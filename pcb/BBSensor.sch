@@ -45,8 +45,8 @@ $EndSheet
 $Sheet
 S 700  4450 950  550 
 U 5D6AE5E2
-F0 "Temperature" 60
-F1 "Temperature.sch" 60
+F0 "Temperature1" 60
+F1 "Temperature1.sch" 60
 F2 "TEMP[1..8]" O R 1650 4650 60 
 $EndSheet
 Wire Bus Line
