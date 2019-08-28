@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 6
+Sheet 2 9
 Title "BBSensor"
 Date "2019-08-28"
 Rev "1.0"
@@ -74,7 +74,7 @@ U 1 1 5D65D401
 P 4250 1300
 F 0 "R1" V 4043 1300 50  0000 C CNN
 F 1 "220" V 4250 1300 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P7.62mm_Vertical" V 4180 1300 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 4180 1300 50  0001 C CNN
 F 3 "~" H 4250 1300 50  0001 C CNN
 	1    4250 1300
 	0    1    1    0   

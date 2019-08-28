@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 6
+Sheet 4 9
 Title "BBSensor"
 Date "2019-08-28"
 Rev "1.0"
@@ -20,7 +20,7 @@ U 1 1 5D6AEAE8
 P 5600 3500
 F 0 "U2" H 5900 3950 50  0000 C CNN
 F 1 "MCP3208" H 6000 2900 50  0000 C CNN
-F 2 "" H 5700 3600 50  0001 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 5700 3600 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21298c.pdf" H 5700 3600 50  0001 C CNN
 	1    5600 3500
 	1    0    0    -1  
@@ -85,7 +85,7 @@ U 1 1 5D6B045B
 P 5150 2750
 F 0 "C201" V 4898 2750 50  0000 C CNN
 F 1 "100n" V 4989 2750 50  0000 C CNN
-F 2 "" H 5188 2600 50  0001 C CNN
+F 2 "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm" H 5188 2600 50  0001 C CNN
 F 3 "~" H 5150 2750 50  0001 C CNN
 	1    5150 2750
 	0    1    1    0   

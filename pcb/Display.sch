@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 6
+Sheet 5 9
 Title "BBSensor"
 Date "2019-08-28"
 Rev "1.0"
@@ -20,7 +20,7 @@ U 1 1 5D6BF1C5
 P 6450 3300
 F 0 "U4" H 6900 4050 50  0000 C CNN
 F 1 "HD44780" H 6450 3300 50  0000 C CNN
-F 2 "Collection:HD44780_LCD_2x16" H 6450 4331 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x16_P2.54mm_Vertical" H 6450 4331 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/181/p181.pdf" H 6450 4239 50  0001 C CNN
 	1    6450 3300
 	1    0    0    -1  
@@ -31,7 +31,7 @@ U 1 1 5D6BFDD2
 P 3950 3250
 F 0 "U3" H 4150 3800 50  0000 C CNN
 F 1 "74HC595" H 3650 2600 50  0000 C CNN
-F 2 "" H 3950 3250 50  0001 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 3950 3250 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 3950 3250 50  0001 C CNN
 	1    3950 3250
 	1    0    0    -1  
@@ -42,7 +42,7 @@ U 1 1 5D6C0D39
 P 3400 2250
 F 0 "C301" V 3148 2250 50  0000 C CNN
 F 1 "100n" V 3239 2250 50  0000 C CNN
-F 2 "" H 3438 2100 50  0001 C CNN
+F 2 "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm" H 3438 2100 50  0001 C CNN
 F 3 "~" H 3400 2250 50  0001 C CNN
 	1    3400 2250
 	0    1    1    0   
@@ -149,7 +149,7 @@ U 1 1 5D6C50BB
 P 7550 3050
 F 0 "R301" V 7600 3200 50  0000 L CNN
 F 1 "220" V 7550 3050 50  0000 C CNN
-F 2 "" V 7480 3050 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 7480 3050 50  0001 C CNN
 F 3 "~" H 7550 3050 50  0001 C CNN
 	1    7550 3050
 	1    0    0    -1  
@@ -193,7 +193,7 @@ U 1 1 5D6C6C7B
 P 7200 3900
 F 0 "R302" V 7250 4050 50  0000 L CNN
 F 1 "2k" V 7200 3900 50  0000 C CNN
-F 2 "" V 7130 3900 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 7130 3900 50  0001 C CNN
 F 3 "~" H 7200 3900 50  0001 C CNN
 	1    7200 3900
 	1    0    0    -1  
@@ -265,8 +265,8 @@ NoConn ~ 5800 3150
 NoConn ~ 5800 3250
 NoConn ~ 5800 3350
 NoConn ~ 5800 3450
-Wire Bus Line
-	2450 1100 2450 3250
 Text Label 1350 1100 0    60   ~ 0
 SPI[1..5]
+Wire Bus Line
+	2450 1100 2450 3250
 $EndSCHEMATC
