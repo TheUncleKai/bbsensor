@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "",
+  "builtInLibrariesFolders": "/home/kai/opt/arduino-1.8.9/libraries",
+  "customBuildProperties": "build.warn_data_percentage=75,runtime.tools.mkspiffs.path=/home/kai/.arduino15/packages/esp8266/tools/mkspiffs/2.5.0-3-20ed2b9,runtime.tools.mkspiffs-2.5.0-3-20ed2b9.path=/home/kai/.arduino15/packages/esp8266/tools/mkspiffs/2.5.0-3-20ed2b9,runtime.tools.xtensa-lx106-elf-gcc.path=/home/kai/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9,runtime.tools.xtensa-lx106-elf-gcc-2.5.0-3-20ed2b9.path=/home/kai/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9,runtime.tools.python.path=/home/kai/.arduino15/packages/esp8266/tools/python/3.7.2-post1,runtime.tools.python-3.7.2-post1.path=/home/kai/.arduino15/packages/esp8266/tools/python/3.7.2-post1",
+  "fqbn": "esp8266:esp8266:nodemcuv2:xtal=80,vt=flash,exception=disabled,ssl=all,eesz=4M1M,ip=lm2f,dbg=Serial,lvl=None____,wipe=none,baud=115200",
+  "hardwareFolders": "/home/kai/opt/arduino-1.8.9/hardware,/home/kai/.arduino15/packages",
+  "otherLibrariesFolders": "/home/kai/Arduino/libraries",
+  "runtime.ide.version": "10809",
+  "sketchLocation": "/home/kai/Arduino/Example/blink/blink.ino",
+  "toolsFolders": "/home/kai/opt/arduino-1.8.9/tools-builder,/home/kai/opt/arduino-1.8.9/hardware/tools/avr,/home/kai/.arduino15/packages"
+}
