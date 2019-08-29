@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 8
 Title "BBSensor"
-Date "2019-08-28"
+Date "2019-08-29"
 Rev "1.0"
 Comp ""
 Comment1 "BBQ Sensor"
@@ -108,7 +108,7 @@ Wire Wire Line
 Wire Wire Line
 	4700 1300 4400 1300
 Wire Wire Line
-	4100 1300 3650 1300
+	4100 1300 3800 1300
 Connection ~ 3650 1300
 $Comp
 L Connector_Generic:Conn_01x01 J1
@@ -166,4 +166,34 @@ Wire Wire Line
 	2800 1300 2950 1300
 Wire Wire Line
 	2800 1500 3650 1500
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5D6E657E
+P 3800 1150
+F 0 "TP1" H 3858 1222 50  0000 L CNN
+F 1 "TestPoint" H 3858 1177 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 4000 1150 50  0001 C CNN
+F 3 "~" H 4000 1150 50  0001 C CNN
+	1    3800 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 1150 3800 1300
+Connection ~ 3800 1300
+Wire Wire Line
+	3800 1300 3650 1300
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5D6E6D75
+P 3750 1500
+F 0 "TP2" V 3750 1688 50  0000 L CNN
+F 1 "TestPoint" H 3808 1527 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 3950 1500 50  0001 C CNN
+F 3 "~" H 3950 1500 50  0001 C CNN
+	1    3750 1500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3650 1500 3750 1500
+Connection ~ 3650 1500
 $EndSCHEMATC

@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 6 8
 Title "BBSensor"
-Date "2019-08-28"
+Date "2019-08-29"
 Rev "1.0"
 Comp ""
 Comment1 "BBQ Sensor"
@@ -180,18 +180,18 @@ F 3 "~" H 2900 2600 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	3050 2600 3250 2600
+	3050 2600 3200 2600
 Wire Wire Line
 	2750 2600 2650 2600
 Wire Wire Line
 	2900 2750 2900 2950
 Wire Wire Line
-	2900 2950 3250 2950
+	2900 2950 3200 2950
 Wire Wire Line
-	3250 2950 3250 2600
-Connection ~ 3250 2600
+	3200 2950 3200 2600
+Connection ~ 3200 2600
 Wire Wire Line
-	3250 2600 3400 2600
+	3200 2600 3400 2600
 $Comp
 L Device:R R4010
 U 1 1 5D6FEC79
@@ -210,8 +210,8 @@ Wire Wire Line
 Wire Wire Line
 	4050 2950 3700 2950
 Wire Wire Line
-	3250 2950 3400 2950
-Connection ~ 3250 2950
+	3200 2950 3400 2950
+Connection ~ 3200 2950
 $Comp
 L power:GND #PWR0126
 U 1 1 5D704CCF
@@ -244,18 +244,18 @@ Connection ~ 2600 1500
 Wire Wire Line
 	2600 1500 3400 1500
 Wire Wire Line
-	3050 2000 3250 2000
+	3050 2000 3350 2000
 Wire Wire Line
 	4150 2000 4150 1600
 Wire Wire Line
 	4150 1600 4000 1600
 Wire Wire Line
-	3250 2000 3250 2400
+	3350 2000 3350 2400
 Wire Wire Line
-	3250 2400 3400 2400
-Connection ~ 3250 2000
+	3350 2400 3400 2400
+Connection ~ 3350 2000
 Wire Wire Line
-	3250 2000 4150 2000
+	3350 2000 4150 2000
 Wire Wire Line
 	2300 2050 2300 2600
 Connection ~ 2300 2600
@@ -528,18 +528,18 @@ F 3 "~" H 2900 4800 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	3050 4800 3250 4800
+	3050 4800 3200 4800
 Wire Wire Line
 	2750 4800 2650 4800
 Wire Wire Line
 	2900 4950 2900 5150
 Wire Wire Line
-	2900 5150 3250 5150
+	2900 5150 3200 5150
 Wire Wire Line
-	3250 5150 3250 4800
-Connection ~ 3250 4800
+	3200 5150 3200 4800
+Connection ~ 3200 4800
 Wire Wire Line
-	3250 4800 3400 4800
+	3200 4800 3400 4800
 $Comp
 L Device:R R4110
 U 1 1 5D7906AD
@@ -558,8 +558,8 @@ Wire Wire Line
 Wire Wire Line
 	4050 5150 3700 5150
 Wire Wire Line
-	3250 5150 3400 5150
-Connection ~ 3250 5150
+	3200 5150 3400 5150
+Connection ~ 3200 5150
 $Comp
 L power:GND #PWR0128
 U 1 1 5D7906BC
@@ -592,18 +592,18 @@ Connection ~ 2600 3700
 Wire Wire Line
 	2600 3700 3400 3700
 Wire Wire Line
-	3050 4200 3250 4200
+	3050 4200 3350 4200
 Wire Wire Line
 	4150 4200 4150 3800
 Wire Wire Line
 	4150 3800 4000 3800
 Wire Wire Line
-	3250 4200 3250 4600
+	3350 4200 3350 4600
 Wire Wire Line
-	3250 4600 3400 4600
-Connection ~ 3250 4200
+	3350 4600 3400 4600
+Connection ~ 3350 4200
 Wire Wire Line
-	3250 4200 4150 4200
+	3350 4200 4150 4200
 Wire Wire Line
 	2300 4250 2300 4800
 Connection ~ 2300 4800
@@ -695,6 +695,128 @@ F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 5200 4450 50  0001 C CNN
 	2    5200 4450
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:TestPoint TP4002
+U 1 1 5D688F9D
+P 1950 1300
+F 0 "TP4002" H 2008 1372 50  0000 L CNN
+F 1 "TestPoint" H 2008 1327 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 2150 1300 50  0001 C CNN
+F 3 "~" H 2150 1300 50  0001 C CNN
+	1    1950 1300
+	1    0    0    -1  
+$EndComp
+Connection ~ 1950 1300
+$Comp
+L Connector:TestPoint TP4004
+U 1 1 5D68978B
+P 2600 1100
+F 0 "TP4004" H 2658 1172 50  0000 L CNN
+F 1 "TestPoint" H 2658 1127 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 2800 1100 50  0001 C CNN
+F 3 "~" H 2800 1100 50  0001 C CNN
+	1    2600 1100
+	1    0    0    -1  
+$EndComp
+Connection ~ 2600 1100
+$Comp
+L Connector:TestPoint TP4001
+U 1 1 5D68B2AE
+P 5800 2250
+F 0 "TP4001" H 5858 2322 50  0000 L CNN
+F 1 "TestPoint" H 5858 2277 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 6000 2250 50  0001 C CNN
+F 3 "~" H 6000 2250 50  0001 C CNN
+	1    5800 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP4011
+U 1 1 5D68C348
+P 1850 2450
+F 0 "TP4011" H 1908 2522 50  0000 L CNN
+F 1 "TestPoint" H 1908 2477 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 2050 2450 50  0001 C CNN
+F 3 "~" H 2050 2450 50  0001 C CNN
+	1    1850 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 2450 1850 2600
+Wire Wire Line
+	1850 2600 2300 2600
+$Comp
+L Connector:TestPoint TP4009
+U 1 1 5D69844D
+P 3200 2600
+F 0 "TP4009" V 3300 2650 50  0000 L CNN
+F 1 "TestPoint" H 3258 2627 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 3400 2600 50  0001 C CNN
+F 3 "~" H 3400 2600 50  0001 C CNN
+	1    3200 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP4102
+U 1 1 5D6993F8
+P 1950 3500
+F 0 "TP4102" H 2008 3572 50  0000 L CNN
+F 1 "TestPoint" H 2008 3527 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 2150 3500 50  0001 C CNN
+F 3 "~" H 2150 3500 50  0001 C CNN
+	1    1950 3500
+	1    0    0    -1  
+$EndComp
+Connection ~ 1950 3500
+$Comp
+L Connector:TestPoint TP4104
+U 1 1 5D699A1A
+P 2600 3300
+F 0 "TP4104" H 2658 3372 50  0000 L CNN
+F 1 "TestPoint" H 2658 3327 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 2800 3300 50  0001 C CNN
+F 3 "~" H 2800 3300 50  0001 C CNN
+	1    2600 3300
+	1    0    0    -1  
+$EndComp
+Connection ~ 2600 3300
+$Comp
+L Connector:TestPoint TP4111
+U 1 1 5D69A84A
+P 1850 4650
+F 0 "TP4111" H 1908 4722 50  0000 L CNN
+F 1 "TestPoint" H 1908 4677 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 2050 4650 50  0001 C CNN
+F 3 "~" H 2050 4650 50  0001 C CNN
+	1    1850 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 4650 1850 4800
+Wire Wire Line
+	1850 4800 2300 4800
+$Comp
+L Connector:TestPoint TP4101
+U 1 1 5D6A11D1
+P 5800 4450
+F 0 "TP4101" H 5858 4522 50  0000 L CNN
+F 1 "TestPoint" H 5858 4477 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 6000 4450 50  0001 C CNN
+F 3 "~" H 6000 4450 50  0001 C CNN
+	1    5800 4450
+	1    0    0    -1  
+$EndComp
 Wire Bus Line
 	7150 750  7150 4350
+$Comp
+L Connector:TestPoint TP4109
+U 1 1 5D6A9DDC
+P 3200 4800
+F 0 "TP4109" V 3300 4850 50  0000 L CNN
+F 1 "TestPoint" H 3258 4827 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 3400 4800 50  0001 C CNN
+F 3 "~" H 3400 4800 50  0001 C CNN
+	1    3200 4800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
