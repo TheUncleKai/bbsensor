@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 9
+Sheet 5 8
 Title "BBSensor"
 Date "2019-08-28"
 Rev "1.0"
@@ -20,7 +20,7 @@ U 1 1 5D6BF1C5
 P 6450 3300
 F 0 "U4" H 6900 4050 50  0000 C CNN
 F 1 "HD44780" H 6450 3300 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x16_P2.54mm_Vertical" H 6450 4331 50  0001 C CNN
+F 2 "Box_Header:Box_Header_Straight_2x08" H 6450 4331 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/181/p181.pdf" H 6450 4239 50  0001 C CNN
 	1    6450 3300
 	1    0    0    -1  

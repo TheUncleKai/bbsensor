@@ -1,4 +1,4 @@
-16808681265363218
+16825921110620874
 ALPS
 ALPS_EC11B15242AE
 
@@ -50666,72 +50666,142 @@ Yellow 5381 Series LED
 2
 2
 Lumberg
-LUMBERG_0105_01
+LUMBERG_0105
 DIN 45326 Socket
-Socket
+Socket DIN-Rundsteckverbinder
 0
 8
 8
+Lumberg
+LUMBERG_1501_03
+Klinkeneinbaukupplung nach JIS C 6560 JC25J3A, 2,5 mm, 3-polig/stereo, abgewinkelte Ausführung, für Leiterplatten
+AudioJack3
+0
+3
+3
+Lumberg
+LUMBERG_1501_04
+Klinkeneinbaukupplung nach JIS C 6560 JC25J3A, 2,5 mm, 3-polig/stereo, abgewinkelte Ausführung, mit Metallkragen, für Leiterplatten
+AudioJack3
+0
+3
+3
+Lumberg
+LUMBERG_1501_05
+Klinkeneinbaukupplung nach JIS C 6560 JC25J3A, 2,5 mm, 3-polig/stereo, abgewinkelte Ausführung, mit Kunststoffkragen, für Leiterplatten
+AudioJack3
+0
+3
+3
+Lumberg
+LUMBERG_1501_06
+Klinkeneinbaukupplung nach JIS C 6560 JC25J3A, 2,5 mm, 3-polig/stereo, abgewinkelte Ausführung, mit Metallkragen, für Leiterplatten
+AudioJack3
+0
+0
+0
+Lumberg
+LUMBERG_1501_09
+Klinkeneinbaukupplung nach JIS C 6560 JC25P2B, 2,5 mm, 2-polig/mono, abgewinkelte Ausführung, mit Öffner, für Leiterplatten, für Rückseitenmontage
+AudioJack2
+0
+3
+3
 Lumberg
 LUMBERG_1502_01
-
-
+Klinkeneinbaukupplung nach JIS C 6560 JC35J3A, 3,5 mm, 3-polig/stereo, stehende Ausführung, für Leiterplatten
+AudioJack3
 0
 3
 3
 Lumberg
+LUMBERG_1503_06
+Klinkeneinbaukupplung nach JIS C 6560 JC35J2B, 3,5 mm, 2-polig/mono, abgewinkelte Ausführung, mit Öffner, für Leiterplatten
+AudioJack2
+0
+3
+3
+Lumberg
+LUMBERG_1503_07
+Klinkeneinbaukupplung nach JIS C 6560 JC35J3A, 3,5 mm, 3-polig/stereo, abgewinkelte Ausführung, für Leiterplatten
+AudioJack3
+0
+4
+3
+Lumberg
+LUMBERG_1503_08
+Klinkeneinbaukupplung nach JIS C 6560 JC35J3A, 3,5 mm, 3-polig/stereo, abgewinkelte Ausführung, für Leiterplatten
+AudioJack3
+0
+4
+3
+Lumberg
+LUMBERG_1503_09
+Klinkeneinbaukupplung nach JIS C 6560 JC35J3B, 3,5 mm, 3-polig/stereo, abgewinkelte Ausführung, mit 2 Öffnern und Lötaugen, für Leiterplatten, für Rückseitenmontage
+AudioJack3
+0
+5
+5
+Lumberg
+LUMBERG_1503_10
+Klinkeneinbaukupplung nach JEITA RC-5325A JC35J4A, 3,5 mm, 4-polig/stereo, abgewinkelte Ausführung, für Leiterplatten
+AudioJack4
+0
+5
+5
+Lumberg
 LUMBERG_1553_02
-
-
+RCA-Einbaukupplung nach JEITA RC-5231, abgewinkelte Ausführung, für Leiterplatten
+RCA
 0
 5
 2
 Lumberg
 LUMBERG_1613_21
-
-
+Netzgeräte-Einbaukupplung, abgewinkelte Ausführung, mit Öffner, für Leiterplatten
+Barrel Jack
 0
 3
 3
 Lumberg
 LUMBERG_2410_01
-
-
+USB-2.0-Einbaukupplung Typ A, stehende Ausführung, für Leiterplatten
+USB
 0
 6
 5
 Lumberg
 LUMBERG_2410_02
-
-
+USB-2.0-Einbaukupplung Typ A, abgewinkelte Ausführung, für Leiterplatten
+USB
 0
 6
 5
 Lumberg
 LUMBERG_2410_03
-
-
+Doppelte USB-2.0-Einbaukupplung Typ A, abgewinkelte Ausführung, für Leiterplatten, mit Massekontakten vorne
+USB
 0
 12
 9
 Lumberg
 LUMBERG_2410_06
-
-
+USB-2.0-Einbaukupplung Typ A, abgewinkelte Ausführung, für Leiterplatten, Surface-Mount-Technik (SMT)
+USB
 0
 6
 5
 Lumberg
 LUMBERG_KLB_4
-
-
+Klinkeneinbaukupplung nach JIS C 6560 JC35J3A, 3,5 mm, 3-polig/stereo, mit Lötaugen, für Rückseitenmontage
+AudioJack3
 0
 3
 3
 Lumberg
 LUMBERG_KLB_13
-
-
+Klinkeneinbaukupplung nach JIS C 6560 JC25J3A, 2,5 mm, 3-polig/stereo, stehende Ausführung, mit Lötaugen, für Rückseitenmontage
+AudioJack3
 0
 3
 3
@@ -74402,6 +74472,13 @@ transformer flyback
 0
 10
 10
+VCC
+5600F
+5600 Series 3mm (T-1) LED Through Hole Right Angle Circuit Board Indicator
+LED
+0
+2
+2
 Valve
 Valve_ECC-83-1
 Valve ECC-83-1 round pins

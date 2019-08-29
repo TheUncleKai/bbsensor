@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 9
+Sheet 1 8
 Title "BBSensor"
 Date "2019-08-28"
 Rev "1.0"
@@ -89,21 +89,9 @@ F0 "Temperature3" 60
 F1 "Temperature3.sch" 60
 F2 "TEMP[1..8]" O R 1650 6400 60 
 $EndSheet
-$Sheet
-S 700  7100 950  550 
-U 5D65F4D8
-F0 "Temperature4" 60
-F1 "Temperature4.sch" 60
-F2 "TEMP[1..8]" O R 1650 7250 60 
-$EndSheet
-Wire Bus Line
-	1650 7250 2500 7250
-Wire Bus Line
-	2500 7250 2500 6400
 Connection ~ 2500 5500
 Wire Bus Line
 	1650 6400 2500 6400
-Connection ~ 2500 6400
 Wire Bus Line
 	2500 6400 2500 5500
 $EndSCHEMATC
