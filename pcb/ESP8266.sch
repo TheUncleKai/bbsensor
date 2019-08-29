@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 3 8
 Title "BBSensor"
-Date "2019-08-28"
+Date "2019-08-29"
 Rev "1.0"
 Comp ""
 Comment1 "BBQ Sensor"
@@ -83,7 +83,7 @@ F 3 "" H 4500 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4500 4000 4500 3850
+	4500 4000 4500 3550
 Wire Wire Line
 	4500 3550 4700 3550
 Wire Wire Line
@@ -95,167 +95,51 @@ Connection ~ 4500 3150
 Wire Wire Line
 	4500 3150 4500 3550
 Wire Bus Line
-	1500 1000 2300 1000
+	1500 1000 2700 1000
 Text HLabel 1500 1000 0    60   BiDi ~ 0
 SPI[1..5]
 Text Label 1600 1000 0    60   ~ 0
 SPI[1..5]
 Entry Wire Line
-	2300 2650 2400 2750
+	2700 2650 2800 2750
 Entry Wire Line
-	2300 2750 2400 2850
+	2700 2750 2800 2850
 Entry Wire Line
-	2300 2850 2400 2950
+	2700 2850 2800 2950
 Entry Wire Line
-	2300 2950 2400 3050
-Text Label 4000 2750 0    60   ~ 0
-MOSI
-Text Label 4000 2850 0    60   ~ 0
-CS1
-Text Label 4000 2950 0    60   ~ 0
+	2700 2950 2800 3050
+Text Label 4200 2950 0    60   ~ 0
 MISO
-Text Label 4000 3050 0    60   ~ 0
-SCLK
 $Comp
 L Device:R R101
-U 1 1 5D66DF97
-P 3100 2750
-F 0 "R101" V 3050 2500 50  0000 C CNN
-F 1 "1k" V 3100 2750 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3030 2750 50  0001 C CNN
-F 3 "~" H 3100 2750 50  0001 C CNN
-	1    3100 2750
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R102
-U 1 1 5D66F07D
-P 3100 2850
-F 0 "R102" V 3050 2600 50  0000 C CNN
-F 1 "1k" V 3100 2850 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3030 2850 50  0001 C CNN
-F 3 "~" H 3100 2850 50  0001 C CNN
-	1    3100 2850
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R103
 U 1 1 5D66F293
-P 3100 2950
-F 0 "R103" V 3050 2700 50  0000 C CNN
-F 1 "1k" V 3100 2950 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3030 2950 50  0001 C CNN
-F 3 "~" H 3100 2950 50  0001 C CNN
-	1    3100 2950
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R104
-U 1 1 5D66F547
-P 3100 3050
-F 0 "R104" V 3050 2800 50  0000 C CNN
-F 1 "1k" V 3100 3050 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3030 3050 50  0001 C CNN
-F 3 "~" H 3100 3050 50  0001 C CNN
-	1    3100 3050
+P 3800 2950
+F 0 "R101" V 3750 2700 50  0000 C CNN
+F 1 "1k" V 3800 2950 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3730 2950 50  0001 C CNN
+F 3 "~" H 3800 2950 50  0001 C CNN
+	1    3800 2950
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	2950 2750 2400 2750
+	3650 2950 2800 2950
 Wire Wire Line
-	2400 2850 2950 2850
+	3950 2950 4100 2950
 Wire Wire Line
-	2950 2950 2400 2950
+	4100 2950 4100 3100
 Wire Wire Line
-	2400 3050 2950 3050
-$Comp
-L Device:R R106
-U 1 1 5D670101
-P 3300 3350
-F 0 "R106" V 3250 3000 50  0000 L CNN
-F 1 "2k2" V 3300 3350 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3230 3350 50  0001 C CNN
-F 3 "~" H 3300 3350 50  0001 C CNN
-	1    3300 3350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R107
-U 1 1 5D670F1A
-P 3450 3350
-F 0 "R107" V 3400 3000 50  0000 L CNN
-F 1 "2k2" V 3450 3350 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3380 3350 50  0001 C CNN
-F 3 "~" H 3450 3350 50  0001 C CNN
-	1    3450 3350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R108
-U 1 1 5D671154
-P 3600 3350
-F 0 "R108" V 3550 3000 50  0000 L CNN
-F 1 "2k2" V 3600 3350 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3530 3350 50  0001 C CNN
-F 3 "~" H 3600 3350 50  0001 C CNN
-	1    3600 3350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R109
-U 1 1 5D67135E
-P 3750 3350
-F 0 "R109" V 3700 3000 50  0000 L CNN
-F 1 "2k2" V 3750 3350 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3680 3350 50  0001 C CNN
-F 3 "~" H 3750 3350 50  0001 C CNN
-	1    3750 3350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3250 2750 3300 2750
-Wire Wire Line
-	3300 2750 3300 3200
-Wire Wire Line
-	3300 2750 4700 2750
-Connection ~ 3300 2750
-Wire Wire Line
-	3250 2850 3450 2850
-Wire Wire Line
-	3450 2850 3450 3200
-Wire Wire Line
-	3250 2950 3600 2950
-Wire Wire Line
-	3600 2950 3600 3200
-Wire Wire Line
-	3600 2950 4700 2950
-Connection ~ 3600 2950
+	4100 2950 4700 2950
+Connection ~ 4100 2950
 Wire Wire Line
 	4500 2350 4500 3150
-Wire Wire Line
-	4700 2850 3450 2850
-Connection ~ 3450 2850
-Wire Wire Line
-	3250 3050 3750 3050
-Wire Wire Line
-	3750 3050 3750 3200
-Wire Wire Line
-	3750 3050 4700 3050
-Connection ~ 3750 3050
-Text Label 2450 2850 0    60   ~ 0
+Text Label 2800 2850 0    60   ~ 0
 SPI4
-Text Label 2450 2950 0    60   ~ 0
+Text Label 2800 2950 0    60   ~ 0
 SPI2
-Text Label 2450 3050 0    60   ~ 0
+Text Label 2800 3050 0    60   ~ 0
 SPI3
 Wire Wire Line
-	3750 3500 3750 3850
-Wire Wire Line
-	3600 3850 3600 3500
-Wire Wire Line
-	3450 3500 3450 3850
-Wire Wire Line
-	3300 3850 3300 3500
+	4100 3550 4100 3400
 $Comp
 L Switch:SW_Push SW1
 U 1 1 5D679CD6
@@ -410,62 +294,10 @@ Wire Wire Line
 	7850 1000 7850 1100
 Wire Wire Line
 	7450 1000 7450 1100
-$Comp
-L Device:R R105
-U 1 1 5D693E5A
-P 3100 2650
-F 0 "R105" V 3050 2400 50  0000 C CNN
-F 1 "1k" V 3100 2650 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3030 2650 50  0001 C CNN
-F 3 "~" H 3100 2650 50  0001 C CNN
-	1    3100 2650
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R110
-U 1 1 5D6942CB
-P 3900 3350
-F 0 "R110" V 3850 3000 50  0000 L CNN
-F 1 "2k2" V 3900 3350 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 3830 3350 50  0001 C CNN
-F 3 "~" H 3900 3350 50  0001 C CNN
-	1    3900 3350
-	1    0    0    -1  
-$EndComp
 Entry Wire Line
-	2300 2550 2400 2650
-Wire Wire Line
-	2400 2650 2950 2650
-Text Label 2450 2650 0    60   ~ 0
+	2700 2550 2800 2650
+Text Label 2800 2650 0    60   ~ 0
 SPI5
-Wire Wire Line
-	3900 3500 3900 3850
-Wire Wire Line
-	3300 3850 3450 3850
-Connection ~ 4500 3850
-Wire Wire Line
-	4500 3850 4500 3550
-Connection ~ 3450 3850
-Wire Wire Line
-	3450 3850 3600 3850
-Connection ~ 3600 3850
-Wire Wire Line
-	3600 3850 3750 3850
-Connection ~ 3750 3850
-Wire Wire Line
-	3750 3850 3900 3850
-Connection ~ 3900 3850
-Wire Wire Line
-	3900 3850 4500 3850
-Wire Wire Line
-	3250 2650 3900 2650
-Wire Wire Line
-	3900 2650 3900 3200
-Wire Wire Line
-	3900 2650 4700 2650
-Connection ~ 3900 2650
-Text Label 4000 2650 0    60   ~ 0
-CS2
 NoConn ~ 6800 2450
 NoConn ~ 6800 2550
 NoConn ~ 6800 2950
@@ -505,8 +337,39 @@ F 3 "~" H 10500 1250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	10500 1050 10500 1250
-Text Label 2450 2750 0    60   ~ 0
+Text Label 2800 2750 0    60   ~ 0
 SPI1
+Wire Wire Line
+	2800 2750 4700 2750
+Wire Wire Line
+	2800 2850 4700 2850
+Wire Wire Line
+	2800 3050 4700 3050
+Wire Wire Line
+	2800 2650 4700 2650
+$Comp
+L Device:R R102
+U 1 1 5D671154
+P 4100 3250
+F 0 "R102" V 4050 2900 50  0000 L CNN
+F 1 "2k2" V 4100 3250 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 4030 3250 50  0001 C CNN
+F 3 "~" H 4100 3250 50  0001 C CNN
+	1    4100 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 3550 4500 3550
+Text Notes 3100 2650 0    60   ~ 0
+CS2
+Text Notes 3100 2750 0    60   ~ 0
+MOSI
+Text Notes 3100 2850 0    60   ~ 0
+CS1
+Text Notes 3100 2950 0    60   ~ 0
+MISO
+Text Notes 3100 3050 0    60   ~ 0
+SCLK
 Wire Bus Line
-	2300 1000 2300 2950
+	2700 1000 2700 2950
 $EndSCHEMATC

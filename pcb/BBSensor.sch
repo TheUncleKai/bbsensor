@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 8
 Title "BBSensor"
-Date "2019-08-28"
+Date "2019-08-29"
 Rev "1.0"
 Comp ""
 Comment1 "BBQ Sensor"

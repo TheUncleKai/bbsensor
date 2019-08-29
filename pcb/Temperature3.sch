@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 8 8
 Title "BBSensor"
-Date "2019-08-28"
+Date "2019-08-29"
 Rev "1.0"
 Comp ""
 Comment1 "BBQ Sensor"
@@ -436,4 +436,48 @@ NoConn ~ 2450 4900
 NoConn ~ 2450 3900
 Wire Bus Line
 	5500 1000 5500 4700
+$Comp
+L Connector:TestPoint TP501
+U 1 1 5D6E42A4
+P 4450 1800
+F 0 "TP501" H 4508 1872 50  0000 L CNN
+F 1 "TestPoint" H 4508 1827 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 4650 1800 50  0001 C CNN
+F 3 "~" H 4650 1800 50  0001 C CNN
+	1    4450 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP502
+U 1 1 5D6E4A43
+P 4450 2800
+F 0 "TP502" H 4508 2872 50  0000 L CNN
+F 1 "TestPoint" H 4508 2827 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 4650 2800 50  0001 C CNN
+F 3 "~" H 4650 2800 50  0001 C CNN
+	1    4450 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP503
+U 1 1 5D6E4CC7
+P 4450 3800
+F 0 "TP503" H 4508 3872 50  0000 L CNN
+F 1 "TestPoint" H 4508 3827 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 4650 3800 50  0001 C CNN
+F 3 "~" H 4650 3800 50  0001 C CNN
+	1    4450 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP504
+U 1 1 5D6E50E5
+P 4450 4800
+F 0 "TP504" H 4508 4872 50  0000 L CNN
+F 1 "TestPoint" H 4508 4827 50  0001 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D2.5mm_Drill1.2mm" H 4650 4800 50  0001 C CNN
+F 3 "~" H 4650 4800 50  0001 C CNN
+	1    4450 4800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
