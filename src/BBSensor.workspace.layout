@@ -2,5 +2,5 @@
 <CodeBlocks_workspace_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveProject path="core/core.cbp" />
-	<PreferredTarget name="Release" />
+	<PreferredTarget name="Default" />
 </CodeBlocks_workspace_layout_file>

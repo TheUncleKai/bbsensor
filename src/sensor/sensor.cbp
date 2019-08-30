@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="sensor" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_for_esp8266" />
+		<Build>
+			<Target title="Default">
+				<Option output="../output/bin/sensor" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../output/obj/" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-w" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-U__STRICT_ANSI__" />
+					<Add option="-mlongcalls" />
+					<Add option="-mtext-section-literals" />
+					<Add option="-fno-rtti" />
+					<Add option="-falign-functions=4" />
+					<Add option="-MMD" />
+					<Add option="-ffunction-sections" />
+					<Add option="-fdata-sections" />
+					<Add option="-fno-exceptions" />
+					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266&quot;' />
+					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/avr&quot;' />
+					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/libb64&quot;' />
+					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/spiffs&quot;' />
+					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/umm_malloc&quot;' />
+					<Add option='&quot;-I$$(ESP8266_ROOT)/variants/nodemcu&quot;' />
+					<Add option="-D__ets__" />
+					<Add option="-DICACHE_FLASH" />
+					<Add option="-DNONOSDK221=1" />
+					<Add option="-DF_CPU=80000000L" />
+					<Add option="-DLWIP_OPEN_SRC" />
+					<Add option="-DTCP_MSS=536" />
+					<Add option="-DLWIP_FEATURES=1" />
+					<Add option="-DLWIP_IPV6=0" />
+					<Add option="-DDEBUG_ESP_PORT=Serial" />
+					<Add option="-DARDUINO=10809" />
+					<Add option="-DARDUINO_ESP8266_NODEMCU" />
+					<Add option="-DARDUINO_ARCH_ESP8266" />
+					<Add option='-DARDUINO_BOARD=\&quot;ESP8266_NODEMCU\&quot;' />
+					<Add option="-DFLASHMODE_DIO -DESP8266" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

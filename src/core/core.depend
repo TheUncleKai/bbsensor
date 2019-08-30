@@ -1,0 +1,366 @@
+# depslib dependency file v1.0
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\abi.cpp
+	<stdlib.h>
+	<assert.h>
+	<debug.h>
+	<Arduino.h>
+	<cxxabi.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\base64.cpp
+	"Arduino.h"
+	"libb64/cdecode.h"
+	"libb64/cencode.h"
+	"base64.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\cbuf.cpp
+	"cbuf.h"
+	"c_types.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\cont.s
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\cont_util.cpp
+	"cont.h"
+	<stddef.h>
+	<string.h>
+	"ets_sys.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_app_entry_noextra4k.cpp
+	<c_types.h>
+	"cont.h"
+	"coredecls.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_eboot_command.cpp
+	<stddef.h>
+	<stdbool.h>
+	"eboot_command.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_flash_utils.cpp
+	<stddef.h>
+	<stdint.h>
+	<stdbool.h>
+	"flash_utils.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_i2s.cpp
+	"Arduino.h"
+	"osapi.h"
+	"ets_sys.h"
+	"i2s_reg.h"
+	"i2s.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_main.cpp
+	<Arduino.h>
+	"Schedule.h"
+	"ets_sys.h"
+	"os_type.h"
+	"osapi.h"
+	"mem.h"
+	"user_interface.h"
+	"cont.h"
+	<core_version.h>
+	"gdb_hooks.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_noniso.cpp
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<stdint.h>
+	<math.h>
+	"stdlib_noniso.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_phy.cpp
+	<stdint.h>
+	<stddef.h>
+	<stdbool.h>
+	<string.h>
+	"c_types.h"
+	"ets_sys.h"
+	"spi_flash.h"
+	"user_interface.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_postmortem.cpp
+	<stdint.h>
+	<stddef.h>
+	<stdbool.h>
+	<stdio.h>
+	<stdarg.h>
+	"debug.h"
+	"ets_sys.h"
+	"user_interface.h"
+	"esp8266_peri.h"
+	"cont.h"
+	"pgmspace.h"
+	"gdb_hooks.h"
+	"StackThunk.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_si2c.cpp
+	"twi.h"
+	"pins_arduino.h"
+	"wiring_private.h"
+	"twi_util.h"
+	"ets_sys.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_sigma_delta.cpp
+	"Arduino.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_timer.cpp
+	"wiring_private.h"
+	"pins_arduino.h"
+	"c_types.h"
+	"ets_sys.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_waveform.cpp
+	<Arduino.h>
+	"ets_sys.h"
+	"core_esp8266_waveform.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_wiring.cpp
+	"wiring_private.h"
+	"ets_sys.h"
+	"osapi.h"
+	"user_interface.h"
+	"cont.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_wiring_analog.cpp
+	"wiring_private.h"
+	"pins_arduino.h"
+	"user_interface.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_wiring_digital.cpp
+	"wiring_private.h"
+	"pins_arduino.h"
+	"c_types.h"
+	"eagle_soc.h"
+	"ets_sys.h"
+	"user_interface.h"
+	"core_esp8266_waveform.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_wiring_pulse.cpp
+	<limits.h>
+	"wiring_private.h"
+	"pins_arduino.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_wiring_pwm.cpp
+	<Arduino.h>
+	"core_esp8266_waveform.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\core_esp8266_wiring_shift.cpp
+	"wiring_private.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\debug.cpp
+	"Arduino.h"
+	"debug.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\esp-frag.cpp
+	"umm_malloc/umm_malloc.h"
+	"umm_malloc/umm_malloc_cfg.h"
+	"coredecls.h"
+	"Esp.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\esp-version.cpp
+	<Arduino.h>
+	<user_interface.h>
+	<core_version.h>
+	<lwip/init.h>
+	<lwipopts.h>
+	<bearssl/bearssl_git.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\esp.cpp
+	"Arduino.h"
+	"flash_utils.h"
+	"eboot_command.h"
+	<memory>
+	"interrupts.h"
+	"MD5Builder.h"
+	"umm_malloc/umm_malloc.h"
+	"cont.h"
+	"user_interface.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\fs.cpp
+	"FS.h"
+	"FSImpl.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\functionalinterrupt.cpp
+	<FunctionalInterrupt.h>
+	<Schedule.h>
+	"Arduino.h"
+	<ScheduledFunctions.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\gdb_hooks.cpp
+	"ets_sys.h"
+	"gdb_hooks.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\hardwareserial.cpp
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<inttypes.h>
+	<PolledTimeout.h>
+	"Arduino.h"
+	"HardwareSerial.h"
+	"Esp.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\heap.cpp
+	<stdlib.h>
+	"umm_malloc/umm_malloc.h"
+	<c_types.h>
+	<sys/reent.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\ipaddress.cpp
+	<Arduino.h>
+	<IPAddress.h>
+	<Print.h>
+	<StreamString.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\libb64\cdecode.cpp
+	<pgmspace.h>
+	<stdint.h>
+	"cdecode.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\libb64\cencode.cpp
+	<pgmspace.h>
+	"cencode.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\libc_replacements.cpp
+	<stddef.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<limits.h>
+	<errno.h>
+	<string.h>
+	<time.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<errno.h>
+	<sys/reent.h>
+	"ets_sys.h"
+	"os_type.h"
+	"osapi.h"
+	"mem.h"
+	"user_interface.h"
+	"debug.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\md5builder.cpp
+	<Arduino.h>
+	<MD5Builder.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\print.cpp
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<Arduino.h>
+	"Print.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\schedule.cpp
+	"Schedule.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\scheduledfunctions.cpp
+	"ScheduledFunctions.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\sntp-lwip2.cpp
+	<lwip/init.h>
+	<sys/time.h>
+	<osapi.h>
+	<os_type.h>
+	"coredecls.h"
+	<pgmspace.h>
+	<lwip/apps/sntp.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs\spiffs_cache.cpp
+	"spiffs.h"
+	"spiffs_nucleus.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs\spiffs_check.cpp
+	"spiffs.h"
+	"spiffs_nucleus.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs\spiffs_gc.cpp
+	"spiffs.h"
+	"spiffs_nucleus.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs\spiffs_hydrogen.cpp
+	"spiffs.h"
+	"spiffs_nucleus.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs\spiffs_nucleus.cpp
+	"spiffs.h"
+	"spiffs_nucleus.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs_api.cpp
+	"spiffs_api.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\spiffs_hal.cpp
+	<Arduino.h>
+	<stdlib.h>
+	<algorithm>
+	"spiffs/spiffs.h"
+	"debug.h"
+	"c_types.h"
+	"spi_flash.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\sqrt32.cpp
+	<coredecls.h>
+	<stdint.h>
+	<stdio.h>
+	<stdint.h>
+	<math.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\stackthunk.cpp
+	<stdint.h>
+	<stdlib.h>
+	"StackThunk.h"
+	<ets_sys.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\stream.cpp
+	<Arduino.h>
+	<Stream.h>
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\streamstring.cpp
+	<Arduino.h>
+	"StreamString.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\time.cpp
+	<time.h>
+	<sys/time.h>
+	<sys/reent.h>
+	"sntp.h"
+	"coredecls.h"
+	"sntp-lwip2.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\tone.cpp
+	"Arduino.h"
+	"core_esp8266_waveform.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\uart.cpp
+	"Arduino.h"
+	<pgmspace.h>
+	"../../libraries/GDBStub/src/GDBStub.h"
+	"uart.h"
+	"esp8266_peri.h"
+	"user_interface.h"
+	"uart_register.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\updater.cpp
+	"Updater.h"
+	"Arduino.h"
+	"eboot_command.h"
+	<interrupts.h>
+	<esp8266_peri.h>
+	<Updater_Signing.h>
+	"../../libraries/ESP8266WiFi/src/BearSSLHelpers.h"
+	"c_types.h"
+	"spi_flash.h"
+	"user_interface.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\wmath.cpp
+	<stdlib.h>
+	"esp8266_peri.h"
+
+1558378614 source:d:\home\kai\projekte\bbsensor\src\core\wstring.cpp
+	<Arduino.h>
+	"WString.h"
+	"stdlib_noniso.h"
+
