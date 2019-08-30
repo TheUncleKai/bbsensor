@@ -25,3 +25,6 @@ _autosave-*
 # Exported BOM files
 *.xml
 *.csv
+
+firmware/ext/core/*.S
+firmware/ext/core/*.cpp
