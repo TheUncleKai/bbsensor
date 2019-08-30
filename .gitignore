@@ -26,5 +26,7 @@ _autosave-*
 *.xml
 *.csv
 
-firmware/ext/core/*.S
-firmware/ext/core/*.cpp
+firmware/ext/core/*.o
+firmware/ext/core/*.d
+firmware/ext/core/*.a
+firmware/rules/config.mk

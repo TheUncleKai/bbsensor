@@ -1,0 +1,2 @@
+@echo off
+set PATH=d:\ESP8266\toolchain\make;d:\ESP8266\toolchain\esptool;d:\ESP8266\toolchain\mklittlefs;d:\ESP8266\toolchain\mkspiffs;d:\ESP8266\toolchain\python-3.7.2.post1-embed-win32;d:\ESP8266\toolchain\xtensa-lx106-elf\bin;d:\ESP8266\toolchain\xtensa-lx106-elf\libexec\gcc\xtensa-lx106-elf\4.8.2;d:\ESP8266\toolchain\xtensa-lx106-elf\libexec\gcc\xtensa-lx106-elf\4.8.2\install-tools;d:\ESP8266\toolchain\xtensa-lx106-elf\xtensa-lx106-elf\bin
