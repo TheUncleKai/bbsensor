@@ -7,9 +7,10 @@
 		<Option compiler="gnu_gcc_compiler_for_esp8266" />
 		<Build>
 			<Target title="Default">
-				<Option output="../output/bin/sensor" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../output/obj/" />
-				<Option type="1" />
+				<Option output="lib.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="." />
+				<Option type="2" />
 				<Option compiler="gnu_gcc_compiler_for_esp8266" />
 				<Compiler>
 					<Add option="-Os" />
@@ -46,12 +47,57 @@
 					<Add option='-DARDUINO_BOARD=\&quot;ESP8266_NODEMCU\&quot;' />
 					<Add option="-DFLASHMODE_DIO -DESP8266" />
 				</Compiler>
+				<Linker>
+					<Add option="-L../output/bin" />
+					<Add option="-fno-exceptions" />
+					<Add option="-Wl,-Map" />
+					<Add option="-Wl,..\output/blink.ino.map" />
+					<Add option="-g" />
+					<Add option="-Os" />
+					<Add option="-nostdlib" />
+					<Add option="-Wl,--no-check-sections" />
+					<Add option="-u app_entry" />
+					<Add option="-u _printf_float" />
+					<Add option="-u _scanf_float" />
+					<Add option="-Wl,-static" />
+					<Add option="-Teagle.flash.4m1m.ld" />
+					<Add option="-Wl,--gc-sections" />
+					<Add option="-Wl,-wrap,system_restart_local" />
+					<Add option="-Wl,-wrap,spi_flash_read" />
+					<Add option="-Wl,--start-group" />
+					<Add option="..\output\sensor.o" />
+					<Add option="-lcore" />
+					<Add option="-lhal" />
+					<Add option="-lphy" />
+					<Add option="-lpp" />
+					<Add option="-lnet80211" />
+					<Add option="-llwip2-536-feat" />
+					<Add option="-lwpa" />
+					<Add option="-lcrypto" />
+					<Add option="-lmain" />
+					<Add option="-lwps" />
+					<Add option="-lbearssl" />
+					<Add option="-laxtls" />
+					<Add option="-lespnow" />
+					<Add option="-lsmartconfig" />
+					<Add option="-lairkiss" />
+					<Add option="-lwpa2" />
+					<Add option="-lstdc++" />
+					<Add option="-lm" />
+					<Add option="-lc" />
+					<Add option="-lgcc" />
+					<Add option="-Wl,--end-group" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="xtensa-lx106-elf-gcc -CC -E -P -DVTABLES_IN_FLASH %ESP8266_SDK%\ld\eagle.app.v6.common.ld.h -o local.eagle.app.v6.common.ld" />
+					<Add after='xtensa-lx106-elf-gcc.exe -fno-exceptions -Wl,-Map &quot;-Wl,sensor.map&quot; -g -Os -nostdlib -Wl,--no-check-sections -u app_entry -u _printf_float -u _scanf_float -Wl,-static &quot;-L%ESP8266_ROOT%/tools/sdk/lib&quot; -L..\output\bin &quot;-L%ESP8266_ROOT%/tools/sdk/lib/NONOSDK221&quot; &quot;-L%ESP8266_ROOT%/tools/sdk/ld&quot; &quot;-L%ESP8266_ROOT%/tools/sdk/libc/xtensa-lx106-elf/lib&quot; -Teagle.flash.4m1m.ld -Wl,--gc-sections -Wl,-wrap,system_restart_local -Wl,-wrap,spi_flash_read -o sensor.elf -Wl,--start-group sensor.o -lcore -lhal -lphy -lpp -lnet80211 -llwip2-536-feat -lwpa -lcrypto -lmain -lwps -lbearssl -laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc -Wl,--end-group' />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="sensor.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
