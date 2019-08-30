@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-include(cmake/ESP8266.cmake)
 
-MESSAGE(STATUS " Root:       ${ARDUINO_ROOT}")
+include(cmake/config.cmake)
+include(cmake/esp8266.cmake)
+
+MESSAGE(STATUS " BIN:        ${ESP8266_BIN}")
 MESSAGE(STATUS " AVR:        ${ARDUINO_AVR_ROOT}")
 MESSAGE(STATUS " --------")
 MESSAGE(STATUS " Cores:      ${ARDUINO_INCLUDE_CORES}")
