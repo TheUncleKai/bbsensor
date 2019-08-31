@@ -5,8 +5,15 @@ ROOT = ..
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
 
-TARGET = sensor.elf
-MAP = sensor.map
+NAME = sensor
+
+ELF = $(NAME).elf
+BIN = $(NAME).bin
+MAP = $(NAME).map
+SIZES = $(NAME).txt
+LD = local.eagle.app.v6.common.ld
+
+DEPS=$(OBJS:.o=.d)
 
 include objects.mk
 
@@ -39,22 +46,39 @@ LDFLAGS = \
 LDLIBS = \
 	-lhal -lphy -lpp -lnet80211 -llwip2-536-feat -lwpa -lcrypto -lmain -lwps -lbearssl -laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc
 
-all: $(OBJS) $(TARGET)
+all: $(OBJS) $(ELF) $(BIN) $(SIZES) $(LD)
 
 clean:
-	@$(RMDIR) *.o
-	@$(RMDIR) *.map
-	@$(RMDIR) *.d
-	@$(RMDIR) *.elf
+	@$(RMDIR) $(OBJS)
+	@$(RMDIR) $(MAP)
+	@$(RMDIR) $(DEPS)
+	@$(RMDIR) $(LD)
+	@$(RMDIR) $(ELF)
+	@$(RMDIR) $(BIN)
+	@$(RMDIR) $(SIZES)
 
 %.o: %.cpp
 	@echo "	 ==> $@"
 	@$(CXX) $(CFLAGS) $< -o $@
 
-$(TARGET): $(OBJS)
+$(LD): $(ESP8266_SDK)/ld/eagle.app.v6.common.ld.h
 	@echo "	 ==> $@"
-	@$(GCC) -CC -E -P -DVTABLES_IN_FLASH $(ESP8266_SDK)/ld/eagle.app.v6.common.ld.h -o local.eagle.app.v6.common.ld
-	@$(GCC) $(LDFLAGS) -o sensor.elf -Wl,--start-group sensor.o ../ext/core/libcore.a $(LDLIBS) -Wl,--end-group
+	@$(GCC) -CC -E -P -DVTABLES_IN_FLASH $< -o $@
+
+$(ELF): $(OBJS) $(LD)
+	@echo "	 ==> $@"
+	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) ../ext/core/libcore.a $(LDLIBS) -Wl,--end-group
+
+$(BIN): $(ELF)
+	@echo "	 ==> $@"
+	@$(PYTHON) $(ELF2BIN) --eboot "$(ESP8266_PATH)/hardware/esp8266/2.5.2/bootloaders/eboot/eboot.elf" --app $< --flash_mode dio --flash_freq 40 --flash_size 4M --path $(ESP8266_BIN) --out $@
+    @$(PYTHON) $(SIGNING) --mode sign --privatekey private.key --bin $@ --out $@.signed
+
+$(SIZES): $(BIN)
+	@echo "	 ==> Size"
+	@$(SIZE) -A $(ELF) > $@
+
+-include $(DEPS)
 
 include depends.mk
 
