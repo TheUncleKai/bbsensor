@@ -1,14 +1,14 @@
-ESP8266_PATH = 
-ESP8266_VERSION = 
-ESP8266_GCC_VERSION = 
-ESP8266_GCC_PREFIX = 
-MKDIR = md
-RMDIR = rd
-PYTHON = $(ESP8266_PATH)/tools/python/3.7.2-post1/python.exe
-SIGNING = $(ESP8266_PATH)/hardware/esp8266/2.5.2/tools/signing.py
+ESP8266_PATH = C:/Users/kai/AppData/Local/Arduino15/packages/esp8266
+ESP8266_GCC_PREFIX = xtensa-lx106-elf
 
-ESP8266_ROOT = $(ESP8266_PATH)/toolchain/$(ESP8266_GCC_PREFIX)
+MKDIR = md
+RM = del
+RMDIR = rd
+PYTHON = $(ESP8266_PATH)/tools/python/3.7.2-post1/python
+TOOLS = $(ESP8266_PATH)/hardware/esp8266/2.5.2/tools/
+
+ESP8266_ROOT = $(ESP8266_PATH)/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9
 ESP8266_BIN  = $(ESP8266_ROOT)/bin
-ESP8266_SDK  = $(ESP8266_PATH)/$(ESP8266_VERSION)/tools/sdk
-ESP8266_CORES = $(ESP8266_PATH)/$(ESP8266_VERSION)/cores/esp8266
-ESP8266_VARIANTS = $(ESP8266_PATH)/$(ESP8266_VERSION)/variants/nodemcu
+ESP8266_SDK  = $(ESP8266_PATH)/hardware/esp8266/2.5.2/tools/sdk
+ESP8266_CORES = $(ESP8266_PATH)/hardware/esp8266/2.5.2/cores/esp8266
+ESP8266_VARIANTS = $(ESP8266_PATH)/hardware/esp8266/2.5.2/variants/nodemcu

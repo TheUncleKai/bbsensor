@@ -49,13 +49,13 @@ LDLIBS = \
 all: $(OBJS) $(ELF) $(BIN) $(SIZES) $(LD)
 
 clean:
-	@$(RMDIR) $(OBJS)
-	@$(RMDIR) $(MAP)
-	@$(RMDIR) $(DEPS)
-	@$(RMDIR) $(LD)
-	@$(RMDIR) $(ELF)
-	@$(RMDIR) $(BIN)
-	@$(RMDIR) $(SIZES)
+	@$(RM) $(OBJS)
+	@$(RM) $(MAP)
+	@$(RM) $(DEPS)
+	@$(RM) $(LD)
+	@$(RM) $(ELF)
+	@$(RM) $(BIN)
+	@$(RM) $(SIZES)
 
 %.o: %.cpp
 	@echo "	 ==> $@"
@@ -67,7 +67,7 @@ $(LD): $(ESP8266_SDK)/ld/eagle.app.v6.common.ld.h
 
 $(ELF): $(OBJS) $(LD)
 	@echo "	 ==> $@"
-	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) ../ext/core/libcore.a $(LDLIBS) -Wl,--end-group
+	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) ../ext/core/core.a $(LDLIBS) -Wl,--end-group
 
 $(BIN): $(ELF)
 	@echo "	 ==> $@"
@@ -79,7 +79,5 @@ $(SIZES): $(BIN)
 	@$(SIZE) -A $(ELF) > $@
 
 -include $(DEPS)
-
-include depends.mk
 
 .PHONY: all clean

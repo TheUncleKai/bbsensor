@@ -5,9 +5,23 @@ ROOT = ../..
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
 
-TARGET = libcore.a
+LIB = core.a
+
+CORE = core
+SPIFFS = spiffs
+LIBB64 = libb64
+MALLOC = umm_malloc
 
 include objects.mk
+
+OBJECTS = $(OBJS_CORE) $(OBJS_SPIFFS) $(OBJS_LIBB64) $(OBJS_MALLOC)
+
+OBJDIR := objdir
+OBJS := $(addprefix $(OBJDIR)/, $(OBJECTS))
+
+DEPS=$(OBJS:.o=.d)
+TEMP=$(OBJS:.o=.ar)
+
 
 ASMFLAGS = \
 	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
@@ -50,28 +64,56 @@ CFLAGS = \
 	$(ESP8266_INCLUDE_VARIANTS)
 
 
-all: $(OBJS)
+all: $(OBJS) $(TEMP)
 
 clean:
-	@$(RMDIR) *.o
-	@$(RMDIR) *.d
-	@$(RMDIR) *.a
+	@$(RM) $(LIB)
 
 Updater_Signing.h:
-	@echo "  ==> $@"
+	@echo "	 ==> $@"
 	@$(PYTHON) $(SIGNING) --mode header --publickey public.key --out $@
 
-%.o: $(ESP8266_CORES)/%.cpp Updater_Signing.h
-	@echo "  ==> $@"
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+	@$(MKDIR) $(OBJDIR)
+
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/%.cpp Updater_Signing.h
+	@echo "	(CXX) ==> $@"
 	@$(CXX) $(CFLAGS) $< -o $@
-	@$(AR) cru $(TARGET) $@
 
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/libb64/%.cpp Updater_Signing.h
+	@echo "	(CXX) ==> $@"
+	@$(CXX) $(CFLAGS) $< -o $@
 
-%.o: $(ESP8266_CORES)/%.S Updater_Signing.h
-	@echo "  ==> $@"
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/spiffs/%.cpp Updater_Signing.h
+	@echo "	(CXX) ==> $@"
+	@$(CXX) $(CFLAGS) $< -o $@
+
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/umm_malloc/%.cpp Updater_Signing.h
+	@echo "	(CXX) ==> $@"
+	@$(CXX) $(CFLAGS) $< -o $@
+
+$(OBJDIR)/%.S.o: $(ESP8266_CORES)/%.S Updater_Signing.h
+	@echo "	(GCC) ==> $@"
 	@$(GCC) $(ASMFLAGS) $< -o $@
-	@$(AR) cru $(TARGET) $@
 
-include depends.mk
+$(OBJDIR)/%.cpp.ar: $(OBJDIR)/%.cpp.o
+	@echo "	(AR) ==> $< -> $(LIB)"
+	@$(AR) cru $(LIB) $<
+	@echo 1 > $@
+
+$(OBJDIR)/%.S.ar: $(OBJDIR)/%.S.o
+	@echo "	(AR) ==> $< -> $(LIB)"
+	@$(AR) cru $(LIB) $<
+	@echo 1 > $@
+
+include depends_core.mk
+include depends_libb64.mk
+include depends_spiffs.mk
+include depends_malloc.mk
+
+
+-include $(DEPS)
 
 .PHONY: all clean
