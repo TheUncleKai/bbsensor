@@ -30,3 +30,8 @@ firmware/ext/core/*.o
 firmware/ext/core/*.d
 firmware/ext/core/*.a
 firmware/rules/config.mk
+firmware/src/*.o
+firmware/src/*.d
+firmware/src/*.ld
+firmware/src/*.elf
+firmware/src/*.map

@@ -1,7 +1,6 @@
 # Makefile for corelib
 
 ROOT = ../..
-OBJDIR = ../../bin/core
 
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
