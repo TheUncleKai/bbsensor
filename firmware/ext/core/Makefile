@@ -18,6 +18,14 @@ TEMP=$(OBJS:.o=.ar)
 
 include flags.mk
 
+help:
+	@echo -e "\n\e[1;34mTargets for makefile\e[0;0m\n"
+	@echo -e "\t\e[1;34mall\e[0;0m:\t\tcompiles and links all targets"
+	@echo -e "\t\e[1;34mcompile\e[0;0m:\tcompiles all targets"
+	@echo -e "\t\e[1;34mlink\e[0;0m:\t\tlink all targets"
+	@echo -e "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
+	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
+
 all: $(OBJS) $(TEMP)
 
 compile: $(OBJS)
@@ -25,7 +33,7 @@ compile: $(OBJS)
 link: $(TEMP)
 
 prepare:
-	@$(LOG) "Copy $(APP)"
+	@$(LOG) "Copy $(LIBCORE)"
 	@$(MKDIR) libb64
 	@$(MKDIR) umm_malloc
 	@$(MKDIR) spiffs

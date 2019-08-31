@@ -21,6 +21,13 @@ DEPS=$(OBJS:.o=.d)
 
 include flags.mk
 
+help:
+	@echo -e "\n\e[1;34mTargets for makefile\e[0;0m\n"
+	@echo -e "\t\e[1;34mall\e[0;0m:\t\tcompiles and links all targets"
+	@echo -e "\t\e[1;34mcompile\e[0;0m:\tcompiles all targets"
+	@echo -e "\t\e[1;34mlink\e[0;0m:\t\tlink all targets"
+	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
+
 all: compile link
 
 compile: $(OBJS) $(LD)
