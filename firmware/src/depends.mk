@@ -1,1 +1,1 @@
-sensor.o: sensor.cpp
+$(OBJDIR)/sensor.cpp.o: sensor.cpp

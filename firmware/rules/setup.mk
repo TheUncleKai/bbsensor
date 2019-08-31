@@ -13,3 +13,12 @@ OBJCOPY = $(ESP8266_BIN)/$(ESP8266_GCC_PREFIX)-objcopy.exe
 SIZE = $(ESP8266_BIN)/$(ESP8266_GCC_PREFIX)-size.exe
 SIGNING = $(TOOLS)/signing.py
 ELF2BIN = $(TOOLS)/elf2bin.py
+
+INFORM = echo -e "\e[1;31m Info:\e[0;0m ==>\t"
+LOG    = echo -e "\e[1;34m       ==>\e[0;0m\t"
+
+LIB_SUFFIX = .a
+
+OUTPUT = build
+LIBCORE = libcore
+APP = sensor

@@ -99,3 +99,19 @@ $(OBJDIR)/Updater.cpp.o: $(ESP8266_CORES)/Updater.cpp
 $(OBJDIR)/WMath.cpp.o: $(ESP8266_CORES)/WMath.cpp
 
 $(OBJDIR)/WString.cpp.o: $(ESP8266_CORES)/WString.cpp
+
+$(OBJDIR)/cdecode.cpp.o: $(ESP8266_CORES)/libb64/cdecode.cpp
+
+$(OBJDIR)/cencode.cpp.o: $(ESP8266_CORES)/libb64/cencode.cpp
+
+$(OBJDIR)/umm_malloc.cpp.o: $(ESP8266_CORES)/umm_malloc/umm_malloc.cpp
+
+$(OBJDIR)/spiffs_cache.cpp.o: $(ESP8266_CORES)/spiffs/spiffs_cache.cpp
+
+$(OBJDIR)/spiffs_check.cpp.o: $(ESP8266_CORES)/spiffs/spiffs_check.cpp
+
+$(OBJDIR)/spiffs_gc.cpp.o: $(ESP8266_CORES)/spiffs/spiffs_gc.cpp
+
+$(OBJDIR)/spiffs_hydrogen.cpp.o: $(ESP8266_CORES)/spiffs/spiffs_hydrogen.cpp
+
+$(OBJDIR)/spiffs_nucleus.cpp.o: $(ESP8266_CORES)/spiffs/spiffs_nucleus.cpp

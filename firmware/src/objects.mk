@@ -1,2 +1,2 @@
-OBJS = \
-    sensor.o
+OBJECTS = \
+    sensor.cpp.o
