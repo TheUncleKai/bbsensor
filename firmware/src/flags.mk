@@ -18,7 +18,7 @@ CFLAGS = \
 	-DARDUINO_BOARD=\"ESP8266_NODEMCU\" \
 	-DFLASHMODE_DIO \
 	-DESP8266 \
-	$(ESP8266_INCLUDE_CORES) \
+	$(ESP8266_INCLUDE_CORE) \
 	$(ESP8266_INCLUDE_VARIANTS)
 
 LDFLAGS = \
@@ -28,5 +28,5 @@ LDFLAGS = \
 
 LDLIBS = \
 	$(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX) \
-    -lhal -lphy -lpp -lnet80211 -llwip2-536-feat -lwpa -lcrypto -lmain -lwps -lbearssl \
-    -laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc
+	-lhal -lphy -lpp -lnet80211 -llwip2-536-feat -lwpa -lcrypto -lmain -lwps -lbearssl \
+	-laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc

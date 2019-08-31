@@ -26,14 +26,9 @@ _autosave-*
 *.xml
 *.csv
 
-firmware/ext/core/objdir/*
-firmware/ext/core/*.a
+firmware/build/*
+firmware/ext/*/*.cpp
+firmware/ext/*/*.h
+firmware/ext/*/*.S
 firmware/rules/config.mk
-firmware/src/*.o
-firmware/src/*.d
-firmware/src/*.bin
-firmware/src/*.txt
 firmware/src/*.ld
-firmware/src/*.elf
-firmware/src/*.map
-

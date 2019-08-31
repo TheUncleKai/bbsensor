@@ -24,13 +24,34 @@ compile: $(OBJS)
 
 link: $(TEMP)
 
+prepare:
+	@$(LOG) "Copy $(APP)"
+	@$(MKDIR) libb64
+	@$(MKDIR) umm_malloc
+	@$(MKDIR) spiffs
+	@$(COPY) $(ESP8266_CORE)/*.S .
+	@$(COPY) $(ESP8266_CORE)/*.h .
+	@$(COPY) $(ESP8266_CORE)/*.cpp .
+	@$(COPY) $(ESP8266_CORE)/libb64/*.h libb64/
+	@$(COPY) $(ESP8266_CORE)/libb64/*.cpp libb64/
+	@$(COPY) $(ESP8266_CORE)/umm_malloc/*.h umm_malloc/
+	@$(COPY) $(ESP8266_CORE)/umm_malloc/*.cpp umm_malloc/
+	@$(COPY) $(ESP8266_CORE)/spiffs/*.h spiffs/
+	@$(COPY) $(ESP8266_CORE)/spiffs/*.cpp spiffs/
+
 clean:
-	@$(LOG) "Clean $(LIBCORE)"
 	@$(RM) $(TARGET)
 	@$(RM) $(OBJS)
 	@$(RM) $(DEPS)
 	@$(RM) $(TEMP)
 	@$(RMDIR) $(OBJDIR)
+	@$(RM) *.S *.cpp *.h
+	@$(RM) libb64/*.cpp libb64/*.h
+	@$(RM) umm_malloc/*.cpp umm_malloc/*.h
+	@$(RM) spiffs/*.cpp spiffs/*.h
+	@$(RMDIR) libb64
+	@$(RMDIR) umm_malloc
+	@$(RMDIR) spiffs
 
 Updater_Signing.h:
 	@$(LOG) "$@"
@@ -42,23 +63,23 @@ $(OBJDIR):
 	@$(LOG) "Create $@"
 	@$(MKDIR) $@
 
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/%.cpp Updater_Signing.h
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
 	@$(CXX) $(CFLAGS) $< -o $@
 
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/libb64/%.cpp Updater_Signing.h
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/libb64/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
 	@$(CXX) $(CFLAGS) $< -o $@
 
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/spiffs/%.cpp Updater_Signing.h
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/spiffs/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
 	@$(CXX) $(CFLAGS) $< -o $@
 
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORES)/umm_malloc/%.cpp Updater_Signing.h
+$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/umm_malloc/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
 	@$(CXX) $(CFLAGS) $< -o $@
 
-$(OBJDIR)/%.S.o: $(ESP8266_CORES)/%.S Updater_Signing.h
+$(OBJDIR)/%.S.o: $(ESP8266_CORE)/%.S Updater_Signing.h
 	@$(LOG) "(GCC) $@"
 	@$(GCC) $(ASMFLAGS) $< -o $@
 

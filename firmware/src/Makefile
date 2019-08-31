@@ -28,7 +28,6 @@ compile: $(OBJS) $(LD)
 link: $(ELF) $(BIN) $(SIZES)
 
 clean:
-	@$(LOG) "Clean $(APP)"
 	@$(RM) $(OBJS)
 	@$(RM) $(MAP)
 	@$(RM) $(DEPS)
@@ -59,7 +58,7 @@ $(ELF): $(OBJS) $(LD)
 $(BIN): $(ELF)
 	@$(LOG) "$@"
 	@$(PYTHON) $(ELF2BIN) --eboot "$(ESP8266_PATH)/hardware/esp8266/2.5.2/bootloaders/eboot/eboot.elf" --app $< --flash_mode dio --flash_freq 40 --flash_size 4M --path $(ESP8266_BIN) --out $@
-    @$(PYTHON) $(SIGNING) --mode sign --privatekey private.key --bin $@ --out $@.signed
+	@$(PYTHON) $(SIGNING) --mode sign --privatekey private.key --bin $@ --out $@.signed
 
 $(SIZES): $(BIN)
 	@$(LOG) "Size"
