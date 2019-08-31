@@ -44,18 +44,18 @@ clean:
 	@$(RM) $(OBJS)
 	@$(RM) $(DEPS)
 	@$(RM) $(TEMP)
-	@$(RMDIR) $(OBJDIR)
+	@-$(RMDIR) $(OBJDIR)
 	@$(RM) *.S *.cpp *.h
 	@$(RM) libb64/*.cpp libb64/*.h
 	@$(RM) umm_malloc/*.cpp umm_malloc/*.h
 	@$(RM) spiffs/*.cpp spiffs/*.h
-	@$(RMDIR) libb64
-	@$(RMDIR) umm_malloc
-	@$(RMDIR) spiffs
+	@-$(RMDIR) libb64
+	@-$(RMDIR) umm_malloc
+	@-$(RMDIR) spiffs
 
 Updater_Signing.h:
 	@$(LOG) "$@"
-	@$(PYTHON) $(SIGNING) --mode header --publickey public.key --out $@
+	@echo "#define ARDUINO_SIGNING 0" > Updater_Signing.h
 
 $(OBJS): | $(OBJDIR)
 

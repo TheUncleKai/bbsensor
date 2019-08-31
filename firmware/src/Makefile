@@ -35,7 +35,7 @@ clean:
 	@$(RM) $(ELF)
 	@$(RM) $(BIN)
 	@$(RM) $(SIZES)
-	@$(RMDIR) $(OBJDIR)
+	@-$(RMDIR) $(OBJDIR)
 
 $(OBJS): | $(OBJDIR)
 
