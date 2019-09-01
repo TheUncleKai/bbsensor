@@ -25,3 +25,12 @@ _autosave-*
 # Exported BOM files
 *.xml
 *.csv
+
+firmware/build/*
+firmware/ext/core/*.cpp
+firmware/ext/core/*.h
+firmware/ext/core/*.S
+firmware/ext/core/*/*.cpp
+firmware/ext/core/*/*.h
+firmware/rules/config.mk
+firmware/src/*.ld

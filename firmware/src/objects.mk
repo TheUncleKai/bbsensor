@@ -1,0 +1,2 @@
+OBJECTS = \
+    sensor.cpp.o
