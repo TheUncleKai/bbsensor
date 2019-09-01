@@ -32,5 +32,5 @@ LDLIBS = \
 	-laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc
 
 UPLOADFLAGS = \
-    --chip esp8266 --port $(PORT) --baud $(BAUD) --trace version --end \
-    --chip esp8266 --port $(PORT) --baud $(BAUD) --trace write_flash 0x0 /tmp/arduino_build_915450/blink.ino.bin --end 
+	--chip esp8266 --port $(PORT) --baud $(BAUD) --trace version --end \
+	--chip esp8266 --port $(PORT) --baud $(BAUD) --trace write_flash 0x0

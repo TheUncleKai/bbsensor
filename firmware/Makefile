@@ -11,7 +11,7 @@ help:
 	@$(ECHO) "\t\e[1;34mall\e[0;0m:\t\tcompiles and links libs and firmware"
 	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
-	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tupload firmware"
+	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
@@ -59,9 +59,16 @@ link:
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
 
-prepare:
-	@$(INFORM) "Prepare $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile prepare
+link:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Link $(LIBCORE)"
+	@$(MAKE) -s -C ext/core -f Makefile link
+	@$(INFORM) "Link $(APP)"
+	@$(MAKE) -s -C src -f Makefile link
+
+upload:
+	@$(INFORM) "Upload firmware"
+	@$(MAKE) -s -C src -f Makefile upload
 
 clean:
 	@$(INFORM) "Clean $(LIBCORE)"
