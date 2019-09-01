@@ -26,6 +26,8 @@ help:
 	@echo -e "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
 	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
+default: all
+
 all: $(OBJS) $(TEMP)
 
 compile: $(OBJS)
@@ -46,6 +48,8 @@ prepare:
 	@$(COPY) $(ESP8266_CORE)/umm_malloc/*.cpp umm_malloc/
 	@$(COPY) $(ESP8266_CORE)/spiffs/*.h spiffs/
 	@$(COPY) $(ESP8266_CORE)/spiffs/*.cpp spiffs/
+
+cleanall: clean
 
 clean:
 	@$(RM) $(TARGET)
@@ -105,4 +109,4 @@ include depends.mk
 
 -include $(DEPS)
 
-.PHONY: all clean
+.PHONY: help default all compile link prepare clean cleanall

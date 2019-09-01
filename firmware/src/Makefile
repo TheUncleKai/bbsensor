@@ -34,6 +34,8 @@ compile: $(OBJS) $(LD)
 
 link: $(ELF) $(BIN) $(SIZES)
 
+cleanall: clean
+
 clean:
 	@$(RM) $(OBJS)
 	@$(RM) $(MAP)
@@ -73,4 +75,4 @@ $(SIZES): $(BIN)
 
 -include $(DEPS)
 
-.PHONY: all compile link clean
+.PHONY: all compile link clean cleanall

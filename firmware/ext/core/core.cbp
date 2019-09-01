@@ -3,114 +3,410 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="core" />
+		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gnu_gcc_compiler_for_esp8266" />
+		<MakeCommands>
+			<Build command="$make -f $makefile all" />
+			<CompileFile command="$make -f $makefile compile" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile clean" />
+			<AskRebuildNeeded command="$make -f $makefile all" />
+			<SilentBuild command="$make -f $makefile all &gt; $(CMD_NULL)" />
+		</MakeCommands>
 		<Build>
-			<Target title="Default">
-				<Option output="../output/bin/core" prefix_auto="1" extension_auto="1" />
+			<Target title="all">
+				<Option output="lib.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
-				<Option object_output="../output/obj/" />
+				<Option object_output="D:/home/kai/projekte/bbsensor/firmware/ext/core/.objs" />
 				<Option type="2" />
 				<Option compiler="gnu_gcc_compiler_for_esp8266" />
-				<Compiler>
-					<Add option="-Os" />
-					<Add option="-w" />
-					<Add option="-std=c++11" />
-					<Add option="-g" />
-					<Add option="-U__STRICT_ANSI__" />
-					<Add option="-mlongcalls" />
-					<Add option="-mtext-section-literals" />
-					<Add option="-fno-rtti" />
-					<Add option="-falign-functions=4" />
-					<Add option="-MMD" />
-					<Add option="-ffunction-sections" />
-					<Add option="-fdata-sections" />
-					<Add option="-fno-exceptions" />
-					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266&quot;' />
-					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/avr&quot;' />
-					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/libb64&quot;' />
-					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/spiffs&quot;' />
-					<Add option='&quot;-I$$(ESP8266_ROOT)/cores/esp8266/umm_malloc&quot;' />
-					<Add option='&quot;-I$$(ESP8266_ROOT)/variants/nodemcu&quot;' />
-					<Add option="-D__ets__" />
-					<Add option="-DICACHE_FLASH" />
-					<Add option="-DNONOSDK221=1" />
-					<Add option="-DF_CPU=80000000L" />
-					<Add option="-DLWIP_OPEN_SRC" />
-					<Add option="-DTCP_MSS=536" />
-					<Add option="-DLWIP_FEATURES=1" />
-					<Add option="-DLWIP_IPV6=0" />
-					<Add option="-DDEBUG_ESP_PORT=Serial" />
-					<Add option="-DARDUINO=10809" />
-					<Add option="-DARDUINO_ESP8266_NODEMCU" />
-					<Add option="-DARDUINO_ARCH_ESP8266" />
-					<Add option='-DARDUINO_BOARD=\&quot;ESP8266_NODEMCU\&quot;' />
-					<Add option="-DFLASHMODE_DIO -DESP8266" />
-				</Compiler>
+			</Target>
+			<Target title="compile">
+				<Option output="core" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+			</Target>
+			<Target title="link">
+				<Option output="core" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+			</Target>
+			<Target title="clean">
+				<Option output="core" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler_for_esp8266" />
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Esp-frag.cpp" />
-		<Unit filename="Esp-version.cpp" />
-		<Unit filename="Esp.cpp" />
-		<Unit filename="FS.cpp" />
-		<Unit filename="FunctionalInterrupt.cpp" />
-		<Unit filename="HardwareSerial.cpp" />
-		<Unit filename="IPAddress.cpp" />
-		<Unit filename="MD5Builder.cpp" />
-		<Unit filename="Print.cpp" />
-		<Unit filename="Schedule.cpp" />
-		<Unit filename="ScheduledFunctions.cpp" />
-		<Unit filename="StackThunk.cpp" />
-		<Unit filename="Stream.cpp" />
-		<Unit filename="StreamString.cpp" />
-		<Unit filename="Tone.cpp" />
-		<Unit filename="Updater.cpp" />
-		<Unit filename="WMath.cpp" />
-		<Unit filename="WString.cpp" />
-		<Unit filename="abi.cpp" />
-		<Unit filename="base64.cpp" />
-		<Unit filename="cbuf.cpp" />
-		<Unit filename="cont.S" />
-		<Unit filename="cont_util.cpp" />
-		<Unit filename="core_esp8266_app_entry_noextra4k.cpp" />
-		<Unit filename="core_esp8266_eboot_command.cpp" />
-		<Unit filename="core_esp8266_flash_utils.cpp" />
-		<Unit filename="core_esp8266_i2s.cpp" />
-		<Unit filename="core_esp8266_main.cpp" />
-		<Unit filename="core_esp8266_noniso.cpp" />
-		<Unit filename="core_esp8266_phy.cpp" />
-		<Unit filename="core_esp8266_postmortem.cpp" />
-		<Unit filename="core_esp8266_si2c.cpp" />
-		<Unit filename="core_esp8266_sigma_delta.cpp" />
-		<Unit filename="core_esp8266_timer.cpp" />
-		<Unit filename="core_esp8266_waveform.cpp" />
-		<Unit filename="core_esp8266_wiring.cpp" />
-		<Unit filename="core_esp8266_wiring_analog.cpp" />
-		<Unit filename="core_esp8266_wiring_digital.cpp" />
-		<Unit filename="core_esp8266_wiring_pulse.cpp" />
-		<Unit filename="core_esp8266_wiring_pwm.cpp" />
-		<Unit filename="core_esp8266_wiring_shift.cpp" />
-		<Unit filename="debug.cpp" />
-		<Unit filename="gdb_hooks.cpp" />
-		<Unit filename="heap.cpp" />
-		<Unit filename="libb64/cdecode.cpp" />
-		<Unit filename="libb64/cencode.cpp" />
-		<Unit filename="libc_replacements.cpp" />
-		<Unit filename="sntp-lwip2.cpp" />
-		<Unit filename="spiffs/spiffs_cache.cpp" />
-		<Unit filename="spiffs/spiffs_check.cpp" />
-		<Unit filename="spiffs/spiffs_gc.cpp" />
-		<Unit filename="spiffs/spiffs_hydrogen.cpp" />
-		<Unit filename="spiffs/spiffs_nucleus.cpp" />
-		<Unit filename="spiffs_api.cpp" />
-		<Unit filename="spiffs_hal.cpp" />
-		<Unit filename="sqrt32.cpp" />
-		<Unit filename="time.cpp" />
-		<Unit filename="uart.cpp" />
-		<Unit filename="umm_malloc/umm_malloc.cpp" />
+		<Unit filename="AddrList.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Arduino.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Client.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Esp-frag.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Esp-version.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Esp.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Esp.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="FS.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="FS.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="FSImpl.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="FunctionalInterrupt.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="FunctionalInterrupt.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="HardwareSerial.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="HardwareSerial.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="IPAddress.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="IPAddress.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="MD5Builder.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="MD5Builder.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Makefile">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="PolledTimeout.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Print.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Print.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Printable.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Schedule.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Schedule.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="ScheduledFunctions.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="ScheduledFunctions.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Server.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="StackThunk.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="StackThunk.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Stream.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Stream.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="StreamString.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="StreamString.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Tone.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Udp.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Updater.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Updater.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="Updater_Signing.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="WCharacter.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="WMath.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="WString.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="WString.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="abi.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="base64.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="base64.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="binary.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="cbuf.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="cbuf.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="cont.S">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="cont.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="cont_util.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_app_entry_noextra4k.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_eboot_command.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_features.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_flash_utils.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_i2s.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_main.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_noniso.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_phy.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_postmortem.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_si2c.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_sigma_delta.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_timer.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_version.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_waveform.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_waveform.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_wiring.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_wiring_analog.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_wiring_digital.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_wiring_pulse.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_wiring_pwm.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_esp8266_wiring_shift.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="core_version.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="coredecls.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="debug.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="debug.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="depends.mk">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="eboot_command.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="esp8266_peri.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="esp8266_undocumented.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="flags.mk">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="flash_utils.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="gdb_hooks.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="gdb_hooks.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="heap.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="i2s.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="interrupts.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="libb64/cdecode.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="libb64/cdecode.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="libb64/cencode.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="libb64/cencode.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="libc_replacements.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="md5.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="objects.mk">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="pgmspace.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="sigma_delta.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="sntp-lwip2.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="sntp-lwip2.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_cache.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_check.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_config.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_gc.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_hydrogen.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_nucleus.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs/spiffs_nucleus.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs_api.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs_api.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="spiffs_hal.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="sqrt32.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="stdlib_noniso.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="time.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="twi.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="twi_util.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="uart.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="uart.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="umm_malloc/umm_malloc.cpp">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="umm_malloc/umm_malloc.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="umm_malloc/umm_malloc_cfg.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="user_config.h">
+			<Option target="all" />
+		</Unit>
+		<Unit filename="wiring_private.h">
+			<Option target="all" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
