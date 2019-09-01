@@ -73,6 +73,10 @@ $(SIZES): $(BIN)
 	@$(LOG) "Size"
 	@$(SIZE) -A $(ELF) > $@
 
+upload: $(BIN)
+	@$(INFORM) "Upload $(BIN)"
+	@$(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(BIN) --end 
+
 -include $(DEPS)
 
-.PHONY: all compile link clean cleanall
+.PHONY: all compile link clean cleanall upload

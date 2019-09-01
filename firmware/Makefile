@@ -6,13 +6,14 @@ include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
 
 help:
-	@echo -e "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@echo -e "\t\e[1;34minfo\e[0;0m:\t\tinfo about enviroments"
-	@echo -e "\t\e[1;34mall\e[0;0m:\t\tcompiles and links all targets"
-	@echo -e "\t\e[1;34mcompile\e[0;0m:\tcompiles all targets"
-	@echo -e "\t\e[1;34mlink\e[0;0m:\t\tlink all targets"
-	@echo -e "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
-	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
+	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
+	@$(ECHO) "\t\e[1;34minfo\e[0;0m:\t\tinfo about enviroments"
+	@$(ECHO) "\t\e[1;34mall\e[0;0m:\t\tcompiles and links libs and firmware"
+	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
+	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
+	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tupload firmware"
+	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
+	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
 
 info:
@@ -24,6 +25,8 @@ info:
 	@$(LOG) "SDK:      $(ESP8266_SDK)"
 	@$(LOG) "Variants: $(ESP8266_VARIANTS)"
 	@$(LOG) "Tools:    $(TOOLS)"
+	@$(LOG) "Port:     $(PORT)"
+	@$(LOG) "Baud:     $(BAUD)"
 	@$(LOG) "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 	@$(LOG) "Make directory:   $(MKDIR)"
 	@$(LOG) "Remove file:      $(RM)"
@@ -67,4 +70,4 @@ clean:
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
-.PHONY: help all compile link prepare clean info
+.PHONY: help all compile link prepare clean info upload

@@ -1,4 +1,4 @@
-ESP8266_PATH       = C:/Users/kai/AppData/Local/Arduino15/packages/esp8266
+ESP8266_PATH       = /home/kai/.arduino15/packages/esp8266
 ESP8266_GCC_PREFIX = xtensa-lx106-elf
 
 MKDIR  = mkdir -p
@@ -7,6 +7,10 @@ RMDIR  = rmdir
 PYTHON = $(ESP8266_PATH)/tools/python/3.7.2-post1/python
 TOOLS  = $(ESP8266_PATH)/hardware/esp8266/2.5.2/tools/
 COPY   = cp
+EXEEXT = .exe
+ECHO   = echo -e
+PORT   = /dev/ttyUSB0
+BAUD   = 115200
 
 ESP8266_ROOT     = $(ESP8266_PATH)/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9
 ESP8266_BIN      = $(ESP8266_ROOT)/bin
