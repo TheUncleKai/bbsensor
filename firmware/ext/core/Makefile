@@ -19,12 +19,12 @@ TEMP=$(OBJS:.o=.ar)
 include flags.mk
 
 help:
-	@echo -e "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@echo -e "\t\e[1;34mall\e[0;0m:\t\tcompiles and links all targets"
-	@echo -e "\t\e[1;34mcompile\e[0;0m:\tcompiles all targets"
-	@echo -e "\t\e[1;34mlink\e[0;0m:\t\tlink all targets"
-	@echo -e "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
-	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
+	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
+	@$(ECHO) "\t\e[1;34mall\e[0;0m:\t\tcompiles and link core library"
+	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompile core library"
+	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink core library"
+	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare if needed (used currently for Code::Blocks workspace)"
+	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
 default: all
 
@@ -77,32 +77,39 @@ $(OBJDIR):
 
 $(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
-	@$(CXX) $(CFLAGS) $< -o $@
+	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/libb64/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
-	@$(CXX) $(CFLAGS) $< -o $@
+	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/spiffs/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
-	@$(CXX) $(CFLAGS) $< -o $@
+	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/umm_malloc/%.cpp Updater_Signing.h
 	@$(LOG) "(CXX) $@"
-	@$(CXX) $(CFLAGS) $< -o $@
+	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.S.o: $(ESP8266_CORE)/%.S Updater_Signing.h
 	@$(LOG) "(GCC) $@"
-	@$(GCC) $(ASMFLAGS) $< -o $@
+	@$(LOGTIME) $(GCC) $(ASMFLAGS) $< -o $@ $(LOGONLY)
+	@$(GCC) $(ASMFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.cpp.ar: $(OBJDIR)/%.cpp.o $(OBJS)
 	@$(LOG) "(AR) $< -> $(TARGET)"
-	@$(AR) cru $(TARGET) $<
+	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
+	@$(AR) cru $(TARGET) $< $(LOGOUT)
 	@echo 1 > $@
 
 $(OBJDIR)/%.S.ar: $(OBJDIR)/%.S.o $(OBJS)
 	@$(LOG) "(AR) $< -> $(TARGET)"
-	@$(AR) cru $(TARGET) $<
+	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
+	@$(AR) cru $(TARGET) $< $(LOGOUT)
 	@echo 1 > $@
 
 include depends.mk

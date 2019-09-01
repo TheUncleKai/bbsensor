@@ -33,6 +33,7 @@ info:
 	@$(LOG) "Remove directory: $(RMDIR)"
 	@$(LOG) "Python:           $(PYTHON)"
 	@$(LOG) "Copy file:        $(COPY)"
+	@$(LOG) "Log file:         $(LOGFILE)"
 	@$(LOG) "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 	@$(LOG) "Include SDK:     $(ESP8266_INCLUDE_SDK)"
 	@$(LOG) "Iclude Core:     $(ESP8266_INCLUDE_CORE)"
@@ -40,6 +41,7 @@ info:
 
 all:
 	@$(MKDIR) $(OUTPUT)
+	@@$(RM) $(LOGFILE)
 	@$(INFORM) "Build $(LIBCORE)"
 	@$(MAKE) -s -C ext/core -f Makefile all
 	@$(INFORM) "Build $(APP)"
@@ -59,19 +61,13 @@ link:
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
 
-link:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile link
-	@$(INFORM) "Link $(APP)"
-	@$(MAKE) -s -C src -f Makefile link
-
 upload:
 	@$(INFORM) "Upload firmware"
 	@$(MAKE) -s -C src -f Makefile upload
 
 clean:
 	@$(INFORM) "Clean $(LIBCORE)"
+	@@$(RM) $(LOGFILE)
 	@$(MAKE) -s -C ext/core -f Makefile clean
 	@$(INFORM) "Clean $(APP)"
 	@$(MAKE) -s -C src -f Makefile clean
