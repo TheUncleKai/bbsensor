@@ -1,30 +1,18 @@
 EESchema Schematic File Version 4
-LIBS:BBSensor-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 8
+Sheet 1 1
 Title "BBSensor"
-Date "2019-08-29"
+Date "2019-09-02"
 Rev "1.0"
 Comp ""
-Comment1 "BBQ Sensor"
+Comment1 "Display"
 Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L BBLib:HD44780 U4
-U 1 1 5D6BF1C5
-P 6450 3300
-F 0 "U4" H 6900 4050 50  0000 C CNN
-F 1 "HD44780" H 6450 3300 50  0000 C CNN
-F 2 "Box_Header:Box_Header_Straight_2x08" H 6450 4331 50  0001 C CNN
-F 3 "https://cdn-shop.adafruit.com/product-files/181/p181.pdf" H 6450 4239 50  0001 C CNN
-	1    6450 3300
-	1    0    0    -1  
-$EndComp
 $Comp
 L 74xx:74HC595 U3
 U 1 1 5D6BFDD2
@@ -91,12 +79,6 @@ Wire Wire Line
 	3250 2250 3100 2250
 Wire Wire Line
 	3100 2250 3100 2350
-Wire Bus Line
-	1200 1100 2450 1100
-Text HLabel 1200 1100 0    60   BiDi ~ 0
-SPI[1..5]
-Entry Wire Line
-	2450 2750 2550 2850
 Wire Wire Line
 	3950 2450 3350 2450
 Wire Wire Line
@@ -118,18 +100,14 @@ Wire Wire Line
 NoConn ~ 4350 3750
 NoConn ~ 4350 3550
 NoConn ~ 4350 3450
-Entry Wire Line
-	2450 2950 2550 3050
-Entry Wire Line
-	2450 3250 2550 3350
 Wire Wire Line
-	3550 3350 2550 3350
+	3550 3350 2500 3350
 Text Label 2650 2850 0    60   ~ 0
-SPI1
+MOSI
 Text Label 2650 3050 0    60   ~ 0
-SPI3
+SCLK
 Text Label 2650 3350 0    60   ~ 0
-SPI5
+CS2
 $Comp
 L power:+5V #PWR0121
 U 1 1 5D6C4A6E
@@ -216,7 +194,7 @@ Wire Wire Line
 Wire Wire Line
 	4350 2850 5800 2850
 Wire Wire Line
-	2550 2850 3550 2850
+	2000 2850 3550 2850
 Wire Wire Line
 	3550 3050 2550 3050
 Wire Wire Line
@@ -265,8 +243,64 @@ NoConn ~ 5800 3150
 NoConn ~ 5800 3250
 NoConn ~ 5800 3350
 NoConn ~ 5800 3450
-Text Label 1350 1100 0    60   ~ 0
-SPI[1..5]
-Wire Bus Line
-	2450 1100 2450 3250
+$Comp
+L BBLib:HD44780 U4
+U 1 1 5D6D603A
+P 6450 3300
+F 0 "U4" H 6875 4050 50  0000 C CNN
+F 1 "HD44780" H 6450 3300 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x16_P2.54mm_Vertical" H 6450 4239 50  0001 C CNN
+F 3 "https://cdn-shop.adafruit.com/product-files/181/p181.pdf" H 6450 4240 50  0001 C CNN
+	1    6450 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J1
+U 1 1 5D6D4B27
+P 1800 2850
+F 0 "J1" H 1718 3267 50  0000 C CNN
+F 1 "Conn_01x05" H 1718 3176 50  0000 C CNN
+F 2 "Molex:Molex_KK256_Pin_Header_Straight_1x05" H 1800 2850 50  0001 C CNN
+F 3 "~" H 1800 2850 50  0001 C CNN
+	1    1800 2850
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2000 2950 2550 2950
+Wire Wire Line
+	2550 2950 2550 3050
+Wire Wire Line
+	2000 3050 2500 3050
+Wire Wire Line
+	2500 3050 2500 3350
+$Comp
+L power:GND #PWR0101
+U 1 1 5D6DA7EB
+P 2150 3300
+F 0 "#PWR0101" H 2150 3050 50  0001 C CNN
+F 1 "GND" H 2155 3127 50  0000 C CNN
+F 2 "" H 2150 3300 50  0001 C CNN
+F 3 "" H 2150 3300 50  0001 C CNN
+	1    2150 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2000 2750 2150 2750
+Wire Wire Line
+	2150 2750 2150 3300
+$Comp
+L power:+5V #PWR0102
+U 1 1 5D6DBCCC
+P 2150 2450
+F 0 "#PWR0102" H 2150 2300 50  0001 C CNN
+F 1 "+5V" H 2165 2623 50  0000 C CNN
+F 2 "" H 2150 2450 50  0001 C CNN
+F 3 "" H 2150 2450 50  0001 C CNN
+	1    2150 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2000 2650 2150 2650
+Wire Wire Line
+	2150 2650 2150 2450
 $EndSCHEMATC
