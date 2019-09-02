@@ -1,4 +1,4 @@
-16824552134211518
+16827488663507728
 ALPS
 ALPS_EC11B15242AE
 
@@ -764,6 +764,13 @@ pin header
 64
 Bulgin
 PF0030PC
+
+
+0
+3
+3
+Bulgin
+PX0580PC
 
 
 0
@@ -68326,6 +68333,13 @@ Salecom_TS40P_TS-21A
 0
 2
 2
+Schaeffer
+Schaeffer_BV220
+
+
+0
+10
+10
 Schurter
 Fuse_holder_20x5_22.5
 http://www.schurter.com/var/schurter/storage/ilcatalogue/files/document/datasheet/en/pdf/typ_OGN.pdf
