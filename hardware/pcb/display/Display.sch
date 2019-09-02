@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:Display-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -261,7 +260,7 @@ U 1 1 5D6D4B27
 P 1800 2850
 F 0 "J1" H 1718 3267 50  0000 C CNN
 F 1 "Conn_01x05" H 1718 3176 50  0000 C CNN
-F 2 "Molex:Molex_KK256_Pin_Header_Angled_1x05" H 1800 2850 50  0001 C CNN
+F 2 "Molex:Molex_KK256_Pin_Header_Straight_1x05" H 1800 2850 50  0001 C CNN
 F 3 "~" H 1800 2850 50  0001 C CNN
 	1    1800 2850
 	-1   0    0    -1  
