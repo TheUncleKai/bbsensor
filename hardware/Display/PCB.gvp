@@ -1,4 +1,6 @@
 (gerbv-file-version! "2.0A")
+(define-layer! 7 (cons 'filename "plot/Display-PTH.drl")(cons 'visible #t)(cons 'color #(65535 50629 13107))(cons 'attribs (list (list 'autodetect 'Boolean 1) (list 'zero_supression 'Enum 1) (list 'units 'Enum 1) (list 'digits 'Integer 3))))
+(define-layer! 6 (cons 'filename "plot/Display-NPTH.drl")(cons 'visible #t)(cons 'color #(53713 6939 26728))(cons 'attribs (list (list 'autodetect 'Boolean 1) (list 'zero_supression 'Enum 1) (list 'units 'Enum 1) (list 'digits 'Integer 3))))
 (define-layer! 5 (cons 'filename "plot/Display-F_SilkS.gto")(cons 'visible #t)(cons 'color #(54741 65021 13107)))
 (define-layer! 4 (cons 'filename "plot/Display-F_Mask.gts")(cons 'visible #t)(cons 'color #(0 50115 50115)))
 (define-layer! 3 (cons 'filename "plot/Display-F_Cu.gtl")(cons 'visible #t)(cons 'color #(30069 62194 26471)))
