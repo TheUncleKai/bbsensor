@@ -282,4 +282,6 @@ Wire Wire Line
 Wire Wire Line
 	4075 3300 4025 3300
 Connection ~ 3875 3100
+Text Label 4500 2500 0    50   ~ 0
+SIGNAL
 $EndSCHEMATC
