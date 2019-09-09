@@ -1,15 +1,15 @@
 EESchema Schematic File Version 4
-LIBS:Pt100-cache
+LIBS:RTD-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "APt100"
-Date "2017-10-05"
+Title "RTD"
+Date "2019-09-09"
 Rev "1.2"
 Comp ""
-Comment1 "Add-On for Pt100 sensors"
+Comment1 "Amplifier for Pt100 sensor"
 Comment2 ""
 Comment3 ""
 Comment4 ""
@@ -428,7 +428,7 @@ F 3 "~" H 1750 3550 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	1950 4250 1950 4350
+	1950 4250 1950 4300
 $Comp
 L Sensor_Temperature:PT100 R3
 U 1 1 5D7A833B
@@ -440,28 +440,17 @@ F 3 "https://www.heraeus.com/media/media/group/doc_group/products_1/hst/sot_to/d
 	1    1950 2200
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:AudioJack3 J1
-U 1 1 5D7ADF88
-P 5850 1900
-F 0 "J1" H 5570 1833 50  0000 R CNN
-F 1 "AudioJack3" H 5570 1924 50  0000 R CNN
-F 2 "Lumberg:LUMBERG_1501_03" H 5850 1900 50  0001 C CNN
-F 3 "~" H 5850 1900 50  0001 C CNN
-	1    5850 1900
-	-1   0    0    1   
-$EndComp
 Text Label 4900 1900 0    60   ~ 0
 SIGNAL
 $Comp
 L power:+5V #PWR0109
 U 1 1 5D7B1545
-P 5350 1650
-F 0 "#PWR0109" H 5350 1500 50  0001 C CNN
-F 1 "+5V" H 5365 1823 50  0000 C CNN
-F 2 "" H 5350 1650 50  0001 C CNN
-F 3 "" H 5350 1650 50  0001 C CNN
-	1    5350 1650
+P 5500 1650
+F 0 "#PWR0109" H 5500 1500 50  0001 C CNN
+F 1 "+5V" H 5515 1823 50  0000 C CNN
+F 2 "" H 5500 1650 50  0001 C CNN
+F 3 "" H 5500 1650 50  0001 C CNN
+	1    5500 1650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -528,7 +517,7 @@ F 1 "200" V 2300 3350 50  0000 C CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2230 3350 50  0001 C CNN
 F 3 "~" H 2300 3350 50  0001 C CNN
 	1    2300 3350
-	0    1    1    0   
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R8
@@ -539,7 +528,7 @@ F 1 "200" V 3050 2700 50  0000 C CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2980 2700 50  0001 C CNN
 F 3 "~" H 3050 2700 50  0001 C CNN
 	1    3050 2700
-	0    1    1    0   
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R7
@@ -550,7 +539,7 @@ F 1 "4k7" V 3550 2700 50  0000 C CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3480 2700 50  0001 C CNN
 F 3 "~" H 3550 2700 50  0001 C CNN
 	1    3550 2700
-	0    1    1    0   
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R6
@@ -564,11 +553,40 @@ F 3 "~" H 650 3000 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5350 1650 5350 1800
-Wire Wire Line
-	5350 1800 5650 1800
-Wire Wire Line
 	5650 2000 5350 2000
 Wire Wire Line
 	5350 2000 5350 2150
+$Comp
+L Connector:TestPoint W11
+U 1 1 5D799F3F
+P 1550 4350
+F 0 "W11" H 1492 4422 50  0000 R CNN
+F 1 "~" H 1608 4377 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 1750 4350 50  0001 C CNN
+F 3 "~" H 1750 4350 50  0001 C CNN
+	1    1550 4350
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1550 4350 1550 4300
+Wire Wire Line
+	1550 4300 1950 4300
+Connection ~ 1950 4300
+Wire Wire Line
+	1950 4300 1950 4350
+$Comp
+L Connector_Generic:Conn_01x03 J1
+U 1 1 5D7A1044
+P 5850 2000
+F 0 "J1" H 5930 2042 50  0000 L CNN
+F 1 "Conn_01x03" H 5930 1951 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 5850 2000 50  0001 C CNN
+F 3 "~" H 5850 2000 50  0001 C CNN
+	1    5850 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5500 1650 5500 2100
+Wire Wire Line
+	5500 2100 5650 2100
 $EndSCHEMATC
