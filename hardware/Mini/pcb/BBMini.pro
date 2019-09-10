@@ -1,4 +1,4 @@
-update=10/09/2019 17:38:22
+update=10/09/2019 23:17:25
 version=1
 last_client=kicad
 [cvpcb]
@@ -244,9 +244,9 @@ dPairWidth=0,2
 dPairGap=0,25
 dPairViaGap=0,25
 [pcbnew/Netclasses/1]
-Name=Large
-Clearance=0,2
-TrackWidth=2
+Name=3V3
+Clearance=0,3
+TrackWidth=0,5
 ViaDiameter=0,8
 ViaDrill=0,4
 uViaDiameter=0,3
@@ -255,8 +255,19 @@ dPairWidth=0,2
 dPairGap=0,25
 dPairViaGap=0,25
 [pcbnew/Netclasses/2]
+Name=Large
+Clearance=0,5
+TrackWidth=2
+ViaDiameter=0,8
+ViaDrill=0,4
+uViaDiameter=0,3
+uViaDrill=0,1
+dPairWidth=0,2
+dPairGap=0,25
+dPairViaGap=0,25
+[pcbnew/Netclasses/3]
 Name=Medium
-Clearance=0,2
+Clearance=0,4
 TrackWidth=1
 ViaDiameter=0,8
 ViaDrill=0,4
