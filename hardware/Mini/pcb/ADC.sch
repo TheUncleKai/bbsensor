@@ -214,25 +214,25 @@ F 3 "~" H 925 6175 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1125 1875 3675 1875
+	1125 1875 2250 1875
 Wire Wire Line
 	3675 1875 3675 3200
 Wire Wire Line
 	3675 3200 5000 3200
 Wire Wire Line
-	1125 2475 3600 2475
+	1125 2475 2250 2475
 Wire Wire Line
 	3600 2475 3600 3300
 Wire Wire Line
 	3600 3300 5000 3300
 Wire Wire Line
-	1125 3075 3525 3075
+	1125 3075 2250 3075
 Wire Wire Line
 	3525 3075 3525 3400
 Wire Wire Line
 	3525 3400 5000 3400
 Wire Wire Line
-	1125 6075 3675 6075
+	1125 6075 2250 6075
 Wire Wire Line
 	3675 6075 3675 3900
 Wire Wire Line
@@ -242,21 +242,21 @@ Wire Wire Line
 Wire Wire Line
 	3600 3800 3600 5475
 Wire Wire Line
-	3600 5475 1125 5475
+	3600 5475 2250 5475
 Wire Wire Line
-	1125 4875 3525 4875
+	1125 4875 2250 4875
 Wire Wire Line
 	3525 4875 3525 3700
 Wire Wire Line
 	3525 3700 5000 3700
 Wire Wire Line
-	1125 4275 3450 4275
+	1125 4275 2250 4275
 Wire Wire Line
 	3450 4275 3450 3600
 Wire Wire Line
 	3450 3600 5000 3600
 Wire Wire Line
-	1125 3675 3375 3675
+	1125 3675 2250 3675
 Wire Wire Line
 	3375 3675 3375 3500
 Wire Wire Line
@@ -377,4 +377,116 @@ Wire Wire Line
 	1175 1975 1175 2575
 Wire Bus Line
 	7100 1000 7100 3600
+$Comp
+L Connector:TestPoint TS1
+U 1 1 5D78CB03
+P 2250 1875
+F 0 "TS1" H 2308 1947 50  0000 L CNN
+F 1 "TestPoint" H 2308 1902 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 1875 50  0001 C CNN
+F 3 "~" H 2450 1875 50  0001 C CNN
+	1    2250 1875
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 1875
+Wire Wire Line
+	2250 1875 3675 1875
+$Comp
+L Connector:TestPoint TS2
+U 1 1 5D78D6F0
+P 2250 2475
+F 0 "TS2" H 2308 2547 50  0000 L CNN
+F 1 "TestPoint" H 2308 2502 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 2475 50  0001 C CNN
+F 3 "~" H 2450 2475 50  0001 C CNN
+	1    2250 2475
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 2475
+Wire Wire Line
+	2250 2475 3600 2475
+$Comp
+L Connector:TestPoint TS3
+U 1 1 5D78DE59
+P 2250 3075
+F 0 "TS3" H 2308 3147 50  0000 L CNN
+F 1 "TestPoint" H 2308 3102 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 3075 50  0001 C CNN
+F 3 "~" H 2450 3075 50  0001 C CNN
+	1    2250 3075
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 3075
+Wire Wire Line
+	2250 3075 3525 3075
+$Comp
+L Connector:TestPoint TS4
+U 1 1 5D78E5F8
+P 2250 3675
+F 0 "TS4" H 2308 3747 50  0000 L CNN
+F 1 "TestPoint" H 2308 3702 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 3675 50  0001 C CNN
+F 3 "~" H 2450 3675 50  0001 C CNN
+	1    2250 3675
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 3675
+Wire Wire Line
+	2250 3675 3375 3675
+$Comp
+L Connector:TestPoint TS5
+U 1 1 5D78EAD1
+P 2250 4275
+F 0 "TS5" H 2308 4347 50  0000 L CNN
+F 1 "TestPoint" H 2308 4302 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 4275 50  0001 C CNN
+F 3 "~" H 2450 4275 50  0001 C CNN
+	1    2250 4275
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 4275
+Wire Wire Line
+	2250 4275 3450 4275
+$Comp
+L Connector:TestPoint TS6
+U 1 1 5D78EE5D
+P 2250 4875
+F 0 "TS6" H 2308 4947 50  0000 L CNN
+F 1 "TestPoint" H 2308 4902 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 4875 50  0001 C CNN
+F 3 "~" H 2450 4875 50  0001 C CNN
+	1    2250 4875
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 4875
+Wire Wire Line
+	2250 4875 3525 4875
+$Comp
+L Connector:TestPoint TS7
+U 1 1 5D78F203
+P 2250 5475
+F 0 "TS7" H 2308 5547 50  0000 L CNN
+F 1 "TestPoint" H 2308 5502 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 5475 50  0001 C CNN
+F 3 "~" H 2450 5475 50  0001 C CNN
+	1    2250 5475
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 5475
+Wire Wire Line
+	2250 5475 1125 5475
+$Comp
+L Connector:TestPoint TS8
+U 1 1 5D78F562
+P 2250 6075
+F 0 "TS8" H 2308 6147 50  0000 L CNN
+F 1 "TestPoint" H 2308 6102 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 2450 6075 50  0001 C CNN
+F 3 "~" H 2450 6075 50  0001 C CNN
+	1    2250 6075
+	1    0    0    -1  
+$EndComp
+Connection ~ 2250 6075
+Wire Wire Line
+	2250 6075 3675 6075
 $EndSCHEMATC
