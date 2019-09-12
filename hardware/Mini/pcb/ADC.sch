@@ -375,8 +375,6 @@ Wire Wire Line
 Connection ~ 1175 1975
 Wire Wire Line
 	1175 1975 1175 2575
-Wire Bus Line
-	7100 1000 7100 3600
 $Comp
 L Connector:TestPoint TS1
 U 1 1 5D78CB03
@@ -489,4 +487,6 @@ $EndComp
 Connection ~ 2250 6075
 Wire Wire Line
 	2250 6075 3675 6075
+Wire Bus Line
+	7100 1000 7100 3600
 $EndSCHEMATC
