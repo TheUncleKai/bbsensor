@@ -10,5 +10,5 @@ The 8 is a simple temperature monitor for BBQ/Smoker.
 ![Top View][view3]
 
 [view1]: prj/BBSensor_01.png
-[view1]: prj/BBSensor_02.png
-[view1]: prj/BBSensor_03.png
+[view2]: prj/BBSensor_02.png
+[view3]: prj/BBSensor_03.png
