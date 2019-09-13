@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name BBConn)(type Legacy)(uri ${BBROOT}/symbols/BBConn.lib)(options "")(descr ""))
+  (lib (name BBLib)(type Legacy)(uri ${BBROOT}/symbols/BBLib.lib)(options "")(descr ""))
+  (lib (name BBLinear)(type Legacy)(uri ${BBROOT}/symbols/BBLinear.lib)(options "")(descr ""))
+)
