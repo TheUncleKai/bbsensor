@@ -134,7 +134,7 @@ F 1 "AudioJack3" H 907 2209 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 1975 50  0001 C CNN
 F 3 "~" H 925 1975 50  0001 C CNN
 	1    925  1975
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH2
@@ -145,7 +145,7 @@ F 1 "AudioJack3" H 907 2809 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 2575 50  0001 C CNN
 F 3 "~" H 925 2575 50  0001 C CNN
 	1    925  2575
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH3
@@ -156,7 +156,7 @@ F 1 "AudioJack3" H 907 3409 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 3175 50  0001 C CNN
 F 3 "~" H 925 3175 50  0001 C CNN
 	1    925  3175
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH4
@@ -167,7 +167,7 @@ F 1 "AudioJack3" H 907 4009 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 3775 50  0001 C CNN
 F 3 "~" H 925 3775 50  0001 C CNN
 	1    925  3775
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH5
@@ -178,7 +178,7 @@ F 1 "AudioJack3" H 907 4609 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 4375 50  0001 C CNN
 F 3 "~" H 925 4375 50  0001 C CNN
 	1    925  4375
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH6
@@ -189,7 +189,7 @@ F 1 "AudioJack3" H 907 5209 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 4975 50  0001 C CNN
 F 3 "~" H 925 4975 50  0001 C CNN
 	1    925  4975
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH7
@@ -200,7 +200,7 @@ F 1 "AudioJack3" H 907 5809 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 5575 50  0001 C CNN
 F 3 "~" H 925 5575 50  0001 C CNN
 	1    925  5575
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:AudioJack3 TH8
@@ -211,7 +211,7 @@ F 1 "AudioJack3" H 907 6409 50  0000 C CNN
 F 2 "Lumberg:LUMBERG_1501_05" H 925 6175 50  0001 C CNN
 F 3 "~" H 925 6175 50  0001 C CNN
 	1    925  6175
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 Wire Wire Line
 	1125 1875 2250 1875
