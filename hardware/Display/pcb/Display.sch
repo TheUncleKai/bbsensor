@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Display-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -127,7 +128,7 @@ U 1 1 5D6C50BB
 P 7550 3050
 F 0 "R301" V 7600 3200 50  0000 L CNN
 F 1 "220" V 7550 3050 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 7480 3050 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7480 3050 50  0001 C CNN
 F 3 "~" H 7550 3050 50  0001 C CNN
 	1    7550 3050
 	1    0    0    -1  
@@ -171,7 +172,7 @@ U 1 1 5D6C6C7B
 P 7200 3900
 F 0 "R302" V 7250 4050 50  0000 L CNN
 F 1 "2k" V 7200 3900 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 7130 3900 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7130 3900 50  0001 C CNN
 F 3 "~" H 7200 3900 50  0001 C CNN
 	1    7200 3900
 	1    0    0    -1  
