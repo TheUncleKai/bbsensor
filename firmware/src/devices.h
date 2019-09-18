@@ -14,23 +14,26 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#ifndef DATA_H_INCLUDED
+#define DATA_H_INCLUDED
+
+#include "led.h"
 
 
-class LED
+class Devices
 {
-  private:
-    int _num, _status, _pin;
+    public:
+        Devices();
+        virtual ~Devices();
 
-  public:
-    LED (int num, int pin);
+        LED* led1();
+        LED* led2();
 
-    void setup();
-    void toggle();
+    protected:
 
-    void on();
-    void off();
+    private:
+        LED* p_led1;
+        LED* p_led2;
 };
 
-#endif // LED_H_INCLUDED
+#endif // DATA_H_INCLUDED

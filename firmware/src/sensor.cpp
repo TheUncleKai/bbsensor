@@ -1,45 +1,56 @@
+/*
+   Copyright (C) 2019, Kai Raphahn
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #include <Arduino.h>
 
 #include "config.h"
-#include "data.h"
+#include "devices.h"
 
 void setup();
 void loop();
 
-Data* data = new Data();
+Devices* devices = new Devices();
 
 
-void setup() {
+void setup()
+{
     Serial.begin(115200);
     delay(3000);
 
-    data->led1()->setup();
-    data->led2()->setup();
+    devices->led1()->setup();
+    devices->led2()->setup();
 
     DEBUG_MSG("bootup...\n");
 }
 
-// the loop function runs over and over again forever
-void loop() {
+
+void loop()
+{
     DEBUG_MSG("loop %d\n", millis());
-
-
     DEBUG_MSG("Toggle on\n");
-    data->led1()->toggle();
-    data->led2()->toggle();
 
-//    digitalWrite(LED1, LOW);
-//    digitalWrite(LED2, HIGH);
-
+    devices->led1()->toggle();
+    devices->led2()->toggle();
 
     delay(LOOP_WAIT);
 
     DEBUG_MSG("Toggle off\n");
-    data->led1()->toggle();
-    data->led2()->toggle();
 
-//    digitalWrite(LED1, HIGH);
-//    digitalWrite(LED2, LOW);
+    devices->led1()->toggle();
+    devices->led2()->toggle();
 
     delay(LOOP_WAIT);
 }

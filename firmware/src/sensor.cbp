@@ -62,14 +62,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Makefile" />
 		<Unit filename="config.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="data.h" />
+		<Unit filename="depends.mk" />
+		<Unit filename="devices.cpp" />
+		<Unit filename="devices.h" />
+		<Unit filename="flags.mk" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
+		<Unit filename="objects.mk" />
 		<Unit filename="sensor.cpp" />
-		<Unit filename="data.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

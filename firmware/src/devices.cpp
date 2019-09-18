@@ -14,23 +14,27 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#include "devices.h"
+#include "config.h"
 
-
-class LED
+Devices::Devices()
 {
-  private:
-    int _num, _status, _pin;
+    p_led1 = new LED(1, LED1);
+    p_led2 = new LED(2, LED2);
+}
 
-  public:
-    LED (int num, int pin);
 
-    void setup();
-    void toggle();
+Devices::~Devices()
+{
+    //dtor
+}
 
-    void on();
-    void off();
-};
 
-#endif // LED_H_INCLUDED
+LED* Devices::led1() {
+    return p_led1;
+}
+
+
+LED* Devices::led2() {
+    return p_led2;
+}
