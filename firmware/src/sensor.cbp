@@ -21,6 +21,9 @@
 				<Option object_output="D:/home/kai/projekte/bbsensor/firmware/src/.objs" />
 				<Option type="5" />
 				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+				<Compiler>
+					<Add directory="include" />
+				</Compiler>
 			</Target>
 			<Target title="compile">
 				<Option type="4" />
@@ -29,6 +32,9 @@
 				<Option projectLinkerOptionsRelation="-1" />
 				<Option projectIncludeDirsRelation="-1" />
 				<Option projectLibDirsRelation="-1" />
+				<Compiler>
+					<Add directory="include" />
+				</Compiler>
 				<MakeCommands>
 					<Build command="" />
 					<CompileFile command="" />
@@ -41,18 +47,29 @@
 			<Target title="link">
 				<Option type="4" />
 				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+				<Compiler>
+					<Add directory="include" />
+				</Compiler>
 			</Target>
 			<Target title="clean">
 				<Option type="4" />
 				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+				<Compiler>
+					<Add directory="include" />
+				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="config.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="data.h" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
 		<Unit filename="sensor.cpp" />
+		<Unit filename="data.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

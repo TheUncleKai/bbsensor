@@ -1,11 +1,6 @@
 #include <Arduino.h>
 
-#ifdef DEBUG_ESP_PORT
-#define DEBUG_MSG(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
-#else
-#define DEBUG_MSG(...)
-#endif
-
+#include "config.h"
 #include "led.h"
 
 LED::LED (int num, int pin) {

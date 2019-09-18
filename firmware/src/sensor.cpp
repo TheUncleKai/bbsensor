@@ -1,34 +1,20 @@
 #include <Arduino.h>
 
-#ifdef DEBUG_ESP_PORT
-#define DEBUG_MSG(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
-#else
-#define DEBUG_MSG(...)
-#endif
-
-// #define LED_BUILTIN 2
-
-#define LED1 16 // D0
-#define LED2 5  // D1
-
-#define LOOP_WAIT 500
-
-#include "led.h"
+#include "config.h"
+#include "data.h"
 
 void setup();
 void loop();
 
-
-LED led1(1, LED1);
-LED led2(2, LED2);
+Data* data = new Data();
 
 
 void setup() {
     Serial.begin(115200);
     delay(3000);
 
-    led1.setup();
-    led2.setup();
+    data->led1()->setup();
+    data->led2()->setup();
 
     DEBUG_MSG("bootup...\n");
 }
@@ -39,8 +25,8 @@ void loop() {
 
 
     DEBUG_MSG("Toggle on\n");
-    led1.toggle();
-    led2.toggle();
+    data->led1()->toggle();
+    data->led2()->toggle();
 
 //    digitalWrite(LED1, LOW);
 //    digitalWrite(LED2, HIGH);
@@ -49,8 +35,8 @@ void loop() {
     delay(LOOP_WAIT);
 
     DEBUG_MSG("Toggle off\n");
-    led1.toggle();
-    led2.toggle();
+    data->led1()->toggle();
+    data->led2()->toggle();
 
 //    digitalWrite(LED1, HIGH);
 //    digitalWrite(LED2, LOW);
