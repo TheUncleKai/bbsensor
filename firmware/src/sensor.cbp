@@ -73,7 +73,7 @@
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
 		<Unit filename="objects.mk" />
-		<Unit filename="sensor.cpp" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
