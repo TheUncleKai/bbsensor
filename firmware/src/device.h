@@ -14,30 +14,15 @@
    limitations under the License.
 */
 
-#ifndef DATA_H_INCLUDED
-#define DATA_H_INCLUDED
+#ifndef DEVICE_H_INCLUDED
+#define DEVICE_H_INCLUDED
 
-#include "device.h"
-#include "led.h"
-
-
-class Devices : public Device
+class Device
 {
     public:
-        Devices();
-        virtual ~Devices();
+        virtual void setup();
+        virtual void execute();
 
-        LED* led1();
-        LED* led2();
-
-        void setup();
-        void execute();
-
-    protected:
-
-    private:
-        LED* p_led1;
-        LED* p_led2;
 };
 
-#endif // DATA_H_INCLUDED
+#endif // DEVICE_H_INCLUDED

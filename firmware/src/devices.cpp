@@ -15,6 +15,8 @@
 */
 
 #include "devices.h"
+
+#include "debug.h"
 #include "config.h"
 
 Devices::Devices()
@@ -37,4 +39,18 @@ LED* Devices::led1() {
 
 LED* Devices::led2() {
     return p_led2;
+}
+
+
+void Devices::setup()
+{
+    p_led1->setup();
+    p_led2->setup();
+}
+
+
+void Devices::execute()
+{
+    p_led1->execute();
+    p_led2->execute();
 }

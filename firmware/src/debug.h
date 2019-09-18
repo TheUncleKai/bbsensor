@@ -14,30 +14,13 @@
    limitations under the License.
 */
 
-#ifndef DATA_H_INCLUDED
-#define DATA_H_INCLUDED
+#ifndef DEBUG_H_INCLUDED
+#define DEBUG_H_INCLUDED
 
-#include "device.h"
-#include "led.h"
+#ifdef DEBUG_ESP_PORT
+#define DEBUG_MSG(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
+#else
+#define DEBUG_MSG(...)
+#endif
 
-
-class Devices : public Device
-{
-    public:
-        Devices();
-        virtual ~Devices();
-
-        LED* led1();
-        LED* led2();
-
-        void setup();
-        void execute();
-
-    protected:
-
-    private:
-        LED* p_led1;
-        LED* p_led2;
-};
-
-#endif // DATA_H_INCLUDED
+#endif // DEBUG_H_INCLUDED

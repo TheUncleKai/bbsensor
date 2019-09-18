@@ -17,20 +17,26 @@
 #ifndef LED_H_INCLUDED
 #define LED_H_INCLUDED
 
+#include "device.h"
 
-class LED
+
+class LED : public Device
 {
   private:
     int _num, _status, _pin;
 
+    void _on();
+    void _off();
+
   public:
     LED (int num, int pin);
 
-    void setup();
     void toggle();
-
     void on();
     void off();
+
+    void setup();
+    void execute();
 };
 
 #endif // LED_H_INCLUDED

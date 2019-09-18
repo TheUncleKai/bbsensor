@@ -16,8 +16,10 @@
 
 #include <Arduino.h>
 
-#include "config.h"
 #include "devices.h"
+
+#include "config.h"
+#include "debug.h"
 
 void setup();
 void loop();
@@ -30,8 +32,7 @@ void setup()
     Serial.begin(115200);
     delay(3000);
 
-    devices->led1()->setup();
-    devices->led2()->setup();
+    devices->setup();
 
     DEBUG_MSG("bootup...\n");
 }
@@ -45,12 +46,6 @@ void loop()
     devices->led1()->toggle();
     devices->led2()->toggle();
 
-    delay(LOOP_WAIT);
-
-    DEBUG_MSG("Toggle off\n");
-
-    devices->led1()->toggle();
-    devices->led2()->toggle();
-
+    devices->execute();
     delay(LOOP_WAIT);
 }
