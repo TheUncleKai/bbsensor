@@ -24,7 +24,19 @@
 			</Target>
 			<Target title="compile">
 				<Option type="4" />
-				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+				<Option compiler="gnu_gcc_compiler_for_esp8266-e12" />
+				<Option projectCompilerOptionsRelation="-1" />
+				<Option projectLinkerOptionsRelation="-1" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 			<Target title="link">
 				<Option type="4" />
@@ -38,6 +50,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="led.cpp" />
+		<Unit filename="led.h" />
 		<Unit filename="sensor.cpp" />
 		<Extensions>
 			<code_completion />

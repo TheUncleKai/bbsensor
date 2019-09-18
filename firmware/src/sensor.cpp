@@ -6,32 +6,54 @@
 #define DEBUG_MSG(...)
 #endif
 
-#define LED_BUILTIN 2
+// #define LED_BUILTIN 2
+
+#define LED1 16 // D0
+#define LED2 5  // D1
+
+#define LOOP_WAIT 500
+
+#include "led.h"
 
 void setup();
 void loop();
 
-void setup() {
-  Serial.begin(115200);
-  delay(3000);
 
-  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
-  DEBUG_MSG("bootup...\n");
+LED led1(1, LED1);
+LED led2(2, LED2);
+
+
+void setup() {
+    Serial.begin(115200);
+    delay(3000);
+
+    led1.setup();
+    led2.setup();
+
+    DEBUG_MSG("bootup...\n");
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  DEBUG_MSG("loop %d\n", millis());
-
-  DEBUG_MSG("LED low\n", millis());
-
-  digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
-                                    // but actually the LED is on; this is because
-                                    // it is acive low on the ESP-01)
+    DEBUG_MSG("loop %d\n", millis());
 
 
-  delay(1000);                      // Wait for a second
-  DEBUG_MSG("LED high\n", millis());
-  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
-  delay(2000);                      // Wait for two seconds (to demonstrate the active low LED)
+    DEBUG_MSG("Toggle on\n");
+    led1.toggle();
+    led2.toggle();
+
+//    digitalWrite(LED1, LOW);
+//    digitalWrite(LED2, HIGH);
+
+
+    delay(LOOP_WAIT);
+
+    DEBUG_MSG("Toggle off\n");
+    led1.toggle();
+    led2.toggle();
+
+//    digitalWrite(LED1, HIGH);
+//    digitalWrite(LED2, LOW);
+
+    delay(LOOP_WAIT);
 }

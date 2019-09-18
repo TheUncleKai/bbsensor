@@ -1,2 +1,3 @@
 OBJECTS = \
-    sensor.cpp.o
+    sensor.cpp.o \
+    led.cpp.o
