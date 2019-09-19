@@ -59,6 +59,8 @@ compile:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile $(LIBCORE)"
 	@$(MAKE) -s -C ext/core -f Makefile compile
+	@$(INFORM) "Compile $(LIBSPI)"
+	@$(MAKE) -s -C ext/spi -f Makefile compile
 	@$(INFORM) "Compile $(APP)"
 	@$(MAKE) -s -C src -f Makefile compile
 
@@ -66,6 +68,8 @@ link:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Link $(LIBCORE)"
 	@$(MAKE) -s -C ext/core -f Makefile link
+	@$(INFORM) "Link $(LIBSPI)"
+	@$(MAKE) -s -C ext/spi -f Makefile link
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
 
@@ -74,9 +78,11 @@ upload:
 	@$(MAKE) -s -C src -f Makefile upload
 
 clean:
-	@$(INFORM) "Clean $(LIBCORE)"
 	@@$(RM) $(LOGFILE)
+	@$(INFORM) "Clean $(LIBCORE)"
 	@$(MAKE) -s -C ext/core -f Makefile clean
+	@$(INFORM) "Clean $(LIBSPI)"
+	@$(MAKE) -s -C ext/spi -f Makefile clean
 	@$(INFORM) "Clean $(APP)"
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)

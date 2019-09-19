@@ -15,6 +15,7 @@
 */
 
 #include <Arduino.h>
+#include <SPI.h>
 
 #include "hardware.h"
 
@@ -25,12 +26,13 @@ void setup();
 void loop();
 
 Hardware* hardware = new Hardware();
-
+SPIClass* spi = new SPIClass();
 
 void setup()
 {
     Serial.begin(115200);
     delay(3000);
+    spi->begin();
 
     hardware->setup();
 

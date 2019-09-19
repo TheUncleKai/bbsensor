@@ -18,8 +18,10 @@ CFLAGS = \
 	-DARDUINO_BOARD=\"ESP8266_NODEMCU\" \
 	-DFLASHMODE_DIO \
 	-DESP8266 \
+    -DNO_GLOBAL_SPI \
 	$(ESP8266_INCLUDE_CORE) \
-	$(ESP8266_INCLUDE_VARIANTS)
+	$(ESP8266_INCLUDE_VARIANTS) \
+    $(ESP8266_INCLUDE_SPI)
 
 LDFLAGS = \
 	-fno-exceptions -Wl,-Map "-Wl,$(MAP)" -g -Os -nostdlib -Wl,--no-check-sections -u app_entry -u _printf_float -u _scanf_float \
@@ -27,7 +29,6 @@ LDFLAGS = \
 	-Teagle.flash.4m1m.ld -Wl,--gc-sections -Wl,-wrap,system_restart_local -Wl,-wrap,spi_flash_read
 
 LDLIBS = \
-	$(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX) \
 	-lhal -lphy -lpp -lnet80211 -llwip2-536-feat -lwpa -lcrypto -lmain -lwps -lbearssl \
 	-laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc
 
