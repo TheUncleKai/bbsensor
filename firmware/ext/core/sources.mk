@@ -1,6 +1,8 @@
 
-SOURCES_CORE = \
-    $(ESP8266_CORE)/cont.S \
+SOURCES_CORE_ASM = \
+    $(ESP8266_CORE)/cont.S
+
+SOURCES_CORE_CPP = \
     $(ESP8266_CORE)/abi.cpp \
     $(ESP8266_CORE)/base64.cpp \
     $(ESP8266_CORE)/cbuf.cpp \

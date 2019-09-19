@@ -8,9 +8,10 @@ include $(ROOT)/rules/setup.mk
 OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCORE)
 TARGET = $(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX)
 
-include objects.mk
-
+include sources.mk
 include flags.mk
+include path.mk
+
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
@@ -22,5 +23,12 @@ help:
 
 default: all
 
-all: $(OBJS) $(TEMP)
+deps: $(DEPS) 
 
+compile: $(OBJS)
+
+all: deps compile
+
+include rules.mk
+
+.PHONY: default help all deps compile link prepare clean info upload
