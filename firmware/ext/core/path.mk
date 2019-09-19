@@ -18,6 +18,8 @@ OBJS_SPIFFS := ${subst $(ESP8266_CORE)/spiffs,$(OBJDIR),$(OBJS_SPIFFS)}
 
 OBJS := $(OBJS_CORE_ASM) $(OBJS_CORE_CPP) $(OBJS_LIBB64) $(OBJS_MALLOC) $(OBJS_SPIFFS)
 
+ARS := $(OBJS:.o=.ar)
+
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Dependencies
 
