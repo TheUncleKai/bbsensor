@@ -14,42 +14,42 @@
    limitations under the License.
 */
 
-#include "devices.h"
+#include "hardware.h"
 
 #include "debug.h"
 #include "config.h"
 
-Devices::Devices()
+Hardware::Hardware()
 {
     p_led1 = new LED(1, LED1);
     p_led2 = new LED(2, LED2);
 }
 
 
-Devices::~Devices()
+Hardware::~Hardware()
 {
     //dtor
 }
 
 
-LED* Devices::led1() {
+LED* Hardware::led1() {
     return p_led1;
 }
 
 
-LED* Devices::led2() {
+LED* Hardware::led2() {
     return p_led2;
 }
 
 
-void Devices::setup()
+void Hardware::setup()
 {
     p_led1->setup();
     p_led2->setup();
 }
 
 
-void Devices::execute()
+void Hardware::execute()
 {
     p_led1->execute();
     p_led2->execute();

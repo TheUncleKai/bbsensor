@@ -51,8 +51,8 @@
 		</Unit>
 		<Unit filename="depends.mk" />
 		<Unit filename="device.h" />
-		<Unit filename="devices.cpp" />
-		<Unit filename="devices.h" />
+		<Unit filename="hardware.cpp" />
+		<Unit filename="hardware.h" />
 		<Unit filename="flags.mk" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />

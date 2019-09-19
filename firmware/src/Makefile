@@ -21,19 +21,24 @@ DEPS=$(OBJS:.o=.d)
 
 include flags.mk
 
+default: compile link deps
+
 help:
 	@echo -e "\n\e[1;34mTargets for makefile\e[0;0m\n"
 	@echo -e "\t\e[1;34mall\e[0;0m:\t\tcompiles and link firmware"
+	@echo -e "\t\e[1;34mdeps\e[0;0m:\t\tcreate dependecies"
 	@echo -e "\t\e[1;34mcompile\e[0;0m:\tcompiles firmware"
 	@echo -e "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
 	@echo -e "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-all: compile link
+all: compile link deps
 
-compile: $(OBJS) $(LD)
+deps: $(OBJDIR) $(DEPS)
 
-link: $(ELF) $(BIN) $(SIZES)
+compile: $(OBJDIR) $(OBJS) $(LD)
+
+link: $(OBJDIR) $(ELF) $(BIN) $(SIZES)
 
 cleanall: clean
 
@@ -53,7 +58,13 @@ $(OBJDIR):
 	@$(LOG) "Create $@"
 	@$(MKDIR) $@
 
-$(OBJDIR)/%.cpp.o: %.cpp
+$(OBJDIR)/%.d: %.cpp
+	@$(MKDIR) $(OBJDIR)
+	@$(LOG) "$@"
+	@$(LOGTIME) $(CXX) -MM $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) -MM $(CFLAGS) $< -o $@ $(LOGOUT)
+
+$(OBJDIR)/%.o: %.cpp
 	@$(LOG) "$@"
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
@@ -87,4 +98,4 @@ upload: $(BIN)
 
 -include $(DEPS)
 
-.PHONY: all compile link clean cleanall upload
+.PHONY: default all compile link clean cleanall upload

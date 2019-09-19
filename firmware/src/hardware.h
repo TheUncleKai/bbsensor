@@ -21,11 +21,11 @@
 #include "led.h"
 
 
-class Devices : public Device
+class Hardware : public Device
 {
     public:
-        Devices();
-        virtual ~Devices();
+        Hardware();
+        virtual ~Hardware();
 
         LED* led1();
         LED* led2();

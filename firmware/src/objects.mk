@@ -1,4 +1,4 @@
 OBJECTS = \
-	devices.cpp.o \
-	led.cpp.o \
-	main.cpp.o
+	hardware.o \
+	led.o \
+	main.o

@@ -5,6 +5,9 @@ ROOT = .
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
 
+default: compile link
+
+
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
 	@$(ECHO) "\t\e[1;34minfo\e[0;0m:\t\tinfo about enviroments"
@@ -47,6 +50,11 @@ all:
 	@$(INFORM) "Build $(APP)"
 	@$(MAKE) -s -C src -f Makefile all
 
+deps:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Create deps"
+	@$(MAKE) -s -C src -f Makefile deps
+
 compile:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile $(LIBCORE)"
@@ -73,4 +81,4 @@ clean:
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
-.PHONY: help all compile link prepare clean info upload
+.PHONY: default help all deps compile link prepare clean info upload
