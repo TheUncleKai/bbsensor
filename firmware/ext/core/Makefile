@@ -22,13 +22,11 @@ help:
 	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare if needed (used currently for Code::Blocks workspace)"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-deps: $(DEPS) 
-
 compile: $(OBJS)
 
 link: $(ARS)
 
-all: deps compile link
+all: compile link
 
 prepare:
 	@$(LOG) "Copy $(LIBCORE)"
@@ -61,6 +59,5 @@ clean:
 
 include rules.mk
 
--include $(DEPS)
 
-.PHONY: default help all deps compile link prepare clean cleanall
+.PHONY: default help all compile link prepare clean cleanall
