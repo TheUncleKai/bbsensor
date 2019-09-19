@@ -8,15 +8,11 @@ include $(ROOT)/rules/setup.mk
 OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCORE)
 TARGET = $(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX)
 
-include objects.mk
-
-OBJECTS = $(OBJS_CORE) $(OBJS_SPIFFS) $(OBJS_LIBB64) $(OBJS_MALLOC)
-OBJS := $(addprefix $(OBJDIR)/, $(OBJECTS))
-
-DEPS=$(OBJS:.o=.d)
-TEMP=$(OBJS:.o=.ar)
-
+include sources.mk
 include flags.mk
+include path.mk
+
+default: all
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
@@ -26,13 +22,11 @@ help:
 	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare if needed (used currently for Code::Blocks workspace)"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-default: all
-
-all: $(OBJS) $(TEMP)
-
 compile: $(OBJS)
 
-link: $(TEMP)
+link: $(ARS)
+
+all: compile link
 
 prepare:
 	@$(LOG) "Copy $(LIBCORE)"
@@ -52,10 +46,8 @@ prepare:
 cleanall: clean
 
 clean:
+	@$(RM) $(OBJDIR)/*
 	@$(RM) $(TARGET)
-	@$(RM) $(OBJS)
-	@$(RM) $(DEPS)
-	@$(RM) $(TEMP)
 	@-$(RMDIR) $(OBJDIR)
 	@$(RM) *.S *.cpp *.h
 	@$(RM) libb64/*.cpp libb64/*.h
@@ -65,55 +57,6 @@ clean:
 	@-$(RMDIR) umm_malloc
 	@-$(RMDIR) spiffs
 
-Updater_Signing.h:
-	@$(LOG) "$@"
-	@echo "#define ARDUINO_SIGNING 0" > Updater_Signing.h
+include rules.mk
 
-$(OBJS): | $(OBJDIR)
-
-$(OBJDIR):
-	@$(LOG) "Create $@"
-	@$(MKDIR) $@
-
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/%.cpp Updater_Signing.h
-	@$(LOG) "(CXX) $@"
-	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
-	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
-
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/libb64/%.cpp Updater_Signing.h
-	@$(LOG) "(CXX) $@"
-	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
-	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
-
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/spiffs/%.cpp Updater_Signing.h
-	@$(LOG) "(CXX) $@"
-	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
-	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
-
-$(OBJDIR)/%.cpp.o: $(ESP8266_CORE)/umm_malloc/%.cpp Updater_Signing.h
-	@$(LOG) "(CXX) $@"
-	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
-	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
-
-$(OBJDIR)/%.S.o: $(ESP8266_CORE)/%.S Updater_Signing.h
-	@$(LOG) "(GCC) $@"
-	@$(LOGTIME) $(GCC) $(ASMFLAGS) $< -o $@ $(LOGONLY)
-	@$(GCC) $(ASMFLAGS) $< -o $@ $(LOGOUT)
-
-$(OBJDIR)/%.cpp.ar: $(OBJDIR)/%.cpp.o $(OBJS)
-	@$(LOG) "(AR) $< -> $(TARGET)"
-	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
-	@$(AR) cru $(TARGET) $< $(LOGOUT)
-	@echo 1 > $@
-
-$(OBJDIR)/%.S.ar: $(OBJDIR)/%.S.o $(OBJS)
-	@$(LOG) "(AR) $< -> $(TARGET)"
-	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
-	@$(AR) cru $(TARGET) $< $(LOGOUT)
-	@echo 1 > $@
-
-include depends.mk
-
--include $(DEPS)
-
-.PHONY: help default all compile link prepare clean cleanall
+.PHONY: default help all compile link prepare clean cleanall
