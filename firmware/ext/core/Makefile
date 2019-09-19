@@ -59,5 +59,4 @@ clean:
 
 include rules.mk
 
-
 .PHONY: default help all compile link prepare clean cleanall
