@@ -27,6 +27,7 @@ void loop();
 
 Hardware* hardware = new Hardware();
 SPIClass* spi = new SPIClass();
+uint64_t loop_count = 0;
 
 void setup()
 {
@@ -43,12 +44,18 @@ void setup()
 
 void loop()
 {
-    DEBUG_MSG("loop %d\n", millis());
-    DEBUG_MSG("Toggle on\n");
+    DEBUG_MSG("loop %u: %d\n", loop_count, millis());
 
-    hardware->led1()->toggle();
-    hardware->led2()->toggle();
+    if (loop_count == 0) {
+        hardware->led1()->on();
+        hardware->led2()->off();
+    } else {
+        hardware->led1()->toggle();
+        hardware->led2()->toggle();
+    }
 
     hardware->execute();
     delay(LOOP_WAIT);
+
+    loop_count++;
 }
