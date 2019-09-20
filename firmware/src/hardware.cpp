@@ -42,9 +42,16 @@ LED* Hardware::led2() {
     return this->p_led2;
 }
 
+
 SPIClass* Hardware::spi()
 {
     return this->p_spi;
+}
+
+
+Button* Hardware::button()
+{
+    return this->p_button;
 }
 
 
@@ -52,6 +59,7 @@ void Hardware::setup()
 {
     this->p_led1->setup();
     this->p_led2->setup();
+    this->p_button->setup();
     this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
     this->p_spi->begin();
 
@@ -62,4 +70,5 @@ void Hardware::execute()
 {
     this->p_led1->execute();
     this->p_led2->execute();
+    this->p_button->execute();
 }

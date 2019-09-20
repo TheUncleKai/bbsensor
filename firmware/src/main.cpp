@@ -29,12 +29,26 @@ void loop();
 Hardware* hardware = new Hardware();
 Loop* looper = new Loop();
 
+
+void handleRISING()
+{
+    hardware->button()->handleRISING();
+}
+
+
+void handleFALLING()
+{
+    hardware->button()->handleFALLING();
+}
+
+
 void setup()
 {
     Serial.begin(115200);
     delay(3000);
 
     looper->setup();
+    hardware->button()->setISR(handleRISING, handleFALLING);
     hardware->setup();
 }
 

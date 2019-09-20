@@ -21,6 +21,7 @@
 
 #include "device.h"
 #include "led.h"
+#include "button.h"
 
 
 class Hardware : public Device
@@ -32,6 +33,7 @@ class Hardware : public Device
         LED* led1();
         LED* led2();
         SPIClass* spi();
+        Button* button();
 
         void setup();
         void execute();
@@ -42,7 +44,7 @@ class Hardware : public Device
         LED* p_led1;
         LED* p_led2;
         SPIClass* p_spi;
-
+        Button* p_button;
 };
 
 #endif // DATA_H_INCLUDED

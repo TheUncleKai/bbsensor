@@ -22,10 +22,16 @@
 #include "debug.h"
 
 
-Button::Button (int pin)
+Button::Button (int num, int pin)
 {
+    this->m_num = num;
     this->m_pin = pin;
     this->m_status = Button::NONE;
+    this->p_rising = NULL;
+    this->p_falling = NULL;
+    this->m_start = 0;
+    this->m_end = 0;
+    this->m_counter = 0;
 }
 
 
@@ -33,15 +39,47 @@ Button::~Button()
 {
 }
 
+
 Button::status_t Button::status()
 {
     return this->m_status;
 }
 
 
+void Button::setISR(void (*rising_isr)(void), void (*falling_isr)(void))
+{
+    this->p_rising = rising_isr;
+    this->p_falling = falling_isr;
+}
+
+
+void Button::handleRISING()
+{
+    DEBUG_MSG("BUTTON%d: RISING\n", this->m_num);
+    this->m_start = millis();
+}
+
+
+void Button::handleFALLING()
+{
+    DEBUG_MSG("BUTTON%d: FALLING\n", this->m_num);
+    this->m_end = millis();
+}
+
+
 void Button::setup()
 {
-    pinMode(this->m_pin, INPUT_PULLUP);
+    DEBUG_MSG("BUTTON%d: setup pin %d\n", this->m_num, this->m_pin);
+
+    if (this->p_rising != NULL && this->p_falling != NULL)
+    {
+        pinMode(this->m_pin, INPUT_PULLUP);
+        attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_rising, RISING);
+        attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_falling, FALLING);
+
+    } else {
+        DEBUG_MSG("BUTTON%d: ISR is missing!\n", this->m_num);
+    }
 }
 
 

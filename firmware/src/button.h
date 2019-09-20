@@ -23,7 +23,7 @@
 class Button : public Device
 {
     public:
-        Button (int pin);
+        Button (int num, int pin);
         virtual ~Button();
 
         enum status_t {
@@ -33,14 +33,22 @@ class Button : public Device
             HOLD = 3
         };
 
+        void setISR(void (*rising_isr)(void), void (*falling_isr)(void));
+        void handleRISING();
+        void handleFALLING();
+
         void setup();
         void execute();
 
         status_t status();
 
     private:
-        int m_pin;
+        int m_num, m_pin, m_counter;
+        unsigned long m_start, m_end;
+
         status_t m_status;
+        void (*p_rising)(void);
+        void (*p_falling)(void);
 };
 
 #endif // BUTTON_H_INCLUDED
