@@ -24,6 +24,7 @@ Hardware::Hardware()
     this->p_led1 = new LED(1, PIN_LED1);
     this->p_led2 = new LED(2, PIN_LED2);
     this->p_spi = new SPIClass();
+    this->p_button = new Button(1, PIN_BUTTON);
 }
 
 

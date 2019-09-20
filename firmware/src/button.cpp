@@ -27,11 +27,11 @@ Button::Button (int num, int pin)
     this->m_num = num;
     this->m_pin = pin;
     this->m_status = Button::NONE;
-    this->p_rising = NULL;
-    this->p_falling = NULL;
+    this->p_isr = NULL;
     this->m_start = 0;
     this->m_end = 0;
     this->m_counter = 0;
+    this->m_onoff = 0;
 }
 
 
@@ -46,24 +46,24 @@ Button::status_t Button::status()
 }
 
 
-void Button::setISR(void (*rising_isr)(void), void (*falling_isr)(void))
+void Button::setISR(void (*isr)(void))
 {
-    this->p_rising = rising_isr;
-    this->p_falling = falling_isr;
+    this->p_isr = isr;
 }
 
 
-void Button::handleRISING()
+void Button::handleISR()
 {
-    DEBUG_MSG("BUTTON%d: RISING\n", this->m_num);
-    this->m_start = millis();
-}
+    if (this->m_onoff == 0)
+    {
+        this->m_start = millis();
+        this->m_onoff = 1;
+    } else {
+        this->m_end = millis();
+        this->m_onoff = 0;
+    }
 
-
-void Button::handleFALLING()
-{
-    DEBUG_MSG("BUTTON%d: FALLING\n", this->m_num);
-    this->m_end = millis();
+    DEBUG_MSG("BUTTON%d: state %d, start %d, end %d\n", this->m_num, this->m_onoff, this->m_start, this->m_end);
 }
 
 
@@ -71,11 +71,10 @@ void Button::setup()
 {
     DEBUG_MSG("BUTTON%d: setup pin %d\n", this->m_num, this->m_pin);
 
-    if (this->p_rising != NULL && this->p_falling != NULL)
+    if (this->p_isr != NULL)
     {
         pinMode(this->m_pin, INPUT_PULLUP);
-        attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_rising, RISING);
-        attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_falling, FALLING);
+        attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_isr, CHANGE);
 
     } else {
         DEBUG_MSG("BUTTON%d: ISR is missing!\n", this->m_num);

@@ -30,15 +30,9 @@ Hardware* hardware = new Hardware();
 Loop* looper = new Loop();
 
 
-void handleRISING()
+void handleISR()
 {
-    hardware->button()->handleRISING();
-}
-
-
-void handleFALLING()
-{
-    hardware->button()->handleFALLING();
+    hardware->button()->handleISR();
 }
 
 
@@ -48,7 +42,7 @@ void setup()
     delay(3000);
 
     looper->setup();
-    hardware->button()->setISR(handleRISING, handleFALLING);
+    hardware->button()->setISR(handleISR);
     hardware->setup();
 }
 

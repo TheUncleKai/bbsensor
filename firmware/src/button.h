@@ -33,9 +33,8 @@ class Button : public Device
             HOLD = 3
         };
 
-        void setISR(void (*rising_isr)(void), void (*falling_isr)(void));
-        void handleRISING();
-        void handleFALLING();
+        void setISR(void (*isr)(void));
+        void handleISR();
 
         void setup();
         void execute();
@@ -43,12 +42,11 @@ class Button : public Device
         status_t status();
 
     private:
-        int m_num, m_pin, m_counter;
+        int m_num, m_pin, m_counter, m_onoff;
         unsigned long m_start, m_end;
 
         status_t m_status;
-        void (*p_rising)(void);
-        void (*p_falling)(void);
+        void (*p_isr)(void);
 };
 
 #endif // BUTTON_H_INCLUDED
