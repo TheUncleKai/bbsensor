@@ -21,8 +21,8 @@
 
 Hardware::Hardware()
 {
-    p_led1 = new LED(1, LED1);
-    p_led2 = new LED(2, LED2);
+    p_led1 = new LED(1, PIN_LED1);
+    p_led2 = new LED(2, PIN_LED2);
 }
 
 

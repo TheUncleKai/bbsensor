@@ -32,11 +32,12 @@ void setup()
 {
     Serial.begin(115200);
     delay(3000);
-    spi->begin();
+    DEBUG_MSG("Bootup...\n");
 
+    spi->pins(14, 12, 13, 15);
+    spi->begin();
     hardware->setup();
 
-    DEBUG_MSG("bootup...\n");
 }
 
 
