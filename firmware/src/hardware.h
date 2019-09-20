@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-#ifndef DATA_H_INCLUDED
-#define DATA_H_INCLUDED
+#ifndef HARDWARE_H_INCLUDED
+#define HARDWARE_H_INCLUDED
 
 #include <SPI.h>
 
@@ -47,4 +47,4 @@ class Hardware : public Device
         Button* p_button;
 };
 
-#endif // DATA_H_INCLUDED
+#endif // HARDWARE_H_INCLUDED
