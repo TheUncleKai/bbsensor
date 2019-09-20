@@ -21,8 +21,9 @@
 
 Hardware::Hardware()
 {
-    p_led1 = new LED(1, PIN_LED1);
-    p_led2 = new LED(2, PIN_LED2);
+    this->p_led1 = new LED(1, PIN_LED1);
+    this->p_led2 = new LED(2, PIN_LED2);
+    this->p_spi = new SPIClass();
 }
 
 
@@ -33,24 +34,32 @@ Hardware::~Hardware()
 
 
 LED* Hardware::led1() {
-    return p_led1;
+    return this->p_led1;
 }
 
 
 LED* Hardware::led2() {
-    return p_led2;
+    return this->p_led2;
+}
+
+SPIClass* Hardware::spi()
+{
+    return this->p_spi;
 }
 
 
 void Hardware::setup()
 {
-    p_led1->setup();
-    p_led2->setup();
+    this->p_led1->setup();
+    this->p_led2->setup();
+    this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
+    this->p_spi->begin();
+
 }
 
 
 void Hardware::execute()
 {
-    p_led1->execute();
-    p_led2->execute();
+    this->p_led1->execute();
+    this->p_led2->execute();
 }

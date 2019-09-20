@@ -42,22 +42,20 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Makefile" />
 		<Unit filename="config.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="debug.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="depends.mk" />
 		<Unit filename="device.h" />
 		<Unit filename="hardware.cpp" />
 		<Unit filename="hardware.h" />
-		<Unit filename="flags.mk" />
+		<Unit filename="loop.cpp" />
+		<Unit filename="loop.h" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="objects.mk" />
 		<Extensions>
 			<code_completion />
 			<envvars />

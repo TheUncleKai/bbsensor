@@ -27,7 +27,8 @@
 
 #define PIN_SCLK   14 // D5,  SPI clock
 #define PIN_MISO   12 // D6,  SPI MISO
-#define PIN_MOSI   13 // D7,  SOI MOSI
+#define PIN_MOSI   13 // D7,  SPI MOSI
+#define PIN_NONE   15 // D8,  SPI CS, not used
 
 #define LOOP_WAIT 500
 

@@ -17,6 +17,8 @@
 #ifndef DATA_H_INCLUDED
 #define DATA_H_INCLUDED
 
+#include <SPI.h>
+
 #include "device.h"
 #include "led.h"
 
@@ -29,6 +31,7 @@ class Hardware : public Device
 
         LED* led1();
         LED* led2();
+        SPIClass* spi();
 
         void setup();
         void execute();
@@ -38,6 +41,8 @@ class Hardware : public Device
     private:
         LED* p_led1;
         LED* p_led2;
+        SPIClass* p_spi;
+
 };
 
 #endif // DATA_H_INCLUDED

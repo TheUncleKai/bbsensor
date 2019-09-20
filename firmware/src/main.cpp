@@ -18,6 +18,7 @@
 #include <SPI.h>
 
 #include "hardware.h"
+#include "loop.h"
 
 #include "config.h"
 #include "debug.h"
@@ -26,27 +27,23 @@ void setup();
 void loop();
 
 Hardware* hardware = new Hardware();
-SPIClass* spi = new SPIClass();
-uint64_t loop_count = 0;
+Loop* looper = new Loop();
 
 void setup()
 {
     Serial.begin(115200);
     delay(3000);
-    DEBUG_MSG("Bootup...\n");
 
-    spi->pins(14, 12, 13, 15);
-    spi->begin();
+    looper->setup();
     hardware->setup();
-
 }
 
 
 void loop()
 {
-    DEBUG_MSG("loop %u: %d\n", loop_count, millis());
+    looper->start();
 
-    if (loop_count == 0) {
+    if (looper->counter() == 0) {
         hardware->led1()->on();
         hardware->led2()->off();
     } else {
@@ -55,7 +52,6 @@ void loop()
     }
 
     hardware->execute();
-    delay(LOOP_WAIT);
 
-    loop_count++;
+    looper->finish();
 }
