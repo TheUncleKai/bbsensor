@@ -14,29 +14,37 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#include <Arduino.h>
 
-#include "device.h"
+#include "button.h"
+
+#include "config.h"
+#include "debug.h"
 
 
-class LED : public Device
+Button::Button (int pin)
 {
-  private:
-    int m_num, m_status, m_pin;
+    this->m_pin = pin;
+    this->m_status = Button::NONE;
+}
 
-    void _on();
-    void _off();
 
-  public:
-    LED (int num, int pin);
+Button::~Button()
+{
+}
 
-    void toggle();
-    void on();
-    void off();
+Button::status_t Button::status()
+{
+    return this->m_status;
+}
 
-    void setup();
-    void execute();
-};
 
-#endif // LED_H_INCLUDED
+void Button::setup()
+{
+    pinMode(this->m_pin, INPUT_PULLUP);
+}
+
+
+void Button::execute()
+{
+}

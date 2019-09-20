@@ -14,29 +14,33 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#ifndef BUTTON_H_INCLUDED
+#define BUTTON_H_INCLUDED
 
 #include "device.h"
 
 
-class LED : public Device
+class Button : public Device
 {
-  private:
-    int m_num, m_status, m_pin;
+    public:
+        Button (int pin);
+        virtual ~Button();
 
-    void _on();
-    void _off();
+        enum status_t {
+            NONE = 0,
+            CLICK = 1,
+            DOUBLE_CLICK = 2,
+            HOLD = 3
+        };
 
-  public:
-    LED (int num, int pin);
+        void setup();
+        void execute();
 
-    void toggle();
-    void on();
-    void off();
+        status_t status();
 
-    void setup();
-    void execute();
+    private:
+        int m_pin;
+        status_t m_status;
 };
 
-#endif // LED_H_INCLUDED
+#endif // BUTTON_H_INCLUDED

@@ -24,37 +24,37 @@
 
 LED::LED (int num, int pin)
 {
-    _num = num;
-    _pin = pin;
-    _status = 0;
+    this->m_num = num;
+    this->m_pin = pin;
+    this->m_status = 0;
 }
 
 
 void LED::_on()
 {
-    DEBUG_MSG("LED%d: turn on\n", _num);
-    digitalWrite(_pin, LOW);
-    this->_status = 1;
+    DEBUG_MSG("LED%d: turn on\n", this->m_num);
+    digitalWrite(this->m_pin, LOW);
+    this->m_status = 1;
 }
 
 
 void LED::_off()
 {
-    DEBUG_MSG("LED%d: turn off\n", _num);
-    digitalWrite(_pin, HIGH);
-    this->_status = 0;
+    DEBUG_MSG("LED%d: turn off\n", this->m_num);
+    digitalWrite(this->m_pin, HIGH);
+    this->m_status = 0;
 }
 
 
 void LED::toggle()
 {
-    if (this->_status == 1) {
-        this->_status = 0;
+    if (this->m_status == 1) {
+        this->m_status = 0;
         return;
     }
 
-    if (this->_status == 0) {
-        this->_status = 1;
+    if (this->m_status == 0) {
+        this->m_status = 1;
         return;
     }
 }
@@ -62,31 +62,31 @@ void LED::toggle()
 
 void LED::on()
 {
-    this->_status = 1;
+    this->m_status = 1;
 }
 
 
 void LED::off()
 {
-    this->_status = 0;
+    this->m_status = 0;
 }
 
 
 void LED::setup()
 {
-    DEBUG_MSG("LED%d: setup pin %d, status %d\n", _num, _pin, _status);
+    DEBUG_MSG("LED%d: setup pin %d, status %d\n", this->m_num, this->m_pin, this->m_status);
 
-    pinMode(_pin, OUTPUT);
+    pinMode(this->m_pin, OUTPUT);
 }
 
 
 void LED::execute()
 {
-    if (this->_status == 1) {
+    if (this->m_status == 1) {
         this->_on();
         return;
     }
-    if (this->_status == 0) {
+    if (this->m_status == 0) {
         this->_off();
         return;
     }
