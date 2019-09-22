@@ -32,7 +32,9 @@ LED::LED (int num, int pin)
 
 void LED::_on()
 {
+#ifdef LED_DEBUG
     DEBUG_MSG("LED%d: turn on\n", this->m_num);
+#endif // LED_DEBUG
     digitalWrite(this->m_pin, LOW);
     this->m_status = 1;
 }
@@ -40,7 +42,9 @@ void LED::_on()
 
 void LED::_off()
 {
+#ifdef LED_DEBUG
     DEBUG_MSG("LED%d: turn off\n", this->m_num);
+#endif // LED_DEBUG
     digitalWrite(this->m_pin, HIGH);
     this->m_status = 0;
 }

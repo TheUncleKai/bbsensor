@@ -130,11 +130,13 @@ void Click::_process()
         if (diff >= CLICK_THRESHOLD && diff <= CLICK_SINGLE) {
             this->m_type = Click::SINGLE_CLICK;
             this->m_counter++;
+            this->_log();
             return;
         }
         if (diff >= CLICK_HOLD) {
             this->m_type = Click::HOLD_CLICK;
             this->m_counter++;
+            this->_log();
             return;
         }
     }
@@ -144,10 +146,12 @@ void Click::_process()
             if (ddiff >= CLICK_THRESHOLD && ddiff <= CLICK_DOUBLE) {
                 this->m_type = Click::DOUBLE_CLICK;
                 this->m_counter++;
+                this->_log();
                 return;
             }
             if (diff >= CLICK_THRESHOLD && diff <= CLICK_SINGLE) {
                 this->m_type = Click::SINGLE_CLICK;
+                this->_log();
                 return;
             }
         }
@@ -155,5 +159,12 @@ void Click::_process()
 }
 
 
-
-
+void Click::_log()
+{
+#ifdef CLICK_DEBUG
+    DEBUG_MSG("Click state %d, diff %d, count %d\n",
+                this->m_type,
+                this->p_current->diff(),
+                this->m_counter);
+#endif // CLICK_DEBUG
+}

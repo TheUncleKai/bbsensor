@@ -90,11 +90,15 @@ void Loop::finish()
 
     if (this->m_max > 0) {
         if (this->m_number == this->m_max) {
+
+#ifdef LOOP_DEBUG
         DEBUG_MSG("Loop %u: time %d, number %d, max %d\n",
             this->m_counter,
             this->m_timestamp,
             this->m_number,
             this->m_max);
+#endif // LOOP_DEBUG
+
             this->m_number = 0;
         }
     }

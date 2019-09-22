@@ -59,6 +59,7 @@ class Click
         ClickSpan* p_last;
 
         void _process();
+        void _log();
 };
 
 

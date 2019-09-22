@@ -60,9 +60,11 @@ void Button::handleISR()
         this->m_onoff = 0;
     }
 
+#ifdef BUTTON_DEBUG
     DEBUG_MSG("BUTTON%d: state %d\n",
                 this->m_num,
                 this->m_onoff);
+#endif // BUTTON_DEBUG
 }
 
 

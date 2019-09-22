@@ -37,4 +37,9 @@
 
 #define LOOP_WAIT 100
 
+//#define LED_DEBUG 1
+//#define LOOP_DEBUG 1
+#define BUTTON_DEBUG 1
+#define CLICK_DEBUG 1
+
 #endif // CONFIG_H_INCLUDED
