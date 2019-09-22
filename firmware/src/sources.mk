@@ -13,6 +13,7 @@
 # limitations under the License.
 
 SOURCES = \
+	click.cpp \
 	button.cpp \
 	hardware.cpp \
 	led.cpp \

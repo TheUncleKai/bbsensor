@@ -27,18 +27,17 @@ class Loop
         unsigned long bootup();
         unsigned long counter();
         unsigned long timestamp();
+        unsigned long number();
 
         void setup();
         void start();
         void finish();
+        void set_numer(int n);
 
     protected:
 
     private:
-        unsigned long m_bootup;
-        unsigned long m_delay;
-        unsigned long m_counter;
-        unsigned long m_timestamp;
+        unsigned long m_bootup, m_delay, m_counter, m_timestamp, m_number, m_max;
 };
 
 #endif // LOOP_H_INCLUDED

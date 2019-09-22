@@ -26,6 +26,9 @@ Loop::Loop()
     this->m_delay = LOOP_WAIT;
     this->m_counter = 0;
     this->m_timestamp = 0;
+
+    this->m_number = 0;
+    this->m_max = 1;
 }
 
 
@@ -53,17 +56,30 @@ unsigned long Loop::timestamp()
 }
 
 
+unsigned long Loop::number()
+{
+    return this->m_number;
+}
+
+
 void Loop::setup()
 {
     DEBUG_MSG("Bootup...\n");
     this->m_bootup = millis();
+    this->m_number = 0;
 }
 
 
 void Loop::start()
 {
     this->m_timestamp = millis();
-    DEBUG_MSG("Loop %u: %d\n", this->m_counter, this->m_timestamp);
+    if (this->m_max > 0) {
+        this->m_number++;
+    } else {
+        DEBUG_MSG("Loop %u: time %d, number %d, max %d\n",
+            this->m_counter,
+            this->m_timestamp);
+    }
 }
 
 
@@ -71,4 +87,21 @@ void Loop::finish()
 {
     delay(this->m_delay);
     this->m_counter++;
+
+    if (this->m_max > 0) {
+        if (this->m_number == this->m_max) {
+        DEBUG_MSG("Loop %u: time %d, number %d, max %d\n",
+            this->m_counter,
+            this->m_timestamp,
+            this->m_number,
+            this->m_max);
+            this->m_number = 0;
+        }
+    }
+}
+
+
+void Loop::set_numer(int n)
+{
+    this->m_max = n;
 }

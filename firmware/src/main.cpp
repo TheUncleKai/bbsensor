@@ -41,6 +41,7 @@ void setup()
     Serial.begin(115200);
     delay(3000);
 
+    looper->set_numer(10);
     looper->setup();
     hardware->button()->setISR(handleISR);
     hardware->setup();
@@ -54,12 +55,14 @@ void loop()
     if (looper->counter() == 0) {
         hardware->led1()->on();
         hardware->led2()->off();
-    } else {
-        hardware->led1()->toggle();
-        hardware->led2()->toggle();
     }
 
-    hardware->execute();
+    if (looper->number() == 10) {
+        hardware->led1()->toggle();
+        hardware->led2()->toggle();
+
+        hardware->execute();
+    }
 
     looper->finish();
 }

@@ -26,23 +26,18 @@ Button::Button (int num, int pin)
 {
     this->m_num = num;
     this->m_pin = pin;
-    this->m_status = Button::NONE;
+
     this->p_isr = NULL;
-    this->m_start = 0;
-    this->m_end = 0;
-    this->m_counter = 0;
+
     this->m_onoff = 0;
+
+    this->p_click = new Click();
 }
 
 
 Button::~Button()
 {
-}
-
-
-Button::status_t Button::status()
-{
-    return this->m_status;
+    delete this->p_click;
 }
 
 
@@ -54,22 +49,38 @@ void Button::setISR(void (*isr)(void))
 
 void Button::handleISR()
 {
+    unsigned long timestamp = millis();
+
     if (this->m_onoff == 0)
     {
-        this->m_start = millis();
+        this->p_click->set_high(timestamp);
         this->m_onoff = 1;
     } else {
-        this->m_end = millis();
+        this->p_click->set_low(timestamp);
         this->m_onoff = 0;
     }
 
-    DEBUG_MSG("BUTTON%d: state %d, start %d, end %d\n", this->m_num, this->m_onoff, this->m_start, this->m_end);
+    DEBUG_MSG("BUTTON%d: state %d\n",
+                this->m_num,
+                this->m_onoff);
 }
+
+
+Click::Type Button::get_click()
+{
+    Click::Type click = this->p_click->type();
+
+    this->p_click->reset();
+    return click;
+}
+
 
 
 void Button::setup()
 {
     DEBUG_MSG("BUTTON%d: setup pin %d\n", this->m_num, this->m_pin);
+
+    this->p_click->reset();
 
     if (this->p_isr != NULL)
     {

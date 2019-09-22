@@ -18,6 +18,7 @@
 #define BUTTON_H_INCLUDED
 
 #include "device.h"
+#include "click.h"
 
 
 class Button : public Device
@@ -26,26 +27,19 @@ class Button : public Device
         Button (int num, int pin);
         virtual ~Button();
 
-        enum status_t {
-            NONE = 0,
-            CLICK = 1,
-            DOUBLE_CLICK = 2,
-            HOLD = 3
-        };
-
         void setISR(void (*isr)(void));
         void handleISR();
 
         void setup();
         void execute();
 
-        status_t status();
+        Click::Type get_click();
 
     private:
-        int m_num, m_pin, m_counter, m_onoff;
-        unsigned long m_start, m_end;
+        int m_num, m_pin, m_onoff;
 
-        status_t m_status;
+        Click* p_click;
+
         void (*p_isr)(void);
 };
 

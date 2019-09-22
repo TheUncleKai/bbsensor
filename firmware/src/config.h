@@ -30,6 +30,11 @@
 #define PIN_MOSI   13 // D7,  SPI MOSI
 #define PIN_NONE   15 // D8,  SPI CS, not used
 
-#define LOOP_WAIT 500
+#define CLICK_THRESHOLD 20
+#define CLICK_SINGLE    150
+#define CLICK_DOUBLE    300
+#define CLICK_HOLD      3000
+
+#define LOOP_WAIT 100
 
 #endif // CONFIG_H_INCLUDED
