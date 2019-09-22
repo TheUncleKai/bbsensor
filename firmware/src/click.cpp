@@ -44,6 +44,9 @@ unsigned long ClickSpan::diff(ClickSpan* timespan = NULL)
             result = this->end - this->start;
         }
     } else {
+        if (timespan->start == 0) {
+            return result;
+        }
         if (this->end >= timespan->start) {
             result = this->end - timespan->start;
         }
@@ -101,7 +104,7 @@ Click::Type Click::type()
 
 void Click::set_high(unsigned long timestamp)
 {
-    if (this->m_counter = 0) {
+    if (this->m_counter == 0) {
         this->p_current->start = timestamp;
     } else {
         this->p_last->copy(this->p_current);
@@ -126,45 +129,61 @@ void Click::_process()
     diff = this->p_current->diff();
     ddiff = this->p_current->diff(this->p_last);
 
+#ifdef CLICK_DEBUG
+    DEBUG_MSG("Debug: diff %d, ddiff %d, count %d, current %d/%d, last %d/%d\n",
+                diff,
+                ddiff,
+                this->m_counter,
+                this->p_current->start,
+                this->p_current->end,
+                this->p_last->start,
+                this->p_last->end);
+#endif // CLICK_DEBUG
+
     if (this->m_counter == 0) {
-        if (diff >= CLICK_THRESHOLD && diff <= CLICK_SINGLE) {
+        if (diff <= CLICK_SINGLE) {
             this->m_type = Click::SINGLE_CLICK;
             this->m_counter++;
-            this->_log();
+
+#ifdef CLICK_DEBUG
+            DEBUG_MSG("Click: %d\n", this->m_type);
+#endif // CLICK_DEBUG
             return;
         }
         if (diff >= CLICK_HOLD) {
             this->m_type = Click::HOLD_CLICK;
-            this->m_counter++;
-            this->_log();
+            this->m_counter = 0;
+            this->p_current->reset();
+            this->p_last->reset();
+
+#ifdef CLICK_DEBUG
+            DEBUG_MSG("Click: %d\n", this->m_type);
+#endif // CLICK_DEBUG
             return;
         }
     }
 
     if (this->m_counter > 0) {
-        if (this->m_type == Click::SINGLE_CLICK) {
-            if (ddiff >= CLICK_THRESHOLD && ddiff <= CLICK_DOUBLE) {
-                this->m_type = Click::DOUBLE_CLICK;
-                this->m_counter++;
-                this->_log();
-                return;
-            }
-            if (diff >= CLICK_THRESHOLD && diff <= CLICK_SINGLE) {
-                this->m_type = Click::SINGLE_CLICK;
-                this->_log();
-                return;
-            }
+        if (ddiff <= CLICK_DOUBLE) {
+            this->m_type = Click::DOUBLE_CLICK;
+            this->m_counter = 0;
+            this->p_current->reset();
+            this->p_last->reset();
+
+#ifdef CLICK_DEBUG
+            DEBUG_MSG("Click: %d\n", this->m_type);
+#endif // CLICK_DEBUG
+            return;
+        }
+        if (diff <= CLICK_SINGLE) {
+            this->m_type = Click::SINGLE_CLICK;
+            this->m_counter = 1;
+
+#ifdef CLICK_DEBUG
+            DEBUG_MSG("Click: %d\n", this->m_type);
+#endif // CLICK_DEBUG
+            return;
         }
     }
-}
 
-
-void Click::_log()
-{
-#ifdef CLICK_DEBUG
-    DEBUG_MSG("Click state %d, diff %d, count %d\n",
-                this->m_type,
-                this->p_current->diff(),
-                this->m_counter);
-#endif // CLICK_DEBUG
 }

@@ -31,15 +31,15 @@
 #define PIN_NONE   15 // D8,  SPI CS, not used
 
 #define CLICK_THRESHOLD 20
-#define CLICK_SINGLE    150
-#define CLICK_DOUBLE    300
-#define CLICK_HOLD      3000
+#define CLICK_SINGLE    800
+#define CLICK_DOUBLE    500
+#define CLICK_HOLD      2000
 
 #define LOOP_WAIT 100
 
 //#define LED_DEBUG 1
 //#define LOOP_DEBUG 1
-#define BUTTON_DEBUG 1
+//#define BUTTON_DEBUG 1
 #define CLICK_DEBUG 1
 
 #endif // CONFIG_H_INCLUDED

@@ -51,11 +51,12 @@ void Button::handleISR()
 {
     unsigned long timestamp = millis();
 
-    if (this->m_onoff == 0)
-    {
+    if (digitalRead(this->m_pin) == HIGH) {
         this->p_click->set_high(timestamp);
         this->m_onoff = 1;
-    } else {
+    }
+
+    if (digitalRead(this->m_pin) == LOW) {
         this->p_click->set_low(timestamp);
         this->m_onoff = 0;
     }
