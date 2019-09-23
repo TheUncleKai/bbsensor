@@ -35,6 +35,8 @@
 					<Add option="-DFLASHMODE_DIO" />
 					<Add option="-DESP8266" />
 					<Add option="-DNO_GLOBAL_EEPROM" />
+					<Add option="-DCLICK_DEBUG" />
+					<Add option="-DTEMPERATURE_DEBUG" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>
@@ -44,12 +46,14 @@
 		</Compiler>
 		<Unit filename="data/loop.cpp" />
 		<Unit filename="devices/button.cpp" />
+		<Unit filename="devices/channel.cpp" />
 		<Unit filename="devices/click.cpp" />
 		<Unit filename="devices/display.cpp" />
 		<Unit filename="devices/hardware.cpp" />
 		<Unit filename="devices/led.cpp" />
 		<Unit filename="devices/temperature.cpp" />
 		<Unit filename="include/button.h" />
+		<Unit filename="include/channel.h" />
 		<Unit filename="include/click.h" />
 		<Unit filename="include/debug.h" />
 		<Unit filename="include/device.h" />

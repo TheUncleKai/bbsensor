@@ -21,17 +21,42 @@
 
 #include <temperature.h>
 
-Temperature::Temperature(SPIClass* spi, int num, int cs, int channel)
+Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, int cs)
 {
-    this->m_spi = spi;
-    this->m_num = num;
     this->m_cs = cs;
-    this->m_channel = channel;
+    this->p_spi = spi;
+    this->p_eeprom = eeprom;
+    this->p_channels = new ChannelList;
 }
 
 
 Temperature::~Temperature()
 {
+
+    ChannelList::iterator iter;
+    Channel* temp;
+
+    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
+    {
+        temp = (*iter);
+        delete temp;
+    }
+
+    this->p_channels->clear();
+
+    delete this->p_channels;
+}
+
+
+int Temperature::cs()
+{
+    return this->m_cs;
+}
+
+
+ChannelList* Temperature::channel()
+{
+    return this->p_channels;
 }
 
 
@@ -39,6 +64,37 @@ void Temperature::setup()
 {
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
+
+    byte value;
+    int address = 0;
+    Channel* temp = NULL;
+
+
+    for (int i=0; i <= TEMP_CHANNELS; i++) {
+        address = EEPROM_CHANNELS + i;
+        value = this->p_eeprom->read(address);
+        temp = NULL;
+
+        if (value == 1) {
+            temp = new Channel(this->p_spi, i+1, i, 1);
+        }
+        if (value == 2) {
+            temp = new Channel(this->p_spi, i+1, i, 2);
+        }
+        if (value == 3) {
+            temp = new Channel(this->p_spi, i+1, i, 3);
+        }
+
+        if (temp != NULL) {
+#ifdef TEMPERATURE_DEBUG
+            DEBUG_MSG("TEMPERATURE: add channel %d, input %d, type %d\n",
+                      temp->channel(),
+                      temp->number(),
+                      temp->type());
+#endif // TEMPERATURE_DEBUG
+            this->p_channels->push_back(temp);
+        }
+    }
 }
 
 

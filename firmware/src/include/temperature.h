@@ -18,27 +18,31 @@
 #define TEMPERATURE_H_INCLUDED
 
 #include <list>
+#include <EEPROM.h>
 #include <SPI.h>
 
 #include <device.h>
+#include <channel.h>
 
 
 class Temperature : public Device
 {
-  private:
-    int m_num, m_cs, m_channel;
-    SPIClass* m_spi;
+    public:
+        Temperature (EEPROMClass* eeprom, SPIClass* spi, int cs);
+        virtual ~Temperature();
 
-  public:
-    Temperature (SPIClass* spi, int num, int cs, int channel);
-    virtual ~Temperature();
+        void setup();
+        void execute();
+        ChannelList* channel();
 
-    void setup();
-    void execute();
+        int cs();
+
+    private:
+        int m_cs;
+        SPIClass* p_spi;
+        ChannelList* p_channels;
+        EEPROMClass* p_eeprom;
 };
-
-
-typedef std::list<Temperature*> TemperatureList;
 
 
 #endif // TEMPERATURE_H_INCLUDED

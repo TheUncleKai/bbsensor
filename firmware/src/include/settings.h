@@ -36,11 +36,20 @@
 #define CLICK_DOUBLE    500
 #define CLICK_HOLD      2000
 
-#define LOOP_WAIT 100
+#define TEMP_CHANNELS   7
 
-//#define LED_DEBUG 1
-//#define LOOP_DEBUG 1
-//#define BUTTON_DEBUG 1
-#define CLICK_DEBUG 1
+#define EEPROM_CHANNELS 0
+#define EEPROM_WPS      8
+#define EEPROM_SSID     9
+#define EEPROM_PASSWORD 42
+
+#define LOOP_WAIT       100
+
+//#define LED_DEBUG         1
+//#define LOOP_DEBUG        1
+//#define BUTTON_DEBUG      1
+//#define HARDWARE_DEBUG    1
+#define TEMPERATURE_DEBUG 1
+#define CLICK_DEBUG       1
 
 #endif // CONFIG_H_INCLUDED

@@ -14,27 +14,42 @@
    limitations under the License.
 */
 
-#ifndef DISPLAY_H_INCLUDED
-#define DISPLAY_H_INCLUDED
+#ifndef CHANNEL_H_INCLUDED
+#define CHANNEL_H_INCLUDED
 
+#include <list>
 #include <SPI.h>
 
 #include <device.h>
 
 
-class Display : public Device
+class Channel : public Device
 {
     public:
-        Display (SPIClass* spi, int cs);
-        virtual ~Display();
+        Channel (SPIClass* spi, int num, int channel, int type);
+        virtual ~Channel();
+
+        enum Type {
+            NONE = 0,
+            RTD = 1,
+            PTC10 = 2,
+            PTC100 = 3
+        };
 
         void setup();
         void execute();
+        Type type();
+
+        int number();
+        int channel();
 
     private:
-        int m_cs;
+        int m_num, m_channel;
+        Type m_type;
         SPIClass* m_spi;
 };
 
+typedef std::list<Channel*> ChannelList;
 
-#endif // DISPLAY_H_INCLUDED
+
+#endif // CHANNEL_H_INCLUDED

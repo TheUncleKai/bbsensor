@@ -54,7 +54,7 @@ class Hardware : public Device
         Button* p_button1;
         Button* p_button2;
         Display* p_display;
-        TemperatureList* p_temperatures;
+        Temperature* p_temperature;
 };
 
 #endif // HARDWARE_H_INCLUDED

@@ -29,29 +29,18 @@ Hardware::Hardware()
     this->p_button1 = new Button(1, PIN_BUTTON1);
     this->p_button2 = new Button(1, PIN_BUTTON2);
     this->p_display = new Display(this->p_spi, PIN_CS1);
-    this->p_temperatures = new TemperatureList;
+    this->p_temperature = new Temperature(this->p_eeprom, this->p_spi, PIN_CS2);
 }
 
 
 Hardware::~Hardware()
 {
-    TemperatureList::iterator iter;
-    Temperature* temp;
-
-    for (iter = this->p_temperatures->begin(); iter != this->p_temperatures->end(); ++iter)
-    {
-        temp = (*iter);
-        delete temp;
-    }
-
-    this->p_temperatures->clear();
-
     delete this->p_led1;
     delete this->p_led2;
     delete this->p_button1;
     delete this->p_button2;
     delete this->p_display;
-    delete this->p_temperatures;
+    delete this->p_temperature;
     delete this->p_spi;
     delete this->p_eeprom;
 }
@@ -102,11 +91,13 @@ void Hardware::setup()
     this->p_eeprom->begin(512);
     this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
     this->p_spi->begin();
+
     this->p_led1->setup();
     this->p_led2->setup();
     this->p_button1->setup();
     this->p_button2->setup();
     this->p_display->setup();
+    this->p_temperature->setup();
 }
 
 
@@ -117,4 +108,5 @@ void Hardware::execute()
     this->p_button1->execute();
     this->p_button2->execute();
     this->p_display->execute();
+    this->p_temperature->execute();
 }

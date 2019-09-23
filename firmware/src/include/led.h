@@ -22,22 +22,22 @@
 
 class LED : public Device
 {
-  private:
-    int m_num, m_status, m_pin;
+    public:
+        LED (int num, int pin);
+        virtual ~LED();
 
-    void _on();
-    void _off();
+        void toggle();
+        void on();
+        void off();
 
-  public:
-    LED (int num, int pin);
-    virtual ~LED();
+        void setup();
+        void execute();
 
-    void toggle();
-    void on();
-    void off();
+    private:
+        int m_num, m_status, m_pin;
 
-    void setup();
-    void execute();
+        void _on();
+        void _off();
 };
 
 #endif // LED_H_INCLUDED
