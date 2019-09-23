@@ -13,6 +13,6 @@
 # limitations under the License.
 
 OBJS := ${SOURCES:.cpp=.cpp.o}
-OBJS := ${subst $(ESP8266_SPI),$(OBJDIR),$(OBJS)}
+OBJS := ${subst $(SRCDIR),$(OBJDIR),$(OBJS)}
 
 ARS := $(OBJS:.o=.ar)

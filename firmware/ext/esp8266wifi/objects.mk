@@ -12,20 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# CORE, c++
+OBJS := ${SOURCES:.cpp=.cpp.o}
+OBJS := ${subst $(SRCDIR),$(OBJDIR),$(OBJS)}
 
-$(OBJDIR)/%.cpp.o: $(ESP8266_EEPROM)/%.cpp
-	@$(LOG) "(CXX) $@"
-	@$(MKDIR) $(OBJDIR)
-	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
-	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# LIB
-
-$(OBJDIR)/%.ar: $(OBJDIR)/%.o $(OBJS)
-	@$(LOG) "(AR) $< -> $(TARGET)"
-	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
-	@$(AR) cru $(TARGET) $< $(LOGOUT)
-	@echo 1 > $@
+ARS := $(OBJS:.o=.ar)

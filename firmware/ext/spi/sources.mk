@@ -13,4 +13,4 @@
 # limitations under the License.
 
 SOURCES = \
-    $(ESP8266_SPI)/SPI.cpp
+    $(SRCDIR)/SPI.cpp

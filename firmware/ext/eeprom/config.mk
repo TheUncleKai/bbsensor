@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-OBJS := ${SOURCES:.cpp=.cpp.o}
-OBJS := ${subst $(ESP8266_WIFI),$(OBJDIR),$(OBJS)}
-
-ARS := $(OBJS:.o=.ar)
+SRCDIR := $(ESP8266_EEPROM)
+OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBEEPROM)
+TARGET := $(ROOT)/$(OUTPUT)/$(LIBEEPROM)$(LIB_SUFFIX)
+ADD_DEP := 

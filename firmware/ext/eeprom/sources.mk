@@ -13,4 +13,4 @@
 # limitations under the License.
 
 SOURCES = \
-    $(ESP8266_EEPROM)/EEPROM.cpp
+    $(SRCDIR)/EEPROM.cpp

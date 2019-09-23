@@ -13,19 +13,19 @@
 # limitations under the License.
 
 SOURCES = \
-    $(ESP8266_WIFI)/BearSSLHelpers.cpp \
-    $(ESP8266_WIFI)/CertStoreBearSSL.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFi.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFiAP.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFiGeneric.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFiMulti.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFiScan.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFiSTA.cpp \
-    $(ESP8266_WIFI)/ESP8266WiFiSTA-WPS.cpp \
-    $(ESP8266_WIFI)/WiFiClient.cpp \
-    $(ESP8266_WIFI)/WiFiClientSecureAxTLS.cpp \
-    $(ESP8266_WIFI)/WiFiClientSecureBearSSL.cpp \
-    $(ESP8266_WIFI)/WiFiServer.cpp \
-    $(ESP8266_WIFI)/WiFiServerSecureAxTLS.cpp \
-    $(ESP8266_WIFI)/WiFiServerSecureBearSSL.cpp \
-    $(ESP8266_WIFI)/WiFiUdp.cpp
+    $(SRCDIR)/BearSSLHelpers.cpp \
+    $(SRCDIR)/CertStoreBearSSL.cpp \
+    $(SRCDIR)/ESP8266WiFi.cpp \
+    $(SRCDIR)/ESP8266WiFiAP.cpp \
+    $(SRCDIR)/ESP8266WiFiGeneric.cpp \
+    $(SRCDIR)/ESP8266WiFiMulti.cpp \
+    $(SRCDIR)/ESP8266WiFiScan.cpp \
+    $(SRCDIR)/ESP8266WiFiSTA.cpp \
+    $(SRCDIR)/ESP8266WiFiSTA-WPS.cpp \
+    $(SRCDIR)/WiFiClient.cpp \
+    $(SRCDIR)/WiFiClientSecureAxTLS.cpp \
+    $(SRCDIR)/WiFiClientSecureBearSSL.cpp \
+    $(SRCDIR)/WiFiServer.cpp \
+    $(SRCDIR)/WiFiServerSecureAxTLS.cpp \
+    $(SRCDIR)/WiFiServerSecureBearSSL.cpp \
+    $(SRCDIR)/WiFiUdp.cpp
