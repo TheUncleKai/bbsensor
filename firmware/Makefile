@@ -22,35 +22,10 @@ default: link
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@$(ECHO) "\t\e[1;34minfo\e[0;0m:\t\tinfo about enviroments"
 	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
 	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
-
-
-info:
-	@$(LOG) "ESP8266: $(ESP8266_PATH)"
-	@$(LOG) "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-	@$(LOG) "Prefix:   $(ESP8266_GCC_PREFIX)"
-	@$(LOG) "Root:     $(ESP8266_ROOT)"
-	@$(LOG) "Bin:      $(ESP8266_BIN)"
-	@$(LOG) "SDK:      $(ESP8266_SDK)"
-	@$(LOG) "Variants: $(ESP8266_VARIANTS)"
-	@$(LOG) "Tools:    $(TOOLS)"
-	@$(LOG) "Port:     $(PORT)"
-	@$(LOG) "Baud:     $(BAUD)"
-	@$(LOG) "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-	@$(LOG) "Make directory:   $(MKDIR)"
-	@$(LOG) "Remove file:      $(RM)"
-	@$(LOG) "Remove directory: $(RMDIR)"
-	@$(LOG) "Python:           $(PYTHON)"
-	@$(LOG) "Copy file:        $(COPY)"
-	@$(LOG) "Log file:         $(LOGFILE)"
-	@$(LOG) "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-	@$(LOG) "Include SDK:     $(ESP8266_INCLUDE_SDK)"
-	@$(LOG) "Iclude Core:     $(ESP8266_INCLUDE_CORE)"
-	@$(LOG) "Iclude Variants: $(ESP8266_INCLUDE_VARIANTS)"
 
 clean:
 	@@$(RM) $(LOGFILE)
@@ -137,4 +112,4 @@ upload: link
 	@$(MAKE) -s -C src -f Makefile upload
 
 
-.PHONY: default help info clean compile_core link_core compile_spi link_spi compile_eeprom link_eeprom compile link upload
+.PHONY: default help clean compile_core link_core compile_spi link_spi compile_eeprom link_eeprom compile link upload

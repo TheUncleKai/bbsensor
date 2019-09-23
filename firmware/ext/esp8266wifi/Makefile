@@ -20,39 +20,28 @@ include $(ROOT)/rules/setup.mk
 OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBESP8266WIFI)
 TARGET = $(ROOT)/$(OUTPUT)/$(LIBESP8266WIFI)$(LIB_SUFFIX)
 
+include $(ROOT)/rules/flags.mk
+
 include sources.mk
-include flags.mk
 include path.mk
 
-default: all
+default: compile link
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@$(ECHO) "\t\e[1;34mall\e[0;0m:\t\tcompiles and link core library"
-	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompile core library"
-	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink core library"
-	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare if needed (used currently for Code::Blocks workspace)"
+	@$(ECHO) "\t\e[1;34default\e[0;0m:\tcompile and link library"
+	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompile library"
+	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink library"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
 compile: $(OBJS)
 
 link: $(ARS)
 
-all: compile link
-
-prepare:
-	@$(LOG) "Copy $(LIBESP8266WIFI)"
-	@$(COPY) $(ESP8266_WIFI)/*.h .
-	@$(COPY) $(ESP8266_WIFI)/*.cpp .
-
-cleanall: clean
-
 clean:
-	@$(RM) $(OBJDIR)/*
+	@$(RM) -rf $(OBJDIR)/*
 	@$(RM) $(TARGET)
-	@-$(RMDIR) $(OBJDIR)
-	@$(RM) *.cpp *.h
 
 include rules.mk
 
-.PHONY: default help all compile link prepare clean cleanall
+.PHONY: default help compile link clean
