@@ -120,17 +120,6 @@ SPI4
 Text Label 7925 3050 0    60   ~ 0
 SPI2
 $Comp
-L Switch:SW_Push SW1
-U 1 1 5D679CD6
-P 9200 2450
-F 0 "SW1" H 9200 2650 50  0000 C CNN
-F 1 "SW_Push" H 9200 2350 50  0000 C CNN
-F 2 "Button_Switch_THT:SW_Tactile_SPST_Angled_PTS645Vx83-2LFS" H 9200 2650 50  0001 C CNN
-F 3 "~" H 9200 2650 50  0001 C CNN
-	1    9200 2450
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR0110
 U 1 1 5D67B650
 P 7000 1000
@@ -156,8 +145,6 @@ F 3 "" H 9500 2075 50  0001 C CNN
 	1    9500 2075
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	9500 2075 9500 2450
 Wire Wire Line
 	9500 2450 9400 2450
 $Comp
@@ -272,7 +259,6 @@ Wire Wire Line
 	7450 1000 7450 1100
 Text Label 7925 3450 0    60   ~ 0
 SPI5
-NoConn ~ 6800 2550
 NoConn ~ 6800 3250
 NoConn ~ 4700 3450
 NoConn ~ 4700 3350
@@ -377,6 +363,70 @@ Wire Bus Line
 NoConn ~ 4700 3050
 NoConn ~ 4700 2950
 NoConn ~ 4700 2750
+$Comp
+L Switch:SW_Push SW2
+U 1 1 5D888EBC
+P 9200 2675
+F 0 "SW2" H 9325 2800 50  0000 C CNN
+F 1 "SW_Push" H 9200 2575 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_Tactile_SPST_Angled_PTS645Vx83-2LFS" H 9200 2875 50  0001 C CNN
+F 3 "~" H 9200 2875 50  0001 C CNN
+	1    9200 2675
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW1
+U 1 1 5D679CD6
+P 9200 2450
+F 0 "SW1" H 9325 2550 50  0000 C CNN
+F 1 "SW_Push" H 9200 2350 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_Tactile_SPST_Angled_PTS645Vx83-2LFS" H 9200 2650 50  0001 C CNN
+F 3 "~" H 9200 2650 50  0001 C CNN
+	1    9200 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 2675 9500 2675
+Wire Wire Line
+	9500 2075 9500 2450
+Connection ~ 9500 2450
+Wire Wire Line
+	9500 2450 9500 2675
+$Comp
+L Device:R R154
+U 1 1 5D88B2F6
+P 8550 3050
+F 0 "R154" V 8650 2950 50  0000 L CNN
+F 1 "2k2" V 8550 3050 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8480 3050 50  0001 C CNN
+F 3 "~" H 8550 3050 50  0001 C CNN
+	1    8550 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D88B5D0
+P 8550 3975
+F 0 "#PWR?" H 8550 3725 50  0001 C CNN
+F 1 "GND" H 8555 3802 50  0000 C CNN
+F 2 "" H 8550 3975 50  0001 C CNN
+F 3 "" H 8550 3975 50  0001 C CNN
+	1    8550 3975
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 2550 8550 2550
+Wire Wire Line
+	8925 2550 8925 2675
+Wire Wire Line
+	8925 2675 9000 2675
+Wire Wire Line
+	8550 2900 8550 2550
+Connection ~ 8550 2550
+Wire Wire Line
+	8550 2550 8925 2550
+Wire Wire Line
+	8550 3975 8550 3200
 Wire Bus Line
 	8275 3050 8275 4875
 $EndSCHEMATC
