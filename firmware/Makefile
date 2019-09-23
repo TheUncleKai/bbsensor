@@ -39,57 +39,14 @@ clean:
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# ESP8266 Core
 
-compile_core:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile compile
-
-link_core: compile_core
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile link
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# ESP8266 SPI
-
-compile_spi:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile compile
-
-link_spi: compile_spi
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile link
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# EEPROM
-
-compile_eeprom:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile compile
-
-link_eeprom: compile_eeprom
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile link
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# ESP8266WIFI
-
-compile_wifi:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBESP8266WIFI)"
-	@$(MAKE) -s -C ext/esp8266wifi -f Makefile compile
-
-link_wifi: compile_wifi
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(LIBESP8266WIFI)"
-	@$(MAKE) -s -C ext/esp8266wifi -f Makefile link
+include ext/core/lib.mk
+include ext/eeprom/lib.mk
+include ext/esp8266mdns/lib.mk
+include ext/esp8266webserver/lib.mk
+include ext/esp8266wifi/lib.mk
+include ext/softwareserial/lib.mk
+include ext/spi/lib.mk
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Projects

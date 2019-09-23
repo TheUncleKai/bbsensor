@@ -21,6 +21,8 @@ ESP8266_SPI       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/SP
 ESP8266_EEPROM    = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/EEPROM
 ESP8266_WIFI      = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/ESP8266WiFi/src
 ESP8266_WEBSERVER = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/ESP8266WebServer/src
+ESP8266_MDNS      = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/ESP8266mDNS/src
+ESP8266_SERIAL    = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/SoftwareSerial/src
 
 
 ESP8266_INCLUDE_SDK       = -I$(ESP8266_SDK)/include -I$(ESP8266_SDK)/lwip2/include -I$(ESP8266_SDK)/libc/xtensa-lx106-elf/include
@@ -30,6 +32,8 @@ ESP8266_INCLUDE_SPI       = -I$(ESP8266_SPI)
 ESP8266_INCLUDE_EEPROM    = -I$(ESP8266_EEPROM)
 ESP8266_INCLUDE_WIFI      = -I$(ESP8266_WIFI)
 ESP8266_INCLUDE_WEBSERVER = -I$(ESP8266_WEBSERVER) -I$(ESP8266_WEBSERVER)/detail
+ESP8266_INCLUDE_MDNS      = -I$(ESP8266_MDNS)
+ESP8266_INCLUDE_SERIAL    = -I$(ESP8266_SERIAL)
 
 ESP8266_LIB               = -L$(ESP8266_SDK)/lib -L$(ESP8266_SDK)/lib/NONOSDK221 -L$(ESP8266_SDK)/ld -L$(ESP8266_SDK)/libc/xtensa-lx106-elf/lib
 
@@ -58,6 +62,8 @@ LIBSPI              = libspi
 LIBEEPROM           = libeeprom
 LIBESP8266WIFI      = libESP8266WiFi
 LIBESP8266WEBSERVER = libESP8266WebServer
+LIBESP8266MDNS      = libESP8266mDNS
+LIBSOFTWARESERIAL   = libSoftwareSerial
 APP                 = sensor
 
 LOGFILE    = $(ROOT)/$(OUTPUT)/$(LOGGING)
