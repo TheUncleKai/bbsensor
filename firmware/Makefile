@@ -19,26 +19,12 @@ include $(ROOT)/rules/setup.mk
 
 default: link
 
-
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
 	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
 	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
-
-clean:
-	@@$(RM) $(LOGFILE)
-	@$(INFORM) "Clean $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile clean
-	@$(INFORM) "Clean $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile clean
-	@$(INFORM) "Clean $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile clean
-	@$(INFORM) "Clean $(APP)"
-	@$(MAKE) -s -C src -f Makefile clean
-	@-$(RMDIR) $(OUTPUT)
-
 
 include ext/core/lib.mk
 include ext/eeprom/lib.mk
@@ -58,7 +44,7 @@ compile:
 	@$(INFORM) "Compile $(APP)"
 	@$(MAKE) -s -C src -f Makefile compile
 
-link: link_core link_spi link_eeprom link_wifi compile
+link: link_core link_eeprom link_mdns link_webserver link_wifi link_serial link_spi
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
@@ -68,5 +54,10 @@ upload: link
 	@$(INFORM) "Upload firmware"
 	@$(MAKE) -s -C src -f Makefile upload
 
+clean: clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_serial clean_spi
+	@@$(RM) $(LOGFILE)
+	@$(INFORM) "Clean $(APP)"
+	@$(MAKE) -s -C src -f Makefile clean
+	@-$(RMDIR) $(OUTPUT)
 
-.PHONY: default help clean compile_core link_core compile_spi link_spi compile_eeprom link_eeprom compile link upload
+.PHONY: default help compile link upload clean compile_core compile_eeprom compile_mdns compile_webserver compile_wifi compile_serial compile_spi link_core link_eeprom link_mdns link_webserver link_wifi link_serial link_spi clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_serial clean_spi
