@@ -12,24 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Updater_Signing.h:
-	@$(LOG) "$@"
-	@echo "#define ARDUINO_SIGNING 0" > Updater_Signing.h
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-$(OBJDIR)/%.cpp.o: $(SRCDIR)/libb64/%.cpp
+# C++
+$(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp $(ADD_DEP)
 	@$(LOG) "(CXX) $@"
 	@$(MKDIR) $(OBJDIR)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
-$(OBJDIR)/%.cpp.o: $(SRCDIR)/umm_malloc/%.cpp
+# C
+$(OBJDIR)/%.c.o: $(SRCDIR)/%.c $(ADD_DEP)
 	@$(LOG) "(CXX) $@"
 	@$(MKDIR) $(OBJDIR)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
-$(OBJDIR)/%.cpp.o: $(SRCDIR)/spiffs/%.cpp
-	@$(LOG) "(CXX) $@"
+
+# ASM
+$(OBJDIR)/%.S.o: $(SRCDIR)/%.S $(ADD_DEP)
+	@$(LOG) "(GCC) $@"
 	@$(MKDIR) $(OBJDIR)
-	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
-	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
+	@$(LOGTIME) $(GCC) $(ASMFLAGS) $< -o $@ $(LOGONLY)
+	@$(GCC) $(ASMFLAGS) $< -o $@ $(LOGOUT)
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# LIB
+
+$(OBJDIR)/%.ar: $(OBJDIR)/%.o $(OBJS)
+	@$(LOG) "(AR) $< -> $(TARGET)"
+	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
+	@$(AR) cru $(TARGET) $< $(LOGOUT)
+	@echo 1 > $@

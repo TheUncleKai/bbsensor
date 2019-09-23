@@ -16,14 +16,11 @@ ROOT = ../..
 
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
-
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCORE)
-TARGET = $(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX)
-
 include $(ROOT)/rules/flags.mk
 
+include config.mk
 include sources.mk
-include path.mk
+include objects.mk
 
 default: compile link
 
@@ -42,6 +39,10 @@ clean:
 	@$(RM) -rf $(OBJDIR)/*
 	@$(RM) $(TARGET)
 
+# Include general rules
+include $(ROOT)/rules/rules.mk
+
+# Include additional rules
 include rules.mk
 
 .PHONY: default help compile link clean
