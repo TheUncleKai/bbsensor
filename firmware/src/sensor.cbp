@@ -45,6 +45,9 @@
 					<Add directory="$$(ESP8266_ROOT)/libraries/SPI" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/EEPROM" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WiFi/src" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WebServer/src" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266mDNS/src" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/SoftwareSerial/src" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>
