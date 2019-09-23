@@ -13,9 +13,9 @@
 # limitations under the License.
 
 SOURCES = \
-	click.cpp \
-	button.cpp \
-	hardware.cpp \
-	led.cpp \
-	loop.cpp \
+	data/loop.cpp \
+	devices/button.cpp \
+	devices/click.cpp \
+	devices/hardware.cpp \
+	devices/led.cpp \
 	main.cpp

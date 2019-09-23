@@ -16,10 +16,10 @@
 
 #include <Arduino.h>
 
-#include "button.h"
+#include <config.h>
+#include <debug.h>
 
-#include "config.h"
-#include "debug.h"
+#include <button.h>
 
 
 Button::Button (int num, int pin)

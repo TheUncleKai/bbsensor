@@ -41,23 +41,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="click.cpp" />
-		<Unit filename="click.h" />
-		<Unit filename="button.cpp" />
-		<Unit filename="button.h" />
-		<Unit filename="config.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="debug.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="device.h" />
-		<Unit filename="hardware.cpp" />
-		<Unit filename="hardware.h" />
-		<Unit filename="led.cpp" />
-		<Unit filename="led.h" />
-		<Unit filename="loop.cpp" />
-		<Unit filename="loop.h" />
+		<Unit filename="data/loop.cpp" />
+		<Unit filename="devices/button.cpp" />
+		<Unit filename="devices/click.cpp" />
+		<Unit filename="devices/hardware.cpp" />
+		<Unit filename="devices/led.cpp" />
+		<Unit filename="include/button.h" />
+		<Unit filename="include/click.h" />
+		<Unit filename="include/config.h" />
+		<Unit filename="include/debug.h" />
+		<Unit filename="include/device.h" />
+		<Unit filename="include/hardware.h" />
+		<Unit filename="include/led.h" />
+		<Unit filename="include/loop.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

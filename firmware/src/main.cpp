@@ -17,11 +17,12 @@
 #include <Arduino.h>
 #include <SPI.h>
 
-#include "hardware.h"
-#include "loop.h"
+#include <config.h>
+#include <debug.h>
 
-#include "config.h"
-#include "debug.h"
+#include <hardware.h>
+#include <loop.h>
+
 
 void setup();
 void loop();

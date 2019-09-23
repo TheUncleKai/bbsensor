@@ -17,8 +17,9 @@
 #include <Arduino.h>
 
 #include "config.h"
-#include "debug.h"
-#include "loop.h"
+#include <debug.h>
+
+#include <loop.h>
 
 Loop::Loop()
 {

@@ -17,8 +17,8 @@
 #ifndef BUTTON_H_INCLUDED
 #define BUTTON_H_INCLUDED
 
-#include "device.h"
-#include "click.h"
+#include <device.h>
+#include <click.h>
 
 
 class Button : public Device

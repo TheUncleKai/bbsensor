@@ -16,12 +16,16 @@ $(OBJDIR)/%.d: %.cpp
 	@$(MKDIR) $(OBJDIR)
 	@$(LOG) "$@"
 	@$(MKDIR) $(OBJDIR)
+	@$(MKDIR) $(OBJDIR)/devices
+	@$(MKDIR) $(OBJDIR)/data
 	@$(LOGTIME) $(CXX) -MM $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) -MM $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.o: %.cpp
 	@$(LOG) "$@"
 	@$(MKDIR) $(OBJDIR)
+	@$(MKDIR) $(OBJDIR)/devices
+	@$(MKDIR) $(OBJDIR)/data
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 

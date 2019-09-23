@@ -14,10 +14,11 @@
    limitations under the License.
 */
 
-#include "hardware.h"
+#include <config.h>
+#include <debug.h>
 
-#include "debug.h"
-#include "config.h"
+#include <hardware.h>
+
 
 Hardware::Hardware()
 {

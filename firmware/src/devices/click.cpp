@@ -16,10 +16,10 @@
 
 #include <Arduino.h>
 
-#include "click.h"
+#include <config.h>
+#include <debug.h>
 
-#include "config.h"
-#include "debug.h"
+#include <click.h>
 
 
 ClickSpan::ClickSpan()

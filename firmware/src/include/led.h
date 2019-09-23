@@ -17,7 +17,7 @@
 #ifndef LED_H_INCLUDED
 #define LED_H_INCLUDED
 
-#include "device.h"
+#include <device.h>
 
 
 class LED : public Device

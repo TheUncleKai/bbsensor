@@ -16,10 +16,10 @@
 
 #include <Arduino.h>
 
-#include "led.h"
+#include <config.h>
+#include <debug.h>
 
-#include "config.h"
-#include "debug.h"
+#include <led.h>
 
 
 LED::LED (int num, int pin)

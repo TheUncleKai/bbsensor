@@ -58,6 +58,8 @@ clean:
 	@$(RM) $(ELF)
 	@$(RM) $(BIN)
 	@$(RM) $(SIZES)
+	@-$(RMDIR) $(OBJDIR)/devices
+	@-$(RMDIR) $(OBJDIR)/data
 	@-$(RMDIR) $(OBJDIR)
 
 include rules.mk

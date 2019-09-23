@@ -19,9 +19,10 @@
 
 #include <SPI.h>
 
-#include "device.h"
-#include "led.h"
-#include "button.h"
+#include <device.h>
+
+#include <led.h>
+#include <button.h>
 
 
 class Hardware : public Device

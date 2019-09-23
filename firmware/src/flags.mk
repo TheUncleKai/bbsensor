@@ -14,7 +14,7 @@
 
 CFLAGS = \
 	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
-	$(ESP8266_INCLUDE_SDK) -I../ext/core -I. \
+	$(ESP8266_INCLUDE_SDK) -I../ext/core -Iinclude \
 	-c -Os -g -mlongcalls -mtext-section-literals \
 	-fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections -fno-exceptions \
 	-DNONOSDK221=1 \
