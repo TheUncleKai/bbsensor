@@ -17,17 +17,15 @@ ROOT = .
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
 
-default: compile link
+default: link
 
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
 	@$(ECHO) "\t\e[1;34minfo\e[0;0m:\t\tinfo about enviroments"
-	@$(ECHO) "\t\e[1;34mall\e[0;0m:\t\tcompiles and links libs and firmware"
 	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
 	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
-	@$(ECHO) "\t\e[1;34mprepare\e[0;0m:\tprepare targets if needed (used currently for Code::Blocks workspace)"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
 
@@ -54,45 +52,6 @@ info:
 	@$(LOG) "Iclude Core:     $(ESP8266_INCLUDE_CORE)"
 	@$(LOG) "Iclude Variants: $(ESP8266_INCLUDE_VARIANTS)"
 
-all:
-	@$(MKDIR) $(OUTPUT)
-	@@$(RM) $(LOGFILE)
-	@$(INFORM) "Build $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile all
-	@$(INFORM) "Build $(APP)"
-	@$(MAKE) -s -C src -f Makefile all
-
-deps:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Create deps"
-	@$(MAKE) -s -C src -f Makefile deps
-
-compile:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile compile
-	@$(INFORM) "Compile $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile compile
-	@$(INFORM) "Compile $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile compile
-	@$(INFORM) "Compile $(APP)"
-	@$(MAKE) -s -C src -f Makefile compile
-
-link:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile link
-	@$(INFORM) "Link $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile link
-	@$(INFORM) "Compile $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile link
-	@$(INFORM) "Link $(APP)"
-	@$(MAKE) -s -C src -f Makefile link
-
-upload:
-	@$(INFORM) "Upload firmware"
-	@$(MAKE) -s -C src -f Makefile upload
-
 clean:
 	@@$(RM) $(LOGFILE)
 	@$(INFORM) "Clean $(LIBCORE)"
@@ -105,4 +64,77 @@ clean:
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
-.PHONY: default help all deps compile link prepare clean info upload
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# ESP8266 Core
+
+compile_core:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile $(LIBCORE)"
+	@$(MAKE) -s -C ext/core -f Makefile compile
+
+link_core: compile_core
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Link $(LIBCORE)"
+	@$(MAKE) -s -C ext/core -f Makefile link
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# ESP8266 SPI
+
+compile_spi:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile $(LIBSPI)"
+	@$(MAKE) -s -C ext/spi -f Makefile compile
+
+link_spi: compile_spi
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Link $(LIBSPI)"
+	@$(MAKE) -s -C ext/spi -f Makefile link
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# EEPROM
+
+compile_eeprom:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile $(LIBEEPROM)"
+	@$(MAKE) -s -C ext/eeprom -f Makefile compile
+
+link_eeprom: compile_eeprom
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Link $(LIBEEPROM)"
+	@$(MAKE) -s -C ext/eeprom -f Makefile link
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# ESP8266WIFI
+
+compile_wifi:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile $(LIBESP8266WIFI)"
+	@$(MAKE) -s -C ext/esp8266wifi -f Makefile compile
+
+link_wifi: compile_wifi
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Link $(LIBESP8266WIFI)"
+	@$(MAKE) -s -C ext/esp8266wifi -f Makefile link
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Projects
+
+compile:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Create deps"
+	@$(MAKE) -s -C src -f Makefile deps
+	@$(INFORM) "Compile $(APP)"
+	@$(MAKE) -s -C src -f Makefile compile
+
+link: link_core link_spi link_eeprom link_wifi compile
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Link $(APP)"
+	@$(MAKE) -s -C src -f Makefile link
+
+
+upload: link
+	@$(INFORM) "Upload firmware"
+	@$(MAKE) -s -C src -f Makefile upload
+
+
+.PHONY: default help info clean compile_core link_core compile_spi link_spi compile_eeprom link_eeprom compile link upload

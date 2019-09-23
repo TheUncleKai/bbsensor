@@ -37,6 +37,14 @@
 					<Add option="-DNO_GLOBAL_EEPROM" />
 					<Add option="-DCLICK_DEBUG" />
 					<Add option="-DTEMPERATURE_DEBUG" />
+					<Add directory="$$(ESP8266_ROOT)/tools/sdk/include" />
+					<Add directory="$$(ESP8266_ROOT)/tools/sdk/lwip2/include" />
+					<Add directory="$$(ESP8266_ROOT)/tools/sdk/libc/xtensa-lx106-elf/include" />
+					<Add directory="$$(ESP8266_ROOT)/cores/esp8266" />
+					<Add directory="$$(ESP8266_ROOT)/variants/nodemcu" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/SPI" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/EEPROM" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WiFi/src" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>

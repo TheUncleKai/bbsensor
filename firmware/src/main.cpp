@@ -15,6 +15,7 @@
 */
 
 #include <Arduino.h>
+//#include <ESP8266WiFi.h>
 #include <SPI.h>
 
 #include <settings.h>
@@ -23,6 +24,9 @@
 #include <hardware.h>
 #include <loop.h>
 
+// Name and password of the access point
+//#define SSID "Pussycat"
+//#define PASSWORD "supersecret"
 
 void setup();
 void loop();
@@ -53,6 +57,10 @@ void setup()
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
     hardware->setup();
+
+    // Use an external AP
+    // WiFi.mode(WIFI_STA);
+    // WiFi.begin(SSID, PASSWORD);
 }
 
 

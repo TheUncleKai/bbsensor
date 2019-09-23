@@ -1,3 +1,4 @@
+#include <ESP8266WiFi.h>
 #include <SPI.h>
 
 #ifdef DEBUG_ESP_PORT
