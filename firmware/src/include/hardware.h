@@ -20,7 +20,6 @@
 #include <SPI.h>
 
 #include <device.h>
-
 #include <led.h>
 #include <button.h>
 

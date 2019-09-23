@@ -14,29 +14,22 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#ifndef TEMPERATURE_H_INCLUDED
+#define TEMPERATURE_H_INCLUDED
 
 #include <device.h>
 
 
-class LED : public Device
+class Temperature : public Device
 {
   private:
-    int m_num, m_status, m_pin;
-
-    void _on();
-    void _off();
+    int m_num, m_cs, m_channel;
 
   public:
-    LED (int num, int pin);
-
-    void toggle();
-    void on();
-    void off();
+    Temperature (int num, int cs, int channel);
 
     void setup();
     void execute();
 };
 
-#endif // LED_H_INCLUDED
+#endif // TEMPERATURE_H_INCLUDED

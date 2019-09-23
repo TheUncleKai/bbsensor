@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include <config.h>
+#include <settings.h>
 #include <debug.h>
 
 #include <hardware.h>

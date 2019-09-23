@@ -16,6 +16,8 @@ SOURCES = \
 	data/loop.cpp \
 	devices/button.cpp \
 	devices/click.cpp \
+    devices/display.cpp \
 	devices/hardware.cpp \
 	devices/led.cpp \
+    devices/temperature.cpp \
 	main.cpp

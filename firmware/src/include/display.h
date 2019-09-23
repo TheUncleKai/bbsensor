@@ -14,8 +14,10 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#ifndef DISPLAY_H_INCLUDED
+#define DISPLAY_H_INCLUDED
+
+#include <SPI.h>
 
 #include <device.h>
 
@@ -23,20 +25,14 @@
 class LED : public Device
 {
   private:
-    int m_num, m_status, m_pin;
-
-    void _on();
-    void _off();
+    int m_num, m_cs;
 
   public:
-    LED (int num, int pin);
-
-    void toggle();
-    void on();
-    void off();
+    LED (int num, int cs);
 
     void setup();
     void execute();
 };
 
-#endif // LED_H_INCLUDED
+
+#endif // DISPLAY_H_INCLUDED

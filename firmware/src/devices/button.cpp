@@ -16,7 +16,7 @@
 
 #include <Arduino.h>
 
-#include <config.h>
+#include <settings.h>
 #include <debug.h>
 
 #include <button.h>

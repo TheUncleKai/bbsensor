@@ -17,7 +17,7 @@
 #include <Arduino.h>
 #include <SPI.h>
 
-#include <config.h>
+#include <settings.h>
 #include <debug.h>
 
 #include <hardware.h>

@@ -14,29 +14,9 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#include <Arduino.h>
 
-#include <device.h>
+#include <settings.h>
+#include <debug.h>
 
-
-class LED : public Device
-{
-  private:
-    int m_num, m_status, m_pin;
-
-    void _on();
-    void _off();
-
-  public:
-    LED (int num, int pin);
-
-    void toggle();
-    void on();
-    void off();
-
-    void setup();
-    void execute();
-};
-
-#endif // LED_H_INCLUDED
+#include <temperature.h>
