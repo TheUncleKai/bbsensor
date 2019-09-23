@@ -27,6 +27,7 @@ Hardware::Hardware()
     this->p_spi = new SPIClass();
     this->p_button1 = new Button(1, PIN_BUTTON1);
     this->p_button2 = new Button(1, PIN_BUTTON2);
+    this->p_display = new Display(this->p_spi, PIN_CS1);
 }
 
 
@@ -37,6 +38,7 @@ Hardware::~Hardware()
     delete this->p_spi;
     delete this->p_button1;
     delete this->p_button2;
+    delete this->p_display;
 }
 
 
@@ -68,14 +70,21 @@ Button* Hardware::button2()
 }
 
 
+Display* Hardware::display()
+{
+    return this->p_display;
+}
+
+
 void Hardware::setup()
 {
+    this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
+    this->p_spi->begin();
     this->p_led1->setup();
     this->p_led2->setup();
     this->p_button1->setup();
     this->p_button2->setup();
-    this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
-    this->p_spi->begin();
+    this->p_display->setup();
 }
 
 
@@ -85,4 +94,5 @@ void Hardware::execute()
     this->p_led2->execute();
     this->p_button1->execute();
     this->p_button2->execute();
+    this->p_display->execute();
 }

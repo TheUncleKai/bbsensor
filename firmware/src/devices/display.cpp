@@ -20,3 +20,27 @@
 #include <debug.h>
 
 #include <display.h>
+
+
+Display::Display (SPIClass* spi, int cs)
+{
+    this->m_spi = spi;
+    this->m_cs = cs;
+}
+
+
+Display::~Display()
+{
+}
+
+
+void Display::setup()
+{
+    DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
+    pinMode(this->m_cs, OUTPUT);
+}
+
+
+void Display::execute()
+{
+}

@@ -30,6 +30,7 @@ class LED : public Device
 
   public:
     LED (int num, int pin);
+    virtual ~LED();
 
     void toggle();
     void on();

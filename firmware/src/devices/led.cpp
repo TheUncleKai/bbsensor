@@ -30,6 +30,11 @@ LED::LED (int num, int pin)
 }
 
 
+LED::~LED()
+{
+}
+
+
 void LED::_on()
 {
 #ifdef LED_DEBUG

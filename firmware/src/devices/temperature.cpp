@@ -20,3 +20,28 @@
 #include <debug.h>
 
 #include <temperature.h>
+
+Temperature::Temperature(SPIClass* spi, int num, int cs, int channel)
+{
+    this->m_spi = spi;
+    this->m_num = num;
+    this->m_cs = cs;
+    this->m_channel = channel;
+}
+
+
+Temperature::~Temperature()
+{
+}
+
+
+void Temperature::setup()
+{
+    DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
+    pinMode(this->m_cs, OUTPUT);
+}
+
+
+void Temperature::execute()
+{
+}

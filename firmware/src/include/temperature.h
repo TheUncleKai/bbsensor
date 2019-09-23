@@ -17,6 +17,8 @@
 #ifndef TEMPERATURE_H_INCLUDED
 #define TEMPERATURE_H_INCLUDED
 
+#include <SPI.h>
+
 #include <device.h>
 
 
@@ -24,9 +26,11 @@ class Temperature : public Device
 {
   private:
     int m_num, m_cs, m_channel;
+    SPIClass* m_spi;
 
   public:
-    Temperature (int num, int cs, int channel);
+    Temperature (SPIClass* spi, int num, int cs, int channel);
+    virtual ~Temperature();
 
     void setup();
     void execute();

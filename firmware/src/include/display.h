@@ -22,13 +22,15 @@
 #include <device.h>
 
 
-class LED : public Device
+class Display : public Device
 {
   private:
-    int m_num, m_cs;
+    int m_cs;
+    SPIClass* m_spi;
 
   public:
-    LED (int num, int cs);
+    Display (SPIClass* spi, int cs);
+    virtual ~Display();
 
     void setup();
     void execute();
