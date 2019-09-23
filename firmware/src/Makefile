@@ -16,52 +16,40 @@ ROOT = ..
 
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
+include $(ROOT)/rules/flags.mk
 
-OBJDIR := $(ROOT)/$(OUTPUT)/sensor
-
-ELF = $(ROOT)/$(OUTPUT)/$(APP).elf
-BIN = $(ROOT)/$(OUTPUT)/$(APP).bin
-MAP = $(ROOT)/$(OUTPUT)/$(APP).map
-SIZES = $(ROOT)/$(OUTPUT)/$(APP).txt
-LD = local.eagle.app.v6.common.ld
-
+include config.mk
 include sources.mk
-include flags.mk
-include path.mk
+include objects.mk
 
 default: compile link deps
 
 help:
-	@echo -e "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@echo -e "\t\e[1;34mall\e[0;0m:\t\tcompiles and link firmware"
-	@echo -e "\t\e[1;34mdeps\e[0;0m:\t\tcreate dependecies"
-	@echo -e "\t\e[1;34mcompile\e[0;0m:\tcompiles firmware"
-	@echo -e "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
-	@echo -e "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
-	@echo -e "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
+	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
+	@$(ECHO) "\t\e[1;34default\e[0;0m:\tcompile and link firmware"
+	@$(ECHO) "\t\e[1;34mdeps\e[0;0m:\t\tcreate dependecies"
+	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompile firmware"
+	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
+	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
+	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-all: compile link deps
+deps: $(DEPS)
 
-deps: $(OBJDIR) $(DEPS)
+compile: $(OBJS)
 
-compile: $(OBJDIR) $(OBJS) $(LD)
-
-link: $(OBJDIR) $(ELF) $(BIN) $(SIZES)
-
-cleanall: clean
+link: $(TARGET) $(BIN) $(SIZES)
 
 clean:
-	@$(RM) $(OBJS)
-	@$(RM) $(MAP)
+	@$(RM) $(OBJS) $(MAP)
+	@$(RM) $(ADD_DEP)
 	@$(RM) $(DEPS)
-	@$(RM) $(LD)
-	@$(RM) $(ELF)
-	@$(RM) $(BIN)
-	@$(RM) $(SIZES)
-	@-$(RMDIR) $(OBJDIR)/devices
-	@-$(RMDIR) $(OBJDIR)/data
-	@-$(RMDIR) $(OBJDIR)
+	@$(RM) $(TARGET) $(BIN) $(SIZES)
+	@-$(RMDIR) -rf $(OBJDIR)/*
 
+# Include general rules
+include $(ROOT)/rules/rules.mk
+
+# Include additional rules
 include rules.mk
 
 upload: $(BIN)
@@ -71,4 +59,4 @@ upload: $(BIN)
 
 -include $(DEPS)
 
-.PHONY: default all compile link clean cleanall upload
+.PHONY: default help deps compile link clean upload

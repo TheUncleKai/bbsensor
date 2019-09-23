@@ -17,14 +17,14 @@
 # C++
 $(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp $(ADD_DEP)
 	@$(LOG) "(CXX) $@"
-	@$(MKDIR) $(OBJDIR)
+	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 # C
 $(OBJDIR)/%.c.o: $(SRCDIR)/%.c $(ADD_DEP)
 	@$(LOG) "(CXX) $@"
-	@$(MKDIR) $(OBJDIR)
+	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
@@ -32,9 +32,26 @@ $(OBJDIR)/%.c.o: $(SRCDIR)/%.c $(ADD_DEP)
 # ASM
 $(OBJDIR)/%.S.o: $(SRCDIR)/%.S $(ADD_DEP)
 	@$(LOG) "(GCC) $@"
-	@$(MKDIR) $(OBJDIR)
+	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) $(ASMFLAGS) $< -o $@ $(LOGONLY)
 	@$(GCC) $(ASMFLAGS) $< -o $@ $(LOGOUT)
+
+
+# DEP/C++
+$(OBJDIR)/%.d: %.cpp $(ADD_DEP)
+	@$(LOG) "$@"
+	@$(MKDIR) $(FOLDER)
+	@$(LOGTIME) $(CXX) -MM $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) -MM $(CFLAGS) $< -o $@ $(LOGOUT)
+
+
+# C++
+$(OBJDIR)/%.o: %.cpp $(ADD_DEP)
+	@$(LOG) "$@"
+	@$(MKDIR) $(FOLDER)
+	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
+
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # LIB

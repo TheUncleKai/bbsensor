@@ -12,9 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(ESP8266_CORE)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCORE)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBCORE)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX)
-ADD_DEP := Updater_Signing.h
-ADD_INCLUDE := -I.
+SRCDIR := 
+OBJDIR := $(ROOT)/$(OUTPUT)/sensor
+FOLDER := $(ROOT)/$(OUTPUT)/sensor $(ROOT)/$(OUTPUT)/sensor/data $(ROOT)/$(OUTPUT)/sensor/devices
+ADD_DEP := local.eagle.app.v6.common.ld
+ADD_INCLUDE := -I../ext/core -Iinclude
+ADD_LIBS = -lcore -lspi -leeprom -lESP8266WiFi
+
+TARGET := $(ROOT)/$(OUTPUT)/$(APP).elf
+BIN := $(ROOT)/$(OUTPUT)/$(APP).bin
+MAP := $(ROOT)/$(OUTPUT)/$(APP).map
+SIZES := $(ROOT)/$(OUTPUT)/$(APP).txt
+
