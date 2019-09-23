@@ -17,6 +17,7 @@
 #ifndef TEMPERATURE_H_INCLUDED
 #define TEMPERATURE_H_INCLUDED
 
+#include <list>
 #include <SPI.h>
 
 #include <device.h>
@@ -35,5 +36,9 @@ class Temperature : public Device
     void setup();
     void execute();
 };
+
+
+typedef std::list<Temperature*> TemperatureList;
+
 
 #endif // TEMPERATURE_H_INCLUDED

@@ -33,7 +33,8 @@ CFLAGS = \
 	-DNO_GLOBAL_SPI \
 	$(ESP8266_INCLUDE_CORE) \
 	$(ESP8266_INCLUDE_VARIANTS) \
-	$(ESP8266_INCLUDE_SPI)
+	$(ESP8266_INCLUDE_SPI) \
+    $(ESP8266_INCLUDE_EEPROM)
 
 LDFLAGS = \
 	-fno-exceptions -Wl,-Map "-Wl,$(MAP)" -g -Os -nostdlib -Wl,--no-check-sections -u app_entry -u _printf_float -u _scanf_float \

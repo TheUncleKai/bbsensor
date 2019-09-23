@@ -17,12 +17,14 @@
 #ifndef HARDWARE_H_INCLUDED
 #define HARDWARE_H_INCLUDED
 
+#include <EEPROM.h>
 #include <SPI.h>
 
 #include <device.h>
 #include <led.h>
 #include <button.h>
 #include <display.h>
+#include <temperature.h>
 
 
 class Hardware : public Device
@@ -37,6 +39,7 @@ class Hardware : public Device
         Button* button1();
         Button* button2();
         Display* display();
+        EEPROMClass* eeprom();
 
         void setup();
         void execute();
@@ -47,9 +50,11 @@ class Hardware : public Device
         LED* p_led1;
         LED* p_led2;
         SPIClass* p_spi;
+        EEPROMClass* p_eeprom;
         Button* p_button1;
         Button* p_button2;
         Display* p_display;
+        TemperatureList* p_temperatures;
 };
 
 #endif // HARDWARE_H_INCLUDED

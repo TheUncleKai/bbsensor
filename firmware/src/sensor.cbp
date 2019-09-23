@@ -34,6 +34,7 @@
 					<Add option='-DARDUINO_BOARD=\&quot;ESP8266_NODEMCU\&quot;' />
 					<Add option="-DFLASHMODE_DIO" />
 					<Add option="-DESP8266" />
+					<Add option="-DNO_GLOBAL_EEPROM" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>
