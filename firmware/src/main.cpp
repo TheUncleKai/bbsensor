@@ -30,9 +30,15 @@ Hardware* hardware = new Hardware();
 Loop* looper = new Loop();
 
 
-void handleISR()
+void handleISR1()
 {
-    hardware->button()->handleISR();
+    hardware->button1()->handleISR();
+}
+
+
+void handleISR2()
+{
+    hardware->button2()->handleISR();
 }
 
 
@@ -43,7 +49,8 @@ void setup()
 
     looper->set_numer(10);
     looper->setup();
-    hardware->button()->setISR(handleISR);
+    hardware->button1()->setISR(handleISR1);
+    hardware->button2()->setISR(handleISR2);
     hardware->setup();
 }
 

@@ -28,10 +28,7 @@ Button::Button (int num, int pin)
     this->m_pin = pin;
 
     this->p_isr = NULL;
-
-    this->m_onoff = 0;
-
-    this->p_click = new Click();
+    this->p_click = new Click(this->m_num);
 }
 
 
@@ -53,12 +50,10 @@ void Button::handleISR()
 
     if (digitalRead(this->m_pin) == HIGH) {
         this->p_click->set_high(timestamp);
-        this->m_onoff = 1;
     }
 
     if (digitalRead(this->m_pin) == LOW) {
         this->p_click->set_low(timestamp);
-        this->m_onoff = 0;
     }
 
 #ifdef BUTTON_DEBUG

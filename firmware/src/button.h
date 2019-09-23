@@ -36,7 +36,7 @@ class Button : public Device
         Click::Type get_click();
 
     private:
-        int m_num, m_pin, m_onoff;
+        int m_num, m_pin;
 
         Click* p_click;
 

@@ -71,8 +71,9 @@ void ClickSpan::copy(ClickSpan* timespan)
 
 
 
-Click::Click ()
+Click::Click (int num)
 {
+    this->m_num = num;
     this->m_counter = 0;
     this->m_type = Click::NONE;
     this->p_current = new ClickSpan();
@@ -130,7 +131,8 @@ void Click::_process()
     ddiff = this->p_current->diff(this->p_last);
 
 #ifdef CLICK_DEBUG
-    DEBUG_MSG("Debug: diff %d, ddiff %d, count %d, current %d/%d, last %d/%d\n",
+    DEBUG_MSG("BUTTON%d: diff %d, ddiff %d, count %d, current %d/%d, last %d/%d\n",
+                this->m_num,
                 diff,
                 ddiff,
                 this->m_counter,
@@ -146,7 +148,7 @@ void Click::_process()
             this->m_counter++;
 
 #ifdef CLICK_DEBUG
-            DEBUG_MSG("Click: %d\n", this->m_type);
+            DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
 #endif // CLICK_DEBUG
             return;
         }
@@ -157,7 +159,7 @@ void Click::_process()
             this->p_last->reset();
 
 #ifdef CLICK_DEBUG
-            DEBUG_MSG("Click: %d\n", this->m_type);
+            DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
 #endif // CLICK_DEBUG
             return;
         }
@@ -171,7 +173,7 @@ void Click::_process()
             this->p_last->reset();
 
 #ifdef CLICK_DEBUG
-            DEBUG_MSG("Click: %d\n", this->m_type);
+            DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
 #endif // CLICK_DEBUG
             return;
         }
@@ -180,7 +182,7 @@ void Click::_process()
             this->m_counter = 1;
 
 #ifdef CLICK_DEBUG
-            DEBUG_MSG("Click: %d\n", this->m_type);
+            DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
 #endif // CLICK_DEBUG
             return;
         }

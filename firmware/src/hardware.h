@@ -33,7 +33,8 @@ class Hardware : public Device
         LED* led1();
         LED* led2();
         SPIClass* spi();
-        Button* button();
+        Button* button1();
+        Button* button2();
 
         void setup();
         void execute();
@@ -44,7 +45,8 @@ class Hardware : public Device
         LED* p_led1;
         LED* p_led2;
         SPIClass* p_spi;
-        Button* p_button;
+        Button* p_button1;
+        Button* p_button2;
 };
 
 #endif // HARDWARE_H_INCLUDED

@@ -35,7 +35,7 @@ class ClickSpan
 class Click
 {
     public:
-        Click ();
+        Click (int num);
         virtual ~Click();
 
         enum Type {
@@ -52,6 +52,7 @@ class Click
         Type type();
 
     private:
+        int m_num;
         unsigned long m_counter;
         Type m_type;
 

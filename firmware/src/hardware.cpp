@@ -24,13 +24,18 @@ Hardware::Hardware()
     this->p_led1 = new LED(1, PIN_LED1);
     this->p_led2 = new LED(2, PIN_LED2);
     this->p_spi = new SPIClass();
-    this->p_button = new Button(1, PIN_BUTTON);
+    this->p_button1 = new Button(1, PIN_BUTTON1);
+    this->p_button2 = new Button(1, PIN_BUTTON2);
 }
 
 
 Hardware::~Hardware()
 {
-    //dtor
+    delete this->p_led1;
+    delete this->p_led2;
+    delete this->p_spi;
+    delete this->p_button1;
+    delete this->p_button2;
 }
 
 
@@ -50,9 +55,15 @@ SPIClass* Hardware::spi()
 }
 
 
-Button* Hardware::button()
+Button* Hardware::button1()
 {
-    return this->p_button;
+    return this->p_button1;
+}
+
+
+Button* Hardware::button2()
+{
+    return this->p_button2;
 }
 
 
@@ -60,10 +71,10 @@ void Hardware::setup()
 {
     this->p_led1->setup();
     this->p_led2->setup();
-    this->p_button->setup();
+    this->p_button1->setup();
+    this->p_button2->setup();
     this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
     this->p_spi->begin();
-
 }
 
 
@@ -71,5 +82,6 @@ void Hardware::execute()
 {
     this->p_led1->execute();
     this->p_led2->execute();
-    this->p_button->execute();
+    this->p_button1->execute();
+    this->p_button2->execute();
 }
