@@ -14,7 +14,7 @@
 
 CFLAGS = \
 	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
-	$(ESP8266_INCLUDE_SDK) -I../ext/core -Iinclude \
+	$(ESP8266_INCLUDE_SDK) -I. \
 	-c -Os -g -mlongcalls -mtext-section-literals \
 	-fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections -fno-exceptions \
 	-DNONOSDK221=1 \
@@ -27,7 +27,7 @@ CFLAGS = \
 	-DARDUINO=10809 \
 	-DARDUINO_ESP8266_NODEMCU \
 	-DARDUINO_ARCH_ESP8266 \
-	-DARDUINO_BOARD=\"ESP8266_NODEMCU\" \
+	-DARDUINO_BOARD=\"ESP8266_NODEMCU\"\
 	-DFLASHMODE_DIO \
 	-DESP8266 \
 	-DNO_GLOBAL_SPI \
@@ -35,19 +35,3 @@ CFLAGS = \
 	$(ESP8266_INCLUDE_VARIANTS) \
 	$(ESP8266_INCLUDE_SPI) \
     $(ESP8266_INCLUDE_EEPROM)
-
-LDFLAGS = \
-	-fno-exceptions -Wl,-Map "-Wl,$(MAP)" -g -Os -nostdlib -Wl,--no-check-sections -u app_entry -u _printf_float -u _scanf_float \
-	-Wl,-static -L$(ESP8266_SDK)/lib -L$(ESP8266_SDK)/lib/NONOSDK221 -L$(ESP8266_SDK)/ld -L$(ESP8266_SDK)/libc/xtensa-lx106-elf/lib -L$(ROOT)/$(OUTPUT) \
-	-Teagle.flash.4m1m.ld -Wl,--gc-sections -Wl,-wrap,system_restart_local -Wl,-wrap,spi_flash_read
-
-LDLOCAL = \
-    -lcore -lspi -leeprom
-
-LDLIBS = \
-	-lhal -lphy -lpp -lnet80211 -llwip2-536-feat -lwpa -lcrypto -lmain -lwps -lbearssl \
-	-laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc
-
-UPLOADFLAGS = \
-	--chip esp8266 --port $(PORT) --baud $(BAUD) --trace version --end \
-	--chip esp8266 --port $(PORT) --baud $(BAUD) --trace write_flash 0x0

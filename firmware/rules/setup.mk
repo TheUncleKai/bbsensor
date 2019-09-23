@@ -51,6 +51,7 @@ LIB_SUFFIX = .a
 OUTPUT     = build
 LIBCORE    = libcore
 LIBSPI     = libspi
+LIBEEPROM  = libeeprom
 APP        = sensor
 
 LOGFILE    = $(ROOT)/$(OUTPUT)/$(LOGGING)

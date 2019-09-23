@@ -73,6 +73,8 @@ compile:
 	@$(MAKE) -s -C ext/core -f Makefile compile
 	@$(INFORM) "Compile $(LIBSPI)"
 	@$(MAKE) -s -C ext/spi -f Makefile compile
+	@$(INFORM) "Compile $(LIBEEPROM)"
+	@$(MAKE) -s -C ext/eeprom -f Makefile compile
 	@$(INFORM) "Compile $(APP)"
 	@$(MAKE) -s -C src -f Makefile compile
 
@@ -82,6 +84,8 @@ link:
 	@$(MAKE) -s -C ext/core -f Makefile link
 	@$(INFORM) "Link $(LIBSPI)"
 	@$(MAKE) -s -C ext/spi -f Makefile link
+	@$(INFORM) "Compile $(LIBEEPROM)"
+	@$(MAKE) -s -C ext/eeprom -f Makefile link
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
 
@@ -95,6 +99,8 @@ clean:
 	@$(MAKE) -s -C ext/core -f Makefile clean
 	@$(INFORM) "Clean $(LIBSPI)"
 	@$(MAKE) -s -C ext/spi -f Makefile clean
+	@$(INFORM) "Clean $(LIBEEPROM)"
+	@$(MAKE) -s -C ext/eeprom -f Makefile clean
 	@$(INFORM) "Clean $(APP)"
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)

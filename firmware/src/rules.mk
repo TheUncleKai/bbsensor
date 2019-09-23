@@ -38,8 +38,8 @@ $(LD): $(ESP8266_SDK)/ld/eagle.app.v6.common.ld.h
 $(ELF): $(OBJS) $(LD)
 	@$(LOG) "$@"
 	@$(MKDIR) $(OBJDIR)
-	@$(LOGTIME) $(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) $(LDLIBS) -Wl,--end-group $(LOGONLY)
-	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) $(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX) $(ROOT)/$(OUTPUT)/$(LIBSPI)$(LIB_SUFFIX) $(LDLIBS) -Wl,--end-group $(LOGOUT)
+	@$(LOGTIME) $(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) $(LDLOCAL) $(LDLIBS) -Wl,--end-group $(LOGONLY)
+	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) $(LDLOCAL) $(LDLIBS) -Wl,--end-group $(LOGOUT)
 
 $(BIN): $(ELF)
 	@$(LOG) "$@"
