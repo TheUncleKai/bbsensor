@@ -1,55 +1,15 @@
-ERC report (28/08/2019 03:25:14, Encoding UTF8 )
+ERC report (26/09/2019 01:31:19, Encoding UTF8 )
 
 ***** Sheet /
 
+***** Sheet /ESP8266EX/
+
 ***** Sheet /Power/
 
-***** Sheet /ESP8266/
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(74.93 mm, 67.31 mm): Pin 2 (Passive) of component R105 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(74.93 mm, 74.93 mm): Pin 2 (Passive) of component R103 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(74.93 mm, 69.85 mm): Pin 2 (Passive) of component R101 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(74.93 mm, 72.39 mm): Pin 2 (Passive) of component R102 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(74.93 mm, 77.47 mm): Pin 2 (Passive) of component R104 is unconnected.
-
-***** Sheet /Analog/Digital/
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(157.48 mm, 93.98 mm): Pin 10 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(157.48 mm, 91.44 mm): Pin 11 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(157.48 mm, 88.90 mm): Pin 12 (Output) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(157.48 mm, 86.36 mm): Pin 13 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 96.52 mm): Pin 7 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 99.06 mm): Pin 8 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 93.98 mm): Pin 6 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 91.44 mm): Pin 5 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 88.90 mm): Pin 4 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 86.36 mm): Pin 3 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 83.82 mm): Pin 2 (Input) of component U2 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(127.00 mm, 81.28 mm): Pin 1 (Input) of component U2 is unconnected.
-
-***** Sheet /Display/
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(90.17 mm, 77.47 mm): Pin 11 (Input) of component U3 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(90.17 mm, 72.39 mm): Pin 14 (Input) of component U3 is unconnected.
-ErrType(2): Pin not connected (use a “no connection” flag to suppress this error)
-    @(90.17 mm, 85.09 mm): Pin 12 (Input) of component U3 is unconnected.
+***** Sheet /Serial/
 
 ***** Sheet /Temperature/
 
- ** ERC messages: 20  Errors 0  Warnings 20
+***** Sheet /IO/
+
+ ** ERC messages: 0  Errors 0  Warnings 0
