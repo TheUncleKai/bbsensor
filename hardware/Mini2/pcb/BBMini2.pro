@@ -1,4 +1,4 @@
-update=25/09/2019 23:35:22
+update=26/09/2019 15:21:49
 version=1
 last_client=kicad
 [cvpcb]
@@ -9,6 +9,16 @@ version=1
 [eeschema]
 version=1
 LibDir=
+[schematic_editor]
+version=1
+PageLayoutDescrFile=empty.kicad_wks
+PlotDirectoryName=../plot/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -26,8 +36,11 @@ MinMicroViaDiameter=0.2
 MinMicroViaDrill=0.09999999999999999
 MinHoleToHole=0.25
 TrackWidth1=0,2
-ViaDiameter1=0,8
-ViaDrill1=0,4
+TrackWidth2=0,2
+ViaDiameter1=0,6
+ViaDrill1=0,3
+ViaDiameter2=0,6
+ViaDrill2=0,3
 dPairWidth1=0,2
 dPairGap1=0,25
 dPairViaGap1=0,25
@@ -226,8 +239,8 @@ Enabled=0
 Name=Default
 Clearance=0,125
 TrackWidth=0,2
-ViaDiameter=0,8
-ViaDrill=0,4
+ViaDiameter=0,6
+ViaDrill=0,3
 uViaDiameter=0,3
 uViaDrill=0,1
 dPairWidth=0,2
@@ -235,10 +248,10 @@ dPairGap=0,25
 dPairViaGap=0,25
 [pcbnew/Netclasses/1]
 Name=3V3
-Clearance=0,2
-TrackWidth=0,3
-ViaDiameter=0,8
-ViaDrill=0,4
+Clearance=0,125
+TrackWidth=0,2
+ViaDiameter=0,6
+ViaDrill=0,3
 uViaDiameter=0,3
 uViaDrill=0,1
 dPairWidth=0,2
@@ -266,13 +279,3 @@ uViaDrill=0,1
 dPairWidth=0,2
 dPairGap=0,25
 dPairViaGap=0,25
-[schematic_editor]
-version=1
-PageLayoutDescrFile=empty.kicad_wks
-PlotDirectoryName=../plot/
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceAjustPassiveValues=0
-LabSize=60
-ERC_TestSimilarLabels=1

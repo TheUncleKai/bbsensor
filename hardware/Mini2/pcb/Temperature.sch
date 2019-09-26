@@ -14,540 +14,389 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text Label 3000 1500 0    60   ~ 0
+Text Label 4100 2950 0    60   ~ 0
 SIGNAL1
 $Comp
 L power:+5V #PWR?
 U 1 1 5D92C6D7
-P 5100 5100
+P 5950 2650
 AR Path="/5D6ADE4E/5D92C6D7" Ref="#PWR?"  Part="1" 
 AR Path="/5D92C6D7" Ref="#PWR?"  Part="1" 
 AR Path="/5D91B902/5D92C6D7" Ref="#PWR0128"  Part="1" 
-F 0 "#PWR0128" H 5100 4950 50  0001 C CNN
-F 1 "+5V" H 5115 5273 50  0000 C CNN
-F 2 "" H 5100 5100 50  0001 C CNN
-F 3 "" H 5100 5100 50  0001 C CNN
-	1    5100 5100
+F 0 "#PWR0128" H 5950 2500 50  0001 C CNN
+F 1 "+5V" H 5965 2823 50  0000 C CNN
+F 2 "" H 5950 2650 50  0001 C CNN
+F 3 "" H 5950 2650 50  0001 C CNN
+	1    5950 2650
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5D92C6DD
-P 4450 5300
+P 5300 2850
 AR Path="/5D6ADE4E/5D92C6DD" Ref="#PWR?"  Part="1" 
 AR Path="/5D92C6DD" Ref="#PWR?"  Part="1" 
 AR Path="/5D91B902/5D92C6DD" Ref="#PWR0129"  Part="1" 
-F 0 "#PWR0129" H 4450 5050 50  0001 C CNN
-F 1 "GND" H 4455 5127 50  0000 C CNN
-F 2 "" H 4450 5300 50  0001 C CNN
-F 3 "" H 4450 5300 50  0001 C CNN
-	1    4450 5300
+F 0 "#PWR0129" H 5300 2600 50  0001 C CNN
+F 1 "GND" H 5305 2677 50  0000 C CNN
+F 2 "" H 5300 2850 50  0001 C CNN
+F 3 "" H 5300 2850 50  0001 C CNN
+	1    5300 2850
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5D92C6E3
-P 4900 6650
+P 5750 4200
 AR Path="/5D6ADE4E/5D92C6E3" Ref="#PWR?"  Part="1" 
 AR Path="/5D92C6E3" Ref="#PWR?"  Part="1" 
 AR Path="/5D91B902/5D92C6E3" Ref="#PWR0130"  Part="1" 
-F 0 "#PWR0130" H 4900 6400 50  0001 C CNN
-F 1 "GND" H 4905 6477 50  0000 C CNN
-F 2 "" H 4900 6650 50  0001 C CNN
-F 3 "" H 4900 6650 50  0001 C CNN
-	1    4900 6650
+F 0 "#PWR0130" H 5750 3950 50  0001 C CNN
+F 1 "GND" H 5755 4027 50  0000 C CNN
+F 2 "" H 5750 4200 50  0001 C CNN
+F 3 "" H 5750 4200 50  0001 C CNN
+	1    5750 4200
 	0    1    1    0   
 $EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C6E9
-P 2650 1600
-AR Path="/5D6ADE4E/5D92C6E9" Ref="TH?"  Part="1" 
-AR Path="/5D92C6E9" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C6E9" Ref="TH1"  Part="1" 
-F 0 "TH1" H 2632 1925 50  0000 C CNN
-F 1 "AudioJack3" H 2632 1834 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 1600 50  0001 C CNN
-F 3 "~" H 2650 1600 50  0001 C CNN
-	1    2650 1600
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C6EF
-P 2650 2200
-AR Path="/5D6ADE4E/5D92C6EF" Ref="TH?"  Part="1" 
-AR Path="/5D92C6EF" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C6EF" Ref="TH2"  Part="1" 
-F 0 "TH2" H 2632 2525 50  0000 C CNN
-F 1 "AudioJack3" H 2632 2434 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 2200 50  0001 C CNN
-F 3 "~" H 2650 2200 50  0001 C CNN
-	1    2650 2200
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C6F5
-P 2650 2800
-AR Path="/5D6ADE4E/5D92C6F5" Ref="TH?"  Part="1" 
-AR Path="/5D92C6F5" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C6F5" Ref="TH3"  Part="1" 
-F 0 "TH3" H 2632 3125 50  0000 C CNN
-F 1 "AudioJack3" H 2632 3034 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 2800 50  0001 C CNN
-F 3 "~" H 2650 2800 50  0001 C CNN
-	1    2650 2800
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C6FB
-P 2650 3400
-AR Path="/5D6ADE4E/5D92C6FB" Ref="TH?"  Part="1" 
-AR Path="/5D92C6FB" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C6FB" Ref="TH4"  Part="1" 
-F 0 "TH4" H 2632 3725 50  0000 C CNN
-F 1 "AudioJack3" H 2632 3634 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 3400 50  0001 C CNN
-F 3 "~" H 2650 3400 50  0001 C CNN
-	1    2650 3400
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C701
-P 2650 4000
-AR Path="/5D6ADE4E/5D92C701" Ref="TH?"  Part="1" 
-AR Path="/5D92C701" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C701" Ref="TH5"  Part="1" 
-F 0 "TH5" H 2632 4325 50  0000 C CNN
-F 1 "AudioJack3" H 2632 4234 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 4000 50  0001 C CNN
-F 3 "~" H 2650 4000 50  0001 C CNN
-	1    2650 4000
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C707
-P 2650 4600
-AR Path="/5D6ADE4E/5D92C707" Ref="TH?"  Part="1" 
-AR Path="/5D92C707" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C707" Ref="TH6"  Part="1" 
-F 0 "TH6" H 2632 4925 50  0000 C CNN
-F 1 "AudioJack3" H 2632 4834 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 4600 50  0001 C CNN
-F 3 "~" H 2650 4600 50  0001 C CNN
-	1    2650 4600
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C70D
-P 2650 5200
-AR Path="/5D6ADE4E/5D92C70D" Ref="TH?"  Part="1" 
-AR Path="/5D92C70D" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C70D" Ref="TH7"  Part="1" 
-F 0 "TH7" H 2632 5525 50  0000 C CNN
-F 1 "AudioJack3" H 2632 5434 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 5200 50  0001 C CNN
-F 3 "~" H 2650 5200 50  0001 C CNN
-	1    2650 5200
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:AudioJack3 TH?
-U 1 1 5D92C713
-P 2650 5800
-AR Path="/5D6ADE4E/5D92C713" Ref="TH?"  Part="1" 
-AR Path="/5D92C713" Ref="TH?"  Part="1" 
-AR Path="/5D91B902/5D92C713" Ref="TH8"  Part="1" 
-F 0 "TH8" H 2632 6125 50  0000 C CNN
-F 1 "AudioJack3" H 2632 6034 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_1501_05" H 2650 5800 50  0001 C CNN
-F 3 "~" H 2650 5800 50  0001 C CNN
-	1    2650 5800
-	1    0    0    1   
-$EndComp
-Wire Wire Line
-	4100 1500 4100 5600
-Wire Wire Line
-	4100 5600 4600 5600
-Wire Wire Line
-	4050 2100 4050 5700
-Wire Wire Line
-	4050 5700 4600 5700
-Wire Wire Line
-	4000 2700 4000 5800
-Wire Wire Line
-	4000 5800 4600 5800
-Wire Wire Line
-	4600 6200 3800 6200
-Wire Wire Line
-	3800 6200 3800 5100
-Wire Wire Line
-	3850 4500 3850 6100
-Wire Wire Line
-	3850 6100 4600 6100
-Wire Wire Line
-	3900 3900 3900 6000
-Wire Wire Line
-	3900 6000 4600 6000
-Text Label 3000 2100 0    60   ~ 0
+Text Label 4100 3950 0    60   ~ 0
 SIGNAL2
-Text Label 3000 2700 0    60   ~ 0
+Text Label 4100 3050 0    60   ~ 0
 SIGNAL3
-Text Label 3000 3300 0    60   ~ 0
+Text Label 4100 4050 0    60   ~ 0
 SIGNAL4
-Text Label 3000 3900 0    60   ~ 0
+Text Label 4100 3150 0    60   ~ 0
 SIGNAL5
-Text Label 3000 4500 0    60   ~ 0
+Text Label 4100 4150 0    60   ~ 0
 SIGNAL6
-Text Label 3000 5100 0    60   ~ 0
+Text Label 4100 3250 0    60   ~ 0
 SIGNAL7
-Text Label 3000 5700 0    60   ~ 0
+Text Label 4100 4250 0    60   ~ 0
 SIGNAL8
 $Comp
 L power:GND #PWR?
 U 1 1 5D92C72C
-P 2975 6325
+P 3400 4350
 AR Path="/5D6ADE4E/5D92C72C" Ref="#PWR?"  Part="1" 
 AR Path="/5D92C72C" Ref="#PWR?"  Part="1" 
 AR Path="/5D91B902/5D92C72C" Ref="#PWR0131"  Part="1" 
-F 0 "#PWR0131" H 2975 6075 50  0001 C CNN
-F 1 "GND" H 2980 6152 50  0000 C CNN
-F 2 "" H 2975 6325 50  0001 C CNN
-F 3 "" H 2975 6325 50  0001 C CNN
-	1    2975 6325
+F 0 "#PWR0131" H 3400 4100 50  0001 C CNN
+F 1 "GND" H 3405 4177 50  0000 C CNN
+F 2 "" H 3400 4350 50  0001 C CNN
+F 3 "" H 3400 4350 50  0001 C CNN
+	1    3400 4350
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2975 6325 2975 5900
-Wire Wire Line
-	2975 1700 2850 1700
-Wire Wire Line
-	2850 2300 2975 2300
-Connection ~ 2975 2300
-Wire Wire Line
-	2975 2300 2975 1700
-Wire Wire Line
-	2850 2900 2975 2900
-Connection ~ 2975 2900
-Wire Wire Line
-	2975 2900 2975 2300
-Wire Wire Line
-	2850 3500 2975 3500
-Connection ~ 2975 3500
-Wire Wire Line
-	2975 3500 2975 2900
-Wire Wire Line
-	2850 4100 2975 4100
-Connection ~ 2975 4100
-Wire Wire Line
-	2975 4100 2975 3500
-Wire Wire Line
-	2850 4700 2975 4700
-Connection ~ 2975 4700
-Wire Wire Line
-	2975 4700 2975 4100
-Wire Wire Line
-	2850 5300 2975 5300
-Connection ~ 2975 5300
-Wire Wire Line
-	2975 5300 2975 4700
-Wire Wire Line
-	2850 5900 2975 5900
-Connection ~ 2975 5900
-Wire Wire Line
-	2975 5900 2975 5300
 $Comp
 L power:+5V #PWR?
 U 1 1 5D92C749
-P 2900 1200
+P 3400 2850
 AR Path="/5D6ADE4E/5D92C749" Ref="#PWR?"  Part="1" 
 AR Path="/5D92C749" Ref="#PWR?"  Part="1" 
 AR Path="/5D91B902/5D92C749" Ref="#PWR0132"  Part="1" 
-F 0 "#PWR0132" H 2900 1050 50  0001 C CNN
-F 1 "+5V" H 2915 1373 50  0000 C CNN
-F 2 "" H 2900 1200 50  0001 C CNN
-F 3 "" H 2900 1200 50  0001 C CNN
-	1    2900 1200
+F 0 "#PWR0132" H 3400 2700 50  0001 C CNN
+F 1 "+5V" H 3415 3023 50  0000 C CNN
+F 2 "" H 3400 2850 50  0001 C CNN
+F 3 "" H 3400 2850 50  0001 C CNN
+	1    3400 2850
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2900 1200 2900 1600
-Wire Wire Line
-	2900 5800 2850 5800
-Wire Wire Line
-	2850 5200 2900 5200
-Connection ~ 2900 5200
-Wire Wire Line
-	2900 5200 2900 5800
-Wire Wire Line
-	2850 4600 2900 4600
-Connection ~ 2900 4600
-Wire Wire Line
-	2900 4600 2900 5200
-Wire Wire Line
-	2850 4000 2900 4000
-Connection ~ 2900 4000
-Wire Wire Line
-	2900 4000 2900 4600
-Wire Wire Line
-	2850 3400 2900 3400
-Connection ~ 2900 3400
-Wire Wire Line
-	2900 3400 2900 4000
-Wire Wire Line
-	2850 2800 2900 2800
-Connection ~ 2900 2800
-Wire Wire Line
-	2900 2800 2900 3400
-Wire Wire Line
-	2850 2200 2900 2200
-Connection ~ 2900 2200
-Wire Wire Line
-	2900 2200 2900 2800
-Wire Wire Line
-	2850 1600 2900 1600
-Connection ~ 2900 1600
-Wire Wire Line
-	2900 1600 2900 2200
 $Comp
 L Connector:TestPoint TS?
 U 1 1 5D92C766
-P 3550 1500
+P 3950 2850
 AR Path="/5D6ADE4E/5D92C766" Ref="TS?"  Part="1" 
 AR Path="/5D92C766" Ref="TS?"  Part="1" 
 AR Path="/5D91B902/5D92C766" Ref="TS1"  Part="1" 
-F 0 "TS1" H 3608 1572 50  0000 L CNN
-F 1 "TestPoint" H 3608 1527 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 1500 50  0001 C CNN
-F 3 "~" H 3750 1500 50  0001 C CNN
-	1    3550 1500
+F 0 "TS1" V 3950 3100 50  0000 C CNN
+F 1 "TestPoint" H 4008 2877 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 4150 2850 50  0001 C CNN
+F 3 "~" H 4150 2850 50  0001 C CNN
+	1    3950 2850
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2850 5700 3550 5700
-Wire Wire Line
-	2850 5100 3550 5100
-Wire Wire Line
-	2850 4500 3550 4500
-Wire Wire Line
-	2850 3900 3550 3900
-Wire Wire Line
-	2850 3300 3550 3300
-Wire Wire Line
-	2850 2700 3550 2700
-Wire Wire Line
-	2850 2100 3550 2100
-Wire Wire Line
-	2850 1500 3550 1500
-Connection ~ 3550 1500
-Wire Wire Line
-	3550 1500 4100 1500
 $Comp
 L Connector:TestPoint TS?
 U 1 1 5D92C776
-P 3550 2100
+P 3950 4350
 AR Path="/5D6ADE4E/5D92C776" Ref="TS?"  Part="1" 
 AR Path="/5D92C776" Ref="TS?"  Part="1" 
 AR Path="/5D91B902/5D92C776" Ref="TS2"  Part="1" 
-F 0 "TS2" H 3608 2172 50  0000 L CNN
-F 1 "TestPoint" H 3608 2127 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 2100 50  0001 C CNN
-F 3 "~" H 3750 2100 50  0001 C CNN
-	1    3550 2100
-	1    0    0    -1  
+F 0 "TS2" V 3950 4600 50  0000 C CNN
+F 1 "TestPoint" H 4008 4377 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 4150 4350 50  0001 C CNN
+F 3 "~" H 4150 4350 50  0001 C CNN
+	1    3950 4350
+	-1   0    0    1   
 $EndComp
-Connection ~ 3550 2100
-Wire Wire Line
-	3550 2100 4050 2100
-$Comp
-L Connector:TestPoint TS?
-U 1 1 5D92C77E
-P 3550 2700
-AR Path="/5D6ADE4E/5D92C77E" Ref="TS?"  Part="1" 
-AR Path="/5D92C77E" Ref="TS?"  Part="1" 
-AR Path="/5D91B902/5D92C77E" Ref="TS3"  Part="1" 
-F 0 "TS3" H 3608 2772 50  0000 L CNN
-F 1 "TestPoint" H 3608 2727 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 2700 50  0001 C CNN
-F 3 "~" H 3750 2700 50  0001 C CNN
-	1    3550 2700
-	1    0    0    -1  
-$EndComp
-Connection ~ 3550 2700
-Wire Wire Line
-	3550 2700 4000 2700
-$Comp
-L Connector:TestPoint TS?
-U 1 1 5D92C786
-P 3550 3300
-AR Path="/5D6ADE4E/5D92C786" Ref="TS?"  Part="1" 
-AR Path="/5D92C786" Ref="TS?"  Part="1" 
-AR Path="/5D91B902/5D92C786" Ref="TS4"  Part="1" 
-F 0 "TS4" H 3608 3372 50  0000 L CNN
-F 1 "TestPoint" H 3608 3327 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 3300 50  0001 C CNN
-F 3 "~" H 3750 3300 50  0001 C CNN
-	1    3550 3300
-	1    0    0    -1  
-$EndComp
-Connection ~ 3550 3300
-$Comp
-L Connector:TestPoint TS?
-U 1 1 5D92C78D
-P 3550 3900
-AR Path="/5D6ADE4E/5D92C78D" Ref="TS?"  Part="1" 
-AR Path="/5D92C78D" Ref="TS?"  Part="1" 
-AR Path="/5D91B902/5D92C78D" Ref="TS5"  Part="1" 
-F 0 "TS5" H 3608 3972 50  0000 L CNN
-F 1 "TestPoint" H 3608 3927 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 3900 50  0001 C CNN
-F 3 "~" H 3750 3900 50  0001 C CNN
-	1    3550 3900
-	1    0    0    -1  
-$EndComp
-Connection ~ 3550 3900
-Wire Wire Line
-	3550 3900 3900 3900
-$Comp
-L Connector:TestPoint TS?
-U 1 1 5D92C795
-P 3550 4500
-AR Path="/5D6ADE4E/5D92C795" Ref="TS?"  Part="1" 
-AR Path="/5D92C795" Ref="TS?"  Part="1" 
-AR Path="/5D91B902/5D92C795" Ref="TS6"  Part="1" 
-F 0 "TS6" H 3608 4572 50  0000 L CNN
-F 1 "TestPoint" H 3608 4527 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 4500 50  0001 C CNN
-F 3 "~" H 3750 4500 50  0001 C CNN
-	1    3550 4500
-	1    0    0    -1  
-$EndComp
-Connection ~ 3550 4500
-Wire Wire Line
-	3550 4500 3850 4500
-$Comp
-L Connector:TestPoint TS?
-U 1 1 5D92C79D
-P 3550 5100
-AR Path="/5D6ADE4E/5D92C79D" Ref="TS?"  Part="1" 
-AR Path="/5D92C79D" Ref="TS?"  Part="1" 
-AR Path="/5D91B902/5D92C79D" Ref="TS7"  Part="1" 
-F 0 "TS7" H 3608 5172 50  0000 L CNN
-F 1 "TestPoint" H 3608 5127 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 5100 50  0001 C CNN
-F 3 "~" H 3750 5100 50  0001 C CNN
-	1    3550 5100
-	1    0    0    -1  
-$EndComp
-Connection ~ 3550 5100
-Wire Wire Line
-	3550 5100 3800 5100
-$Comp
-L Connector:TestPoint TS?
-U 1 1 5D92C7A5
-P 3550 5700
-AR Path="/5D6ADE4E/5D92C7A5" Ref="TS?"  Part="1" 
-AR Path="/5D92C7A5" Ref="TS?"  Part="1" 
-AR Path="/5D91B902/5D92C7A5" Ref="TS8"  Part="1" 
-F 0 "TS8" H 3608 5772 50  0000 L CNN
-F 1 "TestPoint" H 3608 5727 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 3750 5700 50  0001 C CNN
-F 3 "~" H 3750 5700 50  0001 C CNN
-	1    3550 5700
-	1    0    0    -1  
-$EndComp
-Connection ~ 3550 5700
 $Comp
 L Analog_ADC:MCP3208 U?
 U 1 1 5D92C7AC
-P 5200 5900
+P 6050 3450
 AR Path="/5D6ADE4E/5D92C7AC" Ref="U?"  Part="1" 
 AR Path="/5D92C7AC" Ref="U?"  Part="1" 
 AR Path="/5D91B902/5D92C7AC" Ref="U5"  Part="1" 
-F 0 "U5" H 5500 6350 50  0000 C CNN
-F 1 "MCP3208" H 5600 5300 50  0000 C CNN
-F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 5300 6000 50  0001 C CNN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21298c.pdf" H 5300 6000 50  0001 C CNN
-	1    5200 5900
+F 0 "U5" H 6350 3900 50  0000 C CNN
+F 1 "MCP3208" H 6450 2850 50  0000 C CNN
+F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 6150 3550 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21298c.pdf" H 6150 3550 50  0001 C CNN
+	1    6050 3450
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:C C?
 U 1 1 5D92C7B2
-P 4900 5200
+P 5750 2750
 AR Path="/5D6ADE4E/5D92C7B2" Ref="C?"  Part="1" 
 AR Path="/5D92C7B2" Ref="C?"  Part="1" 
 AR Path="/5D91B902/5D92C7B2" Ref="C10"  Part="1" 
-F 0 "C10" V 4648 5200 50  0000 C CNN
-F 1 "100n" V 4739 5200 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4938 5050 50  0001 C CNN
-F 3 "~" H 4900 5200 50  0001 C CNN
-	1    4900 5200
+F 0 "C10" V 5498 2750 50  0000 C CNN
+F 1 "100n" V 5589 2750 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5788 2600 50  0001 C CNN
+F 3 "~" H 5750 2750 50  0001 C CNN
+	1    5750 2750
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5100 5100 5100 5200
+	5950 2650 5950 2750
 Wire Wire Line
-	5050 5200 5100 5200
-Connection ~ 5100 5200
+	5900 2750 5950 2750
+Connection ~ 5950 2750
 Wire Wire Line
-	5100 5200 5100 5400
+	5950 2750 5950 2950
 Wire Wire Line
-	5100 5200 5400 5200
+	5950 2750 6250 2750
 Wire Wire Line
-	5400 5200 5400 5400
+	6250 2750 6250 2950
 Wire Wire Line
-	4750 5200 4450 5200
+	5600 2750 5300 2750
 Wire Wire Line
-	4450 5200 4450 5300
+	5300 2750 5300 2850
 Wire Wire Line
-	3750 6300 4600 6300
+	5750 4200 5950 4200
 Wire Wire Line
-	3550 5700 3750 5700
+	6250 4200 6250 4050
 Wire Wire Line
-	3750 5700 3750 6300
+	5950 4050 5950 4200
+Connection ~ 5950 4200
 Wire Wire Line
-	3950 5900 4600 5900
-Wire Wire Line
-	3550 3300 3950 3300
-Wire Wire Line
-	3950 3300 3950 5900
-Wire Wire Line
-	4900 6650 5100 6650
-Wire Wire Line
-	5400 6650 5400 6500
-Wire Wire Line
-	5100 6500 5100 6650
-Connection ~ 5100 6650
-Wire Wire Line
-	5100 6650 5400 6650
-Text HLabel 6750 5800 2    60   Input ~ 0
+	5950 4200 6250 4200
+Text HLabel 7600 3350 2    60   Input ~ 0
 SCLK
 Wire Wire Line
-	6750 5800 5800 5800
-Text HLabel 6750 5900 2    60   Output ~ 0
+	7600 3350 6650 3350
+Text HLabel 7600 3450 2    60   Output ~ 0
 MISO
-Text HLabel 6750 6000 2    60   Input ~ 0
+Text HLabel 7600 3550 2    60   Input ~ 0
 MOSI
-Text HLabel 6750 6100 2    60   Input ~ 0
+Text HLabel 7600 3650 2    60   Input ~ 0
 CS1
 Wire Wire Line
-	5800 5900 6750 5900
+	6650 3450 7600 3450
 Wire Wire Line
-	5800 6000 6750 6000
+	6650 3550 7600 3550
 Wire Wire Line
-	5800 6100 6750 6100
-Text Label 6050 5800 0    60   ~ 0
+	6650 3650 7600 3650
+Text Label 6900 3350 0    60   ~ 0
 SCLK
-Text Label 6050 5900 0    60   ~ 0
+Text Label 6900 3450 0    60   ~ 0
 MISO
-Text Label 6050 6000 0    60   ~ 0
+Text Label 6900 3550 0    60   ~ 0
 MOSI
-Text Label 6050 6100 0    60   ~ 0
+Text Label 6900 3650 0    60   ~ 0
 CS1
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J4
+U 1 1 5D8D0ACD
+P 3750 3550
+F 0 "J4" V 3800 3830 50  0000 L CNN
+F 1 "Conn_02x05_Odd_Even" V 3755 3262 50  0001 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 3750 3550 50  0001 C CNN
+F 3 "~" H 3750 3550 50  0001 C CNN
+	1    3750 3550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5350 3250 5350 3950
+Wire Wire Line
+	5350 3950 3950 3950
+Wire Wire Line
+	3950 3950 3950 3850
+Wire Wire Line
+	3850 3350 3850 3050
+Wire Wire Line
+	3850 3050 5100 3050
+Wire Wire Line
+	5100 3050 5100 3350
+Wire Wire Line
+	5100 3350 5450 3350
+Wire Wire Line
+	3850 3850 3850 4050
+Wire Wire Line
+	3850 4050 5300 4050
+Wire Wire Line
+	5300 4050 5300 3450
+Wire Wire Line
+	5300 3450 5450 3450
+Wire Wire Line
+	5450 3250 5350 3250
+Wire Wire Line
+	5450 3550 5050 3550
+Wire Wire Line
+	5050 3550 5050 3150
+Wire Wire Line
+	5050 3150 3750 3150
+Wire Wire Line
+	3750 3150 3750 3350
+Wire Wire Line
+	3750 3850 3750 4150
+Wire Wire Line
+	3750 4150 5250 4150
+Wire Wire Line
+	5250 4150 5250 3650
+Wire Wire Line
+	5250 3650 5450 3650
+Wire Wire Line
+	3650 3350 3650 3250
+Wire Wire Line
+	3650 3250 5000 3250
+Wire Wire Line
+	5000 3250 5000 3750
+Wire Wire Line
+	5000 3750 5450 3750
+Wire Wire Line
+	3650 3850 3650 4250
+Wire Wire Line
+	3650 4250 5200 4250
+Wire Wire Line
+	5200 4250 5200 3850
+Wire Wire Line
+	5200 3850 5450 3850
+Wire Wire Line
+	3950 4350 3950 3950
+Connection ~ 3950 3950
+$Comp
+L Connector:TestPoint TS?
+U 1 1 5D8F9636
+P 3850 4350
+AR Path="/5D6ADE4E/5D8F9636" Ref="TS?"  Part="1" 
+AR Path="/5D8F9636" Ref="TS?"  Part="1" 
+AR Path="/5D91B902/5D8F9636" Ref="TS4"  Part="1" 
+F 0 "TS4" V 3850 4600 50  0000 C CNN
+F 1 "TestPoint" H 3908 4377 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 4050 4350 50  0001 C CNN
+F 3 "~" H 4050 4350 50  0001 C CNN
+	1    3850 4350
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3850 4350 3850 4050
+Connection ~ 3850 4050
+$Comp
+L Connector:TestPoint TS?
+U 1 1 5D8FA57A
+P 3850 2850
+AR Path="/5D6ADE4E/5D8FA57A" Ref="TS?"  Part="1" 
+AR Path="/5D8FA57A" Ref="TS?"  Part="1" 
+AR Path="/5D91B902/5D8FA57A" Ref="TS3"  Part="1" 
+F 0 "TS3" V 3850 3100 50  0000 C CNN
+F 1 "TestPoint" H 3908 2877 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 4050 2850 50  0001 C CNN
+F 3 "~" H 4050 2850 50  0001 C CNN
+	1    3850 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 2850 3850 3050
+Connection ~ 3850 3050
+$Comp
+L Connector:TestPoint TS?
+U 1 1 5D8FB530
+P 3750 2850
+AR Path="/5D6ADE4E/5D8FB530" Ref="TS?"  Part="1" 
+AR Path="/5D8FB530" Ref="TS?"  Part="1" 
+AR Path="/5D91B902/5D8FB530" Ref="TS5"  Part="1" 
+F 0 "TS5" V 3750 3100 50  0000 C CNN
+F 1 "TestPoint" H 3808 2877 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3950 2850 50  0001 C CNN
+F 3 "~" H 3950 2850 50  0001 C CNN
+	1    3750 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TS?
+U 1 1 5D8FB796
+P 3650 2850
+AR Path="/5D6ADE4E/5D8FB796" Ref="TS?"  Part="1" 
+AR Path="/5D8FB796" Ref="TS?"  Part="1" 
+AR Path="/5D91B902/5D8FB796" Ref="TS7"  Part="1" 
+F 0 "TS7" V 3650 3100 50  0000 C CNN
+F 1 "TestPoint" H 3708 2877 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3850 2850 50  0001 C CNN
+F 3 "~" H 3850 2850 50  0001 C CNN
+	1    3650 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 2850 3750 3150
+Connection ~ 3750 3150
+Wire Wire Line
+	3650 3250 3650 2850
+Connection ~ 3650 3250
+$Comp
+L Connector:TestPoint TS?
+U 1 1 5D8FD538
+P 3750 4350
+AR Path="/5D6ADE4E/5D8FD538" Ref="TS?"  Part="1" 
+AR Path="/5D8FD538" Ref="TS?"  Part="1" 
+AR Path="/5D91B902/5D8FD538" Ref="TS6"  Part="1" 
+F 0 "TS6" V 3750 4600 50  0000 C CNN
+F 1 "TestPoint" H 3808 4377 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3950 4350 50  0001 C CNN
+F 3 "~" H 3950 4350 50  0001 C CNN
+	1    3750 4350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TS?
+U 1 1 5D8FD662
+P 3650 4350
+AR Path="/5D6ADE4E/5D8FD662" Ref="TS?"  Part="1" 
+AR Path="/5D8FD662" Ref="TS?"  Part="1" 
+AR Path="/5D91B902/5D8FD662" Ref="TS8"  Part="1" 
+F 0 "TS8" V 3650 4600 50  0000 C CNN
+F 1 "TestPoint" H 3708 4377 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3850 4350 50  0001 C CNN
+F 3 "~" H 3850 4350 50  0001 C CNN
+	1    3650 4350
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3750 4150 3750 4350
+Connection ~ 3750 4150
+Wire Wire Line
+	3650 4350 3650 4250
+Connection ~ 3650 4250
+Wire Wire Line
+	3950 2850 3950 2950
+Wire Wire Line
+	3950 2950 5150 2950
+Wire Wire Line
+	5150 2950 5150 3150
+Wire Wire Line
+	5150 3150 5450 3150
+Connection ~ 3950 2950
+Wire Wire Line
+	3950 2950 3950 3350
+Wire Wire Line
+	3400 2850 3400 3050
+Wire Wire Line
+	3400 3050 3550 3050
+Wire Wire Line
+	3550 3050 3550 3350
+Wire Wire Line
+	3400 4350 3400 4200
+Wire Wire Line
+	3400 4200 3550 4200
+Wire Wire Line
+	3550 4200 3550 3850
 $EndSCHEMATC

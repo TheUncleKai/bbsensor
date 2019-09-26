@@ -15,19 +15,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Memory_Flash:AT25DF041x-UxN-x U?
-U 1 1 5E16E27A
-P 6550 3050
-AR Path="/5E16E27A" Ref="U?"  Part="1" 
-AR Path="/5E10CC8A/5E16E27A" Ref="U2"  Part="1" 
-F 0 "U2" H 7194 3096 50  0000 L CNN
-F 1 "AT25DF041x-UxN-x" H 7194 3005 50  0000 L CNN
-F 2 "Package_SO:SOIC-8_5.275x5.275mm_P1.27mm" H 6350 2450 50  0001 C CNN
-F 3 "http://www.adestotech.com/wp-content/uploads/DS-AT25DF041B_040.pdf" H 6550 3750 50  0001 C CNN
-	1    6550 3050
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:Crystal_GND24 Y?
 U 1 1 5E16E280
 P 1950 4800
@@ -557,21 +544,21 @@ Wire Wire Line
 $Comp
 L Device:R R?
 U 1 1 5DA7DFF4
-P 5150 3650
+P 5300 3650
 AR Path="/5D6608A5/5DA7DFF4" Ref="R?"  Part="1" 
 AR Path="/5DA7DFF4" Ref="R?"  Part="1" 
 AR Path="/5E10CC8A/5DA7DFF4" Ref="R2"  Part="1" 
-F 0 "R2" V 5250 3650 50  0000 C CNN
-F 1 "200" V 5150 3650 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5080 3650 50  0001 C CNN
-F 3 "~" H 5150 3650 50  0001 C CNN
-	1    5150 3650
+F 0 "R2" V 5400 3650 50  0000 C CNN
+F 1 "200" V 5300 3650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5230 3650 50  0001 C CNN
+F 3 "~" H 5300 3650 50  0001 C CNN
+	1    5300 3650
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5750 3650 5300 3650
+	5750 3650 5450 3650
 Wire Wire Line
-	5000 3650 4600 3650
+	5150 3650 4600 3650
 Wire Wire Line
 	4850 2500 7350 2500
 Wire Wire Line
@@ -638,4 +625,33 @@ Text Label 5900 4950 0    60   ~ 0
 GPIO12
 Text Label 5900 5050 0    60   ~ 0
 GPIO4
+$Comp
+L Memory_Flash:AT25SF081-SSHF-X U2
+U 1 1 5D8CBE57
+P 6550 3050
+F 0 "U2" H 7194 3096 50  0000 L CNN
+F 1 "AT25SF081-SSHF-X" H 7194 3005 50  0000 L CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 6550 2450 50  0001 C CNN
+F 3 "https://www.adestotech.com/wp-content/uploads/DS-AT25SF081_045.pdf" H 6550 3050 50  0001 C CNN
+	1    6550 3050
+	1    0    0    -1  
+$EndComp
+Text Label 1850 4250 0    60   ~ 0
+LNA
+Text Label 1850 4550 0    60   ~ 0
+XTAL_OUT
+Text Label 2100 5050 0    60   ~ 0
+XTAL_IN
+Text Label 4650 3550 0    60   ~ 0
+SDIO_CMD
+Text Label 4650 3650 0    60   ~ 0
+SDIO_CLK
+Text Label 5000 2500 0    60   ~ 0
+SDIO_DATA_0
+Text Label 4650 3850 0    60   ~ 0
+SDIO_DATA_2
+Text Label 4650 3950 0    60   ~ 0
+SDIO_DATA_3
+Text Label 4650 4350 0    60   ~ 0
+SDIO_DATA_1
 $EndSCHEMATC
