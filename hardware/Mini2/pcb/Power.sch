@@ -71,7 +71,7 @@ AR Path="/5D8FDB06" Ref="R?"  Part="1"
 AR Path="/5D8E11F6/5D8FDB06" Ref="R3"  Part="1" 
 F 0 "R3" V 3650 1400 50  0000 C CNN
 F 1 "220" V 3750 1400 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3680 1400 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3680 1400 50  0001 C CNN
 F 3 "~" H 3750 1400 50  0001 C CNN
 	1    3750 1400
 	0    1    1    0   
@@ -191,7 +191,7 @@ AR Path="/5D90B33E" Ref="C?"  Part="1"
 AR Path="/5D8E11F6/5D90B33E" Ref="C9"  Part="1" 
 F 0 "C9" H 3750 3350 50  0000 C CNN
 F 1 "1u" H 3600 3150 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3738 3100 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3738 3100 50  0001 C CNN
 F 3 "~" H 3700 3250 50  0001 C CNN
 	1    3700 3250
 	-1   0    0    1   
@@ -219,7 +219,7 @@ AR Path="/5D90B34A" Ref="C?"  Part="1"
 AR Path="/5D8E11F6/5D90B34A" Ref="C8"  Part="1" 
 F 0 "C8" H 3450 3350 50  0000 C CNN
 F 1 "10u" H 3300 3150 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3438 3100 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3438 3100 50  0001 C CNN
 F 3 "~" H 3400 3250 50  0001 C CNN
 	1    3400 3250
 	-1   0    0    1   
@@ -275,7 +275,7 @@ AR Path="/5D90B364" Ref="R?"  Part="1"
 AR Path="/5D8E11F6/5D90B364" Ref="R4"  Part="1" 
 F 0 "R4" H 2250 3150 50  0000 C CNN
 F 1 "10k" V 2400 3150 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 2330 3150 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2330 3150 50  0001 C CNN
 F 3 "~" H 2400 3150 50  0001 C CNN
 	1    2400 3150
 	-1   0    0    1   
@@ -303,7 +303,7 @@ AR Path="/5D90B370" Ref="C?"  Part="1"
 AR Path="/5D8E11F6/5D90B370" Ref="C7"  Part="1" 
 F 0 "C7" H 2200 3350 50  0000 C CNN
 F 1 "10u" H 2050 3150 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2188 3100 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2188 3100 50  0001 C CNN
 F 3 "~" H 2150 3250 50  0001 C CNN
 	1    2150 3250
 	-1   0    0    1   
@@ -366,7 +366,7 @@ U 1 1 5D8DAAF1
 P 1450 1400
 F 0 "J1" H 1507 1717 50  0000 C CNN
 F 1 "Barrel_Jack_Switch" H 1507 1626 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_NEB_21R" H 1500 1360 50  0001 C CNN
+F 2 "Collection:CLIFF_DC_SOCKET_2.5" H 1500 1360 50  0001 C CNN
 F 3 "~" H 1500 1360 50  0001 C CNN
 	1    1450 1400
 	1    0    0    -1  

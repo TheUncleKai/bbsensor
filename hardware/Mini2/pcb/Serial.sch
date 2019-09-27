@@ -47,17 +47,6 @@ Wire Wire Line
 	4000 2000 4000 2450
 Wire Wire Line
 	4000 2450 4050 2450
-$Comp
-L Connector:USB_A J2
-U 1 1 5D91A79D
-P 3450 2850
-F 0 "J2" H 3507 3317 50  0000 C CNN
-F 1 "USB_A" H 3507 3226 50  0000 C CNN
-F 2 "Lumberg:LUMBERG_2410_06" H 3600 2800 50  0001 C CNN
-F 3 " ~" H 3600 2800 50  0001 C CNN
-	1    3450 2850
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3950 2850 3950 3050
 Wire Wire Line
@@ -152,7 +141,7 @@ AR Path="/5D91A7D0" Ref="R?"  Part="1"
 AR Path="/5D90D40E/5D91A7D0" Ref="R6"  Part="1" 
 F 0 "R6" V 6300 2700 50  0000 C CNN
 F 1 "10k" V 6200 2700 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6130 2700 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6130 2700 50  0001 C CNN
 F 3 "~" H 6200 2700 50  0001 C CNN
 	1    6200 2700
 	0    -1   -1   0   
@@ -166,7 +155,7 @@ AR Path="/5D91A7D6" Ref="R?"  Part="1"
 AR Path="/5D90D40E/5D91A7D6" Ref="R7"  Part="1" 
 F 0 "R7" V 6300 3400 50  0000 C CNN
 F 1 "10k" V 6200 3400 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6130 3400 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6130 3400 50  0001 C CNN
 F 3 "~" H 6200 3400 50  0001 C CNN
 	1    6200 3400
 	0    -1   -1   0   
@@ -218,7 +207,7 @@ AR Path="/5D91A7F0" Ref="R?"  Part="1"
 AR Path="/5D90D40E/5D91A7F0" Ref="R5"  Part="1" 
 F 0 "R5" V 6300 2000 50  0000 C CNN
 F 1 "10k" V 6200 2000 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6130 2000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6130 2000 50  0001 C CNN
 F 3 "~" H 6200 2000 50  0001 C CNN
 	1    6200 2000
 	0    -1   -1   0   
@@ -288,4 +277,16 @@ Text HLabel 7450 2150 2    60   BiDi ~ 0
 GPIO1_TXD
 Text HLabel 7450 2000 2    60   BiDi ~ 0
 GPIO3_RXD
+$Comp
+L Connector:USB_B_Mini J2
+U 1 1 5D8D53BD
+P 3450 2850
+F 0 "J2" H 3507 3317 50  0000 C CNN
+F 1 "USB_B_Mini" H 3507 3226 50  0000 C CNN
+F 2 "Connector_USB:USB_Mini-B_Lumberg_2486_01_Horizontal" H 3600 2800 50  0001 C CNN
+F 3 "~" H 3600 2800 50  0001 C CNN
+	1    3450 2850
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3750 3050
 $EndSCHEMATC

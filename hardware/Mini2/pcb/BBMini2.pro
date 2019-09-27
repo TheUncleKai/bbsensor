@@ -1,4 +1,4 @@
-update=26/09/2019 15:21:49
+update=27/09/2019 01:14:53
 version=1
 last_client=kicad
 [cvpcb]
@@ -23,7 +23,7 @@ ERC_TestSimilarLabels=1
 version=1
 PageLayoutDescrFile=
 LastNetListRead=
-CopperLayerCount=2
+CopperLayerCount=4
 BoardThickness=1,6
 AllowMicroVias=0
 AllowBlindVias=0
@@ -74,12 +74,12 @@ Type=0
 Enabled=1
 [pcbnew/Layer.In1.Cu]
 Name=In1.Cu
-Type=0
-Enabled=0
+Type=1
+Enabled=1
 [pcbnew/Layer.In2.Cu]
 Name=In2.Cu
-Type=0
-Enabled=0
+Type=1
+Enabled=1
 [pcbnew/Layer.In3.Cu]
 Name=In3.Cu
 Type=0
@@ -261,17 +261,6 @@ dPairViaGap=0,25
 Name=5V
 Clearance=0,2
 TrackWidth=0,6
-ViaDiameter=0,8
-ViaDrill=0,4
-uViaDiameter=0,3
-uViaDrill=0,1
-dPairWidth=0,2
-dPairGap=0,25
-dPairViaGap=0,25
-[pcbnew/Netclasses/3]
-Name=AC
-Clearance=0,4
-TrackWidth=2
 ViaDiameter=0,8
 ViaDrill=0,4
 uViaDiameter=0,3
