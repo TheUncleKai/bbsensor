@@ -45,7 +45,7 @@ AR Path="/5E10CC8A/5D98F56B" Ref="SW?"  Part="1"
 AR Path="/5D9421A2/5D98F56B" Ref="SW2"  Part="1" 
 F 0 "SW2" H 5100 1850 50  0000 C CNN
 F 1 "SW_Push" H 5100 1850 50  0001 C CNN
-F 2 "Button_Switch_THT:SW_Tactile_Straight_KSL0Axx1LFTR" H 5100 2150 50  0001 C CNN
+F 2 "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm" H 5100 2150 50  0001 C CNN
 F 3 "~" H 5100 2150 50  0001 C CNN
 	1    5100 1950
 	1    0    0    -1  

@@ -89,8 +89,6 @@ $EndComp
 Wire Wire Line
 	4750 4050 4750 4100
 Wire Wire Line
-	3750 2650 3825 2650
-Wire Wire Line
 	3750 2850 3950 2850
 Wire Wire Line
 	3750 2950 4050 2950
@@ -250,25 +248,6 @@ Wire Wire Line
 	4750 4100 4750 4150
 Wire Wire Line
 	3350 3250 3350 3400
-$Comp
-L power:PWR_FLAG #FLG?
-U 1 1 5D91A812
-P 3825 1850
-AR Path="/5D6608A5/5D91A812" Ref="#FLG?"  Part="1" 
-AR Path="/5D91A812" Ref="#FLG?"  Part="1" 
-AR Path="/5D90D40E/5D91A812" Ref="#FLG0106"  Part="1" 
-F 0 "#FLG0106" H 3825 1925 50  0001 C CNN
-F 1 "PWR_FLAG" H 3825 2023 50  0000 C CNN
-F 2 "" H 3825 1850 50  0001 C CNN
-F 3 "~" H 3825 1850 50  0001 C CNN
-	1    3825 1850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3825 1850 3825 2650
-Connection ~ 3825 2650
-Wire Wire Line
-	3825 2650 4050 2650
 Text HLabel 7450 3650 2    60   BiDi ~ 0
 ~RST
 Text HLabel 7450 2300 2    60   BiDi ~ 0
@@ -289,4 +268,6 @@ F 3 "~" H 3600 2800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 NoConn ~ 3750 3050
+Wire Wire Line
+	3750 2650 4050 2650
 $EndSCHEMATC
