@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:BBMini2-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -102,7 +101,7 @@ Text HLabel 4150 2150 0    60   Output ~ 0
 Text HLabel 4150 2350 0    60   Output ~ 0
 EN
 Text HLabel 4150 2550 0    60   BiDi ~ 0
-GPIO0
+GPIO16
 Wire Wire Line
 	4150 2350 6200 2350
 Wire Wire Line
@@ -447,13 +446,13 @@ Wire Wire Line
 Wire Wire Line
 	7250 4750 4150 4750
 Text HLabel 4150 4600 0    60   Input ~ 0
-GPIO15
+GPIO1_TXD
 Text HLabel 6950 1800 1    60   Output ~ 0
 CS1
 Text Label 6950 2250 1    60   ~ 0
 CS1
 Text HLabel 4150 4450 0    60   Input ~ 0
-GPIO16
+GPIO3_RXD
 Wire Wire Line
 	4150 4600 7100 4600
 Wire Wire Line
