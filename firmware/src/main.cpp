@@ -33,6 +33,7 @@ void loop();
 
 Hardware* hardware = new Hardware();
 Loop* looper = new Loop();
+int n = 0;
 
 
 void handleISR1()
@@ -70,14 +71,21 @@ void loop()
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
-        hardware->led2()->off();
+        n = 0;
     }
 
     if (looper->number() == 10) {
         hardware->led1()->toggle();
-        hardware->led2()->toggle();
 
         hardware->execute();
+    }
+
+    hardware->transfer()->transfer(1, n);
+    hardware->transfer()->commit();
+    n++;
+
+    if (n > 255) {
+        n = 0;
     }
 
     looper->finish();

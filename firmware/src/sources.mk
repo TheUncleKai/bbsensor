@@ -20,5 +20,6 @@ SOURCES = \
     devices/display.cpp \
 	devices/hardware.cpp \
 	devices/led.cpp \
+    devices/transfer.cpp \
     devices/temperature.cpp \
 	main.cpp

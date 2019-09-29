@@ -14,47 +14,32 @@
    limitations under the License.
 */
 
-#ifndef HARDWARE_H_INCLUDED
-#define HARDWARE_H_INCLUDED
-
-#include <EEPROM.h>
+#ifndef TRANSFER_H_INCLUDED
+#define TRANSFER_H_INCLUDED
 
 #include <device.h>
-#include <led.h>
-#include <button.h>
-#include <display.h>
-#include <temperature.h>
-#include <transfer.h>
+#include <SPI.h>
 
 
-class Hardware : public Device
+class Transfer : public Device
 {
     public:
-        Hardware();
-        virtual ~Hardware();
+        Transfer ();
+        virtual ~Transfer();
 
-        LED* led1();
-        Transfer* transfer();
-
-        Button* button1();
-        Button* button2();
-        Display* display();
-        EEPROMClass* eeprom();
+        SPIClass* spi();
+        void transfer(int channel, int data);
+        void commit();
 
         void setup();
         void execute();
 
-    protected:
-
     private:
-        LED* p_led1;
-        Transfer* p_transfer;
+        SPIClass* p_spi;
+        int m_cs1, m_cs2, m_data, m_transfer, m_channel;
 
-        EEPROMClass* p_eeprom;
-        Button* p_button1;
-        Button* p_button2;
-        Display* p_display;
-        Temperature* p_temperature;
+        int _on(int channel);
+        int _off(int channel);
 };
 
-#endif // HARDWARE_H_INCLUDED
+#endif // TRANSFER_H_INCLUDED
