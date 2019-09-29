@@ -24,13 +24,22 @@
 
 Display::Display (SPIClass* spi, int cs)
 {
-    this->m_spi = spi;
+    this->p_spi = new SPI();
     this->m_cs = cs;
+
+    this->p_spi->set_spi(spi);
 }
 
 
 Display::~Display()
 {
+    delete this->p_spi;
+}
+
+
+void Display::write_char(char data)
+{
+    this->p_spi->transfer(this->m_cs, data);
 }
 
 
@@ -43,4 +52,5 @@ void Display::setup()
 
 void Display::execute()
 {
+    this->p_spi->commit();
 }

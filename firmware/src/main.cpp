@@ -32,6 +32,7 @@ void setup();
 void loop();
 
 Hardware* hardware = new Hardware();
+Display* display = hardware->display();
 Loop* looper = new Loop();
 int n = 0;
 
@@ -76,17 +77,15 @@ void loop()
 
     if (looper->number() == 10) {
         hardware->led1()->toggle();
-
-        hardware->execute();
     }
-
-    hardware->transfer()->transfer(1, n);
-    hardware->transfer()->commit();
-    n++;
 
     if (n > 255) {
         n = 0;
     }
 
+    display->write_char(n);
+
+    hardware->execute();
     looper->finish();
+    n++;
 }

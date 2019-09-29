@@ -24,7 +24,6 @@
 #include <button.h>
 #include <display.h>
 #include <temperature.h>
-#include <transfer.h>
 
 
 class Hardware : public Device
@@ -33,8 +32,8 @@ class Hardware : public Device
         Hardware();
         virtual ~Hardware();
 
+        SPIClass* spi();
         LED* led1();
-        Transfer* transfer();
 
         Button* button1();
         Button* button2();
@@ -47,8 +46,8 @@ class Hardware : public Device
     protected:
 
     private:
+        SPIClass* p_spi;
         LED* p_led1;
-        Transfer* p_transfer;
 
         EEPROMClass* p_eeprom;
         Button* p_button1;
