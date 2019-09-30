@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:BBMini2-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 6
+Sheet 2 5
 Title "BBSensor"
 Date "2019-09-26"
 Rev "2.0"

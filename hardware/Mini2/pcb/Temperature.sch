@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:BBMini2-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 6
+Sheet 4 5
 Title "BBSensor"
 Date "2019-09-26"
 Rev "2.0"
@@ -535,89 +536,8 @@ Wire Wire Line
 	6675 2500 6825 2500
 Wire Wire Line
 	6825 2500 6825 2625
-$Comp
-L Reference_Voltage:REF02AU U7
-U 1 1 5D92E013
-P 5225 2000
-F 0 "U7" H 5475 2250 50  0000 C CNN
-F 1 "REF02AU" H 4850 2275 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5175 2050 50  0001 C CIN
-F 3 "http://www.ti.com/lit/ds/symlink/ref02.pdf" H 5175 2000 50  0001 C CIN
-	1    5225 2000
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5D92F317
-P 5225 2500
-AR Path="/5D6ADE4E/5D92F317" Ref="#PWR?"  Part="1" 
-AR Path="/5D92F317" Ref="#PWR?"  Part="1" 
-AR Path="/5D91B902/5D92F317" Ref="#PWR0142"  Part="1" 
-F 0 "#PWR0142" H 5225 2250 50  0001 C CNN
-F 1 "GND" H 5230 2327 50  0000 C CNN
-F 2 "" H 5225 2500 50  0001 C CNN
-F 3 "" H 5225 2500 50  0001 C CNN
-	1    5225 2500
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	5225 2300 5225 2500
+	6250 2500 5950 2500
 Wire Wire Line
-	5625 1900 5950 1900
-Wire Wire Line
-	5950 1900 5950 2950
-$Comp
-L Device:C C?
-U 1 1 5D933954
-P 4475 2000
-AR Path="/5D6ADE4E/5D933954" Ref="C?"  Part="1" 
-AR Path="/5D933954" Ref="C?"  Part="1" 
-AR Path="/5D91B902/5D933954" Ref="C14"  Part="1" 
-F 0 "C14" H 4350 1900 50  0000 C CNN
-F 1 "100n" H 4325 2125 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4513 1850 50  0001 C CNN
-F 3 "~" H 4475 2000 50  0001 C CNN
-	1    4475 2000
-	-1   0    0    1   
-$EndComp
-NoConn ~ 4925 2000
-NoConn ~ 5625 2100
-$Comp
-L power:VCC #PWR0145
-U 1 1 5D93ED65
-P 5225 1375
-F 0 "#PWR0145" H 5225 1225 50  0001 C CNN
-F 1 "VCC" H 5242 1548 50  0000 C CNN
-F 2 "" H 5225 1375 50  0001 C CNN
-F 3 "" H 5225 1375 50  0001 C CNN
-	1    5225 1375
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5225 1375 5225 1550
-$Comp
-L power:GND #PWR?
-U 1 1 5D941403
-P 4475 2500
-AR Path="/5D6ADE4E/5D941403" Ref="#PWR?"  Part="1" 
-AR Path="/5D941403" Ref="#PWR?"  Part="1" 
-AR Path="/5D91B902/5D941403" Ref="#PWR0146"  Part="1" 
-F 0 "#PWR0146" H 4475 2250 50  0001 C CNN
-F 1 "GND" H 4480 2327 50  0000 C CNN
-F 2 "" H 4475 2500 50  0001 C CNN
-F 3 "" H 4475 2500 50  0001 C CNN
-	1    4475 2500
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4475 2500 4475 2150
-Wire Wire Line
-	4475 1850 4475 1550
-Wire Wire Line
-	4475 1550 5225 1550
-Connection ~ 5225 1550
-Wire Wire Line
-	5225 1550 5225 1700
-Text Label 5775 1900 0    60   ~ 0
-VREF
+	5950 2500 5950 2950
 $EndSCHEMATC
