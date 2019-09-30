@@ -17,12 +17,37 @@
 #ifndef DEVICE_H_INCLUDED
 #define DEVICE_H_INCLUDED
 
+#include <SPI.h>
+
+
 class Device
 {
     public:
         virtual void setup();
         virtual void execute();
 
+};
+
+
+class SPI
+{
+    public:
+        SPI ();
+        virtual ~SPI();
+
+        SPIClass* spi();
+
+        void set_spi(SPIClass* spi);
+        void transfer(int channel, char data);
+        void commit();
+
+    private:
+        SPIClass* p_spi;
+        int m_transfer, m_channel;
+        char m_data;
+
+        void _on(int channel);
+        void _off(int channel);
 };
 
 #endif // DEVICE_H_INCLUDED

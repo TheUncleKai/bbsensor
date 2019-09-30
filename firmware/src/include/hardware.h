@@ -18,7 +18,6 @@
 #define HARDWARE_H_INCLUDED
 
 #include <EEPROM.h>
-#include <SPI.h>
 
 #include <device.h>
 #include <led.h>
@@ -33,9 +32,9 @@ class Hardware : public Device
         Hardware();
         virtual ~Hardware();
 
-        LED* led1();
-        LED* led2();
         SPIClass* spi();
+        LED* led1();
+
         Button* button1();
         Button* button2();
         Display* display();
@@ -47,9 +46,9 @@ class Hardware : public Device
     protected:
 
     private:
-        LED* p_led1;
-        LED* p_led2;
         SPIClass* p_spi;
+        LED* p_led1;
+
         EEPROMClass* p_eeprom;
         Button* p_button1;
         Button* p_button2;

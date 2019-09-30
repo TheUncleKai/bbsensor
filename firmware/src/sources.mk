@@ -17,6 +17,7 @@ SOURCES = \
 	devices/button.cpp \
     devices/channel.cpp \
 	devices/click.cpp \
+    devices/device.cpp \
     devices/display.cpp \
 	devices/hardware.cpp \
 	devices/led.cpp \

@@ -37,6 +37,7 @@
 					<Add option="-DNO_GLOBAL_EEPROM" />
 					<Add option="-DCLICK_DEBUG" />
 					<Add option="-DTEMPERATURE_DEBUG" />
+					<Add option="-DSPI_DEBUG" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/lwip2/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/libc/xtensa-lx106-elf/include" />
@@ -59,6 +60,7 @@
 		<Unit filename="devices/button.cpp" />
 		<Unit filename="devices/channel.cpp" />
 		<Unit filename="devices/click.cpp" />
+		<Unit filename="devices/device.cpp" />
 		<Unit filename="devices/display.cpp" />
 		<Unit filename="devices/hardware.cpp" />
 		<Unit filename="devices/led.cpp" />

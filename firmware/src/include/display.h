@@ -31,9 +31,11 @@ class Display : public Device
         void setup();
         void execute();
 
+        void write_char(char data);
+
     private:
+        SPI* p_spi;
         int m_cs;
-        SPIClass* m_spi;
 };
 
 
