@@ -90,7 +90,7 @@ void loop()
         hardware->led1()->toggle();
 
         if (number == 0) {
-            display->write_data(DISPLAY_A);
+            display->write_data(DISPLAY_A | DISPLAY_C);
             number = 1;
         }
 
