@@ -24,6 +24,8 @@
 #include <hardware.h>
 #include <loop.h>
 
+#include <list>
+
 // Name and password of the access point
 //#define SSID "Pussycat"
 //#define PASSWORD "supersecret"
@@ -34,8 +36,7 @@ void loop();
 Hardware* hardware = new Hardware();
 Display* display = hardware->display();
 Loop* looper = new Loop();
-int n = 0;
-
+byte number = 0;
 
 void handleISR1()
 {
@@ -59,6 +60,16 @@ void setup()
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
     hardware->setup();
+    number = 0;
+
+//    data.push_back(128);
+//    data.push_back(64);
+//    data.push_back(32);
+//    data.push_back(16);
+//    data.push_back(8);
+//    data.push_back(4);
+//    data.push_back(2);
+//    data.push_back(1);
 
     // Use an external AP
     // WiFi.mode(WIFI_STA);
@@ -72,20 +83,27 @@ void loop()
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
-        n = 0;
+        display->write_data(0);
     }
 
     if (looper->number() == 10) {
         hardware->led1()->toggle();
-    }
 
-    if (n > 255) {
-        n = 0;
-    }
+        if (number == 0) {
+            display->write_data(DISPLAY_A);
+            number = 1;
+        }
 
-    display->write_char(n);
+//        number = *it;
+//
+//        display->write_char(number);
+//        ++it;
+//
+//        if (it == data.end()) {
+//            it = data.begin();
+//        }
+    }
 
     hardware->execute();
     looper->finish();
-    n++;
 }

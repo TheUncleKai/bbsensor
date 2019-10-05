@@ -21,6 +21,15 @@
 
 #include <device.h>
 
+#define DISPLAY_A 1
+#define DISPLAY_B 2
+#define DISPLAY_C 4
+#define DISPLAY_D 8
+#define DISPLAY_E 16
+#define DISPLAY_F 32
+#define DISPLAY_G 64
+#define DISPLAY_H 128
+
 
 class Display : public Device
 {
@@ -32,10 +41,13 @@ class Display : public Device
         void execute();
 
         void write_char(char data);
+        void write_data(byte data);
 
     private:
         SPI* p_spi;
         int m_cs;
+
+        void debug_binary(byte data);
 };
 
 

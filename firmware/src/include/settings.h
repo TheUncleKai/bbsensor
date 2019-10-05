@@ -49,6 +49,7 @@
 //#define BUTTON_DEBUG      1
 //#define HARDWARE_DEBUG    1
 #define SPI_DEBUG         1
+#define DISPLAY_DEBUG     1
 #define TEMPERATURE_DEBUG 1
 #define CLICK_DEBUG       1
 

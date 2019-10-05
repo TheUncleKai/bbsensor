@@ -38,6 +38,7 @@
 					<Add option="-DCLICK_DEBUG" />
 					<Add option="-DTEMPERATURE_DEBUG" />
 					<Add option="-DSPI_DEBUG" />
+					<Add option="-DDISPLAY_DEBUG" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/lwip2/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/libc/xtensa-lx106-elf/include" />
