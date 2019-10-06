@@ -49,21 +49,6 @@ Display::~Display()
 }
 
 
-void Display::debug_binary(byte data)
-{
-    DEBUG_MSG("DISPLAY: %d %c%c%c%c%c%c%c%c\n", data,
-        (data & 0x80 ? '1' : '0'),
-        (data & 0x40 ? '1' : '0'),
-        (data & 0x20 ? '1' : '0'),
-        (data & 0x10 ? '1' : '0'),
-        (data & 0x08 ? '1' : '0'),
-        (data & 0x04 ? '1' : '0'),
-        (data & 0x02 ? '1' : '0'),
-        (data & 0x01 ? '1' : '0'));
-
-}
-
-
 void Display::write_char(char data)
 {
     this->p_spi->transfer(this->m_cs, data);
@@ -72,13 +57,6 @@ void Display::write_char(char data)
 
 void Display::write_data(byte data)
 {
-    // we need to invert the data
-    byte out = 255 ^ data;
-
-#ifdef DISPLAY_DEBUG
-    this->debug_binary(data);
-    this->debug_binary(out);
-#endif // DISPLAY_DEBUG
     this->p_spi->transfer(this->m_cs, data);
 }
 

@@ -20,6 +20,7 @@
 #include <debug.h>
 
 #include <device.h>
+#include <utils.h>
 
 
 SPI::SPI ()
@@ -84,7 +85,8 @@ void SPI::commit()
     this->_off(this->m_channel);
 
 #ifdef SPI_DEBUG
-    DEBUG_MSG("SPI: Transfer\n");
+//    DEBUG_MSG("SPI: %d\n", this->m_data);
+    debug_binary("SPI", this->m_data);
 #endif // SPI_DEBUG
 
     this->m_channel = 0;
