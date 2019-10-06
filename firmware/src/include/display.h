@@ -21,15 +21,6 @@
 
 #include <device.h>
 
-#define DISPLAY_A 0x01 // 1
-#define DISPLAY_B 0x02 // 2
-#define DISPLAY_C 0x04 // 4
-#define DISPLAY_D 0x08 // 8
-#define DISPLAY_E 0x10 // 16
-#define DISPLAY_F 0x20 // 32
-#define DISPLAY_G 0x40 // 64
-#define DISPLAY_H 0x80 // 128
-
 
 class Display : public Device
 {
@@ -46,6 +37,8 @@ class Display : public Device
     private:
         SPI* p_spi;
         int m_cs;
+
+        void _transfer(const char* keyword, bool text, byte data);
 };
 
 

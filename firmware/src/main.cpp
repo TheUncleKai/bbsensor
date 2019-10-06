@@ -37,8 +37,6 @@ Hardware* hardware = new Hardware();
 Display* display = hardware->display();
 Loop* looper = new Loop();
 byte number = 0;
-std::list<byte> data;
-std::list<byte>::iterator it;
 
 void handleISR1()
 {
@@ -62,17 +60,6 @@ void setup()
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
     hardware->setup();
-    number = 0;
-
-    data.push_back(DISPLAY_A);
-    data.push_back(DISPLAY_B);
-    data.push_back(DISPLAY_C);
-    data.push_back(DISPLAY_D);
-    data.push_back(DISPLAY_E);
-    data.push_back(DISPLAY_F);
-    data.push_back(DISPLAY_G);
-    data.push_back(DISPLAY_H);
-    it = data.begin();
 
     // Use an external AP
     // WiFi.mode(WIFI_STA);
@@ -86,21 +73,10 @@ void loop()
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
-        display->write_data(0);
     }
 
     if (looper->number() == 10) {
         hardware->led1()->toggle();
-
-        number = *it;
-        display->write_data(number);
-
-        ++it;
-
-        if (it == data.end()) {
-            it = data.begin();
-        }
-
     }
 
     hardware->execute();

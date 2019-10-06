@@ -34,6 +34,24 @@
   (byte & 0x01 ? '1' : '0')
 
 
+#define PIN_A0 0x01 // 1,   Qa
+#define PIN_A1 0x02 // 2,   Qb
+#define PIN_A2 0x04 // 4,   Qc
+#define PIN_A3 0x08 // 8,   Qd
+#define PIN_A4 0x10 // 16,  Qe
+#define PIN_A5 0x20 // 32,  Qf
+#define PIN_A6 0x40 // 64,  Qg
+#define PIN_A7 0x80 // 128, Qh
+
+#define PIN_RS 0x01 // 1,  Qa
+#define PIN_E  0x02 // 2,  Qb
+
+#define PIN_DB4 0x04 // 4,  Qc
+#define PIN_DB5 0x08 // 8,  Qd
+#define PIN_DB6 0x10 // 16, Qe
+#define PIN_DB7 0x20 // 32, Qf
+
+
 Display::Display (SPIClass* spi, int cs)
 {
     this->p_spi = new SPI();
@@ -61,10 +79,94 @@ void Display::write_data(byte data)
 }
 
 
+/*
+
+    def __lcd_transfer(self, desc, char, bits):
+        signal_on = 0x00
+        signal_off = 0x00
+        value = 0x00
+        mod = 0x00
+
+        bin_list = sorted(list(self.Translate))
+
+        if char is True:
+            signal_on += self.Pins.RS
+            signal_off += self.Pins.RS
+
+        signal_on += self.Pins.E
+
+        for check in bin_list:
+            if bits & check == check:
+                signal_on += self.Translate[check]
+                signal_off += self.Translate[check]
+                value += self.Translate[check]
+
+        bbq.log.debug2(desc, "BITS: " + format(bits, '04b'))
+        bbq.log.debug2(desc, "VAL : " + format(value, '04b'))
+        bbq.log.debug2(desc, "SON : " + format(signal_on, '06b'))
+        bbq.log.debug2(desc, "SOFF: " + format(signal_off, '06b'))
+
+        data = [[1, signal_on], [1, signal_off]]
+
+        self.SPI.transfer2(data, self.Delay2)
+        return
+void _transfer(const char* keyword, bool text, byte data);
+
+*/
+
+void Display::_transfer(const char* keyword, bool text, byte data)
+{
+    byte signal_on = 0x00;
+    byte signal_off = 0x00;
+
+    signal_on = signal_on ^ PIN_E;
+
+
+}
+
+
+
+
 void Display::setup()
 {
+    byte signal = 0x00;
+
     DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
+
+    signal = PIN_DB5; //
+
+
+/*
+
+        # Interface auf 8-Bit setzen
+        self.__lcd_transfer("INIT", False, 0x03)
+        time.sleep(self.Delay1)
+
+        self.__lcd_transfer("INIT", False, 0x03)
+        time.sleep(self.Delay1)
+
+        self.__lcd_transfer("INIT", False, 0x03)
+        time.sleep(self.Delay1)
+
+        # Interface auf 4-Bit setzen
+        self.__lcd_transfer("4BIT", False, 0x02)
+        time.sleep(self.Delay2)
+
+        # 2-zeilig, 5x8-Punkt-Matrix
+        self.__lcd_transfer("DISP", False, 0x02)
+        time.sleep(self.Delay2)
+        self.__lcd_transfer("DISP", False, 0x08)
+        time.sleep(self.Delay2)
+
+        self.__lcd_transfer("SET", False, 0x00)
+        time.sleep(self.Delay2)
+        self.__lcd_transfer("SET", False, 0x06)
+        time.sleep(self.Delay2)
+
+
+
+*/
 }
 
 
