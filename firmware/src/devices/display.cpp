@@ -20,6 +20,7 @@
 #include <debug.h>
 
 #include <display.h>
+#include <string>
 
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 
@@ -34,22 +35,76 @@
   (byte & 0x01 ? '1' : '0')
 
 
-#define PIN_A0 0x01 // 1,   Qa
-#define PIN_A1 0x02 // 2,   Qb
-#define PIN_A2 0x04 // 4,   Qc
-#define PIN_A3 0x08 // 8,   Qd
-#define PIN_A4 0x10 // 16,  Qe
-#define PIN_A5 0x20 // 32,  Qf
-#define PIN_A6 0x40 // 64,  Qg
-#define PIN_A7 0x80 // 128, Qh
+//#define PIN_A0 0x01 // 1,   Qa
+//#define PIN_A1 0x02 // 2,   Qb
+//#define PIN_A2 0x04 // 4,   Qc
+//#define PIN_A3 0x08 // 8,   Qd
+//#define PIN_A4 0x10 // 16,  Qe
+//#define PIN_A5 0x20 // 32,  Qf
+//#define PIN_A6 0x40 // 64,  Qg
+//#define PIN_A7 0x80 // 128, Qh
 
 #define PIN_RS 0x01 // 1,  Qa
 #define PIN_E  0x02 // 2,  Qb
+
+#define PIN_DB0 0x04 // 4,  Qc
+#define PIN_DB1 0x08 // 8,  Qd
+#define PIN_DB2 0x10 // 16, Qe
+#define PIN_DB3 0x20 // 32, Qf
 
 #define PIN_DB4 0x04 // 4,  Qc
 #define PIN_DB5 0x08 // 8,  Qd
 #define PIN_DB6 0x10 // 16, Qe
 #define PIN_DB7 0x20 // 32, Qf
+
+#define POS_DB7 0x80 // 128, 1000 0000
+#define POS_DB6 0x40 //  64, 0100 0000
+#define POS_DB5 0x20 //  32, 0010 0000
+#define POS_DB4 0x10 //  16, 0001 0000
+
+
+Signal::Signal(byte data)
+{
+    this->m_high = data & 0xF0;
+    this->m_low = (data & 0x0F) << 4;
+}
+
+
+Signal::~Signal()
+{
+}
+
+
+byte Signal::_process_pins(byte data)
+{
+    byte pin = 0x00;
+
+    if (data && POS_DB7) {
+        pin = pin | PIN_DB7;
+    }
+    if (data && POS_DB6) {
+        pin = pin | PIN_DB6;
+    }
+    if (data && POS_DB5) {
+        pin = pin | PIN_DB5;
+    }
+    if (data && POS_DB4) {
+        pin = pin | PIN_DB4;
+    }
+
+    return pin;
+}
+
+byte Signal::high()
+{
+    return this->_process_pins(this->m_high);
+}
+
+
+byte Signal::low()
+{
+    return this->_process_pins(this->m_high);
+}
 
 
 Display::Display (SPIClass* spi, int cs)
@@ -67,15 +122,9 @@ Display::~Display()
 }
 
 
-void Display::write_char(char data)
+void Display::write(const char* input, int line)
 {
-    this->p_spi->transfer(this->m_cs, data);
-}
-
-
-void Display::write_data(byte data)
-{
-    this->p_spi->transfer(this->m_cs, data);
+    std::string text(input);
 }
 
 
@@ -114,14 +163,35 @@ void _transfer(const char* keyword, bool text, byte data);
 
 */
 
-void Display::_transfer(const char* keyword, bool text, byte data)
+
+void Display::_transfer(const char* keyword, byte data, bool isfull, bool istext)
 {
     byte signal_on = 0x00;
     byte signal_off = 0x00;
 
-    signal_on = signal_on ^ PIN_E;
+    Signal signal(data);
 
+    if (isfull == true) {
+        signal_on = signal.high() ^ PIN_E;
+        signal_off = signal.low();
 
+        if (istext == true)
+        {
+            signal_on = signal_on ^ PIN_RS;
+            signal_off = signal_on ^ PIN_RS;
+        }
+    } else {
+        signal_on = signal.low() ^ PIN_E;
+        signal_off = 0x00;
+    }
+
+    this->p_spi->transfer(this->m_cs, signal_on);
+    this->p_spi->commit();
+    delay(3);
+
+    this->p_spi->transfer(this->m_cs, signal_off);
+    this->p_spi->commit();
+    delay(3);
 }
 
 
@@ -129,13 +199,22 @@ void Display::_transfer(const char* keyword, bool text, byte data)
 
 void Display::setup()
 {
-    byte signal = 0x00;
-
     DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
+    digitalWrite(this->m_cs, HIGH);
 
-    signal = PIN_DB5; //
+    this->_transfer("INIT", 0x03, false, false); // set 8 bit operation
+    this->_transfer("INIT", 0x03, false, false); //
+    this->_transfer("INIT", 0x03, false, false); //
 
+    this->_transfer("4BIT", 0x02, false, false); // set 4 bit
+    this->_transfer("INIT", 0x03, false, false); // 5x8
+
+    this->_transfer("DISP", 0x02, false, false); // 2-zeilig, 5x8-Punkt-Matrix
+    this->_transfer("DISP", 0x08, false, false); //
+
+    this->_transfer("SET",  0x00, false, false); // Set entry mode
+    this->_transfer("SET",  0x08, false, false); //
 
 /*
 
@@ -163,9 +242,6 @@ void Display::setup()
         time.sleep(self.Delay2)
         self.__lcd_transfer("SET", False, 0x06)
         time.sleep(self.Delay2)
-
-
-
 */
 }
 

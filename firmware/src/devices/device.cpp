@@ -50,8 +50,6 @@ void SPI::set_spi(SPIClass* spi)
 
 void SPI::_on(int channel)
 {
-    digitalWrite(channel, HIGH);
-    delay(3);
     digitalWrite(channel, LOW);
     this->m_transfer = 1;
 }
@@ -60,8 +58,6 @@ void SPI::_on(int channel)
 void SPI::_off(int channel)
 {
     digitalWrite(channel, HIGH);
-    delay(3);
-    digitalWrite(channel, LOW);
     this->m_transfer = 0;
 }
 
