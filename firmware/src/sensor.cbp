@@ -39,6 +39,7 @@
 					<Add option="-DTEMPERATURE_DEBUG" />
 					<Add option="-DSPI_DEBUG" />
 					<Add option="-DDISPLAY_DEBUG" />
+					<Add option="-DDEBUG_SIGNAL" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/lwip2/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/libc/xtensa-lx106-elf/include" />
@@ -66,7 +67,6 @@
 		<Unit filename="devices/hardware.cpp" />
 		<Unit filename="devices/led.cpp" />
 		<Unit filename="devices/temperature.cpp" />
-        <Unit filename="utils/utils.cpp" />
 		<Unit filename="include/button.h" />
 		<Unit filename="include/channel.h" />
 		<Unit filename="include/click.h" />
@@ -78,8 +78,9 @@
 		<Unit filename="include/loop.h" />
 		<Unit filename="include/settings.h" />
 		<Unit filename="include/temperature.h" />
-        <Unit filename="include/utils.h" />
+		<Unit filename="include/utils.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="utils/utils.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

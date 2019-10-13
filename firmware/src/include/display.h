@@ -55,6 +55,7 @@ class Display : public Device
 
         void _parse_pins(byte data);
         void _transfer(const char* keyword, byte data, bool isfull, bool istext);
+        void _send_signal(const char* keyword, byte signal, bool istext);
 };
 
 
