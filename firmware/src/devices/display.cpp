@@ -65,58 +65,6 @@
 #define POS_DB4 0x10 //  16, 0001 0000
 
 
-Signal::Signal(byte data)
-{
-    this->m_high = data & 0xF0;
-    this->m_low = (data & 0x0F) << 4;
-#ifdef DEBUG_SIGNAL
-    debug_binary("SIGHIGH", this->m_high);
-    debug_binary("SIGLOW", this->m_low);
-#endif // DEBUG_SIGNAL
-}
-
-
-Signal::~Signal()
-{
-}
-
-
-byte Signal::_process_pins(byte data)
-{
-    byte pin = 0x00;
-
-    if ((data & POS_DB7) == POS_DB7) {
-        pin = pin | PIN_DB7;
-    }
-    if ((data & POS_DB6) == POS_DB6) {
-        pin = pin | PIN_DB6;
-    }
-    if ((data & POS_DB5) == POS_DB5) {
-        pin = pin | PIN_DB5;
-    }
-    if ((data & POS_DB4) == POS_DB4) {
-        pin = pin | PIN_DB4;
-    }
-
-#ifdef DEBUG_SIGNAL
-    debug_binary("PINS", pin);
-#endif // DEBUG_SIGNAL
-
-    return pin;
-}
-
-byte Signal::high()
-{
-    return this->_process_pins(this->m_high);
-}
-
-
-byte Signal::low()
-{
-    return this->_process_pins(this->m_low);
-}
-
-
 Display::Display (SPIClass* spi, int cs)
 {
     this->p_spi = new SPI();
@@ -173,49 +121,64 @@ void _transfer(const char* keyword, bool text, byte data);
 
 */
 
-
-void Display::_send_signal(const char* keyword, byte signal, bool istext)
+byte Display::_process_pins(byte data)
 {
-    byte signal_on = signal ^ PIN_E;
-    byte signal_off = signal;
+    byte pin = 0x00;
 
+    if ((data & POS_DB7) == POS_DB7) {
+        pin = pin | PIN_DB7;
+    }
+    if ((data & POS_DB6) == POS_DB6) {
+        pin = pin | PIN_DB6;
+    }
+    if ((data & POS_DB5) == POS_DB5) {
+        pin = pin | PIN_DB5;
+    }
+    if ((data & POS_DB4) == POS_DB4) {
+        pin = pin | PIN_DB4;
+    }
+
+    return pin;
+}
+
+void Display::_send(const char* keyword, byte data, byte signal, bool istext)
+{
+    byte pin_on, pin_off;
+    byte pin = 0x00;
+
+    pin = this->_process_pins(signal);
 
     if (istext == true)
     {
-        signal_on = signal_on ^ PIN_RS;
-        signal_off = signal_on ^ PIN_RS;
+        pin = pin ^ PIN_RS;
     }
 
+    pin_on = pin ^ PIN_E;
+    pin_off = pin;
 
-    debug_binary(keyword, signal);
-    debug_binary("ON: ", signal_on);
-    this->p_spi->transfer(this->m_cs, signal_on);
+    debug_display(keyword, data, signal, pin);
+
+    this->p_spi->transfer(this->m_cs, pin_on);
     this->p_spi->commit();
     delay(10);
 
-    debug_binary("OF: ", signal_off);
-    this->p_spi->transfer(this->m_cs, signal_off);
+    this->p_spi->transfer(this->m_cs, pin_off);
     this->p_spi->commit();
-    delay(3);
+    delay(10);
 }
 
 
-void Display::_transfer(const char* keyword, byte data, bool isfull, bool istext)
+void Display::_send_low(const char* keyword, byte data, bool istext)
 {
-    debug_binary(keyword, data);
+    byte signal = (data & 0x0F) << 4;
+    this->_send(keyword, data, signal, istext);
+}
 
-    Signal signal(data);
 
-    if (isfull == true) {
-        // first send bits DB7 to DB4
-        this->_send_signal(keyword, signal.high(), istext);
-
-        // then send bits DB3 to DB0
-        this->_send_signal(keyword, signal.low(), istext);
-    } else {
-        // only send bits DB7 to DB4
-        this->_send_signal(keyword, signal.high(), istext);
-    }
+void Display::_send_high(const char* keyword, byte data, bool istext)
+{
+    byte signal = signal & 0xF0;
+    this->_send(keyword, data, signal, istext);
 }
 
 
@@ -225,29 +188,38 @@ void Display::setup()
     pinMode(this->m_cs, OUTPUT);
     digitalWrite(this->m_cs, HIGH);
 
+    /*
+
     // Function set
     // RS RW DB7 DB6 DB5 DB4
 
-    // 0  0  0   0   1   0      = 0010 -> 0010 0000 -> 0x20
-    this->_transfer("INIT", 0x20, false, false); // set 8 bit operation
+    // set 8 bit operation
+    // 0  0  0   0   1   0      = 0010 -> 0x02
 
-//    this->_transfer("INIT", 0x03, false, false); //
-//    this->_transfer("INIT", 0x03, false, false); //
 
-    // 0  0  0   0   1   0      = 0010
-    // 0  0  1   0   *   *      = 1000 -> 0010 1000 -> 0x28
-    this->_transfer("4BIT", 0x28, true, false); // set 4 bit, set 2 lines and 5x8-Punkt-Matrix
-//    this->_transfer("INIT", 0x03, false, false); // 5x8
+    // set 4 bit, set 2 lines and 5x8-Punkt-Matrix
+    // 0  0  0   0   1   0      = 0010 -> 0x02
+    // 0  0  1   0   *   *      = 1000 -> 0x08
 
-    // 0  0  0   0   0   0      = 0000
-    // 0  0  1   1   1   0      = 1110 -> 0000 1110 -> 0x0e
-    this->_transfer("DISP", 0x0e, true, false); // turn on display and cursor
-//    this->_transfer("DISP", 0x08, false, false); //
+    // turn on display and cursor
+    // 0  0  0   0   0   0      = 0000 -> 0x00
+    // 0  0  1   1   1   0      = 1110 -> 0x0e
 
-    // 0  0  0   0   0   0      = 0000
+    // Set mode to incement the address by one and shift cursor to right
+    // 0  0  0   0   0   0      = 0000 -> 0x00
     // 0  0  0   1   1   0      = 0110 -> 0000 0110 -> 0x06
-    this->_transfer("SET",  0x06, true, false); // Set mode to incement the address by one and shift cursor to right
-//    this->_transfer("SET",  0x08, false, false); //
+    */
+
+    this->_send_low("INIT", 0x02, false);
+
+    this->_send_low("4BIT", 0x02, false);
+    this->_send_low("4BIT", 0x08, false);
+
+    this->_send_low("DISP", 0x00, false);
+    this->_send_low("DISP", 0x0e, false);
+
+    this->_send_low("SET",  0x00, false);
+    this->_send_low("SET",  0x06, false);
 
 /*
 

@@ -22,22 +22,6 @@
 #include <device.h>
 
 
-class Signal
-{
-    public:
-        Signal(byte data);
-        virtual ~Signal();
-
-        byte high();
-        byte low();
-
-    private:
-        byte m_high, m_low;
-
-        byte _process_pins(byte data);
-};
-
-
 class Display : public Device
 {
     public:
@@ -53,9 +37,12 @@ class Display : public Device
         SPI* p_spi;
         int m_cs;
 
-        void _parse_pins(byte data);
-        void _transfer(const char* keyword, byte data, bool isfull, bool istext);
-        void _send_signal(const char* keyword, byte signal, bool istext);
+        byte _process_pins(byte data);
+
+        void _send(const char* keyword, byte data, byte signal, bool istext);
+
+        void _send_low(const char* keyword, byte data, bool istext);
+        void _send_high(const char* keyword, byte data, bool istext);
 };
 
 

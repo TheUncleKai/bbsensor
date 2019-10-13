@@ -19,4 +19,6 @@
 
 void debug_binary(const char* keyword, byte data);
 
+void debug_display(const char* keyword, byte data, byte signal, byte pin);
+
 #endif // UTILS_H_INCLUDED

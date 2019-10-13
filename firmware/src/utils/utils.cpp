@@ -22,7 +22,7 @@
 
 void debug_binary(const char* keyword, byte data)
 {
-    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c%c%c%c%c\n",
+    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c% c%c%c%c\n",
         keyword,
         data,
         data,
@@ -34,5 +34,40 @@ void debug_binary(const char* keyword, byte data)
         (data & 0x04 ? '1' : '0'),
         (data & 0x02 ? '1' : '0'),
         (data & 0x01 ? '1' : '0'));
+
+}
+
+
+void debug_display(const char* keyword, byte data, byte signal, byte pin)
+{
+    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c% c%c%c%c  c%c%c%c c%c%c%c  c%c%c%c c%c%c%c\n",
+        keyword,
+        data,
+        data,
+        (data & 0x80 ? '1' : '0'),
+        (data & 0x40 ? '1' : '0'),
+        (data & 0x20 ? '1' : '0'),
+        (data & 0x10 ? '1' : '0'),
+        (data & 0x08 ? '1' : '0'),
+        (data & 0x04 ? '1' : '0'),
+        (data & 0x02 ? '1' : '0'),
+        (data & 0x01 ? '1' : '0'),
+        (signal & 0x80 ? '1' : '0'),
+        (signal & 0x40 ? '1' : '0'),
+        (signal & 0x20 ? '1' : '0'),
+        (signal & 0x10 ? '1' : '0'),
+        (signal & 0x08 ? '1' : '0'),
+        (signal & 0x04 ? '1' : '0'),
+        (signal & 0x02 ? '1' : '0'),
+        (signal & 0x01 ? '1' : '0'),
+        (pin & 0x80 ? '1' : '0'),
+        (pin & 0x40 ? '1' : '0'),
+        (pin & 0x20 ? '1' : '0'),
+        (pin & 0x10 ? '1' : '0'),
+        (pin & 0x08 ? '1' : '0'),
+        (pin & 0x04 ? '1' : '0'),
+        (pin & 0x02 ? '1' : '0'),
+        (pin & 0x01 ? '1' : '0')
+    );
 
 }
