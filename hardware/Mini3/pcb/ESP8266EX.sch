@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:BBMini2-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -617,7 +616,7 @@ Wire Wire Line
 Wire Wire Line
 	700  2500 700  2700
 Connection ~ 700  2700
-Text HLabel 8800 1700 1    60   Output ~ 0
+Text HLabel 10750 3900 2    60   Output ~ 0
 CS1
 Text HLabel 8650 1700 1    60   Output ~ 0
 SCLK
@@ -985,9 +984,7 @@ Wire Wire Line
 Wire Wire Line
 	4000 4000 6100 4000
 Wire Wire Line
-	7200 3900 8800 3900
-Wire Wire Line
-	8800 3900 8800 1700
+	7200 3900 9000 3900
 Connection ~ 7200 3900
 Text Label 5300 4300 0    60   ~ 0
 GPIO15
@@ -1001,8 +998,8 @@ L 74xx:74HC595 U?
 U 1 1 5DA00902
 P 4750 6500
 AR Path="/5D9D543C/5DA00902" Ref="U?"  Part="1" 
-AR Path="/5E10CC8A/5DA00902" Ref="U8"  Part="1" 
-F 0 "U8" H 4950 7050 50  0000 C CNN
+AR Path="/5E10CC8A/5DA00902" Ref="U4"  Part="1" 
+F 0 "U4" H 4950 7050 50  0000 C CNN
 F 1 "74HC595" H 4450 5850 50  0000 C CNN
 F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 4750 6500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 4750 6500 50  0001 C CNN
@@ -1239,8 +1236,8 @@ L BBLib:HD44780 U?
 U 1 1 5DA00980
 P 2250 6450
 AR Path="/5D9D543C/5DA00980" Ref="U?"  Part="1" 
-AR Path="/5E10CC8A/5DA00980" Ref="U7"  Part="1" 
-F 0 "U7" H 2675 7200 50  0000 C CNN
+AR Path="/5E10CC8A/5DA00980" Ref="U3"  Part="1" 
+F 0 "U3" H 2675 7200 50  0000 C CNN
 F 1 "HD44780" H 2250 6450 50  0000 C CNN
 F 2 "Collection:HD44780_LCD_2x16" H 2250 7389 50  0001 C CNN
 F 3 "https://cdn-shop.adafruit.com/product-files/181/p181.pdf" H 2250 7390 50  0001 C CNN
@@ -1252,11 +1249,7 @@ Wire Wire Line
 Wire Wire Line
 	5150 6700 5950 6700
 Wire Wire Line
-	4000 4300 5800 4300
-Wire Wire Line
-	5150 6400 5800 6400
-Wire Wire Line
-	5800 6400 5800 4300
+	4000 4300 8750 4300
 Wire Wire Line
 	5950 6700 5950 4200
 Connection ~ 5950 4200
@@ -1267,4 +1260,115 @@ Wire Wire Line
 Connection ~ 6100 4000
 Wire Wire Line
 	6100 4000 8500 4000
+$Comp
+L BBLib:SN74LVC1G139 U5
+U 1 1 5DA6C4AB
+P 9450 4000
+F 0 "U5" H 9250 3600 60  0000 C CNN
+F 1 "SN74LVC1G139" H 9875 3575 60  0000 C CNN
+F 2 "Package_SO:VSSOP-8_2.3x2mm_P0.5mm" H 9450 2900 60  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn74lvc1g139.pdf" H 9450 4000 60  0001 C CNN
+	1    9450 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DA6D15C
+P 9450 3250
+AR Path="/5D6608A5/5DA6D15C" Ref="#PWR?"  Part="1" 
+AR Path="/5DA6D15C" Ref="#PWR?"  Part="1" 
+AR Path="/5E10CC8A/5DA6D15C" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 9450 3100 50  0001 C CNN
+F 1 "+3.3V" H 9465 3423 50  0000 C CNN
+F 2 "" H 9450 3250 50  0001 C CNN
+F 3 "" H 9450 3250 50  0001 C CNN
+	1    9450 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9000 4100 8750 4100
+Wire Wire Line
+	8750 4100 8750 4300
+$Comp
+L Device:C C?
+U 1 1 5DA89E8D
+P 9150 3350
+AR Path="/5D9D543C/5DA89E8D" Ref="C?"  Part="1" 
+AR Path="/5E10CC8A/5DA89E8D" Ref="C14"  Part="1" 
+F 0 "C14" V 8898 3350 50  0000 C CNN
+F 1 "100n" V 8989 3350 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9188 3200 50  0001 C CNN
+F 3 "~" H 9150 3350 50  0001 C CNN
+	1    9150 3350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	9450 3250 9450 3350
+Wire Wire Line
+	9300 3350 9450 3350
+Connection ~ 9450 3350
+Wire Wire Line
+	9450 3350 9450 3450
+$Comp
+L power:GND #PWR?
+U 1 1 5DAA6453
+P 9450 4650
+AR Path="/5D6608A5/5DAA6453" Ref="#PWR?"  Part="1" 
+AR Path="/5DAA6453" Ref="#PWR?"  Part="1" 
+AR Path="/5E10CC8A/5DAA6453" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 9450 4400 50  0001 C CNN
+F 1 "GND" H 9455 4477 50  0000 C CNN
+F 2 "" H 9450 4650 50  0001 C CNN
+F 3 "" H 9450 4650 50  0001 C CNN
+	1    9450 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 4550 9450 4650
+$Comp
+L power:GND #PWR?
+U 1 1 5DAAFFF9
+P 8850 3500
+AR Path="/5D6608A5/5DAAFFF9" Ref="#PWR?"  Part="1" 
+AR Path="/5DAAFFF9" Ref="#PWR?"  Part="1" 
+AR Path="/5E10CC8A/5DAAFFF9" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 8850 3250 50  0001 C CNN
+F 1 "GND" H 8855 3327 50  0000 C CNN
+F 2 "" H 8850 3500 50  0001 C CNN
+F 3 "" H 8850 3500 50  0001 C CNN
+	1    8850 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9000 3350 8850 3350
+Wire Wire Line
+	8850 3350 8850 3500
+Wire Wire Line
+	9900 3900 10750 3900
+Text HLabel 10750 4100 2    60   Output ~ 0
+CS2
+Wire Wire Line
+	9900 4100 10750 4100
+Text HLabel 10750 4250 2    60   Output ~ 0
+CS3
+Text GLabel 10750 3750 2    60   Input ~ 0
+CS0
+Wire Wire Line
+	10750 3750 9900 3750
+Wire Wire Line
+	9900 4250 10750 4250
+Text Label 10000 3750 0    60   ~ 0
+CS0
+Text Label 10000 3900 0    60   ~ 0
+CS1
+Text Label 10000 4100 0    60   ~ 0
+CS2
+Text Label 10000 4250 0    60   ~ 0
+CS3
+Text GLabel 5650 6400 2    60   Input ~ 0
+CS0
+Wire Wire Line
+	5650 6400 5150 6400
+Text Label 5275 6400 0    60   ~ 0
+CS0
 $EndSCHEMATC
