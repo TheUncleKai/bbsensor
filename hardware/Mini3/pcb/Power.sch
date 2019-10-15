@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:BBMini3-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 5
+Sheet 2 6
 Title "BBSensor"
 Date "2019-09-26"
 Rev "2.0"
@@ -127,8 +128,8 @@ L Regulator_Linear:AP2112K-3.3 U?
 U 1 1 5D90B330
 P 1950 2975
 AR Path="/5D90B330" Ref="U?"  Part="1" 
-AR Path="/5D8E11F6/5D90B330" Ref="U3"  Part="1" 
-F 0 "U3" H 1950 3317 50  0000 C CNN
+AR Path="/5D8E11F6/5D90B330" Ref="U2"  Part="1" 
+F 0 "U2" H 1950 3317 50  0000 C CNN
 F 1 "AP2112K-3.3" H 1950 3226 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-5" H 1950 3300 50  0001 C CNN
 F 3 "https://www.diodes.com/assets/Datasheets/AP2112.pdf" H 1950 3075 50  0001 C CNN
@@ -334,10 +335,10 @@ Wire Wire Line
 Wire Wire Line
 	1200 1350 1550 1350
 $Comp
-L Regulator_Switching:LM2576S-5 U6
+L Regulator_Switching:LM2576S-5 U1
 U 1 1 5D8F52F9
 P 4700 1350
-F 0 "U6" H 4700 1717 50  0000 C CNN
+F 0 "U1" H 4700 1717 50  0000 C CNN
 F 1 "LM2576S-5" H 4700 1626 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 4700 1100 50  0001 L CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 4700 1350 50  0001 C CNN

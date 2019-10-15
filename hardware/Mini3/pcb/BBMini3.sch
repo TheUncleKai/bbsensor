@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:BBMini3-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 5
+Sheet 1 6
 Title "BBSensor"
 Date "2019-09-26"
 Rev "2.0"
@@ -66,6 +67,10 @@ F2 "SCLK" I L 4000 2500 60
 F3 "MISO" O L 4000 2800 60 
 F4 "MOSI" I L 4000 2650 60 
 F5 "CS1" I L 4000 2950 60 
+F6 "CS2" I L 4000 3100 60 
+F7 "SIGNAL" I R 5100 3000 60 
+F8 "RTD[1..2]" B R 5100 2400 60 
+F9 "PTC[1..3]" B R 5100 2700 60 
 $EndSheet
 $Sheet
 S 700  1650 950  2200
@@ -80,6 +85,7 @@ F6 "SCLK" O R 1650 2500 60
 F7 "MOSI" O R 1650 2650 60 
 F8 "MISO" I R 1650 2800 60 
 F9 "~RST" B R 1650 1750 60 
+F10 "CS2" O R 1650 3100 60 
 $EndSheet
 Wire Wire Line
 	1650 2500 4000 2500
@@ -113,4 +119,25 @@ Wire Wire Line
 	3150 2200 3150 1300
 Wire Wire Line
 	3150 1300 4000 1300
+$Sheet
+S 5800 2150 1500 1150
+U 5DD27E6B
+F0 "Processing" 60
+F1 "Processing.sch" 60
+F2 "RTD[1..2]" B L 5800 2400 60 
+F3 "PTC[1..3]" B L 5800 2700 60 
+F4 "SIGNAL" O L 5800 3000 60 
+$EndSheet
+Wire Wire Line
+	1650 3100 4000 3100
+Wire Bus Line
+	5800 2400 5100 2400
+Wire Bus Line
+	5100 2700 5800 2700
+Wire Wire Line
+	5800 3000 5100 3000
+Text Label 5250 2400 0    60   ~ 0
+RTD[1..2]
+Text Label 5250 2700 0    60   ~ 0
+PTC[1..3]
 $EndSCHEMATC

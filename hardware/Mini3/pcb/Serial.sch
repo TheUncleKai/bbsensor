@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:BBMini3-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 5
+Sheet 3 6
 Title "BBSensor"
 Date "2019-09-26"
 Rev "2.0"
@@ -14,10 +15,10 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Interface_USB:CP2104 U4
+L Interface_USB:CP2104 U14
 U 1 1 5D91A78D
 P 4750 3050
-F 0 "U4" H 4250 2100 50  0000 C CNN
+F 0 "U14" H 4250 2100 50  0000 C CNN
 F 1 "CP2104" H 5150 2100 50  0000 C CNN
 F 2 "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm" H 4900 2100 50  0001 L CNN
 F 3 "https://www.silabs.com/documents/public/data-sheets/cp2104.pdf" H 4200 4300 50  0001 C CNN
@@ -276,8 +277,8 @@ P 3750 1775
 AR Path="/5D6ADE4E/5D9FEBFF" Ref="C?"  Part="1" 
 AR Path="/5D9FEBFF" Ref="C?"  Part="1" 
 AR Path="/5D91B902/5D9FEBFF" Ref="C?"  Part="1" 
-AR Path="/5D90D40E/5D9FEBFF" Ref="C14"  Part="1" 
-F 0 "C14" V 3498 1775 50  0000 C CNN
+AR Path="/5D90D40E/5D9FEBFF" Ref="C19"  Part="1" 
+F 0 "C19" V 3498 1775 50  0000 C CNN
 F 1 "100n" V 3589 1775 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3788 1625 50  0001 C CNN
 F 3 "~" H 3750 1775 50  0001 C CNN
