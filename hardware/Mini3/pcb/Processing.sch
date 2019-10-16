@@ -134,7 +134,7 @@ AR Path="/5DD2F1D1/5DD4F966" Ref="U?"  Part="3"
 AR Path="/5DD27E6B/5DD4F966" Ref="U12"  Part="3" 
 F 0 "U12" H 3708 6646 50  0000 L CNN
 F 1 "OPA2340" H 3708 6555 50  0000 L CNN
-F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 3750 6600 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 3750 6600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 3750 6600 50  0001 C CNN
 	3    3750 6600
 	1    0    0    -1  
@@ -216,7 +216,7 @@ AR Path="/5DD2F1D1/5DD4F992" Ref="U?"  Part="1"
 AR Path="/5DD27E6B/5DD4F992" Ref="U13"  Part="1" 
 F 0 "U13" H 4400 4967 50  0000 C CNN
 F 1 "OPA2340" H 4400 4876 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 4400 4600 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4400 4600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 4400 4600 50  0001 C CNN
 	1    4400 4600
 	1    0    0    -1  
@@ -229,7 +229,7 @@ AR Path="/5DD2F1D1/5DD4F998" Ref="U?"  Part="2"
 AR Path="/5DD27E6B/5DD4F998" Ref="U13"  Part="2" 
 F 0 "U13" H 6100 7067 50  0000 C CNN
 F 1 "OPA2340" H 6100 6976 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 6100 6700 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 6100 6700 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 6100 6700 50  0001 C CNN
 	2    6100 6700
 	1    0    0    -1  
@@ -242,7 +242,7 @@ AR Path="/5DD2F1D1/5DD4F99E" Ref="U?"  Part="3"
 AR Path="/5DD27E6B/5DD4F99E" Ref="U13"  Part="3" 
 F 0 "U13" H 4358 6646 50  0000 L CNN
 F 1 "OPA2340" H 4358 6555 50  0000 L CNN
-F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 4400 6600 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4400 6600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 4400 6600 50  0001 C CNN
 	3    4400 6600
 	1    0    0    -1  
@@ -272,7 +272,7 @@ AR Path="/5DD2F1D1/5DD4F9AF" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9AF" Ref="R102"  Part="1" 
 F 0 "R102" H 1600 3900 50  0000 R CNN
 F 1 "300" V 1700 3900 50  0000 C CNN
-F 2 "Potentiometer_THT:Potentiometer_Bourns_3296Z_Horizontal" H 1700 3900 50  0001 C CNN
+F 2 "Potentiometer_SMD:Potentiometer_Bourns_3269W_Vertical" H 1700 3900 50  0001 C CNN
 F 3 "~" H 1700 3900 50  0001 C CNN
 	1    1700 3900
 	1    0    0    1   
@@ -285,7 +285,7 @@ AR Path="/5DD2F1D1/5DD4F9B5" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9B5" Ref="R109"  Part="1" 
 F 0 "R109" H 2450 6400 50  0000 R CNN
 F 1 "470" V 2500 6400 50  0000 C CNN
-F 2 "Potentiometer_THT:Potentiometer_Bourns_3296Z_Horizontal" H 2500 6400 50  0001 C CNN
+F 2 "Potentiometer_SMD:Potentiometer_Bourns_3269W_Vertical" H 2500 6400 50  0001 C CNN
 F 3 "~" H 2500 6400 50  0001 C CNN
 	1    2500 6400
 	1    0    0    1   
@@ -298,7 +298,7 @@ AR Path="/5DD2F1D1/5DD4F9BB" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9BB" Ref="R101"  Part="1" 
 F 0 "R101" V 4400 5400 50  0000 C CNN
 F 1 "405" V 4500 5400 50  0000 C CNN
-F 2 "Potentiometer_THT:Potentiometer_Bourns_3296Z_Horizontal" H 4500 5400 50  0001 C CNN
+F 2 "Potentiometer_SMD:Potentiometer_Bourns_3269W_Vertical" H 4500 5400 50  0001 C CNN
 F 3 "~" H 4500 5400 50  0001 C CNN
 	1    4500 5400
 	0    -1   1    0   
@@ -352,7 +352,7 @@ AR Path="/5DD2F1D1/5DD4F9E7" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9E7" Ref="R104"  Part="1" 
 F 0 "R104" H 1500 4250 50  0000 C CNN
 F 1 "2k2" V 1700 4250 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 1630 4250 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1630 4250 50  0001 C CNN
 F 3 "~" H 1700 4250 50  0001 C CNN
 	1    1700 4250
 	1    0    0    -1  
@@ -378,7 +378,7 @@ AR Path="/5DD2F1D1/5DD4F9F3" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9F3" Ref="R105"  Part="1" 
 F 0 "R105" H 1250 4800 50  0000 L CNN
 F 1 "10k" V 1200 4800 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 1130 4800 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1130 4800 50  0001 C CNN
 F 3 "~" H 1200 4800 50  0001 C CNN
 	1    1200 4800
 	1    0    0    -1  
@@ -391,7 +391,7 @@ AR Path="/5DD2F1D1/5DD4F9F9" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9F9" Ref="R111"  Part="1" 
 F 0 "R111" H 2650 6800 50  0000 C CNN
 F 1 "2k" V 2500 6800 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2430 6800 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2430 6800 50  0001 C CNN
 F 3 "~" H 2500 6800 50  0001 C CNN
 	1    2500 6800
 	1    0    0    -1  
@@ -404,7 +404,7 @@ AR Path="/5DD2F1D1/5DD4F9FF" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4F9FF" Ref="R110"  Part="1" 
 F 0 "R110" V 2950 6050 50  0000 C CNN
 F 1 "200" V 2850 6050 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2780 6050 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2780 6050 50  0001 C CNN
 F 3 "~" H 2850 6050 50  0001 C CNN
 	1    2850 6050
 	0    -1   -1   0   
@@ -417,7 +417,7 @@ AR Path="/5DD2F1D1/5DD4FA05" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4FA05" Ref="R108"  Part="1" 
 F 0 "R108" V 3700 5400 50  0000 C CNN
 F 1 "200" V 3600 5400 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3530 5400 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3530 5400 50  0001 C CNN
 F 3 "~" H 3600 5400 50  0001 C CNN
 	1    3600 5400
 	0    -1   -1   0   
@@ -430,7 +430,7 @@ AR Path="/5DD2F1D1/5DD4FA0B" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4FA0B" Ref="R107"  Part="1" 
 F 0 "R107" V 4200 5400 50  0000 C CNN
 F 1 "4k7" V 4100 5400 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 4030 5400 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4030 5400 50  0001 C CNN
 F 3 "~" H 4100 5400 50  0001 C CNN
 	1    4100 5400
 	0    -1   -1   0   
@@ -443,7 +443,7 @@ AR Path="/5DD2F1D1/5DD4FA11" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DD4FA11" Ref="R106"  Part="1" 
 F 0 "R106" H 1050 5700 50  0000 C CNN
 F 1 "10k" V 1200 5700 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 1130 5700 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1130 5700 50  0001 C CNN
 F 3 "~" H 1200 5700 50  0001 C CNN
 	1    1200 5700
 	-1   0    0    1   
@@ -493,7 +493,7 @@ AR Path="/5DD283BE/5DDD55A6" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DDD55A6" Ref="R201"  Part="1" 
 F 0 "R201" V 7750 1900 50  0000 C CNN
 F 1 "10k" V 7650 1900 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7580 1900 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7580 1900 50  0001 C CNN
 F 3 "~" H 7650 1900 50  0001 C CNN
 	1    7650 1900
 	0    -1   -1   0   
@@ -506,7 +506,7 @@ AR Path="/5DD283BE/5DDD5993" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DDD5993" Ref="R202"  Part="1" 
 F 0 "R202" H 7450 2150 50  0000 L CNN
 F 1 "10k" V 7350 2150 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7280 2150 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7280 2150 50  0001 C CNN
 F 3 "~" H 7350 2150 50  0001 C CNN
 	1    7350 2150
 	1    0    0    -1  
@@ -551,7 +551,7 @@ AR Path="/5DD283BE/5DDEE656" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DDEE656" Ref="R203"  Part="1" 
 F 0 "R203" V 7750 3000 50  0000 C CNN
 F 1 "10k" V 7650 3000 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7580 3000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7580 3000 50  0001 C CNN
 F 3 "~" H 7650 3000 50  0001 C CNN
 	1    7650 3000
 	0    -1   -1   0   
@@ -574,7 +574,7 @@ AR Path="/5DD283BE/5DDF79CE" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DDF79CE" Ref="R204"  Part="1" 
 F 0 "R204" H 7450 3250 50  0000 L CNN
 F 1 "100k" V 7350 3250 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7280 3250 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7280 3250 50  0001 C CNN
 F 3 "~" H 7350 3250 50  0001 C CNN
 	1    7350 3250
 	1    0    0    -1  
@@ -607,7 +607,7 @@ AR Path="/5DD283BE/5DDFEEDB" Ref="R?"  Part="1"
 AR Path="/5DD27E6B/5DDFEEDB" Ref="R205"  Part="1" 
 F 0 "R205" V 7750 4000 50  0000 C CNN
 F 1 "10k" V 7650 4000 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7580 4000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7580 4000 50  0001 C CNN
 F 3 "~" H 7650 4000 50  0001 C CNN
 	1    7650 4000
 	0    -1   -1   0   
@@ -729,7 +729,7 @@ AR Path="/5DD283BE/5DE1E565" Ref="RV?"  Part="1"
 AR Path="/5DD27E6B/5DE1E565" Ref="RV206"  Part="1" 
 F 0 "RV206" H 7250 4300 50  0000 R CNN
 F 1 "10k" V 7350 4300 50  0000 C CNN
-F 2 "Potentiometer_THT:Potentiometer_Bourns_3296Z_Horizontal" H 7350 4300 50  0001 C CNN
+F 2 "Potentiometer_SMD:Potentiometer_Bourns_3269W_Vertical" H 7350 4300 50  0001 C CNN
 F 3 "~" H 7350 4300 50  0001 C CNN
 	1    7350 4300
 	1    0    0    -1  
@@ -766,7 +766,7 @@ AR Path="/5DD2F1D1/5DD4F960" Ref="U?"  Part="2"
 AR Path="/5DD27E6B/5DD4F960" Ref="U12"  Part="2" 
 F 0 "U12" H 2950 5767 50  0000 C CNN
 F 1 "OPA2340" H 2950 5676 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 2950 5400 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2950 5400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 2950 5400 50  0001 C CNN
 	2    2950 5400
 	1    0    0    -1  
@@ -779,7 +779,7 @@ AR Path="/5DD2F1D1/5DD4F95A" Ref="U?"  Part="1"
 AR Path="/5DD27E6B/5DD4F95A" Ref="U12"  Part="1" 
 F 0 "U12" H 2050 4933 50  0000 C CNN
 F 1 "OPA2340" H 2050 5024 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 2050 5300 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2050 5300 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/opa4340.pdf" H 2050 5300 50  0001 C CNN
 	1    2050 5300
 	1    0    0    1   
@@ -790,11 +790,11 @@ Wire Wire Line
 	7550 4100 7550 4300
 Wire Wire Line
 	7550 4300 7500 4300
+Connection ~ 7350 4100
+Wire Wire Line
+	7350 4100 7350 4000
 Wire Bus Line
 	1500 1050 2500 1050
 Wire Bus Line
 	1500 1200 6000 1200
-Connection ~ 7350 4100
-Wire Wire Line
-	7350 4100 7350 4000
 $EndSCHEMATC
