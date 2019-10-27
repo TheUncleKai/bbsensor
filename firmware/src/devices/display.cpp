@@ -64,6 +64,10 @@
 #define POS_DB5 0x20 //  32, 0010 0000
 #define POS_DB4 0x10 //  16, 0001 0000
 
+#define LINE1 0x80
+#define LINE2 0xc0
+
+#define CLEAR 0x01
 
 #define DELAY_ON  150
 #define DELAY_OFF 30
@@ -146,11 +150,42 @@ void Display::_send_high(const char* keyword, byte data, bool istext)
 }
 
 
+void Display::_set_line(int line)
+{
+    byte data = 0;
+
+    if (line == 1) {
+        data = LINE1;
+
+        this->_send_high("1", data, false);
+        this->_send_low("1", data, false);
+    }
+
+    if (line == 2) {
+        data = LINE2;
+
+        this->_send_high("2", data, false);
+        this->_send_low("2", data, false);
+    }
+}
+
+
+void Display::clear()
+{
+    byte data = CLEAR;
+
+    this->_send_high("C", data, false);
+    this->_send_low("C", data, false);
+}
+
+
 void Display::write(const char* input, int line)
 {
     std::string text(input);
     byte data = 0;
     char* digit = 0;
+
+    this->_set_line(line);
 
     for (std::string::iterator it=text.begin(); it!=text.end(); ++it) {
         data = (byte)*it;

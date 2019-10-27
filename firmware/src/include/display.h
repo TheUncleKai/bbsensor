@@ -31,6 +31,7 @@ class Display : public Device
         void setup();
         void execute();
 
+        void clear();
         void write(const char* input, int line);
 
     private:
@@ -40,6 +41,9 @@ class Display : public Device
         byte _process_pins(byte data);
 
         void _send(const char* keyword, byte data, byte signal, bool istext);
+
+
+        void _set_line(int line);
 
         void _send_low(const char* keyword, byte data, bool istext);
         void _send_high(const char* keyword, byte data, bool istext);
