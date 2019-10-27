@@ -20,6 +20,32 @@
 #include <SPI.h>
 
 #include <device.h>
+#include <list>
+#include <string>
+
+
+enum SignalType {
+    SIG_HIGH = 0,
+    SIG_LOW = 1
+};
+
+
+class Signal
+{
+    public:
+        Signal (const char* keyword, SignalType type, byte data, bool istext);
+        virtual ~Signal();
+
+        byte pins();
+
+    private:
+        byte m_data;
+        SignalType m_type;
+        bool m_text;
+        std::string m_keyword;
+
+        byte _process_pins(byte data);
+};
 
 
 class Display : public Device
@@ -37,12 +63,11 @@ class Display : public Device
     private:
         SPI* p_spi;
         int m_cs;
+        std::list<Signal*>* m_list;
 
-        byte _process_pins(byte data);
+        void _send(Signal* signal);
 
-        void _send(const char* keyword, byte data, byte signal, bool istext);
-
-
+        void _clear_list();
         void _set_line(int line);
 
         void _send_low(const char* keyword, byte data, bool istext);

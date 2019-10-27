@@ -73,22 +73,21 @@
 #define DELAY_OFF 0
 
 
-Display::Display (SPIClass* spi, int cs)
+Signal::Signal(const char* keyword, SignalType type, byte data, bool istext)
 {
-    this->p_spi = new SPI();
-    this->m_cs = cs;
-
-    this->p_spi->set_spi(spi);
+    this->m_keyword = std::string(keyword);
+    this->m_type = type;
+    this->m_data = data;
+    this->m_text = istext;
 }
 
 
-Display::~Display()
+Signal::~Signal()
 {
-    delete this->p_spi;
 }
 
 
-byte Display::_process_pins(byte data)
+byte Signal::_process_pins(byte data)
 {
     byte pin = 0x00;
 
@@ -109,22 +108,63 @@ byte Display::_process_pins(byte data)
 }
 
 
-void Display::_send(const char* keyword, byte data, byte signal, bool istext)
+byte Signal::pins()
 {
-    byte pin_on, pin_off;
-    byte pin = 0x00;
+    byte signal = 0;
+    byte pin = 0;
+
+    if (this->m_type == SIG_HIGH) {
+        signal = this->m_data & 0xF0;
+    }
+
+    if (this->m_type == SIG_LOW) {
+        signal = (this->m_data & 0x0F) << 4;
+    }
 
     pin = this->_process_pins(signal);
 
-    if (istext == true)
+    if (this->m_text == true)
     {
         pin = pin ^ PIN_RS;
     }
 
+#ifdef DISPLAY_DEBUG
+    debug_display(this->m_keyword.c_str(), this->m_data, signal, pin);
+#endif // DISPLAY_DEBUG
+
+    return pin;
+}
+
+
+Display::Display (SPIClass* spi, int cs)
+{
+    this->p_spi = new SPI();
+    this->m_cs = cs;
+
+    this->p_spi->set_spi(spi);
+
+    this->m_list = new std::list<Signal*>;
+}
+
+
+Display::~Display()
+{
+    this->_clear_list();
+
+    delete this->p_spi;
+    delete this->m_list;
+}
+
+
+void Display::_send(Signal* signal)
+{
+    byte pin_on, pin_off;
+    byte pin = 0x00;
+
+    pin = signal->pins();
+
     pin_on = pin ^ PIN_E;
     pin_off = pin;
-
-    debug_display(keyword, data, signal, pin);
 
     this->p_spi->transfer(this->m_cs, pin_on);
     this->p_spi->commit();
@@ -138,15 +178,15 @@ void Display::_send(const char* keyword, byte data, byte signal, bool istext)
 
 void Display::_send_low(const char* keyword, byte data, bool istext)
 {
-    byte signal = (data & 0x0F) << 4;
-    this->_send(keyword, data, signal, istext);
+    Signal* signal = new Signal(keyword, SIG_LOW, data, istext);
+    this->m_list->push_back(signal);
 }
 
 
 void Display::_send_high(const char* keyword, byte data, bool istext)
 {
-    byte signal = data & 0xF0;
-    this->_send(keyword, data, signal, istext);
+    Signal* signal = new Signal(keyword, SIG_HIGH, data, istext);
+    this->m_list->push_back(signal);
 }
 
 
@@ -157,15 +197,17 @@ void Display::_set_line(int line)
     if (line == 1) {
         data = LINE1;
 
-        this->_send_high("1", data, false);
-        this->_send_low("1", data, false);
+
+
+        this->_send_high("LINE1", data, false);
+        this->_send_low("LINE1", data, false);
     }
 
     if (line == 2) {
         data = LINE2;
 
-        this->_send_high("2", data, false);
-        this->_send_low("2", data, false);
+        this->_send_high("LINE2", data, false);
+        this->_send_low("LINE2", data, false);
     }
 }
 
@@ -174,8 +216,8 @@ void Display::clear()
 {
     byte data = CLEAR;
 
-    this->_send_high("C", data, false);
-    this->_send_low("C", data, false);
+    this->_send_high("CLEAR", data, false);
+    this->_send_low("CLEAR", data, false);
 }
 
 
@@ -233,17 +275,34 @@ void Display::setup()
 
     this->_send_low("SET",  0x00, false);
     this->_send_low("SET",  0x06, false);
-//    this->_send_low("H",    0x04, true);
-//    this->_send_low("H",    0x08, true);
-//
-//    this->_send_low("i",    0x06, true);
-//    this->_send_low("i",    0x09, true);
 }
 
 
+void Display::_clear_list()
+{
+    Signal* signal = NULL;
+
+    std::list<Signal*>::iterator it;
+
+    for (it = this->m_list->begin(); it != this->m_list->end(); ++it) {
+        signal = *it;
+        delete signal;
+    }
+
+    this->m_list->clear();
+}
 
 
 void Display::execute()
 {
-    this->p_spi->commit();
+    Signal* signal = NULL;
+
+    std::list<Signal*>::iterator it;
+
+    for (it = this->m_list->begin(); it != this->m_list->end(); ++it) {
+        signal = *it;
+        this->_send(signal);
+    }
+
+    this->_clear_list();
 }
