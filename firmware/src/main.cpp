@@ -61,6 +61,7 @@ void setup()
     hardware->button2()->setISR(handleISR2);
     hardware->setup();
 
+    hardware->display()->write("BOOT", 1);
     // Use an external AP
     // WiFi.mode(WIFI_STA);
     // WiFi.begin(SSID, PASSWORD);
@@ -73,11 +74,14 @@ void loop()
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
-        hardware->display()->write("TEST", 1);
     }
 
-    if (looper->counter() == 100) {
+    if (looper->counter() == 20) {
         hardware->display()->clear();
+        hardware->display()->write("TEST2", 1);
+    }
+
+    if (looper->counter() == 60) {
         hardware->display()->write("Hitachi", 2);
     }
 

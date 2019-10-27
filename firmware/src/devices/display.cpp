@@ -69,8 +69,8 @@
 
 #define CLEAR 0x01
 
-#define DELAY_ON  150
-#define DELAY_OFF 30
+#define DELAY_ON  1
+#define DELAY_OFF 0
 
 
 Display::Display (SPIClass* spi, int cs)
