@@ -22,7 +22,7 @@
 
 void debug_binary(const char* keyword, byte data)
 {
-    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c% c%c%c%c\n",
+    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c\n",
         keyword,
         data,
         data,
@@ -40,7 +40,7 @@ void debug_binary(const char* keyword, byte data)
 
 void debug_display(const char* keyword, byte data, byte signal, byte pin)
 {
-    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c% c%c%c%c  c%c%c%c c%c%c%c  c%c%c%c c%c%c%c\n",
+    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c  %c%c%c%c %c%c%c%c  %c%c%c%c %c%c%c%c\n",
         keyword,
         data,
         data,

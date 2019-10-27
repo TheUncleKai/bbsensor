@@ -65,6 +65,10 @@
 #define POS_DB4 0x10 //  16, 0001 0000
 
 
+#define DELAY_ON  150
+#define DELAY_OFF 30
+
+
 Display::Display (SPIClass* spi, int cs)
 {
     this->p_spi = new SPI();
@@ -79,47 +83,6 @@ Display::~Display()
     delete this->p_spi;
 }
 
-
-void Display::write(const char* input, int line)
-{
-    std::string text(input);
-}
-
-
-/*
-
-    def __lcd_transfer(self, desc, char, bits):
-        signal_on = 0x00
-        signal_off = 0x00
-        value = 0x00
-        mod = 0x00
-
-        bin_list = sorted(list(self.Translate))
-
-        if char is True:
-            signal_on += self.Pins.RS
-            signal_off += self.Pins.RS
-
-        signal_on += self.Pins.E
-
-        for check in bin_list:
-            if bits & check == check:
-                signal_on += self.Translate[check]
-                signal_off += self.Translate[check]
-                value += self.Translate[check]
-
-        bbq.log.debug2(desc, "BITS: " + format(bits, '04b'))
-        bbq.log.debug2(desc, "VAL : " + format(value, '04b'))
-        bbq.log.debug2(desc, "SON : " + format(signal_on, '06b'))
-        bbq.log.debug2(desc, "SOFF: " + format(signal_off, '06b'))
-
-        data = [[1, signal_on], [1, signal_off]]
-
-        self.SPI.transfer2(data, self.Delay2)
-        return
-void _transfer(const char* keyword, bool text, byte data);
-
-*/
 
 byte Display::_process_pins(byte data)
 {
@@ -141,6 +104,7 @@ byte Display::_process_pins(byte data)
     return pin;
 }
 
+
 void Display::_send(const char* keyword, byte data, byte signal, bool istext)
 {
     byte pin_on, pin_off;
@@ -160,11 +124,11 @@ void Display::_send(const char* keyword, byte data, byte signal, bool istext)
 
     this->p_spi->transfer(this->m_cs, pin_on);
     this->p_spi->commit();
-    delay(10);
+    delay(DELAY_ON);
 
     this->p_spi->transfer(this->m_cs, pin_off);
     this->p_spi->commit();
-    delay(10);
+    delay(DELAY_OFF);
 }
 
 
@@ -177,8 +141,24 @@ void Display::_send_low(const char* keyword, byte data, bool istext)
 
 void Display::_send_high(const char* keyword, byte data, bool istext)
 {
-    byte signal = signal & 0xF0;
+    byte signal = data & 0xF0;
     this->_send(keyword, data, signal, istext);
+}
+
+
+void Display::write(const char* input, int line)
+{
+    std::string text(input);
+    byte data = 0;
+    char* digit = 0;
+
+    for (std::string::iterator it=text.begin(); it!=text.end(); ++it) {
+        data = (byte)*it;
+        digit = (char*)&data;
+
+        this->_send_high(digit, data, true);
+        this->_send_low(digit, data, true);
+    }
 }
 
 
@@ -189,66 +169,43 @@ void Display::setup()
     digitalWrite(this->m_cs, HIGH);
 
     /*
+    Function set
+    RS RW DB7 DB6 DB5 DB4
 
-    // Function set
-    // RS RW DB7 DB6 DB5 DB4
+    set 8 bit operation
+    0  0  0   0   1   0      = 0010 -> 0x02
 
-    // set 8 bit operation
-    // 0  0  0   0   1   0      = 0010 -> 0x02
+    set 4 bit, set 2 lines and 5x8-Punkt-Matrix
+    0  0  0   0   1   0      = 0010 -> 0x02
+    0  0  1   0   *   *      = 1000 -> 0x08
 
+    turn on display and cursor
+    0  0  0   0   0   0      = 0000 -> 0x00
+    0  0  1   1   1   0      = 1110 -> 0x0e
 
-    // set 4 bit, set 2 lines and 5x8-Punkt-Matrix
-    // 0  0  0   0   1   0      = 0010 -> 0x02
-    // 0  0  1   0   *   *      = 1000 -> 0x08
-
-    // turn on display and cursor
-    // 0  0  0   0   0   0      = 0000 -> 0x00
-    // 0  0  1   1   1   0      = 1110 -> 0x0e
-
-    // Set mode to incement the address by one and shift cursor to right
-    // 0  0  0   0   0   0      = 0000 -> 0x00
-    // 0  0  0   1   1   0      = 0110 -> 0000 0110 -> 0x06
+    Set mode to incement the address by one and shift cursor to right
+    0  0  0   0   0   0      = 0000 -> 0x00
+    0  0  0   1   1   0      = 0110 -> 0000 0110 -> 0x06
     */
 
     this->_send_low("INIT", 0x02, false);
 
     this->_send_low("4BIT", 0x02, false);
-    this->_send_low("4BIT", 0x08, false);
+    this->_send_low("4BIT", 0x0b, false);
 
     this->_send_low("DISP", 0x00, false);
     this->_send_low("DISP", 0x0e, false);
 
     this->_send_low("SET",  0x00, false);
     this->_send_low("SET",  0x06, false);
-
-/*
-
-        # Interface auf 8-Bit setzen
-        self.__lcd_transfer("INIT", False, 0x03)
-        time.sleep(self.Delay1)
-
-        self.__lcd_transfer("INIT", False, 0x03)
-        time.sleep(self.Delay1)
-
-        self.__lcd_transfer("INIT", False, 0x03)
-        time.sleep(self.Delay1)
-
-        # Interface auf 4-Bit setzen
-        self.__lcd_transfer("4BIT", False, 0x02)
-        time.sleep(self.Delay2)
-
-        # 2-zeilig, 5x8-Punkt-Matrix
-        self.__lcd_transfer("DISP", False, 0x02)
-        time.sleep(self.Delay2)
-        self.__lcd_transfer("DISP", False, 0x08)
-        time.sleep(self.Delay2)
-
-        self.__lcd_transfer("SET", False, 0x00)
-        time.sleep(self.Delay2)
-        self.__lcd_transfer("SET", False, 0x06)
-        time.sleep(self.Delay2)
-*/
+//    this->_send_low("H",    0x04, true);
+//    this->_send_low("H",    0x08, true);
+//
+//    this->_send_low("i",    0x06, true);
+//    this->_send_low("i",    0x09, true);
 }
+
+
 
 
 void Display::execute()

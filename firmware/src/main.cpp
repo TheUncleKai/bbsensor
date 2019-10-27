@@ -73,6 +73,8 @@ void loop()
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
+        hardware->display()->write("TEST", 0);
+//        hardware->display()->write("Hitachi", 1);
     }
 
     if (looper->number() == 10) {
