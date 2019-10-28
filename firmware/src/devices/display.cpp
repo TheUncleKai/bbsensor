@@ -73,69 +73,6 @@
 #define DELAY_OFF 0
 
 
-Signal::Signal(const char* keyword, SignalType type, byte data, bool istext)
-{
-    this->m_keyword = std::string(keyword);
-    this->m_type = type;
-    this->m_data = data;
-    this->m_text = istext;
-}
-
-
-Signal::~Signal()
-{
-}
-
-
-byte Signal::_process_pins(byte data)
-{
-    byte pin = 0x00;
-
-    if ((data & POS_DB7) == POS_DB7) {
-        pin = pin | PIN_DB7;
-    }
-    if ((data & POS_DB6) == POS_DB6) {
-        pin = pin | PIN_DB6;
-    }
-    if ((data & POS_DB5) == POS_DB5) {
-        pin = pin | PIN_DB5;
-    }
-    if ((data & POS_DB4) == POS_DB4) {
-        pin = pin | PIN_DB4;
-    }
-
-    return pin;
-}
-
-
-byte Signal::pins()
-{
-    byte signal = 0;
-    byte pin = 0;
-
-    if (this->m_type == SIG_HIGH) {
-        signal = this->m_data & 0xF0;
-    }
-
-    if (this->m_type == SIG_LOW) {
-        signal = (this->m_data & 0x0F) << 4;
-    }
-
-    pin = this->_process_pins(signal);
-
-    if (this->m_text == true)
-    {
-        pin = pin ^ PIN_RS;
-    }
-
-#ifdef DISPLAY_DEBUG
-    debug_display(this->m_keyword.c_str(), this->m_data, signal, pin);
-#endif // DISPLAY_DEBUG
-
-    return pin;
-}
-
-
 Display::Display (SPIClass* spi, int cs)
 {
     this->p_spi = new SPI();
@@ -156,12 +93,52 @@ Display::~Display()
 }
 
 
-void Display::_send(Signal* signal)
+byte Display::_process_pins(byte data)
 {
-    byte pin_on, pin_off;
     byte pin = 0x00;
 
-    pin = signal->pins();
+    if ((data & POS_DB7) == POS_DB7) {
+        pin = pin | PIN_DB7;
+    }
+    if ((data & POS_DB6) == POS_DB6) {
+        pin = pin | PIN_DB6;
+    }
+    if ((data & POS_DB5) == POS_DB5) {
+        pin = pin | PIN_DB5;
+    }
+    if ((data & POS_DB4) == POS_DB4) {
+        pin = pin | PIN_DB4;
+    }
+
+    return pin;
+}
+
+
+void Display::_send(Signal* input)
+{
+    byte pin_on, pin_off;
+    byte signal = 0x00;
+    byte pin = 0x00;
+
+
+    if (input->type == Type::SIG_HIGH) {
+        signal = input->data & 0xF0;
+    }
+
+    if (input->type == Type::SIG_LOW) {
+        signal = (input->data & 0x0F) << 4;
+    }
+
+    pin = this->_process_pins(signal);
+
+    if (input->istext == true)
+    {
+        pin = pin ^ PIN_RS;
+    }
+
+#ifdef DISPLAY_DEBUG
+    debug_display(input->keyword, input->data, signal, pin);
+#endif // DISPLAY_DEBUG
 
     pin_on = pin ^ PIN_E;
     pin_off = pin;
@@ -178,14 +155,26 @@ void Display::_send(Signal* signal)
 
 void Display::_send_low(const char* keyword, byte data, bool istext)
 {
-    Signal* signal = new Signal(keyword, SIG_LOW, data, istext);
+    Signal* signal = new Signal();
+
+    signal->keyword = keyword;
+    signal->data = data;
+    signal->istext = istext;
+    signal->type = Type::SIG_LOW;
+
     this->m_list->push_back(signal);
 }
 
 
 void Display::_send_high(const char* keyword, byte data, bool istext)
 {
-    Signal* signal = new Signal(keyword, SIG_HIGH, data, istext);
+    Signal* signal = new Signal();
+
+    signal->keyword = keyword;
+    signal->data = data;
+    signal->istext = istext;
+    signal->type = Type::SIG_HIGH;
+
     this->m_list->push_back(signal);
 }
 
@@ -196,8 +185,6 @@ void Display::_set_line(int line)
 
     if (line == 1) {
         data = LINE1;
-
-
 
         this->_send_high("LINE1", data, false);
         this->_send_low("LINE1", data, false);
@@ -275,6 +262,9 @@ void Display::setup()
 
     this->_send_low("SET",  0x00, false);
     this->_send_low("SET",  0x06, false);
+
+    this->write("BOOT...", 1);
+    this->execute();
 }
 
 

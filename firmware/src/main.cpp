@@ -61,7 +61,6 @@ void setup()
     hardware->button2()->setISR(handleISR2);
     hardware->setup();
 
-    hardware->display()->write("BOOT", 1);
     // Use an external AP
     // WiFi.mode(WIFI_STA);
     // WiFi.begin(SSID, PASSWORD);

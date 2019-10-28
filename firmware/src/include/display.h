@@ -24,27 +24,18 @@
 #include <string>
 
 
-enum SignalType {
+enum class Type {
     SIG_HIGH = 0,
     SIG_LOW = 1
 };
 
 
-class Signal
+struct Signal
 {
-    public:
-        Signal (const char* keyword, SignalType type, byte data, bool istext);
-        virtual ~Signal();
-
-        byte pins();
-
-    private:
-        byte m_data;
-        SignalType m_type;
-        bool m_text;
-        std::string m_keyword;
-
-        byte _process_pins(byte data);
+    byte data;
+    Type type;
+    bool istext;
+    const char* keyword;
 };
 
 
@@ -65,7 +56,8 @@ class Display : public Device
         int m_cs;
         std::list<Signal*>* m_list;
 
-        void _send(Signal* signal);
+        byte _process_pins(byte data);
+        void _send(Signal* input);
 
         void _clear_list();
         void _set_line(int line);
