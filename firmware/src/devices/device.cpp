@@ -80,9 +80,9 @@ void SPI::commit()
     this->p_spi->transfer(this->m_data);
     this->_off(this->m_channel);
 
-#ifdef SPI_DEBUG
+#ifdef DEBUG_SPI
     debug_binary("SPI", this->m_data);
-#endif // SPI_DEBUG
+#endif // DEBUG_SPI
 
     this->m_channel = 0;
     this->m_transfer = 0;

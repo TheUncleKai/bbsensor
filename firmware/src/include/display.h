@@ -23,6 +23,7 @@
 #include <list>
 #include <string>
 
+#define DISPLAY_DEBUG
 
 enum class Type {
     SIG_HIGH = 0,

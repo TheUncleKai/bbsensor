@@ -19,6 +19,8 @@
 
 #include <SPI.h>
 
+#define DEBUG_SPI
+
 
 class Device
 {

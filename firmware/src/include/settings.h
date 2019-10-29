@@ -44,15 +44,4 @@
 
 #define LOOP_WAIT       100
 
-//#define LED_DEBUG         1
-//#define LOOP_DEBUG        1
-//#define BUTTON_DEBUG      1
-//#define HARDWARE_DEBUG    1
-//#define SPI_DEBUG         1
-#define DISPLAY_DEBUG     1
-#define TEMPERATURE_DEBUG 1
-#define CLICK_DEBUG       1
-
-#define DEBUG_SIGNAL      1
-
 #endif // CONFIG_H_INCLUDED

@@ -17,6 +17,8 @@
 #ifndef CLICK_H_INCLUDED
 #define CLICK_H_INCLUDED
 
+#define DEBUG_CLICK
+
 
 class ClickSpan
 {

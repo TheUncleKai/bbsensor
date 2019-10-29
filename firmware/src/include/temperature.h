@@ -24,6 +24,8 @@
 #include <device.h>
 #include <channel.h>
 
+#define DEBUG_TEMPERATURE
+
 
 class Temperature : public Device
 {

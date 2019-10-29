@@ -17,6 +17,8 @@
 #ifndef LOOP_H_INCLUDED
 #define LOOP_H_INCLUDED
 
+#define DEBUG_LOOP
+
 
 class Loop
 {

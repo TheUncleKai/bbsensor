@@ -86,12 +86,12 @@ void Temperature::setup()
         }
 
         if (temp != NULL) {
-#ifdef TEMPERATURE_DEBUG
+#ifdef DEBUG_TEMPERATURE
             DEBUG_MSG("TEMPERATURE: add channel %d, input %d, type %d\n",
                       temp->channel(),
                       temp->number(),
                       temp->type());
-#endif // TEMPERATURE_DEBUG
+#endif // DEBUG_TEMPERATURE
             this->p_channels->push_back(temp);
         }
     }
