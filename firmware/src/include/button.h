@@ -20,7 +20,7 @@
 #include <device.h>
 #include <click.h>
 
-#define DEBUG_BUTTON
+//#define DEBUG_BUTTON
 
 
 class Button : public Device
