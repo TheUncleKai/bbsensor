@@ -71,7 +71,7 @@ void SPI::transfer(int channel, char data)
 }
 
 
-void SPI::commit()
+void SPI::commit(bool debug_out)
 {
     if (this->m_transfer == 0) {
         return;
@@ -81,7 +81,9 @@ void SPI::commit()
     this->_off(this->m_channel);
 
 #ifdef DEBUG_SPI
-    debug_binary("SPI", this->m_data);
+    if (debug_out == true) {
+        debug_binary("SPI", this->m_data);
+    }
 #endif // DEBUG_SPI
 
     this->m_channel = 0;

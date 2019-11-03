@@ -69,8 +69,8 @@
 
 #define CLEAR 0x01
 
-#define DELAY_ON  1
-#define DELAY_OFF 0
+#define DELAY_ON  3
+#define DELAY_OFF 2
 
 
 Display::Display (SPIClass* spi, int cs)
@@ -144,11 +144,11 @@ void Display::_send(Signal* input)
     pin_off = pin;
 
     this->p_spi->transfer(this->m_cs, pin_on);
-    this->p_spi->commit();
+    this->p_spi->commit(false);
     delay(DELAY_ON);
 
     this->p_spi->transfer(this->m_cs, pin_off);
-    this->p_spi->commit();
+    this->p_spi->commit(false);
     delay(DELAY_OFF);
 }
 

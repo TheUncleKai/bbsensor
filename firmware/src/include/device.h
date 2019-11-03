@@ -41,7 +41,7 @@ class SPI
 
         void set_spi(SPIClass* spi);
         void transfer(int channel, char data);
-        void commit();
+        void commit(bool debug_out);
 
     private:
         SPIClass* p_spi;

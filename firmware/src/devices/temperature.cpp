@@ -65,25 +65,11 @@ void Temperature::setup()
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
 
-    byte value;
-    int address = 0;
     Channel* temp = NULL;
 
-
     for (int i=0; i <= TEMP_CHANNELS; i++) {
-        address = EEPROM_CHANNELS + i;
-        value = this->p_eeprom->read(address);
-        temp = NULL;
 
-        if (value == 1) {
-            temp = new Channel(this->p_spi, i+1, i, 1);
-        }
-        if (value == 2) {
-            temp = new Channel(this->p_spi, i+1, i, 2);
-        }
-        if (value == 3) {
-            temp = new Channel(this->p_spi, i+1, i, 3);
-        }
+        temp = new Channel(this->p_spi, i+1, i, 2);
 
         if (temp != NULL) {
 #ifdef DEBUG_TEMPERATURE
