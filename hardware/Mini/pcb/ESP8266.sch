@@ -115,9 +115,9 @@ F 3 "~" H 7525 3050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4500 2350 4500 3150
-Text Label 7925 3350 0    60   ~ 0
+Text Label 7950 2650 0    60   ~ 0
 SPI4
-Text Label 7925 3050 0    60   ~ 0
+Text Label 7950 3050 0    60   ~ 0
 SPI2
 $Comp
 L power:+3.3V #PWR0110
@@ -180,21 +180,10 @@ L Device:LED D101
 U 1 1 5D68583F
 P 7450 1650
 F 0 "D101" H 7550 1750 50  0000 R CNN
-F 1 "RED" H 7550 1550 50  0000 R CNN
+F 1 "GREEN" H 7550 1550 50  0000 R CNN
 F 2 "VCC:5600F" H 7450 1650 50  0001 C CNN
 F 3 "~" H 7450 1650 50  0001 C CNN
 	1    7450 1650
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:LED D102
-U 1 1 5D6865FB
-P 7850 1650
-F 0 "D102" H 7950 1750 50  0000 R CNN
-F 1 "GREEN" H 8050 1550 50  0000 R CNN
-F 2 "VCC:5600F" H 7850 1650 50  0001 C CNN
-F 3 "~" H 7850 1650 50  0001 C CNN
-	1    7850 1650
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -219,28 +208,6 @@ F 3 "~" H 7450 1250 50  0001 C CNN
 	1    7450 1250
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R R151
-U 1 1 5D68B840
-P 7850 1250
-F 0 "R151" V 7950 1150 50  0000 L CNN
-F 1 "140" V 7850 1250 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7780 1250 50  0001 C CNN
-F 3 "~" H 7850 1250 50  0001 C CNN
-	1    7850 1250
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR0114
-U 1 1 5D68BB96
-P 7850 1000
-F 0 "#PWR0114" H 7850 850 50  0001 C CNN
-F 1 "+3.3V" H 7865 1173 50  0000 C CNN
-F 2 "" H 7850 1000 50  0001 C CNN
-F 3 "" H 7850 1000 50  0001 C CNN
-	1    7850 1000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7450 1400 7450 1500
 Wire Wire Line
@@ -248,18 +215,9 @@ Wire Wire Line
 Wire Wire Line
 	7450 2250 6800 2250
 Wire Wire Line
-	6800 2350 7850 2350
-Wire Wire Line
-	7850 2350 7850 1800
-Wire Wire Line
-	7850 1500 7850 1400
-Wire Wire Line
-	7850 1000 7850 1100
-Wire Wire Line
 	7450 1000 7450 1100
-Text Label 7925 3450 0    60   ~ 0
+Text Label 7950 3250 0    60   ~ 0
 SPI5
-NoConn ~ 6800 3250
 NoConn ~ 4700 3450
 NoConn ~ 4700 3350
 NoConn ~ 4700 3250
@@ -291,7 +249,7 @@ F 3 "~" H 10500 1250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	10500 1050 10500 1250
-Text Label 7925 3150 0    60   ~ 0
+Text Label 7950 3150 0    60   ~ 0
 SPI1
 $Comp
 L Device:R R102
@@ -304,46 +262,39 @@ F 3 "~" H 7325 3700 50  0001 C CNN
 	1    7325 3700
 	1    0    0    -1  
 $EndComp
-Text Notes 7050 3450 0    60   ~ 0
+Text Notes 7050 3250 0    60   ~ 0
 CS2
 Text Notes 7050 3150 0    60   ~ 0
 MOSI
-Text Notes 7050 3350 0    60   ~ 0
+Text Notes 7050 2650 0    60   ~ 0
 CS1
 Text Notes 7675 3050 0    60   ~ 0
 MISO
 Text Notes 7050 2950 0    60   ~ 0
 SCLK
-NoConn ~ 6800 2650
 Wire Wire Line
 	6800 2450 8775 2450
 Connection ~ 8775 2450
 Wire Bus Line
-	8275 4875 2700 4875
+	8300 4875 2700 4875
 Entry Wire Line
-	8275 3550 8175 3450
-Wire Wire Line
-	6800 3450 8175 3450
-Entry Wire Line
-	8275 3450 8175 3350
-Wire Wire Line
-	8175 3350 6800 3350
+	8300 3350 8200 3250
 NoConn ~ 4700 2650
 NoConn ~ 4700 2850
 Entry Wire Line
-	8275 3050 8175 2950
+	8300 3050 8200 2950
 Wire Wire Line
-	8175 2950 6800 2950
-Text Label 7925 2950 0    60   ~ 0
+	8200 2950 6800 2950
+Text Label 7950 2950 0    60   ~ 0
 SPI3
 Entry Wire Line
-	8275 3250 8175 3150
+	8300 3250 8200 3150
 Wire Wire Line
-	8175 3150 6800 3150
+	8200 3150 6800 3150
 Entry Wire Line
-	8275 3150 8175 3050
+	8300 3150 8200 3050
 Wire Wire Line
-	7675 3050 8175 3050
+	7675 3050 8200 3050
 Wire Wire Line
 	7375 3050 7325 3050
 Wire Wire Line
@@ -415,18 +366,29 @@ F 3 "" H 8550 3975 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6800 2550 8550 2550
+	8925 2675 9000 2675
+Wire Wire Line
+	8550 3975 8550 3200
 Wire Wire Line
 	8925 2550 8925 2675
 Wire Wire Line
-	8925 2675 9000 2675
-Wire Wire Line
 	8550 2900 8550 2550
-Connection ~ 8550 2550
 Wire Wire Line
 	8550 2550 8925 2550
 Wire Wire Line
-	8550 3975 8550 3200
+	6800 2350 8550 2350
+Wire Wire Line
+	8550 2350 8550 2550
+Connection ~ 8550 2550
+NoConn ~ 6800 2550
+Wire Wire Line
+	6800 2650 8200 2650
+Entry Wire Line
+	8200 2650 8300 2750
+NoConn ~ 6800 3350
+Wire Wire Line
+	6800 3250 8200 3250
+NoConn ~ 6800 3450
 Wire Bus Line
-	8275 3050 8275 4875
+	8300 2750 8300 4875
 $EndSCHEMATC

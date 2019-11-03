@@ -14,7 +14,7 @@
 
 SRCDIR := 
 OBJDIR := $(ROOT)/$(OUTPUT)/sensor
-FOLDER := $(ROOT)/$(OUTPUT)/sensor $(ROOT)/$(OUTPUT)/sensor/data $(ROOT)/$(OUTPUT)/sensor/devices
+FOLDER := $(ROOT)/$(OUTPUT)/sensor $(ROOT)/$(OUTPUT)/sensor/data $(ROOT)/$(OUTPUT)/sensor/devices $(ROOT)/$(OUTPUT)/sensor/utils
 ADD_DEP := local.eagle.app.v6.common.ld
 ADD_INCLUDE := -I../ext/core -Iinclude
 ADD_LIBS = -lcore -lspi -leeprom -lESP8266WiFi
