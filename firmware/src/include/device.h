@@ -18,8 +18,12 @@
 #define DEVICE_H_INCLUDED
 
 #include <SPI.h>
+#include <list>
 
 #define DEBUG_SPI
+
+
+typedef std::list<uint8_t> SPIData;
 
 
 class Device
@@ -40,13 +44,14 @@ class SPI
         SPIClass* spi();
 
         void set_spi(SPIClass* spi);
-        void transfer(int channel, char data);
-        void commit(bool debug_out);
+        void transfer(int channel, uint8_t data);
+        void transfer(int channel, uint8_t data[], int size);
+        void commit(bool debug_out, SPIData* result);
 
     private:
         SPIClass* p_spi;
+        SPIData* p_data;
         int m_transfer, m_channel;
-        char m_data;
 
         void _on(int channel);
         void _off(int channel);

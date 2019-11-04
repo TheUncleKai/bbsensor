@@ -21,12 +21,21 @@
 #include <SPI.h>
 
 #include <device.h>
+#include <list>
 
+
+struct ChannelValue
+{
+    unsigned int data;
+    float voltage;
+};
+
+typedef std::list<ChannelValue> ChannelData;
 
 class Channel : public Device
 {
     public:
-        Channel (SPIClass* spi, int num, int channel, int type);
+        Channel (int num, byte channel, int type);
         virtual ~Channel();
 
         enum Type {
@@ -38,15 +47,17 @@ class Channel : public Device
 
         void setup();
         void execute();
-        Type type();
 
+        Type type();
         int number();
-        int channel();
+        ChannelData* data();
+        byte command();
 
     private:
-        int m_num, m_channel;
+        int m_num;
+        byte m_channel;
         Type m_type;
-        SPIClass* m_spi;
+        ChannelData* p_data;
 };
 
 typedef std::list<Channel*> ChannelList;

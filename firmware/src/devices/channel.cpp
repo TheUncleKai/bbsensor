@@ -22,9 +22,9 @@
 #include <channel.h>
 
 
-Channel::Channel(SPIClass* spi, int num, int channel, int type)
+Channel::Channel(int num, byte channel, int type)
 {
-    this->m_spi = spi;
+    this->p_data = new ChannelData;
     this->m_num = num;
     this->m_channel = channel;
 
@@ -45,24 +45,14 @@ Channel::Channel(SPIClass* spi, int num, int channel, int type)
 
 Channel::~Channel()
 {
+    this->p_data->clear();
+    delete this->p_data;
 }
 
 
 Channel::Type Channel::type()
 {
     return this->m_type;
-}
-
-
-int Channel::number()
-{
-    return this->m_num;
-}
-
-
-int Channel::channel()
-{
-    return this->m_channel;
 }
 
 
@@ -73,4 +63,22 @@ void Channel::setup()
 
 void Channel::execute()
 {
+}
+
+
+int Channel::number()
+{
+    return this->m_num;
+}
+
+
+ChannelData* Channel::data()
+{
+    return this->p_data;
+}
+
+
+byte Channel::command()
+{
+    return (8 ^ this->m_channel) << 4;
 }

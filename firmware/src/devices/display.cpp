@@ -144,11 +144,11 @@ void Display::_send(Signal* input)
     pin_off = pin;
 
     this->p_spi->transfer(this->m_cs, pin_on);
-    this->p_spi->commit(false);
+    this->p_spi->commit(false, NULL);
     delay(DELAY_ON);
 
     this->p_spi->transfer(this->m_cs, pin_off);
-    this->p_spi->commit(false);
+    this->p_spi->commit(false, NULL);
     delay(DELAY_OFF);
 }
 

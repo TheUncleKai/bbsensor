@@ -24,9 +24,12 @@
 Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, int cs)
 {
     this->m_cs = cs;
-    this->p_spi = spi;
+    this->p_spi = new SPI();
+
     this->p_eeprom = eeprom;
     this->p_channels = new ChannelList;
+
+    this->p_spi->set_spi(spi);
 }
 
 
@@ -45,6 +48,7 @@ Temperature::~Temperature()
     this->p_channels->clear();
 
     delete this->p_channels;
+    delete this->p_spi;
 }
 
 
@@ -69,14 +73,12 @@ void Temperature::setup()
 
     for (int i=0; i <= TEMP_CHANNELS; i++) {
 
-        temp = new Channel(this->p_spi, i+1, i, 2);
+        temp = new Channel(i+1, i, 2);
 
         if (temp != NULL) {
 #ifdef DEBUG_TEMPERATURE
             DEBUG_MSG("TEMPERATURE: add channel %d, input %d, type %d\n",
-                      temp->channel(),
-                      temp->number(),
-                      temp->type());
+                      i, temp->number(), temp->type());
 #endif // DEBUG_TEMPERATURE
             this->p_channels->push_back(temp);
         }
@@ -86,4 +88,17 @@ void Temperature::setup()
 
 void Temperature::execute()
 {
+    ChannelList::iterator iter;
+    Channel* chan;
+    SPIData data;
+
+    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
+    {
+        chan = (*iter);
+
+        this->p_spi->transfer(this->m_cs, 1); // set start
+        this->p_spi->transfer(this->m_cs, chan->command()); // then set command
+
+        this->p_spi->commit(true, &data);
+    }
 }

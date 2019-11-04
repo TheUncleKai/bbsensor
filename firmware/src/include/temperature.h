@@ -41,7 +41,7 @@ class Temperature : public Device
 
     private:
         int m_cs;
-        SPIClass* p_spi;
+        SPI* p_spi;
         ChannelList* p_channels;
         EEPROMClass* p_eeprom;
 };
