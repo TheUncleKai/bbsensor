@@ -26,16 +26,16 @@
 
 struct ChannelValue
 {
-    unsigned int data;
+    uint16_t data;
     float voltage;
 };
 
-typedef std::list<ChannelValue> ChannelData;
+typedef std::list<ChannelValue*> ChannelData;
 
 class Channel : public Device
 {
     public:
-        Channel (int num, byte channel, int type);
+        Channel (int num, uint8_t channel, int type);
         virtual ~Channel();
 
         enum Type {
@@ -51,11 +51,11 @@ class Channel : public Device
         Type type();
         int number();
         ChannelData* data();
-        byte command();
+        uint8_t channel();
 
     private:
         int m_num;
-        byte m_channel;
+        uint8_t m_channel;
         Type m_type;
         ChannelData* p_data;
 };

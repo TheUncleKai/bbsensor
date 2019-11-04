@@ -88,17 +88,57 @@ void Temperature::setup()
 
 void Temperature::execute()
 {
+    int n;
     ChannelList::iterator iter;
+    SPIData::iterator data_iter;
+
     Channel* chan;
     SPIData data;
 
+    uint8_t answer = 0;
+    uint32_t command = 0;
+    uint32_t c1, c2, c3;
+
     for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
     {
+        ChannelValue* value = new ChannelValue;
+
+        value->data = 0;
+        value->voltage = 0.0;
+
         chan = (*iter);
 
-        this->p_spi->transfer(this->m_cs, 1); // set start
-        this->p_spi->transfer(this->m_cs, chan->command()); // then set command
+        command = (0x0018 ^ chan->channel()) << 14;
+
+        c1 = (0x00FF0000 & command) >> 16;
+        c2 = (0x0000FF00 & command) >> 8;
+        c3 =  0x000000FF & command;
+
+        this->p_spi->transfer(this->m_cs, (uint8_t)c1); // set start
+        this->p_spi->transfer(this->m_cs, (uint8_t)c2); // set start
+        this->p_spi->transfer(this->m_cs, (uint8_t)c3); // set start
 
         this->p_spi->commit(true, &data);
+
+        if (data.size() != 3)
+            return;
+
+        n = 0;
+        for (data_iter = data.begin(); data_iter != data.end(); ++data_iter) {
+            answer = (*data_iter);
+
+            if (n == 1) {
+                value->data = value->data ^ ((answer & 0x0F) << 8);
+            }
+
+            if (n == 2) {
+                value->data = value->data ^ answer;
+            }
+
+            n++;
+        }
+
+        chan->data()->push_back(value);
+        data.clear();
     }
 }

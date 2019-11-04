@@ -22,7 +22,7 @@
 #include <channel.h>
 
 
-Channel::Channel(int num, byte channel, int type)
+Channel::Channel(int num, uint8_t channel, int type)
 {
     this->p_data = new ChannelData;
     this->m_num = num;
@@ -45,6 +45,14 @@ Channel::Channel(int num, byte channel, int type)
 
 Channel::~Channel()
 {
+    ChannelData::iterator it;
+    ChannelValue* value;
+
+    for (it = this->p_data->begin(); it != this->p_data->end(); ++it) {
+        value = (*it);
+        delete value;
+    }
+
     this->p_data->clear();
     delete this->p_data;
 }
@@ -78,7 +86,7 @@ ChannelData* Channel::data()
 }
 
 
-byte Channel::command()
+uint8_t Channel::channel()
 {
-    return (8 ^ this->m_channel) << 4;
+    return this->m_channel;
 }
