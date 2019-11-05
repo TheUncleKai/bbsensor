@@ -30,17 +30,17 @@
 class Temperature : public Device
 {
     public:
-        Temperature (EEPROMClass* eeprom, SPIClass* spi, int cs);
+        Temperature (EEPROMClass* eeprom, SPIClass* spi, uint8_t cs);
         virtual ~Temperature();
 
         void setup();
         void execute();
         ChannelList* channel();
 
-        int cs();
+        uint8_t cs();
 
     private:
-        int m_cs;
+        uint8_t m_cs;
         SPI* p_spi;
         ChannelList* p_channels;
         EEPROMClass* p_eeprom;

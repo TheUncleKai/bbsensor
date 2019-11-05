@@ -52,21 +52,21 @@ void SPI::set_spi(SPIClass* spi)
 }
 
 
-void SPI::_on(int channel)
+void SPI::_on(uint8_t channel)
 {
     digitalWrite(channel, LOW);
     this->m_transfer = 1;
 }
 
 
-void SPI::_off(int channel)
+void SPI::_off(uint8_t channel)
 {
     digitalWrite(channel, HIGH);
     this->m_transfer = 0;
 }
 
 
-void SPI::transfer(int channel, uint8_t data)
+void SPI::transfer(uint8_t channel, uint8_t data)
 {
     this->_on(channel);
 
@@ -76,13 +76,13 @@ void SPI::transfer(int channel, uint8_t data)
 }
 
 
-void SPI::transfer(int channel, uint8_t data[], int size)
+void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
 {
     this->_on(channel);
 
     this->m_channel = channel;
 
-    for (int i = 0; i < size; ++i) {
+    for (uint8_t i = 0; i < size; ++i) {
         this->p_data->push_back(data[i]);
     }
 }

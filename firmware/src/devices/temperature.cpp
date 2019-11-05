@@ -21,7 +21,7 @@
 
 #include <temperature.h>
 
-Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, int cs)
+Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
 {
     this->m_cs = cs;
     this->p_spi = new SPI();
@@ -52,7 +52,7 @@ Temperature::~Temperature()
 }
 
 
-int Temperature::cs()
+uint8_t Temperature::cs()
 {
     return this->m_cs;
 }
@@ -71,7 +71,7 @@ void Temperature::setup()
 
     Channel* temp = NULL;
 
-    for (int i=0; i <= TEMP_CHANNELS; i++) {
+    for (uint8_t i = 0; i <= TEMP_CHANNELS; i++) {
 
         temp = new Channel(i+1, i, 2);
 
@@ -88,7 +88,7 @@ void Temperature::setup()
 
 void Temperature::_process_channel(Channel* channel)
 {
-    int n;
+    uint8_t n;
     SPIData data;
     ChannelValue* value = new ChannelValue;
     SPIData::iterator iter;

@@ -20,7 +20,7 @@
 #include <string>
 
 
-void debug_binary(const char* keyword, byte data)
+void debug_binary(const char* keyword, uint8_t data)
 {
     DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c\n",
         keyword,
@@ -38,7 +38,7 @@ void debug_binary(const char* keyword, byte data)
 }
 
 
-void debug_display(const char* keyword, byte data, byte signal, byte pin)
+void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin)
 {
     DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c  %c%c%c%c %c%c%c%c  %c%c%c%c %c%c%c%c\n",
         keyword,

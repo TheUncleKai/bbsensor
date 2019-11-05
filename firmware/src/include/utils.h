@@ -17,8 +17,8 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
-void debug_binary(const char* keyword, byte data);
+void debug_binary(const char* keyword, uint8_t data);
 
-void debug_display(const char* keyword, byte data, byte signal, byte pin);
+void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin);
 
 #endif // UTILS_H_INCLUDED

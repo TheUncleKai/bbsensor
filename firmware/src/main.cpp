@@ -36,7 +36,7 @@ void loop();
 Hardware* hardware = new Hardware();
 Display* display = hardware->display();
 Loop* looper = new Loop();
-byte number = 0;
+
 
 void handleISR1()
 {

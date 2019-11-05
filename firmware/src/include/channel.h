@@ -35,7 +35,7 @@ typedef std::list<ChannelValue*> ChannelData;
 class Channel : public Device
 {
     public:
-        Channel (int num, uint8_t channel, int type);
+        Channel (uint8_t num, uint8_t channel, uint8_t type);
         virtual ~Channel();
 
         enum Type {
@@ -49,13 +49,12 @@ class Channel : public Device
         void execute();
 
         Type type();
-        int number();
+        uint8_t number();
         ChannelData* data();
         uint8_t channel();
 
     private:
-        int m_num;
-        uint8_t m_channel;
+        uint8_t m_num, m_channel;
         Type m_type;
         ChannelData* p_data;
 };

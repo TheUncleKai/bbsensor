@@ -22,7 +22,7 @@
 #include <led.h>
 
 
-LED::LED (int num, int pin)
+LED::LED (uint8_t num, uint8_t pin)
 {
     this->m_num = num;
     this->m_pin = pin;

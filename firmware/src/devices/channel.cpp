@@ -22,7 +22,7 @@
 #include <channel.h>
 
 
-Channel::Channel(int num, uint8_t channel, int type)
+Channel::Channel(uint8_t num, uint8_t channel, uint8_t type)
 {
     this->p_data = new ChannelData;
     this->m_num = num;
@@ -74,7 +74,7 @@ void Channel::execute()
 }
 
 
-int Channel::number()
+uint8_t Channel::number()
 {
     return this->m_num;
 }
