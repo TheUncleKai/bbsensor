@@ -86,59 +86,79 @@ void Temperature::setup()
 }
 
 
-void Temperature::execute()
+void Temperature::_process_channel(Channel* channel)
 {
     int n;
-    ChannelList::iterator iter;
-    SPIData::iterator data_iter;
-
-    Channel* chan;
     SPIData data;
+    ChannelValue* value = new ChannelValue;
+    SPIData::iterator iter;
 
     uint8_t answer = 0;
     uint32_t command = 0;
-    uint32_t c1, c2, c3;
+
+    value->data = 0;
+    value->voltage = 0.0;
+
+    //  first 8 bits      second 8 bits      third 8 bits
+    //  X X X X X 1 S D2  D1 D0 X X X X X X  X X X X X X X X
+    //  1 = Start Bit
+    //  S = 1: single ended / 0: differential
+
+    //  Channel selection
+    //  D2 D1 D0  Channel
+    //  0  0  0   CH0
+    //  0  0  1   CH1
+    //  0  1  0   CH2
+    //  0  1  1   CH3
+    //  1  0  0   CH4
+    //  1  0  1   CH5
+    //  1  1  0   CH6
+    //  1  1  1   CH7
+
+    // Result Bits
+    // first 8 bits     second 8 bits          third 8 bits
+    // X X X X X X X X  X X X 0 B11 B10 B9 B8  B7 B6 B5 B4 B3 B2 B1 B0
+
+    command = (0x0018 ^ channel->channel()) << 14;
+
+    this->p_spi->transfer(this->m_cs, (uint8_t)((0x00FF0000 & command) >> 16)); // set start
+    this->p_spi->transfer(this->m_cs, (uint8_t)((0x0000FF00 & command) >> 8)); // set start
+    this->p_spi->transfer(this->m_cs, (uint8_t)(0x000000FF & command)); // set start
+
+    this->p_spi->commit(true, &data);
+
+    if (data.size() != 3)
+        return;
+
+    n = 0;
+    for (iter = data.begin(); iter != data.end(); ++iter) {
+        answer = (*iter);
+
+        if (n == 1) {
+            value->data = value->data ^ ((answer & 0x0F) << 8);
+        }
+
+        if (n == 2) {
+            value->data = value->data ^ answer;
+        }
+
+        n++;
+    }
+
+    channel->data()->push_back(value);
+    data.clear();
+
+}
+
+
+void Temperature::execute()
+{
+    ChannelList::iterator iter;
+    Channel* channel = NULL;
 
     for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
     {
-        ChannelValue* value = new ChannelValue;
-
-        value->data = 0;
-        value->voltage = 0.0;
-
-        chan = (*iter);
-
-        command = (0x0018 ^ chan->channel()) << 14;
-
-        c1 = (0x00FF0000 & command) >> 16;
-        c2 = (0x0000FF00 & command) >> 8;
-        c3 =  0x000000FF & command;
-
-        this->p_spi->transfer(this->m_cs, (uint8_t)c1); // set start
-        this->p_spi->transfer(this->m_cs, (uint8_t)c2); // set start
-        this->p_spi->transfer(this->m_cs, (uint8_t)c3); // set start
-
-        this->p_spi->commit(true, &data);
-
-        if (data.size() != 3)
-            return;
-
-        n = 0;
-        for (data_iter = data.begin(); data_iter != data.end(); ++data_iter) {
-            answer = (*data_iter);
-
-            if (n == 1) {
-                value->data = value->data ^ ((answer & 0x0F) << 8);
-            }
-
-            if (n == 2) {
-                value->data = value->data ^ answer;
-            }
-
-            n++;
-        }
-
-        chan->data()->push_back(value);
-        data.clear();
+        channel = (*iter);
+        this->_process_channel(channel);
     }
 }

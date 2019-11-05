@@ -44,6 +44,8 @@ class Temperature : public Device
         SPI* p_spi;
         ChannelList* p_channels;
         EEPROMClass* p_eeprom;
+
+        void _process_channel(Channel* channel);
 };
 
 
