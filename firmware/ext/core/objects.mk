@@ -1,66 +1,33 @@
-OBJS_CORE = \
-	cont.S.o \
-	abi.cpp.o \
-	base64.cpp.o \
-	cbuf.cpp.o \
-	cont_util.cpp.o \
-	core_esp8266_app_entry_noextra4k.cpp.o \
-	core_esp8266_eboot_command.cpp.o \
-	core_esp8266_flash_utils.cpp.o \
-	core_esp8266_i2s.cpp.o \
-	core_esp8266_main.cpp.o \
-	core_esp8266_noniso.cpp.o \
-	core_esp8266_phy.cpp.o \
-	core_esp8266_postmortem.cpp.o \
-	core_esp8266_si2c.cpp.o \
-	core_esp8266_sigma_delta.cpp.o \
-	core_esp8266_timer.cpp.o \
-	core_esp8266_waveform.cpp.o \
-	core_esp8266_wiring_analog.cpp.o \
-	core_esp8266_wiring_digital.cpp.o \
-	core_esp8266_wiring_pulse.cpp.o \
-	core_esp8266_wiring_pwm.cpp.o \
-	core_esp8266_wiring_shift.cpp.o \
-	core_esp8266_wiring.cpp.o \
-	debug.cpp.o \
-	Esp-frag.cpp.o \
-	Esp-version.cpp.o \
-	Esp.cpp.o \
-	FS.cpp.o \
-	FunctionalInterrupt.cpp.o \
-	gdb_hooks.cpp.o \
-	HardwareSerial.cpp.o \
-	heap.cpp.o \
-	IPAddress.cpp.o \
-	libc_replacements.cpp.o \
-	MD5Builder.cpp.o \
-	Print.cpp.o \
-	Schedule.cpp.o \
-	ScheduledFunctions.cpp.o \
-	sntp-lwip2.cpp.o \
-	spiffs_api.cpp.o \
-	spiffs_hal.cpp.o \
-	sqrt32.cpp.o \
-	StackThunk.cpp.o \
-	Stream.cpp.o \
-	StreamString.cpp.o \
-	time.cpp.o \
-	Tone.cpp.o \
-	uart.cpp.o \
-	Updater.cpp.o \
-	WMath.cpp.o \
-	WString.cpp.o
+# Copyright (C) 2019, Kai Raphahn
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-OBJS_SPIFFS = \
-	spiffs_cache.cpp.o \
-	spiffs_check.cpp.o \
-	spiffs_gc.cpp.o \
-	spiffs_hydrogen.cpp.o \
-	spiffs_nucleus.cpp.o
+OBJS_CORE_ASM := ${SOURCES_CORE_ASM:.S=.S.o}
+OBJS_CORE_ASM := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_CORE_ASM)}
 
-OBJS_LIBB64 = \
-	cdecode.cpp.o \
-	cencode.cpp.o
+OBJS_CORE_CPP := ${SOURCES_CORE_CPP:.cpp=.cpp.o}
+OBJS_CORE_CPP := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_CORE_CPP)}
 
-OBJS_MALLOC = \
-	umm_malloc.cpp.o
+OBJS_LIBB64 := ${SOURCES_LIBB64:.cpp=.cpp.o}
+OBJS_LIBB64 := ${subst $(SRCDIR)/libb64,$(OBJDIR),$(OBJS_LIBB64)}
+
+OBJS_MALLOC := ${SOURCES_MALLOC:.cpp=.cpp.o}
+OBJS_MALLOC := ${subst $(SRCDIR)/umm_malloc,$(OBJDIR),$(OBJS_MALLOC)}
+
+OBJS_SPIFFS := ${SOURCES_SPIFFS:.cpp=.cpp.o}
+OBJS_SPIFFS := ${subst $(SRCDIR)/spiffs,$(OBJDIR),$(OBJS_SPIFFS)}
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+OBJS := $(OBJS_CORE_ASM) $(OBJS_CORE_CPP) $(OBJS_SPIFFS) $(OBJS_LIBB64) $(OBJS_MALLOC)
+ARS := $(OBJS:.o=.ar)

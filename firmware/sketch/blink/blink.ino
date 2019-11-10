@@ -1,3 +1,6 @@
+#include <ESP8266WiFi.h>
+#include <SPI.h>
+
 #ifdef DEBUG_ESP_PORT
 #define DEBUG_MSG(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
 #else
@@ -9,6 +12,7 @@
 void setup() {
   Serial.begin(115200);
   delay(3000);
+  SPI.begin();
   
   pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
   DEBUG_MSG("bootup...\n");
