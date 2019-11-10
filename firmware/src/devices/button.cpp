@@ -22,7 +22,7 @@
 #include <button.h>
 
 
-Button::Button (int num, int pin)
+Button::Button (uint8_t num, uint8_t pin)
 {
     this->m_num = num;
     this->m_pin = pin;
@@ -47,7 +47,6 @@ void Button::setISR(void (*isr)(void))
 void Button::handleISR()
 {
     unsigned long timestamp = millis();
-    byte state = 0;
 
     if (digitalRead(this->m_pin) == HIGH) {
         this->p_click->set_high(timestamp);

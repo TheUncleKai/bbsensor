@@ -24,26 +24,30 @@
 #include <device.h>
 #include <channel.h>
 
-//#define DEBUG_TEMPERATURE
+#define DEBUG_TEMPERATURE
 
 
 class Temperature : public Device
 {
     public:
-        Temperature (EEPROMClass* eeprom, SPIClass* spi, int cs);
+        Temperature (EEPROMClass* eeprom, SPIClass* spi, uint8_t cs);
         virtual ~Temperature();
 
         void setup();
         void execute();
         ChannelList* channel();
+        void set_measure(bool all, uint8_t channel_number, bool measure);
+        Channel* get_channel(uint8_t channel_number);
 
-        int cs();
+        uint8_t cs();
 
     private:
-        int m_cs;
-        SPIClass* p_spi;
+        uint8_t m_cs;
+        SPI* p_spi;
         ChannelList* p_channels;
         EEPROMClass* p_eeprom;
+
+        void _process_channel(Channel* channel);
 };
 
 

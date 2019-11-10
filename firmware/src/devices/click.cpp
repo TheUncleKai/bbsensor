@@ -71,7 +71,7 @@ void ClickSpan::copy(ClickSpan* timespan)
 
 
 
-Click::Click (int num)
+Click::Click (uint8_t num)
 {
     this->m_num = num;
     this->m_counter = 0;

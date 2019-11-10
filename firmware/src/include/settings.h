@@ -35,6 +35,7 @@
 #define CLICK_HOLD      2000
 
 #define TEMP_CHANNELS   7
+#define TEMP_ARRAY      120
 
 #define EEPROM_CHANNELS 0
 #define EEPROM_WPS      8

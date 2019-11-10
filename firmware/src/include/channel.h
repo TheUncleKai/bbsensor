@@ -21,12 +21,22 @@
 #include <SPI.h>
 
 #include <device.h>
+#include <list>
 
+#define DEBUG_CHANNEL
+
+struct ChannelValue
+{
+    uint16_t data;
+    float voltage;
+};
+
+typedef std::list<ChannelValue*> ChannelData;
 
 class Channel : public Device
 {
     public:
-        Channel (SPIClass* spi, int num, int channel, int type);
+        Channel (uint8_t num, uint8_t channel, uint8_t type);
         virtual ~Channel();
 
         enum Type {
@@ -38,15 +48,24 @@ class Channel : public Device
 
         void setup();
         void execute();
-        Type type();
+        void clear();
 
-        int number();
-        int channel();
+        Type type();
+        uint8_t number();
+        ChannelData* data();
+        ChannelValue* value();
+        uint8_t channel();
+
+        void add_value(ChannelValue* value);
+        void do_measure(bool measure);
+        bool measure();
 
     private:
-        int m_num, m_channel;
+        ChannelValue* p_lastvalue;
+        bool m_measure;
+        uint8_t m_num, m_channel;
         Type m_type;
-        SPIClass* m_spi;
+        ChannelData* p_data;
 };
 
 typedef std::list<Channel*> ChannelList;

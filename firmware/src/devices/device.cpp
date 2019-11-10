@@ -22,10 +22,12 @@
 #include <device.h>
 #include <utils.h>
 
+#define SPI_WAIT_WRITE 1
+#define SPI_WAIT_OFF   2
 
 SPI::SPI ()
 {
-    this->m_data = 0;
+    this->p_data = new SPIData;
     this->m_transfer = 0;
     this->m_channel = 0;
 }
@@ -33,6 +35,8 @@ SPI::SPI ()
 
 SPI::~SPI()
 {
+    this->p_data->clear();
+    delete this->p_data;
 }
 
 
@@ -48,42 +52,74 @@ void SPI::set_spi(SPIClass* spi)
 }
 
 
-void SPI::_on(int channel)
+void SPI::_on(uint8_t channel)
 {
     digitalWrite(channel, LOW);
     this->m_transfer = 1;
 }
 
 
-void SPI::_off(int channel)
+void SPI::_off(uint8_t channel)
 {
     digitalWrite(channel, HIGH);
     this->m_transfer = 0;
 }
 
 
-void SPI::transfer(int channel, char data)
+void SPI::transfer(uint8_t channel, uint8_t data)
 {
     this->_on(channel);
 
     this->m_channel = channel;
-    this->m_data = data;
+
+    this->p_data->push_back(data);
 }
 
 
-void SPI::commit()
+void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
+{
+    this->_on(channel);
+
+    this->m_channel = channel;
+
+    for (uint8_t i = 0; i < size; ++i) {
+        this->p_data->push_back(data[i]);
+    }
+}
+
+
+void SPI::commit(bool debug_out, SPIData* result)
 {
     if (this->m_transfer == 0) {
         return;
     }
 
-    this->p_spi->transfer(this->m_data);
-    this->_off(this->m_channel);
+    SPIData::iterator iter;
+    uint8_t data;
+    uint8_t res = 0;
+
+    for (iter = this->p_data->begin(); iter != this->p_data->end(); ++iter)
+    {
+        data = (*iter);
+
+        res = this->p_spi->transfer(data);
+        delay(SPI_WAIT_WRITE);
+
+        if (result != NULL) {
+            result->push_back(res);
+        }
 
 #ifdef DEBUG_SPI
-    debug_binary("SPI", this->m_data);
+        if (debug_out == true) {
+            debug_binary("SPI", data);
+        }
 #endif // DEBUG_SPI
+    }
+
+    this->_off(this->m_channel);
+    delay(SPI_WAIT_OFF);
 
     this->m_channel = 0;
     this->m_transfer = 0;
+    this->p_data->clear(); // clear data after writing
 }

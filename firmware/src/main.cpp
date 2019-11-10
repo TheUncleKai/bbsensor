@@ -23,6 +23,7 @@
 
 #include <hardware.h>
 #include <loop.h>
+#include <utils.h>
 
 #include <list>
 
@@ -36,7 +37,9 @@ void loop();
 Hardware* hardware = new Hardware();
 Display* display = hardware->display();
 Loop* looper = new Loop();
-byte number = 0;
+Channel* channel = NULL;
+bool do_measure = false;
+
 
 void handleISR1()
 {
@@ -69,7 +72,12 @@ void setup()
 
 void loop()
 {
+//    char buff[16];
+    std::string text_out;
+
     looper->start();
+    hardware->temperature()->set_measure(false, 0, false);
+    channel = hardware->temperature()->get_channel(0);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -82,11 +90,22 @@ void loop()
 
     if (looper->counter() == 60) {
         hardware->display()->write("Hitachi", 2);
+        do_measure = true;
     }
 
     if (looper->number() == 10) {
+        if (channel->value() != NULL) {
+            text_out = string_format("%u: %u",
+                channel->number(),
+                channel->value()->data);
+
+            hardware->display()->write(text_out.c_str(), 2);
+        }
+
         hardware->led1()->toggle();
+        hardware->temperature()->set_measure(false, 0, do_measure);
     }
+
 
     hardware->execute();
     looper->finish();

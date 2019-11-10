@@ -24,7 +24,7 @@
 class LED : public Device
 {
     public:
-        LED (int num, int pin);
+        LED (uint8_t num, uint8_t pin);
         virtual ~LED();
 
         void toggle();
@@ -35,7 +35,7 @@ class LED : public Device
         void execute();
 
     private:
-        int m_num, m_status, m_pin;
+        uint8_t m_num, m_status, m_pin;
 
         void _on();
         void _off();

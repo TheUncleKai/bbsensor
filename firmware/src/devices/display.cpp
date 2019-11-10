@@ -69,11 +69,11 @@
 
 #define CLEAR 0x01
 
-#define DELAY_ON  1
-#define DELAY_OFF 0
+#define DELAY_ON  3
+#define DELAY_OFF 2
 
 
-Display::Display (SPIClass* spi, int cs)
+Display::Display (SPIClass* spi, uint8_t cs)
 {
     this->p_spi = new SPI();
     this->m_cs = cs;
@@ -93,9 +93,9 @@ Display::~Display()
 }
 
 
-byte Display::_process_pins(byte data)
+uint8_t Display::_process_pins(uint8_t data)
 {
-    byte pin = 0x00;
+    uint8_t pin = 0x00;
 
     if ((data & POS_DB7) == POS_DB7) {
         pin = pin | PIN_DB7;
@@ -116,9 +116,9 @@ byte Display::_process_pins(byte data)
 
 void Display::_send(Signal* input)
 {
-    byte pin_on, pin_off;
-    byte signal = 0x00;
-    byte pin = 0x00;
+    uint8_t pin_on, pin_off;
+    uint8_t signal = 0x00;
+    uint8_t pin = 0x00;
 
 
     if (input->type == Type::SIG_HIGH) {
@@ -144,16 +144,16 @@ void Display::_send(Signal* input)
     pin_off = pin;
 
     this->p_spi->transfer(this->m_cs, pin_on);
-    this->p_spi->commit();
+    this->p_spi->commit(false, NULL);
     delay(DELAY_ON);
 
     this->p_spi->transfer(this->m_cs, pin_off);
-    this->p_spi->commit();
+    this->p_spi->commit(false, NULL);
     delay(DELAY_OFF);
 }
 
 
-void Display::_send_low(const char* keyword, byte data, bool istext)
+void Display::_send_low(const char* keyword, uint8_t data, bool istext)
 {
     Signal* signal = new Signal();
 
@@ -166,7 +166,7 @@ void Display::_send_low(const char* keyword, byte data, bool istext)
 }
 
 
-void Display::_send_high(const char* keyword, byte data, bool istext)
+void Display::_send_high(const char* keyword, uint8_t data, bool istext)
 {
     Signal* signal = new Signal();
 
@@ -179,9 +179,9 @@ void Display::_send_high(const char* keyword, byte data, bool istext)
 }
 
 
-void Display::_set_line(int line)
+void Display::_set_line(uint8_t line)
 {
-    byte data = 0;
+    uint8_t data = 0;
 
     if (line == 1) {
         data = LINE1;
@@ -201,23 +201,23 @@ void Display::_set_line(int line)
 
 void Display::clear()
 {
-    byte data = CLEAR;
+    uint8_t data = CLEAR;
 
     this->_send_high("CLEAR", data, false);
     this->_send_low("CLEAR", data, false);
 }
 
 
-void Display::write(const char* input, int line)
+void Display::write(const char* input, uint8_t line)
 {
     std::string text(input);
-    byte data = 0;
+    uint8_t data = 0;
     char* digit = 0;
 
     this->_set_line(line);
 
     for (std::string::iterator it=text.begin(); it!=text.end(); ++it) {
-        data = (byte)*it;
+        data = (uint8_t)*it;
         digit = (char*)&data;
 
         this->_send_high(digit, data, true);
