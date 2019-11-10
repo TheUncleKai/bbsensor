@@ -20,22 +20,51 @@
 #include <SPI.h>
 
 #include <device.h>
+#include <list>
+#include <string>
+
+//#define DISPLAY_DEBUG
+
+enum class Type {
+    SIG_HIGH = 0,
+    SIG_LOW = 1
+};
+
+
+struct Signal
+{
+    uint8_t data;
+    Type type;
+    bool istext;
+    const char* keyword;
+};
 
 
 class Display : public Device
 {
     public:
-        Display (SPIClass* spi, int cs);
+        Display (SPIClass* spi, uint8_t cs);
         virtual ~Display();
 
         void setup();
         void execute();
 
-        void write_char(char data);
+        void clear();
+        void write(const char* input, uint8_t line);
 
     private:
         SPI* p_spi;
-        int m_cs;
+        uint8_t m_cs;
+        std::list<Signal*>* m_list;
+
+        uint8_t _process_pins(uint8_t data);
+        void _send(Signal* input);
+
+        void _clear_list();
+        void _set_line(uint8_t line);
+
+        void _send_low(const char* keyword, uint8_t data, bool istext);
+        void _send_high(const char* keyword, uint8_t data, bool istext);
 };
 
 

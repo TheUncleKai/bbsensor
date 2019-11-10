@@ -17,6 +17,8 @@
 #ifndef CLICK_H_INCLUDED
 #define CLICK_H_INCLUDED
 
+//#define DEBUG_CLICK
+
 
 class ClickSpan
 {
@@ -35,7 +37,7 @@ class ClickSpan
 class Click
 {
     public:
-        Click (int num);
+        Click (uint8_t num);
         virtual ~Click();
 
         enum Type {
@@ -52,7 +54,7 @@ class Click
         Type type();
 
     private:
-        int m_num;
+        uint8_t m_num;
         unsigned long m_counter;
         Type m_type;
 

@@ -37,3 +37,6 @@ firmware/ext/core/*/*.cpp
 firmware/ext/core/*/*.h
 firmware/rules/config.mk
 firmware/src/*.ld
+
+.gitmessages
+.gitmessages.*

@@ -22,4 +22,5 @@ SOURCES = \
 	devices/hardware.cpp \
 	devices/led.cpp \
     devices/temperature.cpp \
+    utils/utils.cpp \
 	main.cpp
