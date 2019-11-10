@@ -24,6 +24,8 @@
 
 Channel::Channel(uint8_t num, uint8_t channel, uint8_t type)
 {
+    this->p_lastvalue = NULL;
+    this->m_measure = false;
     this->p_data = new ChannelData;
     this->m_num = num;
     this->m_channel = channel;
@@ -45,6 +47,19 @@ Channel::Channel(uint8_t num, uint8_t channel, uint8_t type)
 
 Channel::~Channel()
 {
+    this->clear();
+    delete this->p_data;
+}
+
+
+ChannelValue* Channel::value()
+{
+    return this->p_lastvalue;
+}
+
+
+void Channel::clear()
+{
     ChannelData::iterator it;
     ChannelValue* value;
 
@@ -54,7 +69,6 @@ Channel::~Channel()
     }
 
     this->p_data->clear();
-    delete this->p_data;
 }
 
 
@@ -89,4 +103,35 @@ ChannelData* Channel::data()
 uint8_t Channel::channel()
 {
     return this->m_channel;
+}
+
+
+void Channel::do_measure(bool measure)
+{
+    this->m_measure = measure;
+}
+
+
+void Channel::add_value(ChannelValue* value)
+{
+    if (this->p_data->size() == TEMP_ARRAY) {
+#ifdef DEBUG_CHANNEL
+    DEBUG_MSG("CHANNEL%u: channel %u, clear data\n", this->number(), this->channel());
+#endif // DEBUG_CHANNEL
+
+        this->clear();
+    }
+
+#ifdef DEBUG_CHANNEL
+    DEBUG_MSG("CHANNEL%u: channel %u, %u\n", this->number(), this->channel(), value->data);
+#endif // DEBUG_CHANNEL
+
+    this->p_data->push_back(value);
+    this->p_lastvalue = value;
+}
+
+
+bool Channel::measure()
+{
+    return this->m_measure;
 }

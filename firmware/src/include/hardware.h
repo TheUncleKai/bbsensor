@@ -40,6 +40,7 @@ class Hardware : public Device
         Button* button1();
         Button* button2();
         Display* display();
+        Temperature* temperature();
         EEPROMClass* eeprom();
 
         void setup();

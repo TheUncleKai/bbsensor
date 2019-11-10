@@ -72,6 +72,12 @@ Display* Hardware::display()
 }
 
 
+Temperature* Hardware::temperature()
+{
+    return this->p_temperature;
+}
+
+
 EEPROMClass* Hardware::eeprom()
 {
     return this->p_eeprom;

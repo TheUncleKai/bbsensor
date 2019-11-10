@@ -77,7 +77,7 @@ void Temperature::setup()
 
         if (temp != NULL) {
 #ifdef DEBUG_TEMPERATURE
-            DEBUG_MSG("TEMPERATURE: add channel %d, input %d, type %d\n",
+            DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
                       i, temp->number(), temp->type());
 #endif // DEBUG_TEMPERATURE
             this->p_channels->push_back(temp);
@@ -88,6 +88,15 @@ void Temperature::setup()
 
 void Temperature::_process_channel(Channel* channel)
 {
+
+#ifdef DEBUG_TEMPERATURE
+    if (channel->measure() == true) {
+        DEBUG_MSG("TEMPERATURE%u: channel %u, measure!\n",
+                    channel->number(),
+                    channel->channel());
+    }
+#endif // DEBUG_TEMPERATURE
+
     uint8_t n;
     SPIData data;
     ChannelValue* value = new ChannelValue;
@@ -145,9 +154,55 @@ void Temperature::_process_channel(Channel* channel)
         n++;
     }
 
-    channel->data()->push_back(value);
+    channel->add_value(value);
     data.clear();
+}
 
+
+void Temperature::set_measure(bool all, uint8_t channel_number, bool measure)
+{
+    ChannelList::iterator iter;
+    Channel* channel = NULL;
+
+    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
+    {
+        channel = (*iter);
+
+        if (all == true) {
+            channel->do_measure(true);
+        } else {
+            if (channel->channel() == channel_number) {
+                channel->do_measure(measure);
+            }
+        }
+
+#ifdef DEBUG_TEMPERATURE
+        if (channel->measure() == true) {
+            DEBUG_MSG("TEMPERATURE%u: channel %u, plan for measure!\n",
+                        channel->number(),
+                        channel->channel());
+        }
+#endif // DEBUG_TEMPERATURE
+    }
+}
+
+
+Channel* Temperature::get_channel(uint8_t channel_number)
+{
+    ChannelList::iterator iter;
+    Channel* channel = NULL;
+    Channel* result = NULL;
+
+    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
+    {
+        channel = (*iter);
+        if (channel->channel() == channel_number) {
+            result = channel;
+            break;
+        }
+    }
+
+    return result;
 }
 
 
@@ -159,6 +214,8 @@ void Temperature::execute()
     for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
     {
         channel = (*iter);
-        this->_process_channel(channel);
+        if (channel->measure() == true) {
+            this->_process_channel(channel);
+        }
     }
 }

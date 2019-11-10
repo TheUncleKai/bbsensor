@@ -36,6 +36,8 @@ class Temperature : public Device
         void setup();
         void execute();
         ChannelList* channel();
+        void set_measure(bool all, uint8_t channel_number, bool measure);
+        Channel* get_channel(uint8_t channel_number);
 
         uint8_t cs();
 

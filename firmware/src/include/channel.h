@@ -23,6 +23,7 @@
 #include <device.h>
 #include <list>
 
+#define DEBUG_CHANNEL
 
 struct ChannelValue
 {
@@ -47,13 +48,21 @@ class Channel : public Device
 
         void setup();
         void execute();
+        void clear();
 
         Type type();
         uint8_t number();
         ChannelData* data();
+        ChannelValue* value();
         uint8_t channel();
 
+        void add_value(ChannelValue* value);
+        void do_measure(bool measure);
+        bool measure();
+
     private:
+        ChannelValue* p_lastvalue;
+        bool m_measure;
         uint8_t m_num, m_channel;
         Type m_type;
         ChannelData* p_data;

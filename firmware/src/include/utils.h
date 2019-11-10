@@ -17,6 +17,12 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
+#include <cstdarg>
+#include <cstdio>
+#include <string>
+
+std::string string_format(const char* fmt, ...);
+
 void debug_binary(const char* keyword, uint8_t data);
 
 void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin);
