@@ -25,6 +25,8 @@
 #include <display.h>
 #include <temperature.h>
 
+//#define DEBUG_HARDWARE
+
 
 class Hardware : public Device
 {
@@ -38,6 +40,7 @@ class Hardware : public Device
         Button* button1();
         Button* button2();
         Display* display();
+        Temperature* temperature();
         EEPROMClass* eeprom();
 
         void setup();

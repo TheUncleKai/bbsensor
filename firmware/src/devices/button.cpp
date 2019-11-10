@@ -22,7 +22,7 @@
 #include <button.h>
 
 
-Button::Button (int num, int pin)
+Button::Button (uint8_t num, uint8_t pin)
 {
     this->m_num = num;
     this->m_pin = pin;
@@ -50,17 +50,18 @@ void Button::handleISR()
 
     if (digitalRead(this->m_pin) == HIGH) {
         this->p_click->set_high(timestamp);
+#ifdef DEBUG_BUTTON
+        DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 1);
+#endif // DEBUG_BUTTON
     }
 
     if (digitalRead(this->m_pin) == LOW) {
         this->p_click->set_low(timestamp);
+#ifdef DEBUG_BUTTON
+        DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 0);
+#endif // DEBUG_BUTTON
     }
 
-#ifdef BUTTON_DEBUG
-    DEBUG_MSG("BUTTON%d: state %d\n",
-                this->m_num,
-                this->m_onoff);
-#endif // BUTTON_DEBUG
 }
 
 

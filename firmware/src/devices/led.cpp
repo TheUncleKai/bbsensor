@@ -22,7 +22,7 @@
 #include <led.h>
 
 
-LED::LED (int num, int pin)
+LED::LED (uint8_t num, uint8_t pin)
 {
     this->m_num = num;
     this->m_pin = pin;
@@ -37,9 +37,9 @@ LED::~LED()
 
 void LED::_on()
 {
-#ifdef LED_DEBUG
+#ifdef DEBUG_LED
     DEBUG_MSG("LED%d: turn on\n", this->m_num);
-#endif // LED_DEBUG
+#endif // DEBUG_LED
     digitalWrite(this->m_pin, LOW);
     this->m_status = 1;
 }
@@ -47,9 +47,9 @@ void LED::_on()
 
 void LED::_off()
 {
-#ifdef LED_DEBUG
+#ifdef DEBUG_LED
     DEBUG_MSG("LED%d: turn off\n", this->m_num);
-#endif // LED_DEBUG
+#endif // DEBUG_LED
     digitalWrite(this->m_pin, HIGH);
     this->m_status = 0;
 }

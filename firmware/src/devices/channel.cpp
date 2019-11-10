@@ -22,9 +22,11 @@
 #include <channel.h>
 
 
-Channel::Channel(SPIClass* spi, int num, int channel, int type)
+Channel::Channel(uint8_t num, uint8_t channel, uint8_t type)
 {
-    this->m_spi = spi;
+    this->p_lastvalue = NULL;
+    this->m_measure = false;
+    this->p_data = new ChannelData;
     this->m_num = num;
     this->m_channel = channel;
 
@@ -45,24 +47,34 @@ Channel::Channel(SPIClass* spi, int num, int channel, int type)
 
 Channel::~Channel()
 {
+    this->clear();
+    delete this->p_data;
+}
+
+
+ChannelValue* Channel::value()
+{
+    return this->p_lastvalue;
+}
+
+
+void Channel::clear()
+{
+    ChannelData::iterator it;
+    ChannelValue* value;
+
+    for (it = this->p_data->begin(); it != this->p_data->end(); ++it) {
+        value = (*it);
+        delete value;
+    }
+
+    this->p_data->clear();
 }
 
 
 Channel::Type Channel::type()
 {
     return this->m_type;
-}
-
-
-int Channel::number()
-{
-    return this->m_num;
-}
-
-
-int Channel::channel()
-{
-    return this->m_channel;
 }
 
 
@@ -73,4 +85,53 @@ void Channel::setup()
 
 void Channel::execute()
 {
+}
+
+
+uint8_t Channel::number()
+{
+    return this->m_num;
+}
+
+
+ChannelData* Channel::data()
+{
+    return this->p_data;
+}
+
+
+uint8_t Channel::channel()
+{
+    return this->m_channel;
+}
+
+
+void Channel::do_measure(bool measure)
+{
+    this->m_measure = measure;
+}
+
+
+void Channel::add_value(ChannelValue* value)
+{
+    if (this->p_data->size() == TEMP_ARRAY) {
+#ifdef DEBUG_CHANNEL
+    DEBUG_MSG("CHANNEL%u: channel %u, clear data\n", this->number(), this->channel());
+#endif // DEBUG_CHANNEL
+
+        this->clear();
+    }
+
+#ifdef DEBUG_CHANNEL
+    DEBUG_MSG("CHANNEL%u: channel %u, %u\n", this->number(), this->channel(), value->data);
+#endif // DEBUG_CHANNEL
+
+    this->p_data->push_back(value);
+    this->p_lastvalue = value;
+}
+
+
+bool Channel::measure()
+{
+    return this->m_measure;
 }

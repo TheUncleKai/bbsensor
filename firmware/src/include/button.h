@@ -20,11 +20,13 @@
 #include <device.h>
 #include <click.h>
 
+//#define DEBUG_BUTTON
+
 
 class Button : public Device
 {
     public:
-        Button (int num, int pin);
+        Button (uint8_t num, uint8_t pin);
         virtual ~Button();
 
         void setISR(void (*isr)(void));
@@ -36,7 +38,7 @@ class Button : public Device
         Click::Type get_click();
 
     private:
-        int m_num, m_pin;
+        uint8_t m_num, m_pin;
 
         Click* p_click;
 

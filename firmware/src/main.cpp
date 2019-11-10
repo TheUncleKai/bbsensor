@@ -23,6 +23,9 @@
 
 #include <hardware.h>
 #include <loop.h>
+#include <utils.h>
+
+#include <list>
 
 // Name and password of the access point
 //#define SSID "Pussycat"
@@ -34,7 +37,8 @@ void loop();
 Hardware* hardware = new Hardware();
 Display* display = hardware->display();
 Loop* looper = new Loop();
-int n = 0;
+Channel* channel = NULL;
+bool do_measure = false;
 
 
 void handleISR1()
@@ -68,24 +72,41 @@ void setup()
 
 void loop()
 {
+//    char buff[16];
+    std::string text_out;
+
     looper->start();
+    hardware->temperature()->set_measure(false, 0, false);
+    channel = hardware->temperature()->get_channel(0);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
-        n = 0;
+    }
+
+    if (looper->counter() == 20) {
+        hardware->display()->clear();
+        hardware->display()->write("TEST2", 1);
+    }
+
+    if (looper->counter() == 60) {
+        hardware->display()->write("Hitachi", 2);
+        do_measure = true;
     }
 
     if (looper->number() == 10) {
+        if (channel->value() != NULL) {
+            text_out = string_format("%u: %u",
+                channel->number(),
+                channel->value()->data);
+
+            hardware->display()->write(text_out.c_str(), 2);
+        }
+
         hardware->led1()->toggle();
+        hardware->temperature()->set_measure(false, 0, do_measure);
     }
 
-    if (n > 255) {
-        n = 0;
-    }
-
-    display->write_char(n);
 
     hardware->execute();
     looper->finish();
-    n++;
 }

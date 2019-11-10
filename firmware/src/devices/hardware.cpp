@@ -28,7 +28,7 @@ Hardware::Hardware()
     this->p_spi = new SPIClass();
     this->p_display = new Display(this->p_spi, PIN_CS1);
 //    this->p_eeprom = new EEPROMClass();
-//    this->p_temperature = new Temperature(this->p_eeprom, this->p_spi, PIN_CS2);
+    this->p_temperature = new Temperature(NULL, this->p_spi, PIN_CS2);
 }
 
 
@@ -39,7 +39,7 @@ Hardware::~Hardware()
     delete this->p_button2;
     delete this->p_spi;
     delete this->p_display;
-//    delete this->p_temperature;
+    delete this->p_temperature;
 //    delete this->p_eeprom;
 }
 
@@ -72,6 +72,12 @@ Display* Hardware::display()
 }
 
 
+Temperature* Hardware::temperature()
+{
+    return this->p_temperature;
+}
+
+
 EEPROMClass* Hardware::eeprom()
 {
     return this->p_eeprom;
@@ -96,7 +102,7 @@ void Hardware::setup()
     this->p_spi->begin();
 
     this->p_display->setup();
-//    this->p_temperature->setup();
+    this->p_temperature->setup();
 }
 
 
@@ -106,5 +112,5 @@ void Hardware::execute()
     this->p_button1->execute();
     this->p_button2->execute();
     this->p_display->execute();
-//    this->p_temperature->execute();
+    this->p_temperature->execute();
 }
