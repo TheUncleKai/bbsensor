@@ -99,14 +99,14 @@ void Temperature::_process_channel(Channel* channel)
 
     uint8_t n;
     SPIData data;
-    ChannelValue* value = new ChannelValue;
+    Value* value = new Value;
     SPIData::iterator iter;
 
     uint8_t answer = 0;
     uint32_t command = 0;
 
     value->data = 0;
-    value->voltage = 0.0;
+    value->value = 0.0;
 
     //  first 8 bits      second 8 bits      third 8 bits
     //  X X X X X 1 S D2  D1 D0 X X X X X X  X X X X X X X X

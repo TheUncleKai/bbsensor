@@ -37,8 +37,10 @@ void loop();
 Hardware* hardware = new Hardware();
 Display* display = hardware->display();
 Loop* looper = new Loop();
-Channel* channel = NULL;
 bool do_measure = false;
+
+Channel* channel = NULL;
+uint8_t channel_number = 0;
 
 
 void handleISR1()
@@ -70,14 +72,35 @@ void setup()
 }
 
 
-void loop()
+void print_channel()
 {
-//    char buff[16];
     std::string text_out;
 
+    if (channel_number == 0) {
+        channel_number = 1;
+    } else {
+        channel_number = 0;
+    }
+
+    channel = hardware->temperature()->get_channel(channel_number);
+
+    if (channel->value() == NULL) {
+        return;
+    }
+
+    text_out = string_format("%u: %u", channel->number(), channel->value()->data);
+
+    hardware->display()->write("       ", 2);
+    hardware->display()->write(text_out.c_str(), 2);
+}
+
+
+
+void loop()
+{
     looper->start();
     hardware->temperature()->set_measure(false, 0, false);
-    channel = hardware->temperature()->get_channel(0);
+    hardware->temperature()->set_measure(false, 1, false);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -85,25 +108,20 @@ void loop()
 
     if (looper->counter() == 20) {
         hardware->display()->clear();
-        hardware->display()->write("TEST2", 1);
+        hardware->display()->write("Start", 1);
     }
 
     if (looper->counter() == 60) {
-        hardware->display()->write("Hitachi", 2);
+        hardware->display()->write("Measure", 1);
         do_measure = true;
     }
 
     if (looper->number() == 10) {
-        if (channel->value() != NULL) {
-            text_out = string_format("%u: %u",
-                channel->number(),
-                channel->value()->data);
-
-            hardware->display()->write(text_out.c_str(), 2);
-        }
+        print_channel();
 
         hardware->led1()->toggle();
         hardware->temperature()->set_measure(false, 0, do_measure);
+        hardware->temperature()->set_measure(false, 1, do_measure);
     }
 
 

@@ -21,17 +21,12 @@
 #include <SPI.h>
 
 #include <device.h>
+#include <tables.h>
+
 #include <list>
 
 #define DEBUG_CHANNEL
 
-struct ChannelValue
-{
-    uint16_t data;
-    float voltage;
-};
-
-typedef std::list<ChannelValue*> ChannelData;
 
 class Channel : public Device
 {
@@ -52,20 +47,20 @@ class Channel : public Device
 
         Type type();
         uint8_t number();
-        ChannelData* data();
-        ChannelValue* value();
+        ValueList* data();
+        Value* value();
         uint8_t channel();
 
-        void add_value(ChannelValue* value);
+        void add_value(Value* value);
         void do_measure(bool measure);
         bool measure();
 
     private:
-        ChannelValue* p_lastvalue;
+        Value* p_lastvalue;
         bool m_measure;
         uint8_t m_num, m_channel;
         Type m_type;
-        ChannelData* p_data;
+        ValueList* p_data;
 };
 
 typedef std::list<Channel*> ChannelList;

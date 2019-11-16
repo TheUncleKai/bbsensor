@@ -59,6 +59,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="data/loop.cpp" />
+		<Unit filename="data/tables.cpp" />
 		<Unit filename="devices/button.cpp" />
 		<Unit filename="devices/channel.cpp" />
 		<Unit filename="devices/click.cpp" />
@@ -77,6 +78,7 @@
 		<Unit filename="include/led.h" />
 		<Unit filename="include/loop.h" />
 		<Unit filename="include/settings.h" />
+		<Unit filename="include/tables.h" />
 		<Unit filename="include/temperature.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="main.cpp" />
