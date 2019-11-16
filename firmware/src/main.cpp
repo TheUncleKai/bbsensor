@@ -90,7 +90,9 @@ void print_channel()
         return;
     }
 
-    text_out = string_format("%u: %u", channel->number(), channel->value()->data);
+    text_out = string_format("%u: %u",
+        channel->number(),
+        channel->value()->data);
 
     hardware->display()->write("       ", 2);
     hardware->display()->write(text_out.c_str(), 2);

@@ -102,6 +102,10 @@ void Channel::do_measure(bool measure)
 
 void Channel::add_value(Value* value)
 {
+    if (value->data > TEMP_LIMIT) {
+        return;
+    }
+
     if (this->p_data->size() == TEMP_ARRAY) {
 #ifdef DEBUG_CHANNEL
     DEBUG_MSG("CHANNEL%u: channel %u, clear data\n", this->number(), this->channel());
@@ -110,8 +114,15 @@ void Channel::add_value(Value* value)
         this->clear();
     }
 
+    if (this->m_type == Channel::VOLTAGE) {
+        value->value = table_voltages[value->data];
+    }
+
 #ifdef DEBUG_CHANNEL
-    DEBUG_MSG("CHANNEL%u: channel %u, %u\n", this->number(), this->channel(), value->data);
+    DEBUG_MSG("CHANNEL%u: raw %u, value %5.3f\n",
+        this->number(),
+        value->data,
+        value->value);
 #endif // DEBUG_CHANNEL
 
     this->p_data->push_back(value);
