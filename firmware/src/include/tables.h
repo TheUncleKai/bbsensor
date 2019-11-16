@@ -17,13 +17,20 @@
 #ifndef TABLES_H_INCLUDED
 #define TABLES_H_INCLUDED
 
-struct Value
+#include <Arduino.h>
+
+#include <list>
+
+
+typedef struct
 {
     uint16_t data;
     float value;
-};
+} Value;
 
 typedef std::list<Value*> ValueList;
+
+extern float table_voltages[4096];
 
 
 #endif // TABLES_H_INCLUDED

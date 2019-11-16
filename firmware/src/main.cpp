@@ -62,6 +62,8 @@ void setup()
 
     looper->set_numer(10);
     looper->setup();
+    hardware->temperature()->add_channel(Channel::VOLTAGE);
+    hardware->temperature()->add_channel(Channel::VOLTAGE);
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
     hardware->setup();

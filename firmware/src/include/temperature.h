@@ -34,6 +34,8 @@ class Temperature : public Device
         virtual ~Temperature();
 
         void setup();
+        void add_channel(Channel::Type type);
+
         void execute();
         ChannelList* channel();
         void set_measure(bool all, uint8_t channel_number, bool measure);
@@ -43,6 +45,7 @@ class Temperature : public Device
 
     private:
         uint8_t m_cs;
+        uint8_t m_number;
         SPI* p_spi;
         ChannelList* p_channels;
         EEPROMClass* p_eeprom;

@@ -31,15 +31,16 @@
 class Channel : public Device
 {
     public:
-        Channel (uint8_t num, uint8_t channel, uint8_t type);
-        virtual ~Channel();
-
         enum Type {
             NONE = 0,
-            RTD = 1,
-            PTC10 = 2,
-            PTC100 = 3
+            VOLTAGE = 1,
+            RTD = 2,
+            PTC10 = 3,
+            PTC100 = 4
         };
+
+        Channel (uint8_t num, uint8_t channel, Type type);
+        virtual ~Channel();
 
         void setup();
         void execute();

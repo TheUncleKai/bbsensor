@@ -36,6 +36,7 @@
 
 #define TEMP_CHANNELS   7
 #define TEMP_ARRAY      120
+#define TEMP_LIMIT      4095 // max value of adc, everything above is suspect
 
 #define EEPROM_CHANNELS 0
 #define EEPROM_WPS      8

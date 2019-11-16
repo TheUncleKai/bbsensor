@@ -30,6 +30,7 @@ Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
     this->p_channels = new ChannelList;
 
     this->p_spi->set_spi(spi);
+    this->m_number = 0;
 }
 
 
@@ -68,23 +69,28 @@ void Temperature::setup()
 {
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
-
-    Channel* temp = NULL;
-
-    for (uint8_t i = 0; i <= TEMP_CHANNELS; i++) {
-
-        temp = new Channel(i+1, i, 2);
-
-        if (temp != NULL) {
-#ifdef DEBUG_TEMPERATURE
-            DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
-                      i, temp->number(), temp->type());
-#endif // DEBUG_TEMPERATURE
-            this->p_channels->push_back(temp);
-        }
-    }
 }
 
+
+void Temperature::add_channel(Channel::Type type)
+{
+    if (this->m_number > TEMP_CHANNELS) {
+        DEBUG_MSG("TEMPERATURE: max number of channels reached!");
+        return;
+    }
+
+    Channel* channel = new Channel(this->m_number+1, this->m_number, type);
+
+    if (channel != NULL) {
+#ifdef DEBUG_TEMPERATURE
+        DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
+                  this->m_number, channel->number(), channel->type());
+#endif // DEBUG_TEMPERATURE
+        this->p_channels->push_back(channel);
+    }
+
+    this->m_number++;
+}
 
 void Temperature::_process_channel(Channel* channel)
 {
