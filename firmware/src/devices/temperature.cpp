@@ -134,7 +134,7 @@ void Temperature::_process_channel(Channel* channel)
     this->p_spi->transfer(this->m_cs, (uint8_t)((0x0000FF00 & command) >> 8)); // set start
     this->p_spi->transfer(this->m_cs, (uint8_t)(0x000000FF & command)); // set start
 
-    this->p_spi->commit(true, &data);
+    this->p_spi->commit(false, &data);
 
     if (data.size() != 3)
         return;
