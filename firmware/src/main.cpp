@@ -90,11 +90,19 @@ void print_channel()
         return;
     }
 
-    text_out = string_format("%u: %u",
-        channel->number(),
-        channel->value()->data);
+    if (channel->type() == Channel::NONE) {
+        text_out = string_format("%u: %u",
+            channel->number(),
+            channel->value()->data);
+    }
 
-    hardware->display()->write("       ", 2);
+    if (channel->type() == Channel::VOLTAGE) {
+        text_out = string_format("%u: %5.3f",
+            channel->number(),
+            channel->value()->value);
+    }
+
+    hardware->display()->write("                ", 2);
     hardware->display()->write(text_out.c_str(), 2);
 }
 
