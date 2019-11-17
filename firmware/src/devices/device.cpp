@@ -22,9 +22,6 @@
 #include <device.h>
 #include <utils.h>
 
-#define SPI_WAIT_WRITE 1
-#define SPI_WAIT_OFF   2
-
 SPI::SPI ()
 {
     this->p_data = new SPIData;
@@ -88,7 +85,7 @@ void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
 }
 
 
-void SPI::commit(bool debug_out, SPIData* result)
+void SPI::commit(bool debug_out, SPIData* result, unsigned long wait_on, unsigned long wait_off)
 {
     if (this->m_transfer == 0) {
         return;
@@ -103,7 +100,9 @@ void SPI::commit(bool debug_out, SPIData* result)
         data = (*iter);
 
         res = this->p_spi->transfer(data);
-        delay(SPI_WAIT_WRITE);
+        if (wait_on > 0) {
+            delay(wait_on);
+        }
 
         if (result != NULL) {
             result->push_back(res);
@@ -117,7 +116,9 @@ void SPI::commit(bool debug_out, SPIData* result)
     }
 
     this->_off(this->m_channel);
-    delay(SPI_WAIT_OFF);
+    if (wait_off > 0) {
+        delay(wait_off);
+    }
 
     this->m_channel = 0;
     this->m_transfer = 0;

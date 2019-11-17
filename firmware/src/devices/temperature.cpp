@@ -30,6 +30,7 @@ Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
     this->p_channels = new ChannelList;
 
     this->p_spi->set_spi(spi);
+    this->m_number = 0;
 }
 
 
@@ -68,23 +69,28 @@ void Temperature::setup()
 {
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
-
-    Channel* temp = NULL;
-
-    for (uint8_t i = 0; i <= TEMP_CHANNELS; i++) {
-
-        temp = new Channel(i+1, i, 2);
-
-        if (temp != NULL) {
-#ifdef DEBUG_TEMPERATURE
-            DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
-                      i, temp->number(), temp->type());
-#endif // DEBUG_TEMPERATURE
-            this->p_channels->push_back(temp);
-        }
-    }
 }
 
+
+void Temperature::add_channel(Channel::Type type)
+{
+    if (this->m_number > TEMP_CHANNELS) {
+        DEBUG_MSG("TEMPERATURE: max number of channels reached!");
+        return;
+    }
+
+    Channel* channel = new Channel(this->m_number+1, this->m_number, type);
+
+    if (channel != NULL) {
+#ifdef DEBUG_TEMPERATURE
+        DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
+                  this->m_number, channel->number(), channel->type());
+#endif // DEBUG_TEMPERATURE
+        this->p_channels->push_back(channel);
+    }
+
+    this->m_number++;
+}
 
 void Temperature::_process_channel(Channel* channel)
 {
@@ -99,14 +105,14 @@ void Temperature::_process_channel(Channel* channel)
 
     uint8_t n;
     SPIData data;
-    ChannelValue* value = new ChannelValue;
+    Value* value = new Value;
     SPIData::iterator iter;
 
     uint8_t answer = 0;
     uint32_t command = 0;
 
     value->data = 0;
-    value->voltage = 0.0;
+    value->value = 0.0;
 
     //  first 8 bits      second 8 bits      third 8 bits
     //  X X X X X 1 S D2  D1 D0 X X X X X X  X X X X X X X X
@@ -134,7 +140,7 @@ void Temperature::_process_channel(Channel* channel)
     this->p_spi->transfer(this->m_cs, (uint8_t)((0x0000FF00 & command) >> 8)); // set start
     this->p_spi->transfer(this->m_cs, (uint8_t)(0x000000FF & command)); // set start
 
-    this->p_spi->commit(true, &data);
+    this->p_spi->commit(false, &data);
 
     if (data.size() != 3)
         return;

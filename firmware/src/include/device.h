@@ -22,6 +22,9 @@
 
 #define DEBUG_SPI
 
+#define SPI_WAIT_ON  1
+#define SPI_WAIT_OFF 2
+
 
 typedef std::list<uint8_t> SPIData;
 
@@ -46,7 +49,7 @@ class SPI
         void set_spi(SPIClass* spi);
         void transfer(uint8_t channel, uint8_t data);
         void transfer(uint8_t channel, uint8_t data[], uint16_t size);
-        void commit(bool debug_out, SPIData* result);
+        void commit(bool debug_out, SPIData* result, unsigned long wait_on = 0, unsigned long wait_off = 0);
 
     private:
         SPIClass* p_spi;

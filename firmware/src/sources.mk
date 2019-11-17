@@ -14,6 +14,7 @@
 
 SOURCES = \
 	data/loop.cpp \
+    data/tables.cpp \
 	devices/button.cpp \
     devices/channel.cpp \
 	devices/click.cpp \
