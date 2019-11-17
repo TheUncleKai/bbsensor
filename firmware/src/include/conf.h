@@ -22,7 +22,8 @@
 
 #include <channel.h>
 
-#define CONFIG_INIT   0
+#define CONFIG_INIT   8
+
 #define CONFIG_TYPES  8
 #define CONFIG_SSID   32
 #define CONFIG_PASS   64
@@ -33,7 +34,7 @@
 
 
 typedef struct {
-    uint8_t init = 0;
+    uint8_t init = CONFIG_INIT;
     uint8_t channel_list = 0;
     uint8_t channel_types[CONFIG_TYPES] = {0};
     uint32_t measure_delay = DEFAULT_DELAY;
@@ -62,12 +63,13 @@ class Config
 
     private:
         bool _verify();
+        int m_pos;
 
-        void write_byte(int* pos, uint8_t data);
-        void write_int(int* pos, uint32_t data);
+        void write_byte(uint8_t data);
+        void write_int(uint32_t data);
 
-        uint8_t read_byte(int* pos);
-        uint32_t read_int(int* pos);
+        uint8_t read_byte();
+        uint32_t read_int();
 
 
         EEPROMClass* p_eeprom;

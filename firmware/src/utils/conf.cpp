@@ -21,6 +21,7 @@ Config::Config()
 {
     this->p_eeprom = new EEPROMClass();
     this->p_data = new configdata;
+    this->m_pos = 0;
 }
 
 
@@ -62,33 +63,6 @@ bool Config::_verify()
 }
 
 
-void Config::read()
-{
-    int addr = 0;
-    int i = 0;
-
-    DEBUG_MSG("CONFIG: read\n");
-
-    this->p_data->init = this->read_byte(&addr);
-
-    this->p_data->channel_list = this->read_byte(&addr);
-
-    this->p_data->measure_delay = this->read_int(&addr);
-
-    for (i = 0; i < CONFIG_TYPES; i++) {
-        this->p_data->channel_types[i] = this->read_byte(&addr);
-    }
-
-    for (i = 0; i < CONFIG_SSID; i++) {
-        this->p_data->wlan_ssid[i] = this->read_byte(&addr);
-    }
-
-    for (i = 0; i < CONFIG_PASS; i++) {
-        this->p_data->wlan_pass[i] = this->read_byte(&addr);
-    }
-}
-
-
 void Config::reset()
 {
     int i = 0;
@@ -111,31 +85,58 @@ void Config::reset()
 }
 
 
-void Config::write()
+void Config::read()
 {
-    int addr = 0;
     int i = 0;
+    this->m_pos = 0;
 
-    // Write Init
-    this->write_byte(&addr, this->p_data->init);
+    DEBUG_MSG("CONFIG: read\n");
 
-    // Write channel_list
-    this->write_byte(&addr, this->p_data->channel_list);
+    this->p_data->init = this->read_byte();
 
-    // Write measure_delay
-    this->write_int(&addr, this->p_data->measure_delay);
+    this->p_data->channel_list = this->read_byte();
 
-    // Write channel_list
+    this->p_data->measure_delay = this->read_int();
+
     for (i = 0; i < CONFIG_TYPES; i++) {
-        this->write_byte(&addr, this->p_data->channel_types[i]);
+        this->p_data->channel_types[i] = this->read_byte();
     }
 
     for (i = 0; i < CONFIG_SSID; i++) {
-        this->write_byte(&addr, this->p_data->wlan_ssid[i]);
+        this->p_data->wlan_ssid[i] = this->read_byte();
     }
 
     for (i = 0; i < CONFIG_PASS; i++) {
-        this->write_byte(&addr, this->p_data->wlan_pass[i]);
+        this->p_data->wlan_pass[i] = this->read_byte();
+    }
+}
+
+
+void Config::write()
+{
+    int i = 0;
+    this->m_pos = 0;
+
+    // Write Init
+    this->write_byte(this->p_data->init);
+
+    // Write channel_list
+    this->write_byte(this->p_data->channel_list);
+
+    // Write measure_delay
+    this->write_int(this->p_data->measure_delay);
+
+    // Write channel_list
+    for (i = 0; i < CONFIG_TYPES; i++) {
+        this->write_byte(this->p_data->channel_types[i]);
+    }
+
+    for (i = 0; i < CONFIG_SSID; i++) {
+        this->write_byte(this->p_data->wlan_ssid[i]);
+    }
+
+    for (i = 0; i < CONFIG_PASS; i++) {
+        this->write_byte(this->p_data->wlan_pass[i]);
     }
 
     DEBUG_MSG("CONFIG: commit\n");
@@ -143,57 +144,48 @@ void Config::write()
 }
 
 
-void Config::write_byte(int* pos, uint8_t data)
+void Config::write_byte(uint8_t data)
 {
-    this->p_eeprom->write(*pos, data);
-    *pos++;
+    DEBUG_MSG("CONFIG: write pos %u, write %u\n", this->m_pos, data);
+    this->p_eeprom->write(this->m_pos, data);
+    this->m_pos++;
 }
 
 
-void Config::write_int(int* pos, uint32_t data)
+void Config::write_int(uint32_t data)
 {
     uint8_t* p = (uint8_t*)&data;
 
-    this->p_eeprom->write(*pos, *p);
-    *pos++;
+    DEBUG_MSG("CONFIG: write32, pos %u: %u\n", this->m_pos, data);
 
-    this->p_eeprom->write(*pos, *(p + 1));
-    *pos++;
-
-    this->p_eeprom->write(*pos, *(p + 2));
-    *pos++;
-
-    this->p_eeprom->write(*pos, *(p + 3));
-    *pos++;
+    this->write_byte(*p);
+    this->write_byte(*(p + 1));
+    this->write_byte(*(p + 2));
+    this->write_byte(*(p + 3));
 }
 
 
-uint8_t Config::read_byte(int* pos)
+uint8_t Config::read_byte()
 {
-    uint8_t val = this->p_eeprom->read(*pos);
-    *pos++;
+    uint8_t val = this->p_eeprom->read(this->m_pos);
+    this->m_pos++;
 
     return val;
 }
 
 
-uint32_t Config::read_int(int* pos)
+uint32_t Config::read_int()
 {
     uint32_t val = 0;
+
     uint8_t* p = (uint8_t*)&val;
 
-    *p = this->p_eeprom->read(*pos);
-    *pos++;
+    *p = this->read_byte();
+    *(p + 1) = this->read_byte();
+    *(p + 2) = this->read_byte();
+    *(p + 3) = this->read_byte();
 
-    *(p + 1) = this->p_eeprom->read(*pos);
-    *pos++;
-
-    *(p + 2) = this->p_eeprom->read(*pos);
-    *pos++;
-
-    *(p + 3) = this->p_eeprom->read(*pos);
-    *pos++;
-
+    DEBUG_MSG("CONFIG: read32 %u\n", val);
     return val;
 }
 
