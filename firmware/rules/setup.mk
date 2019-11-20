@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+TOOLS             = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/tools
+
 ESP8266_ROOT      = $(ESP8266_PATH)/tools/xtensa-lx106-elf-gcc/$(XTENSA)
 ESP8266_BIN       = $(ESP8266_ROOT)/bin
-ESP8266_SDK       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/tools/sdk
+ESP8266_SDK       = $(TOOLS)/sdk
 ESP8266_CORE      = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/cores/esp8266
 ESP8266_VARIANTS  = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/variants/nodemcu
 ESP8266_SPI       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/SPI
