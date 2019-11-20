@@ -28,6 +28,12 @@ $(OBJDIR)/%.cpp.o: $(SRCDIR)/umm_malloc/%.cpp
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
+$(OBJDIR)/%.c.o: $(SRCDIR)/umm_malloc/%.c
+	@$(LOG) "(GCC) $@"
+	@$(MKDIR) $(OBJDIR)
+	@$(LOGTIME) $(GCC) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(GCC) $(CFLAGS) $< -o $@ $(LOGOUT)
+
 $(OBJDIR)/%.cpp.o: $(SRCDIR)/spiffs/%.cpp
 	@$(LOG) "(CXX) $@"
 	@$(MKDIR) $(OBJDIR)

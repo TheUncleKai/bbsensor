@@ -29,7 +29,7 @@ help:
 include ext/core/lib.mk
 include ext/eeprom/lib.mk
 include ext/esp8266mdns/lib.mk
-include ext/esp8266webserver/lib.mk
+# include ext/esp8266webserver/lib.mk
 include ext/esp8266wifi/lib.mk
 include ext/softwareserial/lib.mk
 include ext/spi/lib.mk
@@ -44,7 +44,7 @@ compile:
 	@$(INFORM) "Compile $(APP)"
 	@$(MAKE) -s -C src -f Makefile compile
 
-link: link_core link_eeprom link_mdns link_webserver link_wifi link_serial link_spi
+link: link_core link_eeprom link_mdns link_wifi link_serial link_spi
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
@@ -60,4 +60,4 @@ clean: clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_seria
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
-.PHONY: default help compile link upload clean compile_core compile_eeprom compile_mdns compile_webserver compile_wifi compile_serial compile_spi link_core link_eeprom link_mdns link_webserver link_wifi link_serial link_spi clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_serial clean_spi
+.PHONY: default help compile link upload clean compile_core compile_eeprom compile_mdns compile_webserver compile_wifi compile_serial compile_spi link_core link_eeprom link_mdns link_wifi link_serial link_spi clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_serial clean_spi
