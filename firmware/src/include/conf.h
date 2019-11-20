@@ -18,30 +18,45 @@
 #define CONF_H_INCLUDED
 
 #include <EEPROM.h>
-#include <map>
+#include <list>
 
 #include <channel.h>
 
-#define CONFIG_INIT   8
+#define CONFIG_INIT    2
 
-#define CONFIG_TYPES  8
-#define CONFIG_SSID   32
-#define CONFIG_PASS   64
+#define CHANNEL_NUMBER 8
+#define CHANNEL_NAME   16
 
-#define DEFAULT_DELAY 120
+#define WLAN_SSID      32
+#define WLAN_PASS      64
+
+#define DEFAULT_DELAY  120
 
 #define DEBUG_CONFIG
 
 
 typedef struct {
-    uint8_t init = CONFIG_INIT;
-    uint8_t channel_list = 0;
-    uint8_t channel_types[CONFIG_TYPES] = {0};
-    uint32_t measure_delay = DEFAULT_DELAY;
-    char wlan_ssid[CONFIG_SSID] = "";
-    char wlan_pass[CONFIG_PASS] = "";
-} configdata;
+    uint8_t number = 0;
+    char name[16] = "";
+    uint8_t type = 0;
+    uint8_t active = 0;
+} config_channel;
 
+
+typedef struct {
+    uint8_t wlan_wps = 0;
+    char wlan_ssid[WLAN_SSID] = {0};
+    char wlan_pass[WLAN_PASS] = {0};
+} config_wlan;
+
+
+typedef struct {
+    uint8_t init = CONFIG_INIT;
+    uint32_t measure_delay = DEFAULT_DELAY;
+} config_main;
+
+
+typedef std::list<config_channel*> ChannelConfig;
 
 class Config
 {
@@ -49,7 +64,10 @@ class Config
         Config();
         virtual ~Config();
 
-        configdata* data();
+        config_main* main();
+        config_wlan* wlan();
+
+        config_channel* get_channel(uint8_t number);
 
         void setup();
 
@@ -62,6 +80,11 @@ class Config
     protected:
 
     private:
+        config_main* p_main;
+        config_wlan* p_wlan;
+
+        ChannelConfig* p_channel;
+
         bool _verify();
         int m_pos;
 
@@ -71,9 +94,7 @@ class Config
         uint8_t read_byte();
         uint32_t read_int();
 
-
         EEPROMClass* p_eeprom;
-        configdata* p_data;
 };
 
 
