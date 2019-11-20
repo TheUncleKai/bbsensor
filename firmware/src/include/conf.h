@@ -25,8 +25,6 @@
 #define CONFIG_INIT    2
 
 #define CHANNEL_NUMBER 8
-#define CHANNEL_NAME   16
-
 #define WLAN_SSID      32
 #define WLAN_PASS      64
 
@@ -36,27 +34,15 @@
 
 
 typedef struct {
-    uint8_t number = 0;
-    char name[16] = "";
-    uint8_t type = 0;
-    uint8_t active = 0;
-} config_channel;
-
-
-typedef struct {
-    uint8_t wlan_wps = 0;
-    char wlan_ssid[WLAN_SSID] = {0};
-    char wlan_pass[WLAN_PASS] = {0};
-} config_wlan;
-
-
-typedef struct {
     uint8_t init = CONFIG_INIT;
     uint32_t measure_delay = DEFAULT_DELAY;
-} config_main;
+    uint8_t wlan_wps = 0;
+    char wlan_ssid[WLAN_SSID] = "";
+    char wlan_pass[WLAN_PASS] = "";
+    uint8_t channels = 0;
+    uint8_t channel_types[CHANNEL_NUMBER] = {0};
+} EEPROM_storage;
 
-
-typedef std::list<config_channel*> ChannelConfig;
 
 class Config
 {
@@ -64,10 +50,7 @@ class Config
         Config();
         virtual ~Config();
 
-        config_main* main();
-        config_wlan* wlan();
-
-        config_channel* get_channel(uint8_t number);
+        EEPROM_storage* data();
 
         void setup();
 
@@ -80,19 +63,9 @@ class Config
     protected:
 
     private:
-        config_main* p_main;
-        config_wlan* p_wlan;
-
-        ChannelConfig* p_channel;
+        EEPROM_storage* p_data;
 
         bool _verify();
-        int m_pos;
-
-        void write_byte(uint8_t data);
-        void write_int(uint32_t data);
-
-        uint8_t read_byte();
-        uint32_t read_int();
 
         EEPROMClass* p_eeprom;
 };
