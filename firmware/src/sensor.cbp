@@ -51,6 +51,7 @@
 					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WebServer/src" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266mDNS/src" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/SoftwareSerial/src" />
+					<Add directory="$$(ARDUINO_LIBS)/CRC32/src" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>

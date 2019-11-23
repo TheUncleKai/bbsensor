@@ -18,6 +18,8 @@
 #include <debug.h>
 #include <utils.h>
 
+#include <CRC32.h>
+
 
 const int EEPROM_storageSize = sizeof(EEPROM_storage);
 
