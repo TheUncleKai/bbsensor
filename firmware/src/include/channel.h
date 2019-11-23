@@ -24,6 +24,7 @@
 #include <tables.h>
 
 #include <list>
+#include <map>
 
 #define DEBUG_CHANNEL
 

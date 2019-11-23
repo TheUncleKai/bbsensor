@@ -41,7 +41,6 @@ class Hardware : public Device
         Button* button2();
         Display* display();
         Temperature* temperature();
-        EEPROMClass* eeprom();
 
         void setup();
         void execute();
@@ -52,7 +51,6 @@ class Hardware : public Device
         SPIClass* p_spi;
         LED* p_led1;
 
-        EEPROMClass* p_eeprom;
         Button* p_button1;
         Button* p_button2;
         Display* p_display;

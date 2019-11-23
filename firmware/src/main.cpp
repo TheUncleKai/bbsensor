@@ -24,6 +24,7 @@
 #include <hardware.h>
 #include <loop.h>
 #include <utils.h>
+#include <conf.h>
 
 #include <list>
 
@@ -31,16 +32,35 @@
 //#define SSID "Pussycat"
 //#define PASSWORD "supersecret"
 
+
+// Declarations
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+void handleISR1();
+void handleISR2();
+void print_channel();
+
 void setup();
 void loop();
 
-Hardware* hardware = new Hardware();
-Display* display = hardware->display();
-Loop* looper = new Loop();
-bool do_measure = false;
 
+// Variables
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+bool do_measure = false;
 Channel* channel = NULL;
 uint8_t channel_number = 0;
+
+Hardware* hardware = new Hardware();
+Config* config = new Config();
+Loop* looper = new Loop();
+
+
+Display* display = hardware->display();
+
+
+// Implemnatation
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
 void handleISR1()
@@ -52,25 +72,6 @@ void handleISR1()
 void handleISR2()
 {
     hardware->button2()->handleISR();
-}
-
-
-void setup()
-{
-    Serial.begin(115200);
-    delay(3000);
-
-    looper->set_numer(10);
-    looper->setup();
-    hardware->temperature()->add_channel(Channel::VOLTAGE);
-    hardware->temperature()->add_channel(Channel::VOLTAGE);
-    hardware->button1()->setISR(handleISR1);
-    hardware->button2()->setISR(handleISR2);
-    hardware->setup();
-
-    // Use an external AP
-    // WiFi.mode(WIFI_STA);
-    // WiFi.begin(SSID, PASSWORD);
 }
 
 
@@ -107,6 +108,31 @@ void print_channel()
 }
 
 
+void setup()
+{
+    Serial.begin(115200);
+    delay(3000);
+
+    looper->set_numer(10);
+    looper->setup();
+    hardware->temperature()->add_channel(Channel::VOLTAGE);
+    hardware->temperature()->add_channel(Channel::VOLTAGE);
+    hardware->button1()->setISR(handleISR1);
+    hardware->button2()->setISR(handleISR2);
+
+    config->setup();
+    config->read();
+
+    hardware->setup();
+
+    config->print();
+
+
+    // Use an external AP
+    // WiFi.mode(WIFI_STA);
+    // WiFi.begin(SSID, PASSWORD);
+}
+
 
 void loop()
 {
@@ -129,7 +155,7 @@ void loop()
     }
 
     if (looper->number() == 10) {
-        print_channel();
+        // print_channel();
 
         hardware->led1()->toggle();
         hardware->temperature()->set_measure(false, 0, do_measure);
