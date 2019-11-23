@@ -17,6 +17,10 @@ ROOT = .
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
 
+COMPILE_LIST = 
+PHONY_LIST = 
+CLEAN_LIST = 
+
 default: link
 
 help:
@@ -44,7 +48,8 @@ compile:
 	@$(INFORM) "Compile $(APP)"
 	@$(MAKE) -s -C src -f Makefile compile
 
-link: link_core link_eeprom link_mdns link_wifi link_serial link_spi
+
+link: $(LINK_LIST)
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Link $(APP)"
 	@$(MAKE) -s -C src -f Makefile link
@@ -54,10 +59,12 @@ upload: link
 	@$(INFORM) "Upload firmware"
 	@$(MAKE) -s -C src -f Makefile upload
 
-clean: clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_serial clean_spi
+
+clean: $(CLEAN_LIST)
 	@@$(RM) $(LOGFILE)
 	@$(INFORM) "Clean $(APP)"
 	@$(MAKE) -s -C src -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
-.PHONY: default help compile link upload clean compile_core compile_eeprom compile_mdns compile_webserver compile_wifi compile_serial compile_spi link_core link_eeprom link_mdns link_wifi link_serial link_spi clean_core clean_eeprom clean_mdns clean_webserver clean_wifi clean_serial clean_spi
+
+.PHONY: default help compile link upload clean $(PHONY_LIST)

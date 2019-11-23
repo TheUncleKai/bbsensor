@@ -29,6 +29,7 @@ EXEEXT      = .exe
 ECHO        = echo -e
 PORT        = /dev/ttyUSB0
 BAUD        = 115200
+LIBRARIES   = /home/kai/Arduino/libraries
 
 Example for Linux
 
@@ -49,3 +50,4 @@ PORT        = /dev/ttyUSB0
 BAUD        = 115200
 CHIP        = esp8266
 UPLOAD      = /home/kai/.local/bin/esptool.py
+LIBRARIES   = /home/kai/Arduino/libraries

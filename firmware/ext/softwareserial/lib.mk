@@ -24,3 +24,7 @@ link_serial: compile_serial
 clean_serial: link_serial
 	@$(INFORM) "Clean $(LIBSOFTWARESERIAL)"
 	@$(MAKE) -s -C ext/softwareserial -f Makefile clean
+
+LINK_LIST += link_serial
+CLEAN_LIST += clean_serial
+PHONY_LIST += compile_serial link_serial clean_serial

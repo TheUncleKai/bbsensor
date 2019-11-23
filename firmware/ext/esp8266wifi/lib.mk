@@ -24,3 +24,7 @@ link_wifi: compile_wifi
 clean_wifi: link_wifi
 	@$(INFORM) "Clean $(LIBESP8266WIFI)"
 	@$(MAKE) -s -C ext/esp8266wifi -f Makefile clean
+
+LINK_LIST += link_wifi
+CLEAN_LIST += clean_wifi
+PHONY_LIST += compile_wifi link_wifi clean_wifi
