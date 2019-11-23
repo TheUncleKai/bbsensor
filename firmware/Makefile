@@ -37,6 +37,7 @@ include ext/esp8266mdns/lib.mk
 include ext/esp8266wifi/lib.mk
 include ext/softwareserial/lib.mk
 include ext/spi/lib.mk
+include ext/CRC32/lib.mk
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Projects
