@@ -28,6 +28,7 @@ Config::Config()
 {
     this->p_eeprom = new EEPROMClass();
     this->p_data = new EEPROM_storage;
+    this->m_crc = 0;
 }
 
 
@@ -88,19 +89,45 @@ void Config::reset()
 }
 
 
+
 void Config::read()
 {
     int i = 0;
     int pos = 0;
+    CRC32 crc;
+    uint8_t data;
+    uint32_t crc_value, crc_stored;
 
     DEBUG_MSG("CONFIG: read\n");
 
     uint8_t* byteStorage = (uint8_t*)this->p_data;
 
     for (i = 0; i < EEPROM_storageSize; i++) {
+        data = this->p_eeprom->read(pos + i);
+        byteStorage[i] = data;
+        crc.update(data);
+    }
+
+    crc_value = crc.finalize();
+    crc_stored = this->_read_crc();
+    DEBUG_MSG("CONFIG: crc %x, stored %x\n", crc_value, crc_stored);
+}
+
+
+uint32_t Config::_read_crc()
+{
+    int i = 0;
+    int pos = EEPROM_storageSize + 1;
+    uint32_t crc_value = 0;
+    size_t crc_size = sizeof(uint32_t);
+
+    uint8_t* byteStorage = (uint8_t*)&crc_value;
+
+    for (i = 0; i < crc_size; i++) {
         byteStorage[i] = this->p_eeprom->read(pos + i);
     }
 
+    return crc_value;
 }
 
 

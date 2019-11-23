@@ -64,8 +64,10 @@ class Config
 
     private:
         EEPROM_storage* p_data;
+        uint32_t m_crc;
 
         bool _verify();
+        uint32_t _read_crc();
 
         EEPROMClass* p_eeprom;
 };
