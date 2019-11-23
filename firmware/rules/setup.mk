@@ -26,7 +26,6 @@ ESP8266_WEBSERVER = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/ES
 ESP8266_MDNS      = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/ESP8266mDNS/src
 ESP8266_SERIAL    = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/SoftwareSerial/src
 
-
 ESP8266_INCLUDE_SDK       = -I$(ESP8266_SDK)/include -I$(ESP8266_SDK)/lwip2/include -I$(ESP8266_SDK)/libc/xtensa-lx106-elf/include
 ESP8266_INCLUDE_CORE      = -I$(ESP8266_CORE)
 ESP8266_INCLUDE_VARIANTS  = -I$(ESP8266_VARIANTS)
@@ -47,7 +46,6 @@ OBJCOPY = $(ESP8266_BIN)/$(ESP8266_GCC_PREFIX)-objcopy$(EXEEXT)
 SIZE    = $(ESP8266_BIN)/$(ESP8266_GCC_PREFIX)-size$(EXEEXT)
 SIGNING = $(TOOLS)/signing.py
 ELF2BIN = $(TOOLS)/elf2bin.py
-UPLOAD  = $(TOOLS)/upload.py
 
 NICE_DATE = ''
 

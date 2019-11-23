@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ESP8266_PATH       = C:/Users/kai/AppData/Local/Arduino15/packages/esp8266
+# Example for windows
+
+ESP8266_PATH       = /home/kai/.arduino15/packages/esp8266
 ESP8266_GCC_PREFIX = xtensa-lx106-elf
 
 XTENSA      = 2.5.0-4-b40a506
@@ -27,3 +29,23 @@ EXEEXT      = .exe
 ECHO        = echo -e
 PORT        = /dev/ttyUSB0
 BAUD        = 115200
+
+Example for Linux
+
+ESP8266_PATH       = /home/kai/.arduino15/packages/esp8266
+ESP8266_GCC_PREFIX = xtensa-lx106-elf
+
+XTENSA      = 2.5.0-4-b40a506
+ESP_VERSION = 2.6.1
+MKDIR       = mkdir -p
+RM          = rm -f
+RMDIR       = rmdir
+PYTHON      = /usr/bin/python3
+TOOLS       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/tools/
+COPY        = cp
+EXEEXT      =
+ECHO        = echo
+PORT        = /dev/ttyUSB0
+BAUD        = 115200
+CHIP        = esp8266
+UPLOAD      = /home/kai/.local/bin/esptool.py

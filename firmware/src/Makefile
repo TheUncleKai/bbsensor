@@ -54,8 +54,8 @@ include rules.mk
 
 upload: $(BIN)
 	@$(INFORM) "Upload $(BIN)"
-	@$(LOGTIME) $(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(BIN) --end $(LOGONLY)
-	@$(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(BIN) --end $(LOGOUT)
+	@$(LOGTIME) $(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(BIN) $(LOGONLY)
+	@$(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(BIN) $(LOGOUT)
 
 -include $(DEPS)
 

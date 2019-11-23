@@ -37,9 +37,9 @@ CFLAGS = \
 	$(ESP8266_INCLUDE_SPI) \
 	$(ESP8266_INCLUDE_EEPROM) \
 	$(ESP8266_INCLUDE_WIFI) \
-    $(ESP8266_INCLUDE_WEBSERVER) \
-    $(ESP8266_INCLUDE_MDNS) \
-    $(ESP8266_INCLUDE_SERIAL)
+	$(ESP8266_INCLUDE_WEBSERVER) \
+	$(ESP8266_INCLUDE_MDNS) \
+	$(ESP8266_INCLUDE_SERIAL)
 
 ASMFLAGS = \
 	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
@@ -70,6 +70,5 @@ LDLIBS = \
 	-laxtls -lespnow -lsmartconfig -lairkiss -lwpa2 -lstdc++ -lm -lc -lgcc
 
 UPLOADFLAGS = \
-	--chip esp8266 --port $(PORT) --baud $(BAUD) --trace version --end \
-	--chip esp8266 --port $(PORT) --baud $(BAUD) --trace write_flash 0x0
+	--chip $(CHIP) --port $(PORT) --baud $(BAUD) --trace write_flash 0x0
 
