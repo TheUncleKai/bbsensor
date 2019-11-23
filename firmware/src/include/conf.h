@@ -18,11 +18,8 @@
 #define CONF_H_INCLUDED
 
 #include <EEPROM.h>
-#include <list>
 
-#include <channel.h>
-
-#define CONFIG_INIT    2
+#define CONFIG_INIT    3
 
 #define CHANNEL_NUMBER 8
 #define WLAN_SSID      32
@@ -55,8 +52,13 @@ class Config
         void setup();
 
         void read();
+        bool verify();
+
         void reset();
         void write();
+
+        void set_wlan_ssid(const char* value);
+        void set_wlan_pass(const char* value);
 
         void print();
 
@@ -64,10 +66,9 @@ class Config
 
     private:
         EEPROM_storage* p_data;
-        uint32_t m_crc;
+        uint32_t m_crc, m_calc;
 
-        bool _verify();
-        uint32_t _read_crc();
+        void read_crc();
 
         EEPROMClass* p_eeprom;
 };

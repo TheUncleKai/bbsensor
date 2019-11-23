@@ -18,6 +18,8 @@
 #include <debug.h>
 #include <utils.h>
 
+#include <string>
+
 #include <CRC32.h>
 
 
@@ -44,25 +46,20 @@ void Config::setup()
     bool check;
     DEBUG_MSG("CONFIG: setup\n");
     this->p_eeprom->begin(512);
-
-    DEBUG_MSG("CONFIG: check\n");
-    check = this->_verify();
-
-    if (check == false) {
-        DEBUG_MSG("CONFIG: reset\n");
-        this->reset();
-        this->write();
-    }
 }
 
 
-bool Config::_verify()
+bool Config::verify()
 {
-    uint8_t config_init = 0;
+    bool reset = false;
 
-    config_init = this->p_eeprom->read(0);
+    if (this->m_crc != this->m_calc) {
+        DEBUG_MSG("CONFIG: crc verify failed\n");
+        return false;
+    }
 
-    if (config_init != CONFIG_INIT) {
+    if (this->p_data->init != CONFIG_INIT) {
+        DEBUG_MSG("CONFIG: init verify failed\n");
         return false;
     }
 
@@ -89,18 +86,19 @@ void Config::reset()
 }
 
 
-
 void Config::read()
 {
     int i = 0;
     int pos = 0;
     CRC32 crc;
-    uint8_t data;
-    uint32_t crc_value, crc_stored;
+    uint8_t data = 0;
+    uint8_t* byteStorage = NULL;
+    uint32_t crc_value = 0;
+    size_t crc_size = sizeof(uint32_t);
 
-    DEBUG_MSG("CONFIG: read\n");
 
-    uint8_t* byteStorage = (uint8_t*)this->p_data;
+    // first we read struct data
+    byteStorage = (uint8_t*)this->p_data;
 
     for (i = 0; i < EEPROM_storageSize; i++) {
         data = this->p_eeprom->read(pos + i);
@@ -108,26 +106,18 @@ void Config::read()
         crc.update(data);
     }
 
-    crc_value = crc.finalize();
-    crc_stored = this->_read_crc();
-    DEBUG_MSG("CONFIG: crc %x, stored %x\n", crc_value, crc_stored);
-}
-
-
-uint32_t Config::_read_crc()
-{
-    int i = 0;
-    int pos = EEPROM_storageSize + 1;
-    uint32_t crc_value = 0;
-    size_t crc_size = sizeof(uint32_t);
-
-    uint8_t* byteStorage = (uint8_t*)&crc_value;
+    // then we read crc data
+    byteStorage = (uint8_t*)&crc_value;
+    pos = EEPROM_storageSize + 1;
 
     for (i = 0; i < crc_size; i++) {
         byteStorage[i] = this->p_eeprom->read(pos + i);
     }
 
-    return crc_value;
+    this->m_calc = crc.finalize();
+    this->m_crc = crc_value;
+
+    DEBUG_MSG("CONFIG: read data, crc %x, read %x\n", this->m_calc, this->m_crc);
 }
 
 
@@ -135,15 +125,61 @@ void Config::write()
 {
     size_t i = 0;
     int pos = 0;
+    CRC32 crc;
+    uint8_t data;
+    uint32_t crc_value = 0;
+    uint8_t* byteStorage = NULL;
+    size_t crc_size = sizeof(uint32_t);
 
-    uint8_t* byteStorage = (uint8_t*)this->p_data;
+    byteStorage = (uint8_t*)this->p_data;
 
     for (i = 0; i < EEPROM_storageSize; i++) {
+        data = byteStorage[i];
+        this->p_eeprom->write(pos + i, byteStorage[i]);
+        crc.update(data);
+    }
+
+    crc_value = crc.finalize();
+
+    byteStorage = (uint8_t*)&crc_value;
+    pos = EEPROM_storageSize + 1;
+
+    for (i = 0; i < crc_size; i++) {
         this->p_eeprom->write(pos + i, byteStorage[i]);
     }
 
-    DEBUG_MSG("CONFIG: commit\n");
+    DEBUG_MSG("CONFIG: commit data, crc %x\n", crc_value);
     this->p_eeprom->commit();
+}
+
+
+void Config::set_wlan_ssid(const char* value)
+{
+    std::string data(value);
+    int i = 0;
+
+    if (data.size() > WLAN_SSID) {
+        return;
+    }
+
+    for (i = 0; i < data.size(); ++i) {
+        this->p_data->wlan_ssid[i] = data[i];
+    }
+}
+
+
+void Config::set_wlan_pass(const char* value)
+{
+    std::string data(value);
+    int i = 0;
+
+    if (data.size() > WLAN_PASS) {
+        return;
+    }
+
+    for (i = 0; i < data.size(); ++i) {
+        this->p_data->wlan_pass[i] = data[i];
+    }
 }
 
 

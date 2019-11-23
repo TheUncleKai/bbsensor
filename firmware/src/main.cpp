@@ -54,7 +54,7 @@ uint8_t channel_number = 0;
 Hardware* hardware = new Hardware();
 Config* config = new Config();
 Loop* looper = new Loop();
-
+bool check = false;
 
 Display* display = hardware->display();
 
@@ -122,6 +122,15 @@ void setup()
 
     config->setup();
     config->read();
+
+    check = config->verify();
+
+    if (check == false) {
+        config->reset();
+        config->set_wlan_ssid("test_ssid");
+        config->set_wlan_pass("test_pass");
+        config->write();
+    }
 
     hardware->setup();
 
