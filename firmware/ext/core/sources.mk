@@ -22,6 +22,7 @@ SOURCES_CORE_CPP = \
     $(SRCDIR)/cont_util.cpp \
     $(SRCDIR)/core_esp8266_app_entry_noextra4k.cpp \
     $(SRCDIR)/core_esp8266_eboot_command.cpp \
+    $(SRCDIR)/core_esp8266_features.cpp \
     $(SRCDIR)/core_esp8266_flash_utils.cpp \
     $(SRCDIR)/core_esp8266_i2s.cpp \
     $(SRCDIR)/core_esp8266_main.cpp \
@@ -30,19 +31,23 @@ SOURCES_CORE_CPP = \
     $(SRCDIR)/core_esp8266_postmortem.cpp \
     $(SRCDIR)/core_esp8266_si2c.cpp \
     $(SRCDIR)/core_esp8266_sigma_delta.cpp \
+    $(SRCDIR)/core_esp8266_spi_utils.cpp \
     $(SRCDIR)/core_esp8266_timer.cpp \
     $(SRCDIR)/core_esp8266_waveform.cpp \
+    $(SRCDIR)/core_esp8266_wiring.cpp \
     $(SRCDIR)/core_esp8266_wiring_analog.cpp \
     $(SRCDIR)/core_esp8266_wiring_digital.cpp \
     $(SRCDIR)/core_esp8266_wiring_pulse.cpp \
     $(SRCDIR)/core_esp8266_wiring_pwm.cpp \
     $(SRCDIR)/core_esp8266_wiring_shift.cpp \
-    $(SRCDIR)/core_esp8266_wiring.cpp \
+    $(SRCDIR)/crc32.cpp \
     $(SRCDIR)/debug.cpp \
+    $(SRCDIR)/Esp.cpp \
     $(SRCDIR)/Esp-frag.cpp \
     $(SRCDIR)/Esp-version.cpp \
-    $(SRCDIR)/Esp.cpp \
+    $(SRCDIR)/flash_hal.cpp \
     $(SRCDIR)/FS.cpp \
+    $(SRCDIR)/FSnoop.cpp \
     $(SRCDIR)/FunctionalInterrupt.cpp \
     $(SRCDIR)/gdb_hooks.cpp \
     $(SRCDIR)/HardwareSerial.cpp \
@@ -52,10 +57,8 @@ SOURCES_CORE_CPP = \
     $(SRCDIR)/MD5Builder.cpp \
     $(SRCDIR)/Print.cpp \
     $(SRCDIR)/Schedule.cpp \
-    $(SRCDIR)/ScheduledFunctions.cpp \
     $(SRCDIR)/sntp-lwip2.cpp \
     $(SRCDIR)/spiffs_api.cpp \
-    $(SRCDIR)/spiffs_hal.cpp \
     $(SRCDIR)/sqrt32.cpp \
     $(SRCDIR)/StackThunk.cpp \
     $(SRCDIR)/Stream.cpp \
@@ -70,6 +73,12 @@ SOURCES_CORE_CPP = \
 SOURCES_LIBB64 = \
     $(SRCDIR)/libb64/cdecode.cpp \
     $(SRCDIR)/libb64/cencode.cpp
+
+SOURCES_MALLOC_C = \
+    $(SRCDIR)/umm_malloc/umm_info.c \
+    $(SRCDIR)/umm_malloc/umm_integrity.c \
+    $(SRCDIR)/umm_malloc/umm_local.c \
+    $(SRCDIR)/umm_malloc/umm_poison.c
 
 SOURCES_MALLOC = \
     $(SRCDIR)/umm_malloc/umm_malloc.cpp
