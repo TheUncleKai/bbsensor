@@ -114,8 +114,6 @@ void setup()
     Serial.begin(115200);
     delay(3000);
 
-    looper->set_numer(10);
-    looper->setup();
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
 
@@ -128,7 +126,7 @@ void setup()
         config->reset();
         config->set_channel(0, Temperature::Type::VOLTAGE);
         config->set_channel(2, Temperature::Type::VOLTAGE);
-        config->set_delay(30);
+        config->set_delay(300);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
     }
@@ -138,6 +136,11 @@ void setup()
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
         temperature->add_channel(i, config->get_channel(i));
     }
+
+    looper->set_counter(0, 10);
+    looper->set_counter(1, config->data()->measure_delay);
+    looper->setup();
+
 
     hardware->setup();
 }
@@ -161,16 +164,20 @@ void loop()
     if (looper->counter() == 60) {
         hardware->display()->write("Measure", 1);
         do_measure = true;
-    }
 
-    if (looper->number() == 10) {
-        // print_channel();
-
-        hardware->led1()->toggle();
         temperature->set_measure(false, 0, do_measure);
         temperature->set_measure(false, 2, do_measure);
     }
 
+    if (looper->number(0) == 10) {
+        hardware->led1()->toggle();
+    }
+
+
+    if (looper->number(1) == config->data()->measure_delay) {
+        temperature->set_measure(false, 0, do_measure);
+        temperature->set_measure(false, 2, do_measure);
+    }
 
     hardware->execute();
     looper->finish();

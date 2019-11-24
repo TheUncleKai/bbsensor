@@ -226,6 +226,12 @@ Temperature::Type Config::Manager::get_channel(uint8_t number)
 }
 
 
+Config::EEPROM_storage* Config::Manager::data()
+{
+    return this->p_data;
+}
+
+
 void Config::Manager::print()
 {
 #ifdef DEBUG_CONFIG
