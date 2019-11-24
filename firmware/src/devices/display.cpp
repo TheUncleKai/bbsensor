@@ -22,8 +22,6 @@
 #include <display.h>
 #include <utils.h>
 
-#include <string>
-
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 
 #define BYTE_TO_BINARY(byte)  \
@@ -79,17 +77,19 @@ Display::Display (SPIClass* spi, uint8_t cs)
     this->m_cs = cs;
 
     this->p_spi->set_spi(spi);
+    this->p_list = new Signal *[SIGNAL_LIST];
+    this->m_size = 0;
 
-    this->m_list = new std::list<Signal*>;
+    for (size_t i = 0; i < SIGNAL_LIST; ++i) {
+        this->p_list[i] = NULL;
+    }
 }
 
 
 Display::~Display()
 {
-    this->_clear_list();
-
     delete this->p_spi;
-    delete this->m_list;
+    delete this->p_list;
 }
 
 
@@ -128,7 +128,7 @@ void Display::_send(Signal* input)
     if (input->type == Type::SIG_LOW) {
         signal = (input->data & 0x0F) << 4;
     }
-"CLEAR",
+
     pin = this->_process_pins(signal);
 
     if (input->istext == true)
@@ -161,7 +161,8 @@ void Display::_send_low(uint8_t data, bool istext)
     signal->istext = istext;
     signal->type = Type::SIG_LOW;
 
-    this->m_list->push_back(signal);
+    this->p_list[this->m_size] = signal;
+    this->m_size++;
 }
 
 
@@ -173,7 +174,8 @@ void Display::_send_high(uint8_t data, bool istext)
     signal->istext = istext;
     signal->type = Type::SIG_HIGH;
 
-    this->m_list->push_back(signal);
+    this->p_list[this->m_size] = signal;
+    this->m_size++;
 }
 
 
@@ -208,14 +210,14 @@ void Display::clear()
 
 void Display::write(const char* input, uint8_t line)
 {
-    std::string text(input);
+    size_t size = strlen(input);
+
     uint8_t data = 0;
 
     this->_set_line(line);
 
-    for (std::string::iterator it=text.begin(); it!=text.end(); ++it) {
-        data = (uint8_t)*it;
-
+    for (size_t i = 0; i < size; ++i) {
+        data = input[i];
         this->_send_high(data, true);
         this->_send_low(data, true);
     }
@@ -264,31 +266,21 @@ void Display::setup()
 }
 
 
-void Display::_clear_list()
-{
-    Signal* signal = NULL;
-
-    std::list<Signal*>::iterator it;
-
-    for (it = this->m_list->begin(); it != this->m_list->end(); ++it) {
-        signal = *it;
-        delete signal;
-    }
-
-    this->m_list->clear();
-}
-
-
 void Display::execute()
 {
     Signal* signal = NULL;
 
-    std::list<Signal*>::iterator it;
+    for (size_t i = 0; i < this->m_size; ++i) {
+        signal = this->p_list[i];
 
-    for (it = this->m_list->begin(); it != this->m_list->end(); ++it) {
-        signal = *it;
-        this->_send(signal);
+        if (signal != NULL) {
+            this->_send(signal);
+
+            delete signal;
+            this->p_list[i] = NULL;
+        }
+
     }
 
-    this->_clear_list();
+    this->m_size = 0;
 }

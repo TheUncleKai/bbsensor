@@ -20,8 +20,8 @@
 #include <SPI.h>
 
 #include <device.h>
-#include <list>
-#include <string>
+
+#define SIGNAL_LIST 256
 
 //#define DISPLAY_DEBUG
 
@@ -54,7 +54,8 @@ class Display : public Device
     private:
         SPI* p_spi;
         uint8_t m_cs;
-        std::list<Signal*>* m_list;
+        Signal** p_list;
+        size_t m_size;
 
         uint8_t _process_pins(uint8_t data);
         void _send(Signal* input);
