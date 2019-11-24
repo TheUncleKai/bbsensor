@@ -85,8 +85,7 @@ void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 
     if (channel != NULL) {
 #ifdef DEBUG_TEMPERATURE
-        DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
-                  this->m_number, channel->number(), channel->type());
+        DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->number(), channel->type());
 #endif // DEBUG_TEMPERATURE
         channellist[number] = channel;
     }
@@ -97,9 +96,7 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
 #ifdef DEBUG_TEMPERATURE
     if (channel->measure() == true) {
-        DEBUG_MSG("TEMPERATURE%u: channel %u, measure!\n",
-                    channel->number(),
-                    channel->channel());
+        DEBUG_MSG("TEMPERATURE: channel %u, measure!\n", channel->channel());
     }
 #endif // DEBUG_TEMPERATURE
 
@@ -157,6 +154,8 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
     delete data;
 
+    DEBUG_MSG("TEMPERATURE: channel %u, measure %u\n", channel->channel(), value);
+
     channel->add_value(value);
 }
 
@@ -187,9 +186,7 @@ void Temperature::Manager::set_measure(bool all, uint8_t channel_number, bool me
 
 #ifdef DEBUG_TEMPERATURE
         if (channel->measure() == true) {
-            DEBUG_MSG("TEMPERATURE%u: channel %u, plan for measure!\n",
-                        channel->number(),
-                        channel->channel());
+            DEBUG_MSG("TEMPERATURE: channel %u, plan for measure!\n", channel->channel());
         }
 #endif // DEBUG_TEMPERATURE
     }

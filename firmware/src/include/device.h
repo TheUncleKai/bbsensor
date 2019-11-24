@@ -18,7 +18,6 @@
 #define DEVICE_H_INCLUDED
 
 #include <SPI.h>
-#include <list>
 
 #define DEBUG_SPI
 
