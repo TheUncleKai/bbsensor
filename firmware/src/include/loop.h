@@ -34,6 +34,7 @@ class Loop
         void setup();
         void start();
         void finish();
+        void activate();
         void set_counter(size_t channel, uint32_t n);
 
     protected:
@@ -41,6 +42,7 @@ class Loop
     private:
         uint32_t* p_channel;
         uint32_t* p_number;
+        bool m_activate;
         uint32_t m_bootup, m_delay, m_counter, m_timestamp;
 };
 

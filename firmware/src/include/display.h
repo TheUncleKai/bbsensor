@@ -36,7 +36,6 @@ struct Signal
     uint8_t data;
     Type type;
     bool istext;
-    const char* keyword;
 };
 
 
@@ -63,8 +62,8 @@ class Display : public Device
         void _clear_list();
         void _set_line(uint8_t line);
 
-        void _send_low(const char* keyword, uint8_t data, bool istext);
-        void _send_high(const char* keyword, uint8_t data, bool istext);
+        void _send_low(uint8_t data, bool istext);
+        void _send_high(uint8_t data, bool istext);
 };
 
 

@@ -80,28 +80,18 @@ void print_channel()
 {
     std::string text_out;
 
-    if (channel_number == 0) {
-        channel_number = 1;
-    } else {
-        channel_number = 0;
-    }
-
     channel = temperature->get_channel(channel_number);
 
-    if (channel->value() == NULL) {
+    if (channel->type() == Temperature::Type::NONE) {
         return;
     }
 
-    if (channel->type() == Temperature::Type::NONE) {
-        text_out = string_format("%u: %u",
-            channel->channel(),
-            channel->value()->data);
+    if (channel->type() == Temperature::Type::DATA) {
+        text_out = string_format("%u: %u", channel->channel(), channel->value()->data);
     }
 
     if (channel->type() == Temperature::Type::VOLTAGE) {
-        text_out = string_format("%u: %5.3f",
-            channel->channel(),
-            channel->value()->value);
+        text_out = string_format("%u: %5.3f", channel->channel(), channel->value()->value);
     }
 
     hardware->display()->write("                ", 2);
@@ -125,7 +115,7 @@ void setup()
     if (check == false) {
         config->reset();
         config->set_channel(0, Temperature::Type::VOLTAGE);
-        config->set_channel(2, Temperature::Type::VOLTAGE);
+        config->set_channel(2, Temperature::Type::DATA);
         config->set_delay(300);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
@@ -139,6 +129,7 @@ void setup()
 
     looper->set_counter(0, 10);
     looper->set_counter(1, config->data()->measure_delay);
+    looper->set_counter(2, 100);
     looper->setup();
 
 
@@ -156,15 +147,16 @@ void loop()
         hardware->led1()->on();
     }
 
-    if (looper->counter() == 20) {
+    if (looper->counter() == 10) {
         hardware->display()->clear();
         hardware->display()->write("Start", 1);
     }
 
-    if (looper->counter() == 60) {
+    if (looper->counter() == 20) {
         hardware->display()->write("Measure", 1);
         do_measure = true;
 
+        looper->activate();
         temperature->set_measure(false, 0, do_measure);
         temperature->set_measure(false, 2, do_measure);
     }
@@ -173,6 +165,15 @@ void loop()
         hardware->led1()->toggle();
     }
 
+    if (looper->number(2) == 100) {
+        if (channel_number == 0) {
+            channel_number = 2;
+        } else {
+            channel_number = 0;
+        }
+
+        print_channel();
+    }
 
     if (looper->number(1) == config->data()->measure_delay) {
         temperature->set_measure(false, 0, do_measure);

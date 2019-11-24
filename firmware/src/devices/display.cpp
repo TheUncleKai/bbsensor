@@ -128,7 +128,7 @@ void Display::_send(Signal* input)
     if (input->type == Type::SIG_LOW) {
         signal = (input->data & 0x0F) << 4;
     }
-
+"CLEAR",
     pin = this->_process_pins(signal);
 
     if (input->istext == true)
@@ -137,7 +137,7 @@ void Display::_send(Signal* input)
     }
 
 #ifdef DISPLAY_DEBUG
-    debug_display(input->keyword, input->data, signal, pin);
+    debug_display("DISPLAY", input->data, signal, pin);
 #endif // DISPLAY_DEBUG
 
     pin_on = pin ^ PIN_E;
@@ -153,11 +153,10 @@ void Display::_send(Signal* input)
 }
 
 
-void Display::_send_low(const char* keyword, uint8_t data, bool istext)
+void Display::_send_low(uint8_t data, bool istext)
 {
     Signal* signal = new Signal();
 
-    signal->keyword = keyword;
     signal->data = data;
     signal->istext = istext;
     signal->type = Type::SIG_LOW;
@@ -166,11 +165,10 @@ void Display::_send_low(const char* keyword, uint8_t data, bool istext)
 }
 
 
-void Display::_send_high(const char* keyword, uint8_t data, bool istext)
+void Display::_send_high(uint8_t data, bool istext)
 {
     Signal* signal = new Signal();
 
-    signal->keyword = keyword;
     signal->data = data;
     signal->istext = istext;
     signal->type = Type::SIG_HIGH;
@@ -186,15 +184,15 @@ void Display::_set_line(uint8_t line)
     if (line == 1) {
         data = LINE1;
 
-        this->_send_high("LINE1", data, false);
-        this->_send_low("LINE1", data, false);
+        this->_send_high(data, false);
+        this->_send_low(data, false);
     }
 
     if (line == 2) {
         data = LINE2;
 
-        this->_send_high("LINE2", data, false);
-        this->_send_low("LINE2", data, false);
+        this->_send_high(data, false);
+        this->_send_low(data, false);
     }
 }
 
@@ -203,8 +201,8 @@ void Display::clear()
 {
     uint8_t data = CLEAR;
 
-    this->_send_high("CLEAR", data, false);
-    this->_send_low("CLEAR", data, false);
+    this->_send_high(data, false);
+    this->_send_low(data, false);
 }
 
 
@@ -212,16 +210,14 @@ void Display::write(const char* input, uint8_t line)
 {
     std::string text(input);
     uint8_t data = 0;
-    char* digit = 0;
 
     this->_set_line(line);
 
     for (std::string::iterator it=text.begin(); it!=text.end(); ++it) {
         data = (uint8_t)*it;
-        digit = (char*)&data;
 
-        this->_send_high(digit, data, true);
-        this->_send_low(digit, data, true);
+        this->_send_high(data, true);
+        this->_send_low(data, true);
     }
 }
 
@@ -252,16 +248,16 @@ void Display::setup()
     0  0  0   1   1   0      = 0110 -> 0000 0110 -> 0x06
     */
 
-    this->_send_low("INIT", 0x02, false);
+    this->_send_low(0x02, false); // INIT
 
-    this->_send_low("4BIT", 0x02, false);
-    this->_send_low("4BIT", 0x0b, false);
+    this->_send_low(0x02, false); // 4BIT
+    this->_send_low(0x0b, false);
 
-    this->_send_low("DISP", 0x00, false);
-    this->_send_low("DISP", 0x0e, false);
+    this->_send_low(0x00, false); // DISP
+    this->_send_low(0x0e, false);
 
-    this->_send_low("SET",  0x00, false);
-    this->_send_low("SET",  0x06, false);
+    this->_send_low(0x00, false); // SET
+    this->_send_low(0x06, false);
 
     this->write("BOOT...", 1);
     this->execute();

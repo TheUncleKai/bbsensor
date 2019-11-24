@@ -31,6 +31,7 @@ Loop::Loop()
 
     this->m_counter = 0;
     this->m_timestamp = 0;
+    this->m_activate = false;
 
     for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
         this->p_channel[i] = 0;
@@ -73,6 +74,9 @@ void Loop::start()
     this->m_timestamp = millis();
     this->m_counter++;
 
+    if (this->m_activate == false)
+        return;
+
     for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
         if (this->p_channel[i] > 0)
             this->p_number[i]++;
@@ -84,6 +88,9 @@ void Loop::finish()
 {
     delay(this->m_delay);
 
+    if (this->m_activate == false)
+        return;
+
     for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
         if (this->p_number[i] == this->p_channel[i]) {
             this->p_number[i] = 0;
@@ -91,6 +98,11 @@ void Loop::finish()
     }
 }
 
+
+void Loop::activate()
+{
+    this->m_activate = true;
+}
 
 void Loop::set_counter(size_t channel, uint32_t n)
 {

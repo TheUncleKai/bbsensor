@@ -35,10 +35,11 @@ namespace Temperature
 enum class Type
 {
     NONE = 0,
-    VOLTAGE = 1,
-    RTD = 2,
-    PTC10 = 3,
-    PTC100 = 4
+    DATA = 1,
+    VOLTAGE = 2,
+    RTD = 3,
+    PTC10 = 4,
+    PTC100 = 5
 };
 
 

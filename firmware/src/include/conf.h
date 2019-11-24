@@ -23,7 +23,7 @@
 #include <channel.h>
 #include <settings.h>
 
-#define CONFIG_VERSION 1
+#define CONFIG_VERSION 3
 
 #define DEBUG_CONFIG
 
