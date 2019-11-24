@@ -52,7 +52,7 @@ Temperature::Channel* channel = NULL;
 uint8_t channel_number = 0;
 
 Hardware* hardware = new Hardware();
-Config* config = new Config();
+Config::Manager* config = new Config::Manager();
 Loop* looper = new Loop();
 bool check = false;
 
@@ -127,6 +127,8 @@ void setup()
 
     if (check == false) {
         config->reset();
+        config->set_channel(0, Temperature::Type::VOLTAGE);
+        config->set_channel(1, Temperature::Type::VOLTAGE);
         config->set_delay(30);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();

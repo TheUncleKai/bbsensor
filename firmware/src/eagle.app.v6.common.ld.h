@@ -151,6 +151,9 @@ SECTIONS
 
     *libc.a:(.literal .text .literal.* .text.*)
     *libcore.a:(.literal .text .literal.* .text.*)
+    *libcrc32.a:(.literal .text .literal.* .text.*)
+    *libeeprom.a:(.literal .text .literal.* .text.*)
+    *libspi.a:(.literal .text .literal.* .text.*)
     *libm.a:(.literal .text .literal.* .text.*)
     *libgcc.a:_umoddi3.o(.literal .text)
     *libgcc.a:_udivdi3.o(.literal .text)
