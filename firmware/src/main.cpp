@@ -115,8 +115,6 @@ void setup()
 
     looper->set_numer(10);
     looper->setup();
-    hardware->temperature()->add_channel(0, Temperature::Type::VOLTAGE);
-    hardware->temperature()->add_channel(1, Temperature::Type::VOLTAGE);
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
 
@@ -134,14 +132,13 @@ void setup()
         config->write();
     }
 
-    hardware->setup();
-
     config->print();
 
+    for (int i = 0; i < TEMP_CHANNELS; ++i) {
+        hardware->temperature()->add_channel(i, config->get_channel(i));
+    }
 
-    // Use an external AP
-    // WiFi.mode(WIFI_STA);
-    // WiFi.begin(SSID, PASSWORD);
+    hardware->setup();
 }
 
 

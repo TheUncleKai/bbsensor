@@ -81,12 +81,13 @@ void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
         return;
     }
 
+    if (type == Temperature::Type::NONE)
+        return;
+
     Temperature::Channel* channel = new Channel(number, type);
 
     if (channel != NULL) {
-#ifdef DEBUG_TEMPERATURE
-        DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->number(), channel->type());
-#endif // DEBUG_TEMPERATURE
+        DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
         channellist[number] = channel;
     }
 }
