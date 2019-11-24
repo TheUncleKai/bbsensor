@@ -54,8 +54,8 @@ Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 
 Display* display = hardware->display();
+Temperature::Manager* temperature = hardware->temperature();
 Temperature::Channel* channel = NULL;
-Temperature::Manager* temperature = NULL;
 
 Loop* looper = new Loop();
 
@@ -86,7 +86,7 @@ void print_channel()
         channel_number = 0;
     }
 
-    channel = hardware->temperature()->get_channel(channel_number);
+    channel = temperature->get_channel(channel_number);
 
     if (channel->value() == NULL) {
         return;
@@ -127,7 +127,7 @@ void setup()
     if (check == false) {
         config->reset();
         config->set_channel(0, Temperature::Type::VOLTAGE);
-        config->set_channel(1, Temperature::Type::VOLTAGE);
+        config->set_channel(2, Temperature::Type::VOLTAGE);
         config->set_delay(30);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
@@ -136,7 +136,7 @@ void setup()
     config->print();
 
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        hardware->temperature()->add_channel(i, config->get_channel(i));
+        temperature->add_channel(i, config->get_channel(i));
     }
 
     hardware->setup();
@@ -146,8 +146,8 @@ void setup()
 void loop()
 {
     looper->start();
-    hardware->temperature()->set_measure(false, 0, false);
-    hardware->temperature()->set_measure(false, 1, false);
+    temperature->set_measure(false, 0, false);
+    temperature->set_measure(false, 2, false);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -167,8 +167,8 @@ void loop()
         // print_channel();
 
         hardware->led1()->toggle();
-        hardware->temperature()->set_measure(false, 0, do_measure);
-        hardware->temperature()->set_measure(false, 1, do_measure);
+        temperature->set_measure(false, 0, do_measure);
+        temperature->set_measure(false, 2, do_measure);
     }
 
 

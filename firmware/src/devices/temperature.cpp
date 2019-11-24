@@ -83,7 +83,9 @@ void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
         Temperature::Channel* channel = new Channel(number, type);
 
         if (channel != NULL) {
+#ifdef DEBUG_TEMPERATURE
             DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
+#endif // DEBUG_TEMPERATURE
             channellist[number] = channel;
         }
     } else {
@@ -155,7 +157,9 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
     delete data;
 
+#ifdef DEBUG_TEMPERATURE
     DEBUG_MSG("TEMPERATURE: channel %u, measure %u\n", channel->channel(), value);
+#endif // DEBUG_TEMPERATURE
 
     channel->add_value(value);
 }

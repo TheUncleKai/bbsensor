@@ -125,7 +125,7 @@ void Temperature::Channel::add_value(uint16_t data)
     }
 
 #ifdef DEBUG_CHANNEL
-    DEBUG_MSG("CHANNEL%u: count %u, data %u, value %5.3f\n", this->m_num, this->m_counter, value->data, value->value);
+    DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);
 #endif // DEBUG_CHANNEL
 
     this->p_lastvalue = value;
