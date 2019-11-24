@@ -19,8 +19,6 @@
 
 #include <Arduino.h>
 
-#include <list>
-
 
 typedef struct
 {
@@ -28,9 +26,8 @@ typedef struct
     float value;
 } Value;
 
-typedef std::list<Value*> ValueList;
-
 extern float table_voltages[4096];
 
+extern float table_rtd[4096];
 
 #endif // TABLES_H_INCLUDED

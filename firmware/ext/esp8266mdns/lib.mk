@@ -24,3 +24,7 @@ link_mdns: compile_mdns
 clean_mdns: link_mdns
 	@$(INFORM) "Clean $(LIBESP8266MDNS)"
 	@$(MAKE) -s -C ext/esp8266mdns -f Makefile clean
+
+LINK_LIST += link_mdns
+CLEAN_LIST += clean_mdns
+PHONY_LIST += compile_mdns link_mdns clean_mdns

@@ -23,13 +23,20 @@
 
 Loop::Loop()
 {
+    this->p_channel = new uint32_t[CHANNEL_LOOPS];
+    this->p_number = new uint32_t[CHANNEL_LOOPS];
+
     this->m_bootup = 0;
     this->m_delay = LOOP_WAIT;
+
     this->m_counter = 0;
     this->m_timestamp = 0;
 
-    this->m_number = 0;
-    this->m_max = 1;
+    for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
+        this->p_channel[i] = 0;
+        this->p_number[i] = 0;
+    }
+
 }
 
 
@@ -39,27 +46,18 @@ Loop::~Loop()
 }
 
 
-unsigned long Loop::bootup()
-{
-    return this->m_bootup;
-}
-
-
-unsigned long Loop::counter()
+uint32_t Loop::counter()
 {
     return this->m_counter;
 }
 
 
-unsigned long Loop::timestamp()
+uint32_t Loop::number(size_t channel)
 {
-    return this->m_timestamp;
-}
+    if (channel >= CHANNEL_LOOPS)
+        return 0;
 
-
-unsigned long Loop::number()
-{
-    return this->m_number;
+    return this->p_number[channel];
 }
 
 
@@ -67,19 +65,17 @@ void Loop::setup()
 {
     DEBUG_MSG("Bootup...\n");
     this->m_bootup = millis();
-    this->m_number = 0;
 }
 
 
 void Loop::start()
 {
     this->m_timestamp = millis();
-    if (this->m_max > 0) {
-        this->m_number++;
-    } else {
-        DEBUG_MSG("Loop %u: time %d, number %d, max %d\n",
-            this->m_counter,
-            this->m_timestamp);
+    this->m_counter++;
+
+    for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
+        if (this->p_channel[i] > 0)
+            this->p_number[i]++;
     }
 }
 
@@ -87,26 +83,19 @@ void Loop::start()
 void Loop::finish()
 {
     delay(this->m_delay);
-    this->m_counter++;
 
-    if (this->m_max > 0) {
-        if (this->m_number == this->m_max) {
-
-#ifdef DEBUG_LOOP
-        DEBUG_MSG("Loop %u: time %d, number %d, max %d\n",
-            this->m_counter,
-            this->m_timestamp,
-            this->m_number,
-            this->m_max);
-#endif // DEBUG_LOOP
-
-            this->m_number = 0;
+    for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
+        if (this->p_number[i] == this->p_channel[i]) {
+            this->p_number[i] = 0;
         }
     }
 }
 
 
-void Loop::set_numer(int n)
+void Loop::set_counter(size_t channel, uint32_t n)
 {
-    this->m_max = n;
+    if (channel >= CHANNEL_LOOPS)
+        return;
+
+    this->p_channel[channel] = n;
 }

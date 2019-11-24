@@ -40,8 +40,7 @@ class Hardware : public Device
         Button* button1();
         Button* button2();
         Display* display();
-        Temperature* temperature();
-        EEPROMClass* eeprom();
+        Temperature::Manager* temperature();
 
         void setup();
         void execute();
@@ -52,11 +51,10 @@ class Hardware : public Device
         SPIClass* p_spi;
         LED* p_led1;
 
-        EEPROMClass* p_eeprom;
         Button* p_button1;
         Button* p_button2;
         Display* p_display;
-        Temperature* p_temperature;
+        Temperature::Manager* p_temperature;
 };
 
 #endif // HARDWARE_H_INCLUDED

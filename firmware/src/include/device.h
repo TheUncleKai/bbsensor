@@ -18,15 +18,11 @@
 #define DEVICE_H_INCLUDED
 
 #include <SPI.h>
-#include <list>
 
 #define DEBUG_SPI
 
 #define SPI_WAIT_ON  1
 #define SPI_WAIT_OFF 2
-
-
-typedef std::list<uint8_t> SPIData;
 
 
 class Device
@@ -49,11 +45,12 @@ class SPI
         void set_spi(SPIClass* spi);
         void transfer(uint8_t channel, uint8_t data);
         void transfer(uint8_t channel, uint8_t data[], uint16_t size);
-        void commit(bool debug_out, SPIData* result, unsigned long wait_on = 0, unsigned long wait_off = 0);
+        uint8_t commit(bool debug_out, uint8_t* result, unsigned long wait_on = 0, unsigned long wait_off = 0);
 
     private:
         SPIClass* p_spi;
-        SPIData* p_data;
+        uint8_t* p_data;
+        uint8_t m_counter;
         uint8_t m_transfer, m_channel;
 
         void _on(uint8_t channel);

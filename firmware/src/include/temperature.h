@@ -26,18 +26,21 @@
 
 //#define DEBUG_TEMPERATURE
 
+namespace Temperature
+{
 
-class Temperature : public Device
+
+class Manager : public Device
 {
     public:
-        Temperature (EEPROMClass* eeprom, SPIClass* spi, uint8_t cs);
-        virtual ~Temperature();
+        Manager (SPIClass* spi, uint8_t cs);
+        virtual ~Manager();
 
         void setup();
-        void add_channel(Channel::Type type);
+        void add_channel(uint8_t number, Temperature::Type type);
 
         void execute();
-        ChannelList* channel();
+
         void set_measure(bool all, uint8_t channel_number, bool measure);
         Channel* get_channel(uint8_t channel_number);
 
@@ -45,13 +48,12 @@ class Temperature : public Device
 
     private:
         uint8_t m_cs;
-        uint8_t m_number;
         SPI* p_spi;
-        ChannelList* p_channels;
-        EEPROMClass* p_eeprom;
 
         void _process_channel(Channel* channel);
 };
 
+
+};
 
 #endif // TEMPERATURE_H_INCLUDED

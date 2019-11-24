@@ -40,6 +40,7 @@
 					<Add option="-DSPI_DEBUG" />
 					<Add option="-DDISPLAY_DEBUG" />
 					<Add option="-DDEBUG_SIGNAL" />
+					<Add option="-DDEBUG_CONFIG" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/lwip2/include" />
 					<Add directory="$$(ESP8266_ROOT)/tools/sdk/libc/xtensa-lx106-elf/include" />
@@ -51,6 +52,7 @@
 					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WebServer/src" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266mDNS/src" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/SoftwareSerial/src" />
+					<Add directory="$$(ARDUINO_LIBS)/CRC32/src" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>
@@ -71,6 +73,7 @@
 		<Unit filename="include/button.h" />
 		<Unit filename="include/channel.h" />
 		<Unit filename="include/click.h" />
+		<Unit filename="include/conf.h" />
 		<Unit filename="include/debug.h" />
 		<Unit filename="include/device.h" />
 		<Unit filename="include/display.h" />
@@ -82,6 +85,7 @@
 		<Unit filename="include/temperature.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="utils/conf.cpp" />
 		<Unit filename="utils/utils.cpp" />
 		<Extensions>
 			<code_completion />

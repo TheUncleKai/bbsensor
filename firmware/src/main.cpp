@@ -24,23 +24,44 @@
 #include <hardware.h>
 #include <loop.h>
 #include <utils.h>
+#include <conf.h>
 
-#include <list>
 
 // Name and password of the access point
 //#define SSID "Pussycat"
 //#define PASSWORD "supersecret"
 
+
+// Declarations
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+void handleISR1();
+void handleISR2();
+void print_channel();
+
 void setup();
 void loop();
 
-Hardware* hardware = new Hardware();
-Display* display = hardware->display();
-Loop* looper = new Loop();
-bool do_measure = false;
 
-Channel* channel = NULL;
+// Variables
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+bool do_measure = false;
 uint8_t channel_number = 0;
+bool check = false;
+
+Hardware* hardware = new Hardware();
+Config::Manager* config = new Config::Manager();
+
+Display* display = hardware->display();
+Temperature::Manager* temperature = hardware->temperature();
+Temperature::Channel* channel = NULL;
+
+Loop* looper = new Loop();
+
+
+// Implemnatation
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
 void handleISR1()
@@ -55,25 +76,6 @@ void handleISR2()
 }
 
 
-void setup()
-{
-    Serial.begin(115200);
-    delay(3000);
-
-    looper->set_numer(10);
-    looper->setup();
-    hardware->temperature()->add_channel(Channel::VOLTAGE);
-    hardware->temperature()->add_channel(Channel::VOLTAGE);
-    hardware->button1()->setISR(handleISR1);
-    hardware->button2()->setISR(handleISR2);
-    hardware->setup();
-
-    // Use an external AP
-    // WiFi.mode(WIFI_STA);
-    // WiFi.begin(SSID, PASSWORD);
-}
-
-
 void print_channel()
 {
     std::string text_out;
@@ -84,21 +86,21 @@ void print_channel()
         channel_number = 0;
     }
 
-    channel = hardware->temperature()->get_channel(channel_number);
+    channel = temperature->get_channel(channel_number);
 
     if (channel->value() == NULL) {
         return;
     }
 
-    if (channel->type() == Channel::NONE) {
+    if (channel->type() == Temperature::Type::NONE) {
         text_out = string_format("%u: %u",
-            channel->number(),
+            channel->channel(),
             channel->value()->data);
     }
 
-    if (channel->type() == Channel::VOLTAGE) {
+    if (channel->type() == Temperature::Type::VOLTAGE) {
         text_out = string_format("%u: %5.3f",
-            channel->number(),
+            channel->channel(),
             channel->value()->value);
     }
 
@@ -107,12 +109,48 @@ void print_channel()
 }
 
 
+void setup()
+{
+    Serial.begin(115200);
+    delay(3000);
+
+    hardware->button1()->setISR(handleISR1);
+    hardware->button2()->setISR(handleISR2);
+
+    config->setup();
+    config->read();
+
+    check = config->verify();
+
+    if (check == false) {
+        config->reset();
+        config->set_channel(0, Temperature::Type::VOLTAGE);
+        config->set_channel(2, Temperature::Type::VOLTAGE);
+        config->set_delay(300);
+        config->set_wlan(0, "TEST-SSID", "TEST-PASS");
+        config->write();
+    }
+
+    config->print();
+
+    for (int i = 0; i < TEMP_CHANNELS; ++i) {
+        temperature->add_channel(i, config->get_channel(i));
+    }
+
+    looper->set_counter(0, 10);
+    looper->set_counter(1, config->data()->measure_delay);
+    looper->setup();
+
+
+    hardware->setup();
+}
+
 
 void loop()
 {
     looper->start();
-    hardware->temperature()->set_measure(false, 0, false);
-    hardware->temperature()->set_measure(false, 1, false);
+    temperature->set_measure(false, 0, false);
+    temperature->set_measure(false, 2, false);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -126,16 +164,20 @@ void loop()
     if (looper->counter() == 60) {
         hardware->display()->write("Measure", 1);
         do_measure = true;
+
+        temperature->set_measure(false, 0, do_measure);
+        temperature->set_measure(false, 2, do_measure);
     }
 
-    if (looper->number() == 10) {
-        print_channel();
-
+    if (looper->number(0) == 10) {
         hardware->led1()->toggle();
-        hardware->temperature()->set_measure(false, 0, do_measure);
-        hardware->temperature()->set_measure(false, 1, do_measure);
     }
 
+
+    if (looper->number(1) == config->data()->measure_delay) {
+        temperature->set_measure(false, 0, do_measure);
+        temperature->set_measure(false, 2, do_measure);
+    }
 
     hardware->execute();
     looper->finish();

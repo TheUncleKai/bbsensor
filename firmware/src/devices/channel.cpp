@@ -22,115 +22,118 @@
 #include <channel.h>
 
 
-Channel::Channel(uint8_t num, uint8_t channel, Type type)
+Temperature::Channel::Channel(uint8_t num, Type type)
 {
     this->p_lastvalue = NULL;
     this->m_measure = false;
-    this->p_data = new ValueList;
     this->m_num = num;
-    this->m_channel = channel;
+    this->m_counter = 0;
     this->m_type = type;
+    this->p_values = new Value *[TEMP_ARRAY];
+
+    int i = 0;
+
+    for (i = 0; i < TEMP_ARRAY; ++i) {
+        this->p_values[i] = new Value;
+    }
 }
 
 
-Channel::~Channel()
+Temperature::Channel::~Channel()
 {
-    this->clear();
-    delete this->p_data;
+    int i = 0;
+    Value* value;
+
+    for (i = 0; i < TEMP_ARRAY; ++i) {
+        value = this->p_values[i];
+        delete value;
+    }
+
+    delete this->p_values;
 }
 
 
-Value* Channel::value()
+Value* Temperature::Channel::value()
 {
     return this->p_lastvalue;
 }
 
 
-void Channel::clear()
+void Temperature::Channel::clear()
 {
-    ValueList::iterator it;
+    int i = 0;
     Value* value;
 
-    for (it = this->p_data->begin(); it != this->p_data->end(); ++it) {
-        value = (*it);
-        delete value;
+    for (i = 0; i < TEMP_ARRAY; ++i) {
+        value = this->p_values[i];
+        value->data = 0;
+        value->value = 0.0;
     }
 
-    this->p_data->clear();
+    this->m_counter = 0;
 }
 
 
-Channel::Type Channel::type()
+Temperature::Type Temperature::Channel::type()
 {
     return this->m_type;
 }
 
 
-void Channel::setup()
+void Temperature::Channel::setup()
 {
 }
 
 
-void Channel::execute()
+void Temperature::Channel::execute()
 {
 }
 
 
-uint8_t Channel::number()
+uint8_t Temperature::Channel::channel()
 {
     return this->m_num;
 }
 
 
-ValueList* Channel::data()
-{
-    return this->p_data;
-}
-
-
-uint8_t Channel::channel()
-{
-    return this->m_channel;
-}
-
-
-void Channel::do_measure(bool measure)
+void Temperature::Channel::do_measure(bool measure)
 {
     this->m_measure = measure;
 }
 
 
-void Channel::add_value(Value* value)
+void Temperature::Channel::add_value(uint16_t data)
 {
-    if (value->data > TEMP_LIMIT) {
+    if (data > TEMP_LIMIT) {
         return;
     }
 
-    if (this->p_data->size() == TEMP_ARRAY) {
+    if (this->m_counter == TEMP_ARRAY) {
 #ifdef DEBUG_CHANNEL
-    DEBUG_MSG("CHANNEL%u: channel %u, clear data\n", this->number(), this->channel());
+    DEBUG_MSG("CHANNEL%u: clear data\n", this->channel());
 #endif // DEBUG_CHANNEL
 
         this->clear();
     }
 
-    if (this->m_type == Channel::VOLTAGE) {
-        value->value = table_voltages[value->data];
+    Value* value = this->p_values[this->m_counter];
+
+    value->data = data;
+
+    if (this->m_type == Temperature::Type::VOLTAGE) {
+        value->value = table_voltages[data];
     }
 
 #ifdef DEBUG_CHANNEL
-    DEBUG_MSG("CHANNEL%u: raw %u, value %5.3f\n",
-        this->number(),
-        value->data,
-        value->value);
+    DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);
 #endif // DEBUG_CHANNEL
 
-    this->p_data->push_back(value);
     this->p_lastvalue = value;
+    this->m_counter++;
 }
 
 
-bool Channel::measure()
+bool Temperature::Channel::measure()
 {
     return this->m_measure;
 }

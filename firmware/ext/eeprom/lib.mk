@@ -24,3 +24,7 @@ link_eeprom: compile_eeprom
 clean_eeprom: link_eeprom
 	@$(INFORM) "Clean $(LIBEEPROM)"
 	@$(MAKE) -s -C ext/eeprom -f Makefile clean
+
+LINK_LIST += link_eeprom
+CLEAN_LIST += clean_eeprom
+PHONY_LIST += compile_eeprom link_eeprom clean_eeprom

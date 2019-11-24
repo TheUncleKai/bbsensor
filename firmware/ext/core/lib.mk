@@ -24,3 +24,7 @@ link_core: compile_core
 clean_core: link_core
 	@$(INFORM) "Clean $(LIBCORE)"
 	@$(MAKE) -s -C ext/core -f Makefile clean
+
+LINK_LIST += link_core
+CLEAN_LIST += clean_core
+PHONY_LIST += compile_core link_core clean_core
