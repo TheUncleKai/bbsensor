@@ -76,19 +76,19 @@ void Temperature::Manager::setup()
 
 void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 {
-    if ((number + 1) >= TEMP_CHANNELS) {
-        DEBUG_MSG("TEMPERATURE: max number of channels reached!");
-        return;
-    }
-
     if (type == Temperature::Type::NONE)
         return;
 
-    Temperature::Channel* channel = new Channel(number, type);
+    if (number < TEMP_CHANNELS) {
+        Temperature::Channel* channel = new Channel(number, type);
 
-    if (channel != NULL) {
-        DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
-        channellist[number] = channel;
+        if (channel != NULL) {
+            DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
+            channellist[number] = channel;
+        }
+    } else {
+        DEBUG_MSG("TEMPERATURE: max number of channels reached!");
+        return;
     }
 }
 

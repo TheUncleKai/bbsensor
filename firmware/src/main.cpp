@@ -26,7 +26,6 @@
 #include <utils.h>
 #include <conf.h>
 
-#include <list>
 
 // Name and password of the access point
 //#define SSID "Pussycat"
@@ -48,15 +47,17 @@ void loop();
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 bool do_measure = false;
-Temperature::Channel* channel = NULL;
 uint8_t channel_number = 0;
+bool check = false;
 
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
-Loop* looper = new Loop();
-bool check = false;
 
 Display* display = hardware->display();
+Temperature::Channel* channel = NULL;
+Temperature::Manager* temperature = NULL;
+
+Loop* looper = new Loop();
 
 
 // Implemnatation
