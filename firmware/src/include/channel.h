@@ -29,17 +29,23 @@
 #define DEBUG_CHANNEL
 
 
+namespace Temperature
+{
+
+
+enum class Type
+{
+    NONE = 0,
+    VOLTAGE = 1,
+    RTD = 2,
+    PTC10 = 3,
+    PTC100 = 4
+};
+
+
 class Channel : public Device
 {
     public:
-        enum Type {
-            NONE = 0,
-            VOLTAGE = 1,
-            RTD = 2,
-            PTC10 = 3,
-            PTC100 = 4
-        };
-
         Channel (uint8_t num, uint8_t channel, Type type);
         virtual ~Channel();
 
@@ -67,5 +73,6 @@ class Channel : public Device
 
 typedef std::list<Channel*> ChannelList;
 
+};
 
 #endif // CHANNEL_H_INCLUDED

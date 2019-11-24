@@ -19,7 +19,7 @@
 
 #include <EEPROM.h>
 
-#define CONFIG_INIT    3
+#define CONFIG_INIT    4
 
 #define CHANNEL_NUMBER 8
 #define WLAN_SSID      32
@@ -57,8 +57,9 @@ class Config
         void reset();
         void write();
 
-        void set_wlan_ssid(const char* value);
-        void set_wlan_pass(const char* value);
+        void set_channel(uint8_t channel, uint8_t channel_type);
+        void set_delay(uint32_t measure_delay);
+        void set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass);
 
         void print();
 

@@ -21,7 +21,7 @@
 
 #include <temperature.h>
 
-Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
+Temperature::Manager::Manager(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
 {
     this->m_cs = cs;
     this->p_spi = new SPI();
@@ -30,11 +30,10 @@ Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
     this->p_channels = new ChannelList;
 
     this->p_spi->set_spi(spi);
-    this->m_number = 0;
 }
 
 
-Temperature::~Temperature()
+Temperature::Manager::~Manager()
 {
 
     ChannelList::iterator iter;
@@ -53,33 +52,33 @@ Temperature::~Temperature()
 }
 
 
-uint8_t Temperature::cs()
+uint8_t Temperature::Manager::cs()
 {
     return this->m_cs;
 }
 
 
-ChannelList* Temperature::channel()
+Temperature::ChannelList* Temperature::Manager::channel()
 {
     return this->p_channels;
 }
 
 
-void Temperature::setup()
+void Temperature::Manager::setup()
 {
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
 }
 
 
-void Temperature::add_channel(Channel::Type type)
+void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 {
-    if (this->m_number > TEMP_CHANNELS) {
+    if (number >= TEMP_CHANNELS) {
         DEBUG_MSG("TEMPERATURE: max number of channels reached!");
         return;
     }
 
-    Channel* channel = new Channel(this->m_number+1, this->m_number, type);
+    Temperature::Channel* channel = new Channel(number+1, number, type);
 
     if (channel != NULL) {
 #ifdef DEBUG_TEMPERATURE
@@ -88,11 +87,9 @@ void Temperature::add_channel(Channel::Type type)
 #endif // DEBUG_TEMPERATURE
         this->p_channels->push_back(channel);
     }
-
-    this->m_number++;
 }
 
-void Temperature::_process_channel(Channel* channel)
+void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 {
 
 #ifdef DEBUG_TEMPERATURE
@@ -165,7 +162,7 @@ void Temperature::_process_channel(Channel* channel)
 }
 
 
-void Temperature::set_measure(bool all, uint8_t channel_number, bool measure)
+void Temperature::Manager::set_measure(bool all, uint8_t channel_number, bool measure)
 {
     ChannelList::iterator iter;
     Channel* channel = NULL;
@@ -193,7 +190,7 @@ void Temperature::set_measure(bool all, uint8_t channel_number, bool measure)
 }
 
 
-Channel* Temperature::get_channel(uint8_t channel_number)
+Temperature::Channel* Temperature::Manager::get_channel(uint8_t channel_number)
 {
     ChannelList::iterator iter;
     Channel* channel = NULL;
@@ -212,7 +209,7 @@ Channel* Temperature::get_channel(uint8_t channel_number)
 }
 
 
-void Temperature::execute()
+void Temperature::Manager::execute()
 {
     ChannelList::iterator iter;
     Channel* channel = NULL;

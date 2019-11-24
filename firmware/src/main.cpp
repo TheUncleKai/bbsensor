@@ -48,7 +48,7 @@ void loop();
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 bool do_measure = false;
-Channel* channel = NULL;
+Temperature::Channel* channel = NULL;
 uint8_t channel_number = 0;
 
 Hardware* hardware = new Hardware();
@@ -91,13 +91,13 @@ void print_channel()
         return;
     }
 
-    if (channel->type() == Channel::NONE) {
+    if (channel->type() == Temperature::Type::NONE) {
         text_out = string_format("%u: %u",
             channel->number(),
             channel->value()->data);
     }
 
-    if (channel->type() == Channel::VOLTAGE) {
+    if (channel->type() == Temperature::Type::VOLTAGE) {
         text_out = string_format("%u: %5.3f",
             channel->number(),
             channel->value()->value);
@@ -115,8 +115,8 @@ void setup()
 
     looper->set_numer(10);
     looper->setup();
-    hardware->temperature()->add_channel(Channel::VOLTAGE);
-    hardware->temperature()->add_channel(Channel::VOLTAGE);
+    hardware->temperature()->add_channel(0, Temperature::Type::VOLTAGE);
+    hardware->temperature()->add_channel(1, Temperature::Type::VOLTAGE);
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
 
@@ -127,8 +127,8 @@ void setup()
 
     if (check == false) {
         config->reset();
-        config->set_wlan_ssid("test_ssid");
-        config->set_wlan_pass("test_pass");
+        config->set_delay(30);
+        config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
     }
 

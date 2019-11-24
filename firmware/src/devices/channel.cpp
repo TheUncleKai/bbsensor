@@ -22,7 +22,8 @@
 #include <channel.h>
 
 
-Channel::Channel(uint8_t num, uint8_t channel, Type type)
+
+Temperature::Channel::Channel(uint8_t num, uint8_t channel, Type type)
 {
     this->p_lastvalue = NULL;
     this->m_measure = false;
@@ -33,20 +34,20 @@ Channel::Channel(uint8_t num, uint8_t channel, Type type)
 }
 
 
-Channel::~Channel()
+Temperature::Channel::~Channel()
 {
     this->clear();
     delete this->p_data;
 }
 
 
-Value* Channel::value()
+Value* Temperature::Channel::value()
 {
     return this->p_lastvalue;
 }
 
 
-void Channel::clear()
+void Temperature::Channel::clear()
 {
     ValueList::iterator it;
     Value* value;
@@ -60,47 +61,47 @@ void Channel::clear()
 }
 
 
-Channel::Type Channel::type()
+Temperature::Type Temperature::Channel::type()
 {
     return this->m_type;
 }
 
 
-void Channel::setup()
+void Temperature::Channel::setup()
 {
 }
 
 
-void Channel::execute()
+void Temperature::Channel::execute()
 {
 }
 
 
-uint8_t Channel::number()
+uint8_t Temperature::Channel::number()
 {
     return this->m_num;
 }
 
 
-ValueList* Channel::data()
+ValueList* Temperature::Channel::data()
 {
     return this->p_data;
 }
 
 
-uint8_t Channel::channel()
+uint8_t Temperature::Channel::channel()
 {
     return this->m_channel;
 }
 
 
-void Channel::do_measure(bool measure)
+void Temperature::Channel::do_measure(bool measure)
 {
     this->m_measure = measure;
 }
 
 
-void Channel::add_value(Value* value)
+void Temperature::Channel::add_value(Value* value)
 {
     if (value->data > TEMP_LIMIT) {
         return;
@@ -114,7 +115,7 @@ void Channel::add_value(Value* value)
         this->clear();
     }
 
-    if (this->m_type == Channel::VOLTAGE) {
+    if (this->m_type == Temperature::Type::VOLTAGE) {
         value->value = table_voltages[value->data];
     }
 
@@ -130,7 +131,7 @@ void Channel::add_value(Value* value)
 }
 
 
-bool Channel::measure()
+bool Temperature::Channel::measure()
 {
     return this->m_measure;
 }

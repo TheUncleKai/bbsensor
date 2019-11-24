@@ -153,32 +153,52 @@ void Config::write()
 }
 
 
-void Config::set_wlan_ssid(const char* value)
+void Config::set_channel(uint8_t channel, uint8_t channel_type)
 {
-    std::string data(value);
-    int i = 0;
-
-    if (data.size() > WLAN_SSID) {
-        return;
-    }
-
-    for (i = 0; i < data.size(); ++i) {
-        this->p_data->wlan_ssid[i] = data[i];
-    }
 }
 
 
-void Config::set_wlan_pass(const char* value)
+void Config::set_delay(uint32_t measure_delay)
 {
-    std::string data(value);
-    int i = 0;
-
-    if (data.size() > WLAN_PASS) {
+    if (this->p_data == NULL) {
         return;
     }
 
-    for (i = 0; i < data.size(); ++i) {
-        this->p_data->wlan_pass[i] = data[i];
+    this->p_data->measure_delay = measure_delay;
+}
+
+
+void Config::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass)
+{
+    std::string str_ssid(wlan_ssid);
+    std::string str_pass(wlan_pass);
+
+    int i = 0;
+
+    if (this->p_data == NULL) {
+        return;
+    }
+
+    this->p_data->wlan_wps = wps_onoff;
+
+    if ((str_ssid.size() >= WLAN_SSID) or (str_pass.size() >= WLAN_PASS)) {
+        return;
+    }
+
+    for (i = 0; i < WLAN_SSID; ++i) {
+        if (i < str_ssid.size()) {
+            this->p_data->wlan_ssid[i] = str_ssid[i];
+        } else {
+            this->p_data->wlan_ssid[i] = 0;
+        }
+    }
+
+    for (i = 0; i < WLAN_PASS; ++i) {
+        if (i < str_pass.size()) {
+            this->p_data->wlan_pass[i] = str_pass[i];
+        } else {
+            this->p_data->wlan_pass[i] = 0;
+        }
     }
 }
 
