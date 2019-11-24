@@ -24,7 +24,6 @@
 #include <tables.h>
 
 #include <list>
-#include <map>
 
 #define DEBUG_CHANNEL
 
@@ -46,7 +45,7 @@ enum class Type
 class Channel : public Device
 {
     public:
-        Channel (uint8_t num, uint8_t channel, Type type);
+        Channel (uint8_t num, Type type);
         virtual ~Channel();
 
         void setup();
@@ -54,24 +53,22 @@ class Channel : public Device
         void clear();
 
         Type type();
-        uint8_t number();
-        ValueList* data();
         Value* value();
         uint8_t channel();
 
-        void add_value(Value* value);
+        void add_value(uint16_t data);
         void do_measure(bool measure);
         bool measure();
 
     private:
         Value* p_lastvalue;
+        Value** p_values;
+        size_t m_counter;
         bool m_measure;
-        uint8_t m_num, m_channel;
+        uint8_t m_num;
         Type m_type;
-        ValueList* p_data;
 };
 
-typedef std::list<Channel*> ChannelList;
 
 };
 

@@ -93,13 +93,13 @@ void print_channel()
 
     if (channel->type() == Temperature::Type::NONE) {
         text_out = string_format("%u: %u",
-            channel->number(),
+            channel->channel(),
             channel->value()->data);
     }
 
     if (channel->type() == Temperature::Type::VOLTAGE) {
         text_out = string_format("%u: %5.3f",
-            channel->number(),
+            channel->channel(),
             channel->value()->value);
     }
 
