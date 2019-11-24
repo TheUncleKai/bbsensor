@@ -17,46 +17,51 @@
 #ifndef CONF_H_INCLUDED
 #define CONF_H_INCLUDED
 
-#include <EEPROM.h>
 #include <list>
 
+#include <EEPROM.h>
 #include <channel.h>
+#include <settings.h>
 
-#define CONFIG_INIT    2
-
-#define CHANNEL_NUMBER 8
-#define WLAN_SSID      32
-#define WLAN_PASS      64
-
-#define DEFAULT_DELAY  120
+#define CONFIG_VERSION 1
 
 #define DEBUG_CONFIG
 
+namespace Config
+{
+
 
 typedef struct {
-    uint8_t init = CONFIG_INIT;
+    uint8_t init = CONFIG_VERSION;
     uint32_t measure_delay = DEFAULT_DELAY;
     uint8_t wlan_wps = 0;
     char wlan_ssid[WLAN_SSID] = "";
     char wlan_pass[WLAN_PASS] = "";
-    uint8_t channels = 0;
-    uint8_t channel_types[CHANNEL_NUMBER] = {0};
+    uint8_t channel_types[TEMP_CHANNELS] = {0};
 } EEPROM_storage;
 
 
-class Config
+class Manager
 {
     public:
-        Config();
-        virtual ~Config();
+        Manager();
+        virtual ~Manager();
 
         EEPROM_storage* data();
 
         void setup();
 
         void read();
+        bool verify();
+
         void reset();
         void write();
+
+        void set_channel(uint8_t number, Temperature::Type type);
+        void set_delay(uint32_t measure_delay);
+        void set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass);
+
+        Temperature::Type get_channel(uint8_t number);
 
         void print();
 
@@ -64,12 +69,13 @@ class Config
 
     private:
         EEPROM_storage* p_data;
-
-        bool _verify();
+        uint32_t m_crc, m_calc;
+        void read_crc();
 
         EEPROMClass* p_eeprom;
 };
 
 
+};
 
 #endif // CONF_H_INCLUDED

@@ -19,16 +19,12 @@
 
 #include <Arduino.h>
 
-#include <list>
-
 
 typedef struct
 {
     uint16_t data;
     float value;
 } Value;
-
-typedef std::list<Value*> ValueList;
 
 extern float table_voltages[4096];
 

@@ -21,98 +21,96 @@
 
 #include <temperature.h>
 
-Temperature::Temperature(EEPROMClass* eeprom, SPIClass* spi, uint8_t cs)
+
+Temperature::Channel* channellist[TEMP_CHANNELS];
+
+
+Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 {
     this->m_cs = cs;
     this->p_spi = new SPI();
 
-    this->p_eeprom = eeprom;
-    this->p_channels = new ChannelList;
-
     this->p_spi->set_spi(spi);
-    this->m_number = 0;
+
+    int i = 0;
+
+    for (i = 0; i < TEMP_CHANNELS; ++i) {
+        channellist[i] = NULL;
+    }
+
 }
 
 
-Temperature::~Temperature()
+Temperature::Manager::~Manager()
 {
 
-    ChannelList::iterator iter;
-    Channel* temp;
+    Channel* channel;
 
-    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
-    {
-        temp = (*iter);
-        delete temp;
+    int i = 0;
+
+    for (i = 0; i < TEMP_CHANNELS; ++i) {
+        channel = channellist[i];
+
+        if (channel != NULL) {
+            delete channel;
+            channellist[i] = NULL;
+        }
     }
 
-    this->p_channels->clear();
-
-    delete this->p_channels;
     delete this->p_spi;
 }
 
 
-uint8_t Temperature::cs()
+uint8_t Temperature::Manager::cs()
 {
     return this->m_cs;
 }
 
 
-ChannelList* Temperature::channel()
-{
-    return this->p_channels;
-}
-
-
-void Temperature::setup()
+void Temperature::Manager::setup()
 {
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
     pinMode(this->m_cs, OUTPUT);
 }
 
 
-void Temperature::add_channel(Channel::Type type)
+void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 {
-    if (this->m_number > TEMP_CHANNELS) {
+    if (type == Temperature::Type::NONE)
+        return;
+
+    if (number < TEMP_CHANNELS) {
+        Temperature::Channel* channel = new Channel(number, type);
+
+        if (channel != NULL) {
+#ifdef DEBUG_TEMPERATURE
+            DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
+#endif // DEBUG_TEMPERATURE
+            channellist[number] = channel;
+        }
+    } else {
         DEBUG_MSG("TEMPERATURE: max number of channels reached!");
         return;
     }
-
-    Channel* channel = new Channel(this->m_number+1, this->m_number, type);
-
-    if (channel != NULL) {
-#ifdef DEBUG_TEMPERATURE
-        DEBUG_MSG("TEMPERATURE: add channel %u, input %u, type %u\n",
-                  this->m_number, channel->number(), channel->type());
-#endif // DEBUG_TEMPERATURE
-        this->p_channels->push_back(channel);
-    }
-
-    this->m_number++;
 }
 
-void Temperature::_process_channel(Channel* channel)
+void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 {
 
 #ifdef DEBUG_TEMPERATURE
     if (channel->measure() == true) {
-        DEBUG_MSG("TEMPERATURE%u: channel %u, measure!\n",
-                    channel->number(),
-                    channel->channel());
+        DEBUG_MSG("TEMPERATURE: channel %u, measure!\n", channel->channel());
     }
 #endif // DEBUG_TEMPERATURE
 
     uint8_t n;
-    SPIData data;
-    Value* value = new Value;
-    SPIData::iterator iter;
+    uint16_t value = 0;
+
+    uint8_t* data = new uint8_t[3];
+    uint8_t answer_size = 0;
 
     uint8_t answer = 0;
     uint32_t command = 0;
-
-    value->data = 0;
-    value->value = 0.0;
 
     //  first 8 bits      second 8 bits      third 8 bits
     //  X X X X X 1 S D2  D1 D0 X X X X X X  X X X X X X X X
@@ -140,39 +138,48 @@ void Temperature::_process_channel(Channel* channel)
     this->p_spi->transfer(this->m_cs, (uint8_t)((0x0000FF00 & command) >> 8)); // set start
     this->p_spi->transfer(this->m_cs, (uint8_t)(0x000000FF & command)); // set start
 
-    this->p_spi->commit(false, &data);
+    answer_size = this->p_spi->commit(false, data);
 
-    if (data.size() != 3)
+    if (answer_size != 3)
         return;
 
-    n = 0;
-    for (iter = data.begin(); iter != data.end(); ++iter) {
-        answer = (*iter);
+    for (n = 0; n < 3; ++n) {
+        answer = data[n];
 
         if (n == 1) {
-            value->data = value->data ^ ((answer & 0x0F) << 8);
+            value = value ^ ((answer & 0x0F) << 8);
         }
 
         if (n == 2) {
-            value->data = value->data ^ answer;
+            value = value ^ answer;
         }
-
-        n++;
     }
 
+    delete data;
+
+#ifdef DEBUG_TEMPERATURE
+    DEBUG_MSG("TEMPERATURE: channel %u, measure %u\n", channel->channel(), value);
+#endif // DEBUG_TEMPERATURE
+
     channel->add_value(value);
-    data.clear();
 }
 
 
-void Temperature::set_measure(bool all, uint8_t channel_number, bool measure)
+void Temperature::Manager::set_measure(bool all, uint8_t channel_number, bool measure)
 {
-    ChannelList::iterator iter;
-    Channel* channel = NULL;
+    Channel* channel;
+    int i = 0;
 
-    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
-    {
-        channel = (*iter);
+    if (channel_number >= TEMP_CHANNELS) {
+        return;
+    }
+
+    for (i = 0; i < TEMP_CHANNELS; ++i) {
+        channel = channellist[i];
+
+        if (channel == NULL) {
+            continue;
+        }
 
         if (all == true) {
             channel->do_measure(true);
@@ -184,42 +191,35 @@ void Temperature::set_measure(bool all, uint8_t channel_number, bool measure)
 
 #ifdef DEBUG_TEMPERATURE
         if (channel->measure() == true) {
-            DEBUG_MSG("TEMPERATURE%u: channel %u, plan for measure!\n",
-                        channel->number(),
-                        channel->channel());
+            DEBUG_MSG("TEMPERATURE: channel %u, plan for measure!\n", channel->channel());
         }
 #endif // DEBUG_TEMPERATURE
     }
 }
 
 
-Channel* Temperature::get_channel(uint8_t channel_number)
+Temperature::Channel* Temperature::Manager::get_channel(uint8_t channel_number)
 {
-    ChannelList::iterator iter;
-    Channel* channel = NULL;
-    Channel* result = NULL;
-
-    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
-    {
-        channel = (*iter);
-        if (channel->channel() == channel_number) {
-            result = channel;
-            break;
-        }
+    if (channel_number >= TEMP_CHANNELS) {
+        return NULL;
     }
 
-    return result;
+    return channellist[channel_number];
 }
 
 
-void Temperature::execute()
+void Temperature::Manager::execute()
 {
-    ChannelList::iterator iter;
-    Channel* channel = NULL;
+    Channel* channel;
+    int i = 0;
 
-    for (iter = this->p_channels->begin(); iter != this->p_channels->end(); ++iter)
-    {
-        channel = (*iter);
+    for (i = 0; i < TEMP_CHANNELS; ++i) {
+        channel = channellist[i];
+
+        if (channel == NULL) {
+            continue;
+        }
+
         if (channel->measure() == true) {
             this->_process_channel(channel);
         }

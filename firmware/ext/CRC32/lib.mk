@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_serial:
+compile_crc32:
 	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBSOFTWARESERIAL)"
-	@$(MAKE) -s -C ext/softwareserial -f Makefile compile
+	@$(INFORM) "Compile $(LIBCRC32)"
+	@$(MAKE) -s -C ext/CRC32 -f Makefile compile
 
-link_serial: compile_serial
-	@$(INFORM) "Link $(LIBSOFTWARESERIAL)"
-	@$(MAKE) -s -C ext/softwareserial -f Makefile link
+link_crc32: compile_crc32
+	@$(INFORM) "Link $(LIBCRC32)"
+	@$(MAKE) -s -C ext/CRC32 -f Makefile link
 
-clean_serial: link_serial
-	@$(INFORM) "Clean $(LIBSOFTWARESERIAL)"
-	@$(MAKE) -s -C ext/softwareserial -f Makefile clean
+clean_crc32: link_crc32
+	@$(INFORM) "Clean $(LIBCRC32)"
+	@$(MAKE) -s -C ext/CRC32 -f Makefile clean
 
-LINK_LIST += link_serial
-CLEAN_LIST += clean_serial
-PHONY_LIST += compile_serial link_serial clean_serial
+LINK_LIST += link_crc32
+CLEAN_LIST += clean_crc32
+PHONY_LIST += compile_crc32 link_crc32 clean_crc32

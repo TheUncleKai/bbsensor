@@ -18,48 +18,50 @@
 #include <debug.h>
 #include <utils.h>
 
+#include <string>
 
-const int EEPROM_storageSize = sizeof(EEPROM_storage);
+#include <CRC32.h>
 
 
-Config::Config()
+const int EEPROM_storageSize = sizeof(Config::EEPROM_storage);
+
+
+Config::Manager::Manager()
 {
     this->p_eeprom = new EEPROMClass();
     this->p_data = new EEPROM_storage;
+    this->m_crc = 0;
 }
 
 
-Config::~Config()
+Config::Manager::~Manager()
 {
     delete this->p_eeprom;
     delete this->p_data;
 }
 
 
-void Config::setup()
+void Config::Manager::setup()
 {
-    bool check;
-    DEBUG_MSG("CONFIG: setup\n");
     this->p_eeprom->begin(512);
-
-    DEBUG_MSG("CONFIG: check\n");
-    check = this->_verify();
-
-    if (check == false) {
-        DEBUG_MSG("CONFIG: reset\n");
-        this->reset();
-        this->write();
-    }
 }
 
 
-bool Config::_verify()
+bool Config::Manager::verify()
 {
-    uint8_t config_init = 0;
+    bool reset = false;
 
-    config_init = this->p_eeprom->read(0);
+    if (this->m_crc != this->m_calc) {
+#ifdef DEBUG_CONFIG
+        DEBUG_MSG("CONFIG: crc verify failed\n");
+#endif // DEBUG_CONFIG
+        return false;
+    }
 
-    if (config_init != CONFIG_INIT) {
+    if (this->p_data->init != CONFIG_VERSION) {
+#ifdef DEBUG_CONFIG
+        DEBUG_MSG("CONFIG: config version verify failed\n");
+#endif // DEBUG_CONFIG
         return false;
     }
 
@@ -67,71 +69,181 @@ bool Config::_verify()
 }
 
 
-void Config::reset()
+void Config::Manager::reset()
 {
     int i = 0;
 
-    this->p_data->init = CONFIG_INIT;
+    this->p_data->init = CONFIG_VERSION;
     this->p_data->measure_delay = DEFAULT_DELAY;
 
     this->p_data->wlan_wps = 0;
     memset(this->p_data->wlan_ssid, 0, WLAN_SSID);
     memset(this->p_data->wlan_pass, 0, WLAN_PASS);
 
-    this->p_data->channels = 0;
-
-    for (i = 0; i < CHANNEL_NUMBER; i++) {
+    for (i = 0; i < TEMP_CHANNELS; i++) {
         this->p_data->channel_types[i] = 0;
     }
 }
 
 
-void Config::read()
+void Config::Manager::read()
 {
     int i = 0;
     int pos = 0;
+    CRC32 crc;
+    uint8_t data = 0;
+    uint8_t* byteStorage = NULL;
+    uint32_t crc_value = 0;
+    size_t crc_size = sizeof(uint32_t);
 
-    DEBUG_MSG("CONFIG: read\n");
 
-    uint8_t* byteStorage = (uint8_t*)this->p_data;
+    // first we read struct data
+    byteStorage = (uint8_t*)this->p_data;
 
     for (i = 0; i < EEPROM_storageSize; i++) {
+        data = this->p_eeprom->read(pos + i);
+        byteStorage[i] = data;
+        crc.update(data);
+    }
+
+    // then we read crc data
+    byteStorage = (uint8_t*)&crc_value;
+    pos = EEPROM_storageSize + 1;
+
+    for (i = 0; i < crc_size; i++) {
         byteStorage[i] = this->p_eeprom->read(pos + i);
     }
 
+    this->m_calc = crc.finalize();
+    this->m_crc = crc_value;
+
+#ifdef DEBUG_CONFIG
+    DEBUG_MSG("CONFIG: read data, crc %x, read %x\n", this->m_calc, this->m_crc);
+#endif // DEBUG_CONFIG
 }
 
 
-void Config::write()
+void Config::Manager::write()
 {
     size_t i = 0;
     int pos = 0;
+    CRC32 crc;
+    uint8_t data;
+    uint32_t crc_value = 0;
+    uint8_t* byteStorage = NULL;
+    size_t crc_size = sizeof(uint32_t);
 
-    uint8_t* byteStorage = (uint8_t*)this->p_data;
+    byteStorage = (uint8_t*)this->p_data;
 
     for (i = 0; i < EEPROM_storageSize; i++) {
+        data = byteStorage[i];
+        this->p_eeprom->write(pos + i, byteStorage[i]);
+        crc.update(data);
+    }
+
+    crc_value = crc.finalize();
+
+    byteStorage = (uint8_t*)&crc_value;
+    pos = EEPROM_storageSize + 1;
+
+    for (i = 0; i < crc_size; i++) {
         this->p_eeprom->write(pos + i, byteStorage[i]);
     }
 
-    DEBUG_MSG("CONFIG: commit\n");
+#ifdef DEBUG_CONFIG
+    DEBUG_MSG("CONFIG: commit data, crc %x\n", crc_value);
+#endif // DEBUG_CONFIG
     this->p_eeprom->commit();
 }
 
 
-void Config::print()
+void Config::Manager::set_channel(uint8_t number, Temperature::Type type)
+{
+    if (this->p_data == NULL)
+        return;
+
+    if (number >= TEMP_CHANNELS)
+        return;
+
+    this->p_data->channel_types[number] = (uint8_t)type;
+}
+
+
+void Config::Manager::set_delay(uint32_t measure_delay)
+{
+    if (this->p_data == NULL) {
+        return;
+    }
+
+    this->p_data->measure_delay = measure_delay;
+}
+
+
+void Config::Manager::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass)
+{
+    std::string str_ssid(wlan_ssid);
+    std::string str_pass(wlan_pass);
+
+    int i = 0;
+
+    if (this->p_data == NULL) {
+        return;
+    }
+
+    this->p_data->wlan_wps = wps_onoff;
+
+    if ((str_ssid.size() >= WLAN_SSID) or (str_pass.size() >= WLAN_PASS)) {
+        return;
+    }
+
+    for (i = 0; i < WLAN_SSID; ++i) {
+        if (i < str_ssid.size()) {
+            this->p_data->wlan_ssid[i] = str_ssid[i];
+        } else {
+            this->p_data->wlan_ssid[i] = 0;
+        }
+    }
+
+    for (i = 0; i < WLAN_PASS; ++i) {
+        if (i < str_pass.size()) {
+            this->p_data->wlan_pass[i] = str_pass[i];
+        } else {
+            this->p_data->wlan_pass[i] = 0;
+        }
+    }
+}
+
+
+Temperature::Type Config::Manager::get_channel(uint8_t number)
+{
+    if (this->p_data == NULL)
+        return Temperature::Type::NONE;
+
+    if (number >= TEMP_CHANNELS)
+        return Temperature::Type::NONE;
+
+    return (Temperature::Type)this->p_data->channel_types[number];
+}
+
+
+Config::EEPROM_storage* Config::Manager::data()
+{
+    return this->p_data;
+}
+
+
+void Config::Manager::print()
 {
 #ifdef DEBUG_CONFIG
     int i = 0;
+    DEBUG_MSG("CONFIG: init %u, delay %u\n", this->p_data->init, this->p_data->measure_delay);
+    DEBUG_MSG("CONFIG: wps %u, ssid %s, pass %s\n",
+        this->p_data->wlan_wps,
+        this->p_data->wlan_ssid,
+        this->p_data->wlan_pass);
 
-    DEBUG_MSG("CONFIG: init    %u\n", this->p_data->init);
-    DEBUG_MSG("CONFIG: delay   %u\n", this->p_data->measure_delay);
-
-    DEBUG_MSG("CONFIG: wps     %u\n", this->p_data->wlan_wps);
-    DEBUG_MSG("CONFIG: ssid    %s\n", this->p_data->wlan_ssid);
-    DEBUG_MSG("CONFIG: pass    %s\n", this->p_data->wlan_pass);
-
-    for (i = 0; i < CHANNEL_NUMBER; i++) {
-        DEBUG_MSG("CHANNEL%u: type %u\n", i, this->p_data->channel_types[i]);
+    for (i = 0; i < TEMP_CHANNELS; i++) {
+        DEBUG_MSG("CONFIG: channel %u, type %u\n", i, this->p_data->channel_types[i]);
     }
 #endif // DEBUG_CONFIG
 }

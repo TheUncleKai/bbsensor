@@ -16,6 +16,7 @@ ROOT = ../..
 
 include $(ROOT)/rules/config.mk
 include $(ROOT)/rules/setup.mk
+include $(ROOT)/rules/libraries.mk
 include $(ROOT)/rules/flags.mk
 
 include config.mk

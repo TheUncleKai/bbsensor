@@ -24,3 +24,7 @@ link_spi: compile_spi
 clean_spi: link_spi
 	@$(INFORM) "Clean $(LIBSPI)"
 	@$(MAKE) -s -C ext/spi -f Makefile clean
+
+LINK_LIST += link_spi
+CLEAN_LIST += clean_spi
+PHONY_LIST += compile_spi link_spi clean_spi

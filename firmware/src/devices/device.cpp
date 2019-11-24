@@ -24,15 +24,21 @@
 
 SPI::SPI ()
 {
-    this->p_data = new SPIData;
+    this->p_data = new uint8_t[32];
     this->m_transfer = 0;
     this->m_channel = 0;
+    this->m_counter = 0;
+    int i = 0;
+
+    for (i = 0; i < 32; ++i) {
+        this->p_data[i] = 0;
+    }
 }
 
 
 SPI::~SPI()
 {
-    this->p_data->clear();
+//    this->p_data->clear();
     delete this->p_data;
 }
 
@@ -69,7 +75,8 @@ void SPI::transfer(uint8_t channel, uint8_t data)
 
     this->m_channel = channel;
 
-    this->p_data->push_back(data);
+    this->p_data[this->m_counter] = data;
+    this->m_counter++;
 }
 
 
@@ -80,39 +87,46 @@ void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
     this->m_channel = channel;
 
     for (uint8_t i = 0; i < size; ++i) {
-        this->p_data->push_back(data[i]);
+        this->p_data[this->m_counter] = data[i];
+        this->m_counter++;
     }
 }
 
 
-void SPI::commit(bool debug_out, SPIData* result, unsigned long wait_on, unsigned long wait_off)
+uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsigned long wait_off)
 {
     if (this->m_transfer == 0) {
-        return;
+        return 0;
     }
 
-    SPIData::iterator iter;
-    uint8_t data;
+    uint8_t i = 0;
     uint8_t res = 0;
+    uint8_t data = 0;
 
-    for (iter = this->p_data->begin(); iter != this->p_data->end(); ++iter)
+    for (i = 0; i < this->m_counter; ++i)
     {
-        data = (*iter);
+        // get command from que
+        data = this->p_data[i];
 
         res = this->p_spi->transfer(data);
         if (wait_on > 0) {
             delay(wait_on);
         }
 
-        if (result != NULL) {
-            result->push_back(res);
-        }
+        // reset command after use
+        this->p_data[i] = 0;
 
 #ifdef DEBUG_SPI
         if (debug_out == true) {
             debug_binary("SPI", data);
         }
 #endif // DEBUG_SPI
+
+        if (result == NULL) {
+            continue;
+        }
+
+        result[i] = res;
     }
 
     this->_off(this->m_channel);
@@ -122,5 +136,7 @@ void SPI::commit(bool debug_out, SPIData* result, unsigned long wait_on, unsigne
 
     this->m_channel = 0;
     this->m_transfer = 0;
-    this->p_data->clear(); // clear data after writing
+    this->m_counter = 0;
+
+    return i;
 }

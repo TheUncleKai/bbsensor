@@ -19,6 +19,8 @@
 
 //#define DEBUG_LOOP
 
+#define CHANNEL_LOOPS 8
+
 
 class Loop
 {
@@ -26,20 +28,20 @@ class Loop
         Loop();
         virtual ~Loop();
 
-        unsigned long bootup();
-        unsigned long counter();
-        unsigned long timestamp();
-        unsigned long number();
+        uint32_t counter();
+        uint32_t number(size_t channel);
 
         void setup();
         void start();
         void finish();
-        void set_numer(int n);
+        void set_counter(size_t channel, uint32_t n);
 
     protected:
 
     private:
-        unsigned long m_bootup, m_delay, m_counter, m_timestamp, m_number, m_max;
+        uint32_t* p_channel;
+        uint32_t* p_number;
+        uint32_t m_bootup, m_delay, m_counter, m_timestamp;
 };
 
 #endif // LOOP_H_INCLUDED
