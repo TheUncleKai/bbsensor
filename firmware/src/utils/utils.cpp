@@ -20,24 +20,6 @@
 #include <utils.h>
 
 
-std::string string_format(const char* fmt, ...)
-{
-    va_list vl;
-
-    va_start(vl, fmt);
-    int size = vsnprintf(0, 0, fmt, vl) + sizeof('\0');
-    va_end(vl);
-
-    char buffer[size];
-
-    va_start(vl, fmt);
-    size = vsnprintf(buffer, size, fmt, vl);
-    va_end(vl);
-
-    return std::string(buffer, size);
-}
-
-
 void debug_binary(const char* keyword, uint8_t data)
 {
     DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c\n",

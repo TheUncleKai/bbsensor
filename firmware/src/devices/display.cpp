@@ -208,16 +208,26 @@ void Display::clear()
 }
 
 
-void Display::write(const char* input, uint8_t line)
+void Display::write(uint8_t line, const char* fmt, ...)
 {
-    size_t size = strlen(input);
+    va_list vl;
+
+    va_start(vl, fmt);
+    int size = vsnprintf(0, 0, fmt, vl) + sizeof('\0');
+    va_end(vl);
+
+    char buffer[size];
+
+    va_start(vl, fmt);
+    size = vsnprintf(buffer, size, fmt, vl);
+    va_end(vl);
 
     uint8_t data = 0;
 
     this->_set_line(line);
 
     for (size_t i = 0; i < size; ++i) {
-        data = input[i];
+        data = buffer[i];
         this->_send_high(data, true);
         this->_send_low(data, true);
     }
@@ -261,7 +271,7 @@ void Display::setup()
     this->_send_low(0x00, false); // SET
     this->_send_low(0x06, false);
 
-    this->write("BOOT...", 1);
+    this->write(1, "BOOT...");
     this->execute();
 }
 

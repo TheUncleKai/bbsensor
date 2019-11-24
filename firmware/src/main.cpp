@@ -86,16 +86,15 @@ void print_channel()
         return;
     }
 
+    display->write(2, "                ");
+
     if (channel->type() == Temperature::Type::DATA) {
-        text_out = string_format("%u: %u", channel->channel(), channel->value()->data);
+        display->write(2, "%u: %u", channel->channel(), channel->value()->data);
     }
 
     if (channel->type() == Temperature::Type::VOLTAGE) {
-        text_out = string_format("%u: %5.3f", channel->channel(), channel->value()->value);
+        display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
-
-    hardware->display()->write("                ", 2);
-    hardware->display()->write(text_out.c_str(), 2);
 }
 
 
@@ -149,11 +148,11 @@ void loop()
 
     if (looper->counter() == 10) {
         hardware->display()->clear();
-        hardware->display()->write("Start", 1);
+        hardware->display()->write(1, "Start");
     }
 
     if (looper->counter() == 20) {
-        hardware->display()->write("Measure", 1);
+        hardware->display()->write(1, "Measure");
         do_measure = true;
 
         looper->activate();

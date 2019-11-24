@@ -49,7 +49,7 @@ class Display : public Device
         void execute();
 
         void clear();
-        void write(const char* input, uint8_t line);
+        void write(uint8_t line, const char* fmt, ...);
 
     private:
         SPI* p_spi;
