@@ -73,7 +73,7 @@ void Temperature::Manager::setup()
 
 void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 {
-    if (number >= TEMP_CHANNELS) {
+    if ((number + 1) >= TEMP_CHANNELS) {
         DEBUG_MSG("TEMPERATURE: max number of channels reached!");
         return;
     }

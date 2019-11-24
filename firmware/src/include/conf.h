@@ -18,14 +18,10 @@
 #define CONF_H_INCLUDED
 
 #include <EEPROM.h>
+#include <channel.h>
+#include <settings.h>
 
 #define CONFIG_INIT    4
-
-#define CHANNEL_NUMBER 8
-#define WLAN_SSID      32
-#define WLAN_PASS      64
-
-#define DEFAULT_DELAY  120
 
 #define DEBUG_CONFIG
 
@@ -37,7 +33,7 @@ typedef struct {
     char wlan_ssid[WLAN_SSID] = "";
     char wlan_pass[WLAN_PASS] = "";
     uint8_t channels = 0;
-    uint8_t channel_types[CHANNEL_NUMBER] = {0};
+    uint8_t channel_types[TEMP_CHANNELS] = {0};
 } EEPROM_storage;
 
 
@@ -57,7 +53,7 @@ class Config
         void reset();
         void write();
 
-        void set_channel(uint8_t channel, uint8_t channel_type);
+        void set_channel(uint8_t channel, Temperature::Type type);
         void set_delay(uint32_t measure_delay);
         void set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass);
 

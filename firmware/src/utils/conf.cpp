@@ -80,7 +80,7 @@ void Config::reset()
 
     this->p_data->channels = 0;
 
-    for (i = 0; i < CHANNEL_NUMBER; i++) {
+    for (i = 0; i < TEMP_CHANNELS; i++) {
         this->p_data->channel_types[i] = 0;
     }
 }
@@ -153,8 +153,12 @@ void Config::write()
 }
 
 
-void Config::set_channel(uint8_t channel, uint8_t channel_type)
+void Config::set_channel(uint8_t channel, Temperature::Type type)
 {
+    if (channel >= TEMP_CHANNELS)
+        return;
+
+
 }
 
 
@@ -215,7 +219,7 @@ void Config::print()
     DEBUG_MSG("CONFIG: ssid    %s\n", this->p_data->wlan_ssid);
     DEBUG_MSG("CONFIG: pass    %s\n", this->p_data->wlan_pass);
 
-    for (i = 0; i < CHANNEL_NUMBER; i++) {
+    for (i = 0; i < TEMP_CHANNELS; i++) {
         DEBUG_MSG("CHANNEL%u: type %u\n", i, this->p_data->channel_types[i]);
     }
 #endif // DEBUG_CONFIG
