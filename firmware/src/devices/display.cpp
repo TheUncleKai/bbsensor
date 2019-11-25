@@ -22,28 +22,6 @@
 #include <display.h>
 #include <utils.h>
 
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
-
-#define BYTE_TO_BINARY(byte)  \
-  (byte & 0x80 ? '1' : '0'), \
-  (byte & 0x40 ? '1' : '0'), \
-  (byte & 0x20 ? '1' : '0'), \
-  (byte & 0x10 ? '1' : '0'), \
-  (byte & 0x08 ? '1' : '0'), \
-  (byte & 0x04 ? '1' : '0'), \
-  (byte & 0x02 ? '1' : '0'), \
-  (byte & 0x01 ? '1' : '0')
-
-
-//#define PIN_A0 0x01 // 1,   Qa
-//#define PIN_A1 0x02 // 2,   Qb
-//#define PIN_A2 0x04 // 4,   Qc
-//#define PIN_A3 0x08 // 8,   Qd
-//#define PIN_A4 0x10 // 16,  Qe
-//#define PIN_A5 0x20 // 32,  Qf
-//#define PIN_A6 0x40 // 64,  Qg
-//#define PIN_A7 0x80 // 128, Qh
-
 #define PIN_RS 0x01 // 1,  Qa
 #define PIN_E  0x02 // 2,  Qb
 

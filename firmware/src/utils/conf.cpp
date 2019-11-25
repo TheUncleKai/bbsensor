@@ -18,8 +18,6 @@
 #include <debug.h>
 #include <utils.h>
 
-#include <string>
-
 #include <CRC32.h>
 
 
@@ -181,8 +179,8 @@ void Config::Manager::set_delay(uint32_t measure_delay)
 
 void Config::Manager::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass)
 {
-    std::string str_ssid(wlan_ssid);
-    std::string str_pass(wlan_pass);
+    size_t size_ssid = strlen(wlan_ssid);
+    size_t size_pass = strlen(wlan_pass);
 
     int i = 0;
 
@@ -192,21 +190,21 @@ void Config::Manager::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const c
 
     this->p_data->wlan_wps = wps_onoff;
 
-    if ((str_ssid.size() >= WLAN_SSID) or (str_pass.size() >= WLAN_PASS)) {
+    if ((size_ssid >= WLAN_SSID) or (size_pass >= WLAN_PASS)) {
         return;
     }
 
     for (i = 0; i < WLAN_SSID; ++i) {
-        if (i < str_ssid.size()) {
-            this->p_data->wlan_ssid[i] = str_ssid[i];
+        if (i < size_ssid) {
+            this->p_data->wlan_ssid[i] = wlan_ssid[i];
         } else {
             this->p_data->wlan_ssid[i] = 0;
         }
     }
 
     for (i = 0; i < WLAN_PASS; ++i) {
-        if (i < str_pass.size()) {
-            this->p_data->wlan_pass[i] = str_pass[i];
+        if (i < size_pass) {
+            this->p_data->wlan_pass[i] = wlan_pass[i];
         } else {
             this->p_data->wlan_pass[i] = 0;
         }
