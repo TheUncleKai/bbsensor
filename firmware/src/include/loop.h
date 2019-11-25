@@ -36,6 +36,7 @@ class Loop
         void finish();
         void activate();
         void set_counter(size_t channel, uint32_t n);
+        void reset_counter(size_t channel);
 
     protected:
 

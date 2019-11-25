@@ -49,11 +49,19 @@ void loop();
 // Variables
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-bool do_measure = false;
-uint8_t channel_number = 0;
-bool check = false;
-bool first = true;
+typedef struct {
+    bool measure = false;
+    uint8_t channel_number = 0;
+    bool check_config = false;
+    bool first_print = true;
+    bool ignore_rotate = false;
+    Click::Type button1 = Click::NONE;
+    Click::Type button2 = Click::NONE;
+} MainState;
 
+
+
+MainState* state = new MainState;
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 
@@ -85,8 +93,8 @@ void toggle_channel()
     Temperature::Channel* chan = NULL;
     int i = 0;
 
-    if (first == true) {
-         chan = temperature->get_channel(channel_number);
+    if (state->first_print == true) {
+         chan = temperature->get_channel(state->channel_number);
     }
 
     if (chan != NULL) {
@@ -96,13 +104,13 @@ void toggle_channel()
     }
 
 
-    i = channel_number + 1;
+    i = state->channel_number + 1;
 
     while(i < TEMP_CHANNELS) {
-        chan = temperature->get_channel(channel_number);
+        chan = temperature->get_channel(state->channel_number);
 
         if (chan->type() != Temperature::Type::NONE) {
-            channel_number = chan->channel();
+            state->channel_number = chan->channel();
             return;
         }
 
@@ -113,7 +121,7 @@ void toggle_channel()
 
 void print_channel()
 {
-    channel = temperature->get_channel(channel_number);
+    channel = temperature->get_channel(state->channel_number);
 
     if (channel == NULL)
         return;
@@ -130,7 +138,8 @@ void print_channel()
     if (channel->type() != Temperature::Type::DATA) {
         display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
-    first = false;
+
+    state->first_print = false;
 }
 
 
@@ -145,9 +154,9 @@ void setup()
     config->setup();
     config->read();
 
-    check = config->verify();
+    state->check_config = config->verify();
 
-    if (check == false) {
+    if (state->check_config == false) {
         config->reset();
         config->set_channel(0, Temperature::Type::RTD);
         config->set_channel(2, Temperature::Type::DATA);
@@ -181,6 +190,21 @@ void loop()
     looper->start();
     temperature->set_measure(false);
 
+    state->ignore_rotate = false;
+
+    state->button1 = hardware->button1()->get_click();
+    state->button2 = hardware->button2()->get_click();
+
+    if (state->measure == true) {
+
+        if (state->button1 == Click::SINGLE_CLICK) {
+            toggle_channel();
+            print_channel();
+            state->ignore_rotate = true;
+            looper->reset_counter(2);
+        }
+    }
+
     if (looper->counter() == 0) {
         hardware->led1()->on();
         temperature->set_measure(true);
@@ -192,16 +216,16 @@ void loop()
 
         looper->activate();
         temperature->set_measure(true);
+        state->measure = true;
     }
 
     if (looper->number(0) == 10) {
         hardware->led1()->toggle();
     }
 
-    if (looper->number(2) == 100) {
+    if ((looper->number(2) == 100) && (state->ignore_rotate = false)) {
         toggle_channel();
         print_channel();
-        first = false;
     }
 
     if (looper->number(1) == config->data()->measure_delay) {
