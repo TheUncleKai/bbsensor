@@ -169,29 +169,21 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 }
 
 
-void Temperature::Manager::set_measure(bool all, uint8_t channel_number, bool measure)
+void Temperature::Manager::set_measure(bool measure)
 {
     Channel* channel;
     int i = 0;
 
-    if (channel_number >= TEMP_CHANNELS) {
-        return;
-    }
-
     for (i = 0; i < TEMP_CHANNELS; ++i) {
         channel = channellist[i];
 
-        if (channel == NULL) {
+        if (channel == NULL)
             continue;
-        }
 
-        if (all == true) {
-            channel->do_measure(true);
-        } else {
-            if (channel->channel() == channel_number) {
-                channel->do_measure(measure);
-            }
-        }
+        if (channel->type() == Temperature::Type::NONE)
+            continue;
+
+        channel->do_measure(measure);
 
 #ifdef DEBUG_LEVEL3
         if (channel->measure() == true) {

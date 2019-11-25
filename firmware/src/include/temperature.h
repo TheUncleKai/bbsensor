@@ -40,7 +40,8 @@ class Manager : public Device
 
         void execute();
 
-        void set_measure(bool all, uint8_t channel_number, bool measure);
+        void set_measure(bool measure);
+
         Channel* get_channel(uint8_t channel_number);
 
         uint8_t cs();

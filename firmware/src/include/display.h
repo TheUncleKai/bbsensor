@@ -49,6 +49,7 @@ class Display : public Device
         void execute();
 
         void clear();
+        void clear(uint8_t line);
         void write(uint8_t line, const char* fmt, ...);
 
     private:

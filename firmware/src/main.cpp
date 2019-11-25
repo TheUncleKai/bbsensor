@@ -22,6 +22,8 @@
 #include <debug.h>
 
 #include <hardware.h>
+#include <temperature.h>
+#include <channel.h>
 #include <loop.h>
 #include <utils.h>
 #include <conf.h>
@@ -37,6 +39,7 @@
 
 void handleISR1();
 void handleISR2();
+void toggle_channel();
 void print_channel();
 
 void setup();
@@ -49,6 +52,7 @@ void loop();
 bool do_measure = false;
 uint8_t channel_number = 0;
 bool check = false;
+bool first = true;
 
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
@@ -76,25 +80,57 @@ void handleISR2()
 }
 
 
-void print_channel()
+void toggle_channel()
 {
-    std::string text_out;
+    Temperature::Channel* chan = NULL;
+    int i = 0;
 
-    channel = temperature->get_channel(channel_number);
-
-    if (channel->type() == Temperature::Type::NONE) {
-        return;
+    if (first == true) {
+         chan = temperature->get_channel(channel_number);
     }
 
-    display->write(2, "                ");
+    if (chan != NULL) {
+        if (chan->type() != Temperature::Type::NONE) {
+            return;
+        }
+    }
+
+
+    i = channel_number + 1;
+
+    while(i < TEMP_CHANNELS) {
+        chan = temperature->get_channel(channel_number);
+
+        if (chan->type() != Temperature::Type::NONE) {
+            channel_number = chan->channel();
+            return;
+        }
+
+        ++i;
+    }
+}
+
+
+void print_channel()
+{
+    channel = temperature->get_channel(channel_number);
+
+    if (channel == NULL)
+        return;
+
+    if (channel->type() == Temperature::Type::NONE)
+        return;
+
+    display->clear(2);
 
     if (channel->type() == Temperature::Type::DATA) {
         display->write(2, "%u: %u", channel->channel(), channel->value()->data);
     }
 
-    if (channel->type() == Temperature::Type::VOLTAGE) {
+    if (channel->type() != Temperature::Type::DATA) {
         display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
+    first = false;
 }
 
 
@@ -113,7 +149,7 @@ void setup()
 
     if (check == false) {
         config->reset();
-        config->set_channel(0, Temperature::Type::VOLTAGE);
+        config->set_channel(0, Temperature::Type::RTD);
         config->set_channel(2, Temperature::Type::DATA);
         config->set_delay(300);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
@@ -131,33 +167,31 @@ void setup()
     looper->set_counter(2, 100);
     looper->setup();
 
+    display->write(1, "Start...");
+    display->execute();
 
     hardware->setup();
 }
 
 
+
+
 void loop()
 {
     looper->start();
-    temperature->set_measure(false, 0, false);
-    temperature->set_measure(false, 2, false);
+    temperature->set_measure(false);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
+        temperature->set_measure(true);
     }
 
     if (looper->counter() == 10) {
         hardware->display()->clear();
-        hardware->display()->write(1, "Start");
-    }
-
-    if (looper->counter() == 20) {
         hardware->display()->write(1, "Measure");
-        do_measure = true;
 
         looper->activate();
-        temperature->set_measure(false, 0, do_measure);
-        temperature->set_measure(false, 2, do_measure);
+        temperature->set_measure(true);
     }
 
     if (looper->number(0) == 10) {
@@ -165,18 +199,13 @@ void loop()
     }
 
     if (looper->number(2) == 100) {
-        if (channel_number == 0) {
-            channel_number = 2;
-        } else {
-            channel_number = 0;
-        }
-
+        toggle_channel();
         print_channel();
+        first = false;
     }
 
     if (looper->number(1) == config->data()->measure_delay) {
-        temperature->set_measure(false, 0, do_measure);
-        temperature->set_measure(false, 2, do_measure);
+        temperature->set_measure(true);
     }
 
     hardware->execute();

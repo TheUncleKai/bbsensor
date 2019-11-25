@@ -120,9 +120,21 @@ void Temperature::Channel::add_value(uint16_t data)
 
     value->data = data;
 
-    if (this->m_type == Temperature::Type::VOLTAGE) {
-        value->value = table_voltages[data];
+    if (this->m_type == Temperature::Type::RTD) {
+        value->value = table_rtd[data];
     }
+
+    if (this->m_type == Temperature::Type::PTC10) {
+        value->value = table_ptc10[data];
+    }
+
+    if (this->m_type == Temperature::Type::PTC100) {
+        value->value = table_ptc10[data];
+    }
+
+//    if (this->m_type == Temperature::Type::PTC100) {
+//        value->value = table_ptc100[data];
+//    }
 
 #ifdef DEBUG_LEVEL1
     DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);

@@ -40,6 +40,8 @@
 #define POS_DB5 0x20 //  32, 0010 0000
 #define POS_DB4 0x10 //  16, 0001 0000
 
+#define DIGITS 16
+
 #define LINE1 0x80
 #define LINE2 0xc0
 
@@ -186,6 +188,17 @@ void Display::clear()
 }
 
 
+void Display::clear(uint8_t line)
+{
+    this->_set_line(line);
+
+    for (uint8_t i = 0; i < DIGITS; ++i) {
+        this->_send_high(32, true);
+        this->_send_low(32, true);
+    }
+}
+
+
 void Display::write(uint8_t line, const char* fmt, ...)
 {
     va_list vl;
@@ -251,7 +264,6 @@ void Display::setup()
     this->_send_low(0x00, false); // SET
     this->_send_low(0x06, false);
 
-    this->write(1, "BOOT...");
     this->execute();
 }
 

@@ -32,10 +32,9 @@ enum class Type
 {
     NONE = 0,
     DATA = 1,
-    VOLTAGE = 2,
-    RTD = 3,
-    PTC10 = 4,
-    PTC100 = 5
+    RTD = 2,
+    PTC10 = 3,
+    PTC100 = 4
 };
 
 
