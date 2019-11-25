@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+CFLAGS_DEBUG = -DDEBUG_ESP_PORT=Serial
+# CFLAGS_DEBUG = 
+
 CFLAGS = \
 	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
 	$(ESP8266_INCLUDE_SDK) $(ADD_INCLUDE) \
@@ -23,7 +26,7 @@ CFLAGS = \
 	-DTCP_MSS=536 \
 	-DLWIP_FEATURES=1 \
 	-DLWIP_IPV6=0 \
-	-DDEBUG_ESP_PORT=Serial \
+	$(CFLAGS_DEBUG) \
 	-DARDUINO=10809 \
 	-DARDUINO_ESP8266_NODEMCU \
 	-DARDUINO_ARCH_ESP8266 \
@@ -51,7 +54,7 @@ ASMFLAGS = \
 	-DTCP_MSS=536 \
 	-DLWIP_FEATURES=1 \
 	-DLWIP_IPV6=0 \
-	-DDEBUG_ESP_PORT=Serial \
+	$(CFLAGS_DEBUG) \
 	-DARDUINO=10809 \
 	-DARDUINO_ESP8266_NODEMCU \
 	-DARDUINO_ARCH_ESP8266 \
