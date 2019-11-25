@@ -85,10 +85,12 @@ void Hardware::setup()
     this->p_button1->setup();
     this->p_button2->setup();
 
+#ifdef DEBUG_LEVEL2
     DEBUG_MSG("SPI: SCLK %d, MISO %d, MOSI %d\n",
                 PIN_SCLK,
                 PIN_MISO,
                 PIN_MOSI);
+#endif // DEBUG_LEVEL2
 
     this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
     this->p_spi->begin();

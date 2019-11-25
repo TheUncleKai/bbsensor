@@ -15,14 +15,14 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 # C++
-$(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp $(ADD_DEP)
+$(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp $(ADD_DEP) $(ROOT)/rules/config.mk
 	@$(LOG) "(CXX) $@"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 # C
-$(OBJDIR)/%.c.o: $(SRCDIR)/%.c $(ADD_DEP)
+$(OBJDIR)/%.c.o: $(SRCDIR)/%.c $(ADD_DEP) $(ROOT)/rules/config.mk
 	@$(LOG) "(CXX) $@"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
@@ -30,7 +30,7 @@ $(OBJDIR)/%.c.o: $(SRCDIR)/%.c $(ADD_DEP)
 
 
 # ASM
-$(OBJDIR)/%.S.o: $(SRCDIR)/%.S $(ADD_DEP)
+$(OBJDIR)/%.S.o: $(SRCDIR)/%.S $(ADD_DEP) $(ROOT)/rules/config.mk
 	@$(LOG) "(GCC) $@"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) $(ASMFLAGS) $< -o $@ $(LOGONLY)
@@ -38,7 +38,7 @@ $(OBJDIR)/%.S.o: $(SRCDIR)/%.S $(ADD_DEP)
 
 
 # DEP/C++
-$(OBJDIR)/%.d: %.cpp $(ADD_DEP)
+$(OBJDIR)/%.d: %.cpp $(ADD_DEP) $(ROOT)/rules/config.mk
 	@$(LOG) "$@"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) -MM $(CFLAGS) $< -o $@ $(LOGONLY)
@@ -46,7 +46,7 @@ $(OBJDIR)/%.d: %.cpp $(ADD_DEP)
 
 
 # C++
-$(OBJDIR)/%.o: %.cpp $(ADD_DEP)
+$(OBJDIR)/%.o: %.cpp $(ADD_DEP) $(ROOT)/rules/config.mk
 	@$(LOG) "$@"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
@@ -56,7 +56,7 @@ $(OBJDIR)/%.o: %.cpp $(ADD_DEP)
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # LIB
 
-$(OBJDIR)/%.ar: $(OBJDIR)/%.o $(OBJS)
+$(OBJDIR)/%.ar: $(OBJDIR)/%.o $(OBJS) $(ROOT)/rules/config.mk
 	@$(LOG) "(AR) $< -> $(TARGET)"
 	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
 	@$(AR) cru $(TARGET) $< $(LOGOUT)

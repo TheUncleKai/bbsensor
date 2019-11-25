@@ -114,9 +114,9 @@ void Display::_send(Signal* input)
         pin = pin ^ PIN_RS;
     }
 
-#ifdef DISPLAY_DEBUG
+#ifdef DEBUG_LEVEL3
     debug_display("DISPLAY", input->data, signal, pin);
-#endif // DISPLAY_DEBUG
+#endif // DEBUG_LEVEL3
 
     pin_on = pin ^ PIN_E;
     pin_off = pin;
@@ -214,7 +214,9 @@ void Display::write(uint8_t line, const char* fmt, ...)
 
 void Display::setup()
 {
+#ifdef DEBUG_LEVEL2
     DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
+#endif // DEBUG_LEVEL2
     pinMode(this->m_cs, OUTPUT);
     digitalWrite(this->m_cs, HIGH);
 

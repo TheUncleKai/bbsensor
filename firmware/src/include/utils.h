@@ -17,9 +17,8 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
-#include <cstdarg>
-#include <cstdio>
-#include <string>
+#include <Arduino.h>
+
 
 void debug_binary(const char* keyword, uint8_t data);
 

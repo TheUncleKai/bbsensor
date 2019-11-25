@@ -17,14 +17,13 @@
 #ifndef TEMPERATURE_H_INCLUDED
 #define TEMPERATURE_H_INCLUDED
 
-#include <list>
+#include <Arduino.h>
 #include <EEPROM.h>
 #include <SPI.h>
 
 #include <device.h>
 #include <channel.h>
 
-//#define DEBUG_TEMPERATURE
 
 namespace Temperature
 {

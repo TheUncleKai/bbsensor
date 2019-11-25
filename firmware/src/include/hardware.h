@@ -17,6 +17,7 @@
 #ifndef HARDWARE_H_INCLUDED
 #define HARDWARE_H_INCLUDED
 
+#include <Arduino.h>
 #include <EEPROM.h>
 
 #include <device.h>
@@ -24,8 +25,6 @@
 #include <button.h>
 #include <display.h>
 #include <temperature.h>
-
-//#define DEBUG_HARDWARE
 
 
 class Hardware : public Device

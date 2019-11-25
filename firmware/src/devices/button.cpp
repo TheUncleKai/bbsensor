@@ -50,16 +50,16 @@ void Button::handleISR()
 
     if (digitalRead(this->m_pin) == HIGH) {
         this->p_click->set_high(timestamp);
-#ifdef DEBUG_BUTTON
+#ifdef DEBUG_LEVEL3
         DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 1);
-#endif // DEBUG_BUTTON
+#endif // DEBUG_LEVEL3
     }
 
     if (digitalRead(this->m_pin) == LOW) {
         this->p_click->set_low(timestamp);
-#ifdef DEBUG_BUTTON
+#ifdef DEBUG_LEVEL3
         DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 0);
-#endif // DEBUG_BUTTON
+#endif // DEBUG_LEVEL3
     }
 
 }
@@ -77,7 +77,9 @@ Click::Type Button::get_click()
 
 void Button::setup()
 {
+#ifdef DEBUG_LEVEL2
     DEBUG_MSG("BUTTON%d: setup pin %d\n", this->m_num, this->m_pin);
+#endif // DEBUG_LEVEL2
 
     this->p_click->reset();
 
@@ -87,7 +89,9 @@ void Button::setup()
         attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_isr, CHANGE);
 
     } else {
+#ifdef DEBUG_LEVEL2
         DEBUG_MSG("BUTTON%d: ISR is missing!\n", this->m_num);
+#endif // DEBUG_LEVEL2
     }
 }
 

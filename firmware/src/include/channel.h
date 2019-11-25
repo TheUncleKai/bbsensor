@@ -17,15 +17,11 @@
 #ifndef CHANNEL_H_INCLUDED
 #define CHANNEL_H_INCLUDED
 
-#include <list>
+#include <Arduino.h>
 #include <SPI.h>
 
 #include <device.h>
 #include <tables.h>
-
-#include <list>
-
-#define DEBUG_CHANNEL
 
 
 namespace Temperature

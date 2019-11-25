@@ -130,7 +130,7 @@ void Click::_process()
     diff = this->p_current->diff();
     ddiff = this->p_current->diff(this->p_last);
 
-#ifdef DEBUG_CLICK
+#ifdef DEBUG_LEVEL3
     DEBUG_MSG("BUTTON%d: diff %d, ddiff %d, count %d, current %d/%d, last %d/%d\n",
                 this->m_num,
                 diff,
@@ -140,16 +140,16 @@ void Click::_process()
                 this->p_current->end,
                 this->p_last->start,
                 this->p_last->end);
-#endif // DEBUG_CLICK
+#endif // DEBUG_LEVEL3
 
     if (this->m_counter == 0) {
         if (diff <= CLICK_SINGLE) {
             this->m_type = Click::SINGLE_CLICK;
             this->m_counter++;
 
-#ifdef DEBUG_CLICK
+#ifdef DEBUG_LEVEL3
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_CLICK
+#endif // DEBUG_LEVEL3
             return;
         }
         if (diff >= CLICK_HOLD) {
@@ -158,9 +158,9 @@ void Click::_process()
             this->p_current->reset();
             this->p_last->reset();
 
-#ifdef DEBUG_CLICK
+#ifdef DEBUG_LEVEL3
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_CLICK
+#endif // DEBUG_LEVEL3
             return;
         }
     }
@@ -172,18 +172,18 @@ void Click::_process()
             this->p_current->reset();
             this->p_last->reset();
 
-#ifdef DEBUG_CLICK
+#ifdef DEBUG_LEVEL3
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_CLICK
+#endif // DEBUG_LEVEL3
             return;
         }
         if (diff <= CLICK_SINGLE) {
             this->m_type = Click::SINGLE_CLICK;
             this->m_counter = 1;
 
-#ifdef DEBUG_CLICK
+#ifdef DEBUG_LEVEL3
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_CLICK
+#endif // DEBUG_LEVEL3
             return;
         }
     }

@@ -31,23 +31,11 @@ PORT        = /dev/ttyUSB0
 BAUD        = 115200
 LIBRARIES   = /home/kai/Arduino/libraries
 
-Example for Linux
+# Set Debug Level
+# NONE = Serial is disabled, no defines
+# PRINT: DEBUG_ESP_PORT=Serial
+# LEVEL1: PRINT + DEBUG_LEVEL1
+# LEVEL2: PRINT + DEBUG_LEVEL1+2
+# LEVEL3: PRINT + DEBUG_LEVEL1,2+3
 
-ESP8266_PATH       = /home/kai/.arduino15/packages/esp8266
-ESP8266_GCC_PREFIX = xtensa-lx106-elf
-
-XTENSA      = 2.5.0-4-b40a506
-ESP_VERSION = 2.6.1
-MKDIR       = mkdir -p
-RM          = rm -f
-RMDIR       = rmdir
-PYTHON      = /usr/bin/python3
-TOOLS       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/tools/
-COPY        = cp
-EXEEXT      =
-ECHO        = echo
-PORT        = /dev/ttyUSB0
-BAUD        = 115200
-CHIP        = esp8266
-UPLOAD      = /home/kai/.local/bin/esptool.py
-LIBRARIES   = /home/kai/Arduino/libraries
+DEBUG       = LEVEL1

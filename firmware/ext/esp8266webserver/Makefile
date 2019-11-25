@@ -32,7 +32,7 @@ help:
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink library"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-compile: $(OBJS)
+compile: $(OBJS) $(ROOT)/rules/config.mk
 
 link: $(ARS)
 

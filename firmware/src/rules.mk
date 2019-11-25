@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(ADD_DEP): eagle.app.v6.common.ld.h
+$(ADD_DEP): eagle.app.v6.common.ld.h $(ROOT)/rules/config.mk
 	@$(LOG) "$@"
 	@$(LOGTIME) $(GCC) -I$(ESP8266_SDK)/ld -CC -E -P -DVTABLES_IN_FLASH $< -o $@ $(LOGONLY)
 	@$(GCC) -I$(ESP8266_SDK)/ld -CC -E -P -DVTABLES_IN_FLASH $< -o $@ $(LOGOUT)

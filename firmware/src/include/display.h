@@ -17,13 +17,13 @@
 #ifndef DISPLAY_H_INCLUDED
 #define DISPLAY_H_INCLUDED
 
+#include <Arduino.h>
 #include <SPI.h>
 
 #include <device.h>
 
 #define SIGNAL_LIST 256
 
-//#define DISPLAY_DEBUG
 
 enum class Type {
     SIG_HIGH = 0,

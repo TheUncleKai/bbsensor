@@ -17,7 +17,7 @@
 #ifndef LOOP_H_INCLUDED
 #define LOOP_H_INCLUDED
 
-//#define DEBUG_LOOP
+#include <Arduino.h>
 
 #define CHANNEL_LOOPS 8
 

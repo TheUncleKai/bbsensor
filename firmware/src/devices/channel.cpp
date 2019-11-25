@@ -109,9 +109,9 @@ void Temperature::Channel::add_value(uint16_t data)
     }
 
     if (this->m_counter == TEMP_ARRAY) {
-#ifdef DEBUG_CHANNEL
+#ifdef DEBUG_LEVEL2
     DEBUG_MSG("CHANNEL%u: clear data\n", this->channel());
-#endif // DEBUG_CHANNEL
+#endif // DEBUG_LEVEL2
 
         this->clear();
     }
@@ -124,9 +124,9 @@ void Temperature::Channel::add_value(uint16_t data)
         value->value = table_voltages[data];
     }
 
-#ifdef DEBUG_CHANNEL
+#ifdef DEBUG_LEVEL1
     DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);
-#endif // DEBUG_CHANNEL
+#endif // DEBUG_LEVEL1
 
     this->p_lastvalue = value;
     this->m_counter++;

@@ -27,9 +27,7 @@ default: compile link deps
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@$(ECHO) "\t\e[1;34default\e[0;0m:\tcompile and link firmware"
-	@$(ECHO) "\t\e[1;34mdeps\e[0;0m:\t\tcreate dependecies"
-	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompile firmware"
+	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
 	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"

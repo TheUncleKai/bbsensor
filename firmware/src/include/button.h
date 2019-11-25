@@ -17,10 +17,10 @@
 #ifndef BUTTON_H_INCLUDED
 #define BUTTON_H_INCLUDED
 
+#include <Arduino.h>
+
 #include <device.h>
 #include <click.h>
-
-//#define DEBUG_BUTTON
 
 
 class Button : public Device

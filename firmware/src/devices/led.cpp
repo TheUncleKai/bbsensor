@@ -37,9 +37,9 @@ LED::~LED()
 
 void LED::_on()
 {
-#ifdef DEBUG_LED
+#ifdef DEBUG_LEVEL3
     DEBUG_MSG("LED%d: turn on\n", this->m_num);
-#endif // DEBUG_LED
+#endif // DEBUG_LEVEL3
     digitalWrite(this->m_pin, LOW);
     this->m_status = 1;
 }
@@ -47,9 +47,9 @@ void LED::_on()
 
 void LED::_off()
 {
-#ifdef DEBUG_LED
+#ifdef DEBUG_LEVEL3
     DEBUG_MSG("LED%d: turn off\n", this->m_num);
-#endif // DEBUG_LED
+#endif // DEBUG_LEVEL3
     digitalWrite(this->m_pin, HIGH);
     this->m_status = 0;
 }
@@ -83,7 +83,9 @@ void LED::off()
 
 void LED::setup()
 {
+#ifdef DEBUG_LEVEL2
     DEBUG_MSG("LED%d: setup pin %d, status %d\n", this->m_num, this->m_pin, this->m_status);
+#endif // DEBUG_LEVEL2
 
     pinMode(this->m_pin, OUTPUT);
 }
