@@ -22,19 +22,21 @@
 #include <channel.h>
 
 
-Temperature::Channel::Channel(uint8_t num, Type type)
+Temperature::Channel::Channel(uint8_t num)
 {
     this->p_lastvalue = NULL;
+    this->p_last = NULL;
+    this->p_next = NULL;
     this->m_measure = false;
     this->m_num = num;
     this->m_counter = 0;
-    this->m_type = type;
+    this->m_type = Temperature::Type::NONE;
     this->p_values = new Value *[TEMP_ARRAY];
 
     int i = 0;
 
     for (i = 0; i < TEMP_ARRAY; ++i) {
-        this->p_values[i] = new Value;
+        this->p_values[i] = NULL;
     }
 }
 
@@ -53,6 +55,31 @@ Temperature::Channel::~Channel()
 }
 
 
+Temperature::Channel* Temperature::Channel::last()
+{
+    return this->p_last;
+}
+
+
+Temperature::Channel* Temperature::Channel::next()
+{
+    return this->p_next;
+}
+
+
+void Temperature::Channel::set(Temperature::Channel* last, Temperature::Channel* next)
+{
+    this->p_last = last;
+    this->p_next = next;
+}
+
+
+void Temperature::Channel::set_type(Temperature::Type type)
+{
+    this->m_type = type;
+}
+
+
 Value* Temperature::Channel::value()
 {
     return this->p_lastvalue;
@@ -66,6 +93,10 @@ void Temperature::Channel::clear()
 
     for (i = 0; i < TEMP_ARRAY; ++i) {
         value = this->p_values[i];
+
+        if (value == NULL)
+            continue;
+
         value->data = 0;
         value->value = 0.0;
     }
@@ -117,6 +148,11 @@ void Temperature::Channel::add_value(uint16_t data)
     }
 
     Value* value = this->p_values[this->m_counter];
+
+    if (value == NULL) {
+        value = new Value;
+        this->p_values[this->m_counter] = value;
+    }
 
     value->data = data;
 

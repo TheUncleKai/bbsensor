@@ -41,12 +41,18 @@ enum class Type
 class Channel : public Device
 {
     public:
-        Channel (uint8_t num, Type type);
+        Channel (uint8_t num);
         virtual ~Channel();
+
+        void set(Channel* last, Channel* next);
+        void set_type(Type type);
 
         void setup();
         void execute();
         void clear();
+
+        Channel* last();
+        Channel* next();
 
         Type type();
         Value* value();
@@ -57,6 +63,9 @@ class Channel : public Device
         bool measure();
 
     private:
+        Channel* p_last;
+        Channel* p_next;
+
         Value* p_lastvalue;
         Value** p_values;
         size_t m_counter;

@@ -36,7 +36,7 @@ class Manager : public Device
         virtual ~Manager();
 
         void setup();
-        void add_channel(uint8_t number, Temperature::Type type);
+        void set_channel(uint8_t number, Temperature::Type type);
 
         void execute();
 
@@ -49,6 +49,7 @@ class Manager : public Device
     private:
         uint8_t m_cs;
         SPI* p_spi;
+        Channel** p_channellist;
 
         void _process_channel(Channel* channel);
 };

@@ -51,10 +51,7 @@ void loop();
 
 typedef struct {
     bool measure = false;
-    uint8_t channel_number = 0;
     bool check_config = false;
-    bool first_print = true;
-    bool ignore_rotate = false;
     Click::Type button1 = Click::NONE;
     Click::Type button2 = Click::NONE;
 } MainState;
@@ -87,42 +84,40 @@ void handleISR2()
     hardware->button2()->handleISR();
 }
 
-
+// Toggle to next channel that is assigned
 void toggle_channel()
 {
-    Temperature::Channel* chan = NULL;
     int i = 0;
 
-    if (state->first_print == true) {
-         chan = temperature->get_channel(state->channel_number);
-    }
+    // if no channel is selected, get the first, if first channel is assigned, return
+    if (channel == NULL) {
+        channel = temperature->get_channel(0);
 
-    if (chan != NULL) {
-        if (chan->type() != Temperature::Type::NONE) {
+        if (channel->type() != Temperature::Type::NONE)
             return;
-        }
     }
 
+    // select next channel, check if assigned and the return
+    do {
+        channel = channel->next();
 
-    i = state->channel_number + 1;
-
-    while(i < TEMP_CHANNELS) {
-        chan = temperature->get_channel(state->channel_number);
-
-        if (chan->type() != Temperature::Type::NONE) {
-            state->channel_number = chan->channel();
+        if (channel->type() != Temperature::Type::NONE) {
             return;
         }
 
-        ++i;
-    }
+        i++;
+
+        if (i == TEMP_CHANNELS)
+            break;
+
+
+    } while( true );
 }
 
 
+// print current value of channel on display
 void print_channel()
 {
-    channel = temperature->get_channel(state->channel_number);
-
     if (channel == NULL)
         return;
 
@@ -138,11 +133,10 @@ void print_channel()
     if (channel->type() != Temperature::Type::DATA) {
         display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
-
-    state->first_print = false;
 }
 
 
+// setup ESP
 void setup()
 {
     Serial.begin(115200);
@@ -151,10 +145,13 @@ void setup()
     hardware->button1()->setISR(handleISR1);
     hardware->button2()->setISR(handleISR2);
 
+    // setup and read config
     config->setup();
     config->read();
 
+    // check config, set default config if invalid
     state->check_config = config->verify();
+
 
     if (state->check_config == false) {
         config->reset();
@@ -167,10 +164,15 @@ void setup()
 
     config->print();
 
+    // set channel by config values
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        temperature->add_channel(i, config->get_channel(i));
+        temperature->set_channel(i, config->get_channel(i));
     }
 
+    // setup loop counter
+    // 0: for LED
+    // 1: Measurement delay
+    // 2: delay between display writes and toggles
     looper->set_counter(0, 10);
     looper->set_counter(1, config->data()->measure_delay);
     looper->set_counter(2, 100);
@@ -187,29 +189,35 @@ void setup()
 
 void loop()
 {
+    // start loop
     looper->start();
+
+    // don't measure until loop measurement delay is reached
     temperature->set_measure(false);
 
-    state->ignore_rotate = false;
-
+    // get last click from butons
     state->button1 = hardware->button1()->get_click();
     state->button2 = hardware->button2()->get_click();
 
+    // parse click only after measurement has started
     if (state->measure == true) {
 
+        // toggle channel and print value when single click on button 1 is registered
+        // also reset delay between display writes and toggles
         if (state->button1 == Click::SINGLE_CLICK) {
             toggle_channel();
             print_channel();
-            state->ignore_rotate = true;
             looper->reset_counter(2);
         }
     }
 
+    // first loop, siwtch on led and get first measurement to setup reading
     if (looper->counter() == 0) {
         hardware->led1()->on();
         temperature->set_measure(true);
     }
 
+    // now we start measurement truly
     if (looper->counter() == 10) {
         hardware->display()->clear();
         hardware->display()->write(1, "Measure");
@@ -219,19 +227,25 @@ void loop()
         state->measure = true;
     }
 
+    // toggle LED every 10 cycles
     if (looper->number(0) == 10) {
         hardware->led1()->toggle();
     }
 
-    if ((looper->number(2) == 100) && (state->ignore_rotate = false)) {
+    // toggle display and channel every 100 cycles
+    if (looper->number(2) == 100) {
         toggle_channel();
         print_channel();
     }
 
+    // measure after configured delay
     if (looper->number(1) == config->data()->measure_delay) {
         temperature->set_measure(true);
     }
 
+    // execute all tasks
     hardware->execute();
+
+    // finish loop
     looper->finish();
 }
