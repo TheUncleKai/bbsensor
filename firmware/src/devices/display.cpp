@@ -51,7 +51,7 @@
 #define DELAY_OFF 2
 
 
-Display::Display (SPIClass* spi, uint8_t cs)
+Display::Manager::Manager (SPIClass* spi, uint8_t cs)
 {
     this->p_spi = new SPI();
     this->m_cs = cs;
@@ -66,14 +66,14 @@ Display::Display (SPIClass* spi, uint8_t cs)
 }
 
 
-Display::~Display()
+Display::Manager::~Manager()
 {
     delete this->p_spi;
     delete this->p_list;
 }
 
 
-uint8_t Display::_process_pins(uint8_t data)
+uint8_t Display::Manager::_process_pins(uint8_t data)
 {
     uint8_t pin = 0x00;
 
@@ -94,18 +94,18 @@ uint8_t Display::_process_pins(uint8_t data)
 }
 
 
-void Display::_send(Signal* input)
+void Display::Manager::_send(Display::Signal* input)
 {
     uint8_t pin_on, pin_off;
     uint8_t signal = 0x00;
     uint8_t pin = 0x00;
 
 
-    if (input->type == Type::SIG_HIGH) {
+    if (input->type == Display::Type::SIG_HIGH) {
         signal = input->data & 0xF0;
     }
 
-    if (input->type == Type::SIG_LOW) {
+    if (input->type == Display::Type::SIG_LOW) {
         signal = (input->data & 0x0F) << 4;
     }
 
@@ -133,9 +133,9 @@ void Display::_send(Signal* input)
 }
 
 
-void Display::_send_low(uint8_t data, bool istext)
+void Display::Manager::_send_low(uint8_t data, bool istext)
 {
-    Signal* signal = new Signal();
+    Display::Signal* signal = new Signal();
 
     signal->data = data;
     signal->istext = istext;
@@ -146,20 +146,20 @@ void Display::_send_low(uint8_t data, bool istext)
 }
 
 
-void Display::_send_high(uint8_t data, bool istext)
+void Display::Manager::_send_high(uint8_t data, bool istext)
 {
-    Signal* signal = new Signal();
+    Display::Signal* signal = new Signal();
 
     signal->data = data;
     signal->istext = istext;
-    signal->type = Type::SIG_HIGH;
+    signal->type = Display::Type::SIG_HIGH;
 
     this->p_list[this->m_size] = signal;
     this->m_size++;
 }
 
 
-void Display::_set_line(uint8_t line)
+void Display::Manager::_set_line(uint8_t line)
 {
     uint8_t data = 0;
 
@@ -179,7 +179,7 @@ void Display::_set_line(uint8_t line)
 }
 
 
-void Display::clear()
+void Display::Manager::clear()
 {
     uint8_t data = CLEAR;
 
@@ -188,7 +188,7 @@ void Display::clear()
 }
 
 
-void Display::clear(uint8_t line)
+void Display::Manager::clear(uint8_t line)
 {
     this->_set_line(line);
 
@@ -199,7 +199,7 @@ void Display::clear(uint8_t line)
 }
 
 
-void Display::write(uint8_t line, const char* fmt, ...)
+void Display::Manager::write(uint8_t line, const char* fmt, ...)
 {
     va_list vl;
 
@@ -225,7 +225,7 @@ void Display::write(uint8_t line, const char* fmt, ...)
 }
 
 
-void Display::setup()
+void Display::Manager::setup()
 {
 #ifdef DEBUG_LEVEL2
     DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
@@ -268,9 +268,9 @@ void Display::setup()
 }
 
 
-void Display::execute()
+void Display::Manager::execute()
 {
-    Signal* signal = NULL;
+    Display::Signal* signal = NULL;
 
     for (size_t i = 0; i < this->m_size; ++i) {
         signal = this->p_list[i];

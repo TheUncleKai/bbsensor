@@ -22,20 +22,22 @@
 #include <click.h>
 
 
-ClickSpan::ClickSpan()
+
+
+Click::Span::Span()
 {
     this->start = 0;
     this->end = 0;
 }
 
 
-ClickSpan::~ClickSpan()
+Click::Span::~Span()
 {
     //dtor
 }
 
 
-unsigned long ClickSpan::diff(ClickSpan* timespan = NULL)
+unsigned long Click::Span::diff(Click::Span* timespan = NULL)
 {
     unsigned long result = 0;
 
@@ -56,14 +58,14 @@ unsigned long ClickSpan::diff(ClickSpan* timespan = NULL)
 }
 
 
-void ClickSpan::reset()
+void Click::Span::reset()
 {
     this->start = 0;
     this->end = 0;
 }
 
 
-void ClickSpan::copy(ClickSpan* timespan)
+void Click::Span::copy(Click::Span* timespan)
 {
     this->start = timespan->start;
     this->end = timespan->end;
@@ -71,39 +73,39 @@ void ClickSpan::copy(ClickSpan* timespan)
 
 
 
-Click::Click (uint8_t num)
+Click::Manager::Manager (uint8_t num)
 {
     this->m_num = num;
     this->m_counter = 0;
-    this->m_type = Click::NONE;
-    this->p_current = new ClickSpan();
-    this->p_last = new ClickSpan();
+    this->m_type = Click::Type::NONE;
+    this->p_current = new Click::Span();
+    this->p_last = new Click::Span();
 }
 
 
-Click::~Click()
+Click::Manager::~Manager()
 {
     delete this->p_current;
     delete this->p_last;
 }
 
 
-void Click::reset()
+void Click::Manager::reset()
 {
     this->m_counter = 0;
-    this->m_type = Click::NONE;
+    this->m_type = Click::Type::NONE;
     this->p_current->reset();
     this->p_last->reset();
 }
 
 
-Click::Type Click::type()
+Click::Type Click::Manager::type()
 {
     return this->m_type;
 }
 
 
-void Click::set_high(unsigned long timestamp)
+void Click::Manager::set_high(unsigned long timestamp)
 {
     if (this->m_counter == 0) {
         this->p_current->start = timestamp;
@@ -116,14 +118,14 @@ void Click::set_high(unsigned long timestamp)
 }
 
 
-void Click::set_low(unsigned long timestamp)
+void Click::Manager::set_low(unsigned long timestamp)
 {
     this->p_current->end = timestamp;
     this->_process();
 }
 
 
-void Click::_process()
+void Click::Manager::_process()
 {
     unsigned long diff, ddiff;
 
@@ -144,7 +146,7 @@ void Click::_process()
 
     if (this->m_counter == 0) {
         if (diff <= CLICK_SINGLE) {
-            this->m_type = Click::SINGLE_CLICK;
+            this->m_type = Click::Type::SINGLE;
             this->m_counter++;
 
 #ifdef DEBUG_LEVEL3
@@ -153,7 +155,7 @@ void Click::_process()
             return;
         }
         if (diff >= CLICK_HOLD) {
-            this->m_type = Click::HOLD_CLICK;
+            this->m_type = Click::Type::HOLD;
             this->m_counter = 0;
             this->p_current->reset();
             this->p_last->reset();
@@ -167,7 +169,7 @@ void Click::_process()
 
     if (this->m_counter > 0) {
         if (ddiff <= CLICK_DOUBLE) {
-            this->m_type = Click::DOUBLE_CLICK;
+            this->m_type = Click::Type::DOUBLE;
             this->m_counter = 0;
             this->p_current->reset();
             this->p_last->reset();
@@ -178,7 +180,7 @@ void Click::_process()
             return;
         }
         if (diff <= CLICK_SINGLE) {
-            this->m_type = Click::SINGLE_CLICK;
+            this->m_type = Click::Type::SINGLE;
             this->m_counter = 1;
 
 #ifdef DEBUG_LEVEL3

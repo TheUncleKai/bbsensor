@@ -24,6 +24,9 @@
 
 #define SIGNAL_LIST 256
 
+namespace Display
+{
+
 
 enum class Type {
     SIG_HIGH = 0,
@@ -31,19 +34,19 @@ enum class Type {
 };
 
 
-struct Signal
+typedef struct
 {
     uint8_t data;
     Type type;
     bool istext;
-};
+} Signal;
 
 
-class Display : public Device
+class Manager : public Device
 {
     public:
-        Display (SPIClass* spi, uint8_t cs);
-        virtual ~Display();
+        Manager (SPIClass* spi, uint8_t cs);
+        virtual ~Manager();
 
         void setup();
         void execute();
@@ -68,5 +71,7 @@ class Display : public Device
         void _send_high(uint8_t data, bool istext);
 };
 
+
+};
 
 #endif // DISPLAY_H_INCLUDED

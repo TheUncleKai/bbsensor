@@ -26,7 +26,7 @@ Hardware::Hardware()
     this->p_button1 = new Button(1, PIN_BUTTON1);
     this->p_button2 = new Button(2, PIN_BUTTON2);
     this->p_spi = new SPIClass();
-    this->p_display = new Display(this->p_spi, PIN_CS1);
+    this->p_display = new Display::Manager(this->p_spi, PIN_CS1);
     this->p_temperature = new Temperature::Manager(this->p_spi, PIN_CS2);
 }
 
@@ -64,7 +64,7 @@ Button* Hardware::button2()
 }
 
 
-Display* Hardware::display()
+Display::Manager* Hardware::display()
 {
     return this->p_display;
 }

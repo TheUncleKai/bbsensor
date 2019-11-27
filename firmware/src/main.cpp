@@ -51,8 +51,8 @@ void loop();
 typedef struct {
     bool measure = false;
     bool check_config = false;
-    Click::Type button1 = Click::NONE;
-    Click::Type button2 = Click::NONE;
+    Click::Type button1 = Click::Type::NONE;
+    Click::Type button2 = Click::Type::NONE;
 } MainState;
 
 
@@ -61,7 +61,7 @@ MainState* state = new MainState;
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 
-Display* display = hardware->display();
+Display::Manager* display = hardware->display();
 Temperature::Manager* temperature = hardware->temperature();
 
 Loop* looper = new Loop();
@@ -174,13 +174,13 @@ void loop()
 
         // toggle channel and print value when single click on button 1 is registered
         // also reset delay between display writes and toggles
-        if (state->button1 == Click::SINGLE_CLICK) {
+        if (state->button1 == Click::Type::SINGLE) {
             temperature->next();
             print_channel();
             looper->reset_counter(2);
         }
 
-        if (state->button2 == Click::SINGLE_CLICK) {
+        if (state->button2 == Click::Type::SINGLE) {
             temperature->last();
             print_channel();
             looper->reset_counter(2);

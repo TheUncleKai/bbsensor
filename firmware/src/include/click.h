@@ -19,33 +19,38 @@
 
 #include <Arduino.h>
 
+namespace Click
+{
 
-class ClickSpan
+
+class Span
 {
     public:
-        ClickSpan ();
-        virtual ~ClickSpan();
+        Span ();
+        virtual ~Span();
 
         unsigned long start, end;
 
-        unsigned long diff(ClickSpan* timespan);
+        unsigned long diff(Span* timespan);
         void reset();
-        void copy(ClickSpan* timespan);
+        void copy(Span* timespan);
 };
 
 
-class Click
+enum class Type
+{
+    NONE = 0,
+    SINGLE = 1,
+    DOUBLE = 2,
+    HOLD = 3
+};
+
+
+class Manager
 {
     public:
-        Click (uint8_t num);
-        virtual ~Click();
-
-        enum Type {
-            NONE = 0,
-            SINGLE_CLICK = 1,
-            DOUBLE_CLICK = 2,
-            HOLD_CLICK = 3
-        };
+        Manager (uint8_t num);
+        virtual ~Manager();
 
         void set_high(unsigned long timestamp);
         void set_low(unsigned long timestamp);
@@ -58,11 +63,13 @@ class Click
         unsigned long m_counter;
         Type m_type;
 
-        ClickSpan* p_current;
-        ClickSpan* p_last;
+        Span* p_current;
+        Span* p_last;
 
         void _process();
 };
 
+
+};
 
 #endif // CLICK_H_INCLUDED

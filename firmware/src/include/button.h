@@ -40,9 +40,10 @@ class Button : public Device
     private:
         uint8_t m_num, m_pin;
 
-        Click* p_click;
+        Click::Manager* p_click;
 
         void (*p_isr)(void);
 };
+
 
 #endif // BUTTON_H_INCLUDED

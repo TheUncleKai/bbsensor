@@ -38,7 +38,7 @@ class Hardware : public Device
 
         Button* button1();
         Button* button2();
-        Display* display();
+        Display::Manager* display();
         Temperature::Manager* temperature();
 
         void setup();
@@ -52,7 +52,7 @@ class Hardware : public Device
 
         Button* p_button1;
         Button* p_button2;
-        Display* p_display;
+        Display::Manager* p_display;
         Temperature::Manager* p_temperature;
 };
 

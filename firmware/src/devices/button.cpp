@@ -28,7 +28,7 @@ Button::Button (uint8_t num, uint8_t pin)
     this->m_pin = pin;
 
     this->p_isr = NULL;
-    this->p_click = new Click(this->m_num);
+    this->p_click = new Click::Manager(this->m_num);
 }
 
 
