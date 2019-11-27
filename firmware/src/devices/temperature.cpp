@@ -29,6 +29,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
     Channel* next = NULL;
 
     this->m_cs = cs;
+    this->m_active = false;
     this->p_spi = new SPI();
     this->p_channellist = new Temperature::Channel *[TEMP_CHANNELS];
 
@@ -44,6 +45,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
         channel = this->p_channellist[i];
 
         if (i == 0) {
+            this->p_current = channel;
             last = this->p_channellist[TEMP_CHANNELS-1];
         } else {
             last = this->p_channellist[i-1];
@@ -57,6 +59,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 
         channel->set(last, next);
     }
+
 
 }
 
@@ -103,6 +106,11 @@ void Temperature::Manager::set_channel(uint8_t number, Temperature::Type type)
         Temperature::Channel* channel = this->p_channellist[number];
 
         channel->set_type(type);
+
+        if (this->m_active == false) {
+            this->p_current = channel;
+            this->m_active = true;
+        }
 
 #ifdef DEBUG_LEVEL2
         DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
@@ -219,6 +227,50 @@ Temperature::Channel* Temperature::Manager::get_channel(uint8_t channel_number)
     }
 
     return this->p_channellist[channel_number];
+}
+
+
+void Temperature::Manager::last()
+{
+    this->_toggle(true);
+}
+
+
+void Temperature::Manager::next()
+{
+    this->_toggle(false);
+}
+
+
+void Temperature::Manager::_toggle(bool last)
+{
+    if (this->m_active == false)
+        return;
+
+    Temperature::Channel* channel = NULL;
+    int i = 0;
+
+    while(i < TEMP_CHANNELS) {
+
+        if (last == true) {
+            channel = this->p_current->last();
+        } else {
+            channel = this->p_current->next();
+        }
+
+        if (channel->type() != Temperature::Type::NONE) {
+            this->p_current = channel;
+            break;
+        }
+
+        ++i;
+    }
+}
+
+
+Temperature::Channel* Temperature::Manager::current()
+{
+    return this->p_current;
 }
 
 

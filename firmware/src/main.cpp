@@ -39,7 +39,6 @@
 
 void handleISR1();
 void handleISR2();
-void toggle_channel();
 void print_channel();
 
 void setup();
@@ -64,7 +63,6 @@ Config::Manager* config = new Config::Manager();
 
 Display* display = hardware->display();
 Temperature::Manager* temperature = hardware->temperature();
-Temperature::Channel* channel = NULL;
 
 Loop* looper = new Loop();
 
@@ -84,40 +82,12 @@ void handleISR2()
     hardware->button2()->handleISR();
 }
 
-// Toggle to next channel that is assigned
-void toggle_channel()
-{
-    int i = 0;
-
-    // if no channel is selected, get the first, if first channel is assigned, return
-    if (channel == NULL) {
-        channel = temperature->get_channel(0);
-
-        if (channel->type() != Temperature::Type::NONE)
-            return;
-    }
-
-    // select next channel, check if assigned and the return
-    do {
-        channel = channel->next();
-
-        if (channel->type() != Temperature::Type::NONE) {
-            return;
-        }
-
-        i++;
-
-        if (i == TEMP_CHANNELS)
-            break;
-
-
-    } while( true );
-}
-
 
 // print current value of channel on display
 void print_channel()
 {
+    Temperature::Channel* channel = temperature->current();
+
     if (channel == NULL)
         return;
 
@@ -205,7 +175,13 @@ void loop()
         // toggle channel and print value when single click on button 1 is registered
         // also reset delay between display writes and toggles
         if (state->button1 == Click::SINGLE_CLICK) {
-            toggle_channel();
+            temperature->next();
+            print_channel();
+            looper->reset_counter(2);
+        }
+
+        if (state->button2 == Click::SINGLE_CLICK) {
+            temperature->last();
             print_channel();
             looper->reset_counter(2);
         }
@@ -234,7 +210,7 @@ void loop()
 
     // toggle display and channel every 100 cycles
     if (looper->number(2) == 100) {
-        toggle_channel();
+        temperature->next();
         print_channel();
     }
 

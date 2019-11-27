@@ -44,13 +44,22 @@ class Manager : public Device
 
         Channel* get_channel(uint8_t channel_number);
 
+        void last();
+        void next();
+
+        Channel* current();
+
+
         uint8_t cs();
 
     private:
+        bool m_active;
         uint8_t m_cs;
         SPI* p_spi;
         Channel** p_channellist;
+        Channel* p_current;
 
+        void _toggle(bool last);
         void _process_channel(Channel* channel);
 };
 
