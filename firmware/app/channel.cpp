@@ -20,6 +20,7 @@
 #include <debug.h>
 
 #include <channel.h>
+#include <tables.h>
 
 
 Temperature::Channel::Channel(uint8_t num)
@@ -31,27 +32,11 @@ Temperature::Channel::Channel(uint8_t num)
     this->m_num = num;
     this->m_counter = 0;
     this->m_type = Temperature::Type::NONE;
-    this->p_values = new Value *[TEMP_ARRAY];
-
-    int i = 0;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        this->p_values[i] = NULL;
-    }
 }
 
 
 Temperature::Channel::~Channel()
 {
-    int i = 0;
-    Value* value;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = this->p_values[i];
-        delete value;
-    }
-
-    delete this->p_values;
 }
 
 
@@ -80,7 +65,7 @@ void Temperature::Channel::set_type(Temperature::Type type)
 }
 
 
-Value* Temperature::Channel::value()
+Temperature::Value* Temperature::Channel::value()
 {
     return this->p_lastvalue;
 }
@@ -92,10 +77,7 @@ void Temperature::Channel::clear()
     Value* value;
 
     for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = this->p_values[i];
-
-        if (value == NULL)
-            continue;
+        value = &temp_data[this->m_num][i];
 
         value->data = 0;
         value->value = 0.0;
@@ -147,12 +129,7 @@ void Temperature::Channel::add_value(uint16_t data)
         this->clear();
     }
 
-    Value* value = this->p_values[this->m_counter];
-
-    if (value == NULL) {
-        value = new Value;
-        this->p_values[this->m_counter] = value;
-    }
+    Value* value = &temp_data[this->m_num][this->m_counter];
 
     value->data = data;
 
@@ -167,10 +144,6 @@ void Temperature::Channel::add_value(uint16_t data)
     if (this->m_type == Temperature::Type::PTC100) {
         value->value = table_ptc10[data];
     }
-
-//    if (this->m_type == Temperature::Type::PTC100) {
-//        value->value = table_ptc100[data];
-//    }
 
 #ifdef DEBUG_LEVEL1
     DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);

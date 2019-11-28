@@ -22,15 +22,16 @@
 #include <device.h>
 #include <utils.h>
 
+
 SPI::SPI ()
 {
-    this->p_data = new uint8_t[32];
+    this->p_data = new uint8_t[SPI_MAX];
     this->m_transfer = 0;
     this->m_channel = 0;
     this->m_counter = 0;
     int i = 0;
 
-    for (i = 0; i < 32; ++i) {
+    for (i = 0; i < SPI_MAX; ++i) {
         this->p_data[i] = 0;
     }
 }
@@ -71,6 +72,9 @@ void SPI::_off(uint8_t channel)
 
 void SPI::transfer(uint8_t channel, uint8_t data)
 {
+    if (this->m_counter >= SPI_MAX)
+        return;
+
     this->_on(channel);
 
     this->m_channel = channel;
@@ -82,6 +86,10 @@ void SPI::transfer(uint8_t channel, uint8_t data)
 
 void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
 {
+    if (size >= SPI_MAX)
+        return;
+
+
     this->_on(channel);
 
     this->m_channel = channel;
@@ -130,6 +138,7 @@ uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsi
     }
 
     this->_off(this->m_channel);
+
     if (wait_off > 0) {
         delay(wait_off);
     }

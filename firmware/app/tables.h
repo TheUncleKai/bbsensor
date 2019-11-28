@@ -17,21 +17,17 @@
 #ifndef TABLES_H_INCLUDED
 #define TABLES_H_INCLUDED
 
-#include <Arduino.h>
+#include <channel.h>
+#include <settings.h>
 
 
-typedef struct
-{
-    uint16_t data;
-    float value;
-} Value;
-
-extern float table_voltages[4096];
+extern Temperature::Value temp_data[TEMP_CHANNELS][TEMP_ARRAY];
 
 extern float table_rtd[4096];
 
 extern float table_ptc10[4096];
 
 extern float table_ptc100[4096];
+
 
 #endif // TABLES_H_INCLUDED

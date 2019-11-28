@@ -2,6 +2,5 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="BBSensor">
 		<Project filename="app/sensor.cbp" />
-		<Project filename="lib/libbb.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
