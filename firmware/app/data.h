@@ -14,14 +14,18 @@
    limitations under the License.
 */
 
-#ifndef UTILS_H_INCLUDED
-#define UTILS_H_INCLUDED
+#ifndef TABLES_H_INCLUDED
+#define TABLES_H_INCLUDED
 
-#include <Arduino.h>
+#include <channel.h>
+#include <settings.h>
 
 
-void debug_binary(const char* keyword, uint8_t data);
+extern const float table_rtd[4096];
 
-void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin);
+extern const float table_ptc10[4096];
 
-#endif // UTILS_H_INCLUDED
+extern const float table_ptc100[4096];
+
+
+#endif // TABLES_H_INCLUDED

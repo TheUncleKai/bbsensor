@@ -20,7 +20,7 @@
 #include <debug.h>
 
 #include <channel.h>
-#include <tables.h>
+#include <data.h>
 
 
 Temperature::Channel::Channel(uint8_t num)
@@ -32,11 +32,25 @@ Temperature::Channel::Channel(uint8_t num)
     this->m_num = num;
     this->m_counter = 0;
     this->m_type = Temperature::Type::NONE;
+    this->p_data = new Temperature::Value *[TEMP_ARRAY];
+
+    for (int i = 0; i < TEMP_ARRAY; ++i) {
+        this->p_data[i] = new Temperature::Value;
+    }
+
 }
 
 
 Temperature::Channel::~Channel()
 {
+    Temperature::Value* value;
+
+    for (int i = 0; i < TEMP_ARRAY; ++i) {
+        value = this->p_data[i];
+        delete value;
+    }
+
+    delete this->p_data;
 }
 
 
@@ -77,8 +91,7 @@ void Temperature::Channel::clear()
     Value* value;
 
     for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = &temp_data[this->m_num][i];
-
+        value = this->p_data[i];
         value->data = 0;
         value->value = 0.0;
     }
@@ -129,7 +142,7 @@ void Temperature::Channel::add_value(uint16_t data)
         this->clear();
     }
 
-    Value* value = &temp_data[this->m_num][this->m_counter];
+    Value* value = this->p_data[this->m_counter];
 
     value->data = data;
 
@@ -142,7 +155,7 @@ void Temperature::Channel::add_value(uint16_t data)
     }
 
     if (this->m_type == Temperature::Type::PTC100) {
-        value->value = table_ptc10[data];
+        value->value = table_ptc100[data];
     }
 
 #ifdef DEBUG_LEVEL1

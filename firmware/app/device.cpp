@@ -18,9 +18,27 @@
 
 #include <settings.h>
 #include <debug.h>
-
 #include <device.h>
-#include <utils.h>
+
+
+#ifdef DEBUG_LEVEL3
+void debug_spi(const char* keyword, uint8_t data)
+{
+    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c\n",
+        keyword,
+        data,
+        data,
+        (data & 0x80 ? '1' : '0'),
+        (data & 0x40 ? '1' : '0'),
+        (data & 0x20 ? '1' : '0'),
+        (data & 0x10 ? '1' : '0'),
+        (data & 0x08 ? '1' : '0'),
+        (data & 0x04 ? '1' : '0'),
+        (data & 0x02 ? '1' : '0'),
+        (data & 0x01 ? '1' : '0'));
+
+}
+#endif // DEBUG_LEVEL3
 
 
 SPI::SPI ()
@@ -126,7 +144,7 @@ uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsi
 
 #ifdef DEBUG_LEVEL3
         if (debug_out == true) {
-            debug_binary("SPI", data);
+            debug_spi("SPI", data);
         }
 #endif // DEBUG_LEVEL3
 

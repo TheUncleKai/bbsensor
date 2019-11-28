@@ -14,13 +14,10 @@
    limitations under the License.
 */
 
-#include <tables.h>
+#include <data.h>
 
 
-Temperature::Value temp_data[TEMP_CHANNELS][TEMP_ARRAY];
-
-
-float table_rtd[4096] = {
+const float table_rtd[4096] = {
     0,
     0.001,
     0.002,
@@ -4120,7 +4117,7 @@ float table_rtd[4096] = {
 };
 
 
-float table_ptc10[4096] = {
+const float table_ptc10[4096] = {
     0,
     0.001,
     0.002,
@@ -8220,7 +8217,7 @@ float table_ptc10[4096] = {
 };
 
 
-float table_ptc100[4096] = {
+const float table_ptc100[4096] = {
     0,
     0.001,
     0.002,

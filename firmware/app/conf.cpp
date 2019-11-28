@@ -16,7 +16,6 @@
 
 #include <conf.h>
 #include <debug.h>
-#include <utils.h>
 
 #include <CRC32.h>
 

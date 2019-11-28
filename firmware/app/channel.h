@@ -73,6 +73,8 @@ class Channel : public Device
         Channel* p_next;
 
         Value* p_lastvalue;
+        Value** p_data;
+
         size_t m_counter;
         bool m_measure;
         uint8_t m_num;
