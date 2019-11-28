@@ -45,26 +45,26 @@ include ext/CRC32/lib.mk
 compile:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Create deps"
-	@$(MAKE) -s -C src -f Makefile deps
+	@$(MAKE) -s -C app -f Makefile deps
 	@$(INFORM) "Compile $(APP)"
-	@$(MAKE) -s -C src -f Makefile compile
+	@$(MAKE) -s -C app -f Makefile compile
 
 
 link: $(LINK_LIST)
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Link $(APP)"
-	@$(MAKE) -s -C src -f Makefile link
+	@$(MAKE) -s -C app -f Makefile link
 
 
 upload: link
 	@$(INFORM) "Upload firmware"
-	@$(MAKE) -s -C src -f Makefile upload
+	@$(MAKE) -s -C app -f Makefile upload
 
 
 clean: $(CLEAN_LIST)
 	@@$(RM) $(LOGFILE)
 	@$(INFORM) "Clean $(APP)"
-	@$(MAKE) -s -C src -f Makefile clean
+	@$(MAKE) -s -C app -f Makefile clean
 	@-$(RMDIR) $(OUTPUT)
 
 
