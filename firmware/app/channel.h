@@ -21,11 +21,17 @@
 #include <SPI.h>
 
 #include <device.h>
-#include <tables.h>
 
 
 namespace Temperature
 {
+
+
+typedef struct
+{
+    uint16_t data;
+    float value;
+} Value;
 
 
 enum class Type
@@ -67,7 +73,8 @@ class Channel : public Device
         Channel* p_next;
 
         Value* p_lastvalue;
-        Value** p_values;
+        Value** p_data;
+
         size_t m_counter;
         bool m_measure;
         uint8_t m_num;

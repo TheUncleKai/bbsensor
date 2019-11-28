@@ -29,6 +29,8 @@ fp-info-cache
 *.xml
 *.csv
 
+firmware/app/local.*.ld
+
 firmware/build/*
 firmware/ext/core/*.cpp
 firmware/ext/core/*.h

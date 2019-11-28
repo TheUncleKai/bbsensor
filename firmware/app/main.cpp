@@ -25,13 +25,7 @@
 #include <temperature.h>
 #include <channel.h>
 #include <loop.h>
-#include <utils.h>
 #include <conf.h>
-
-
-// Name and password of the access point
-//#define SSID "Pussycat"
-//#define PASSWORD "supersecret"
 
 
 // Declarations

@@ -27,6 +27,10 @@
 namespace Display
 {
 
+#ifdef DEBUG_LEVEL3
+void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin);
+#endif // DEBUG_LEVEL3
+
 
 enum class Type {
     SIG_HIGH = 0,

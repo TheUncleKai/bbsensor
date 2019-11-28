@@ -18,7 +18,6 @@
 #define HARDWARE_H_INCLUDED
 
 #include <Arduino.h>
-#include <EEPROM.h>
 
 #include <device.h>
 #include <led.h>

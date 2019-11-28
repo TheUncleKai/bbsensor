@@ -35,7 +35,7 @@
 #define CLICK_HOLD      2000
 
 #define TEMP_CHANNELS   8
-#define TEMP_ARRAY      32
+#define TEMP_ARRAY      120
 #define TEMP_LIMIT      4095 // max value of adc, everything above is suspect
 
 #define LOOP_WAIT       100
@@ -44,6 +44,8 @@
 #define WLAN_PASS       64
 
 #define DEFAULT_DELAY   120
+
+#define SPI_MAX         32
 
 
 #endif // CONFIG_H_INCLUDED

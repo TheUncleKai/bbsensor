@@ -18,19 +18,38 @@
 
 #include <settings.h>
 #include <debug.h>
-
 #include <device.h>
-#include <utils.h>
+
+
+#ifdef DEBUG_LEVEL3
+void debug_spi(const char* keyword, uint8_t data)
+{
+    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c\n",
+        keyword,
+        data,
+        data,
+        (data & 0x80 ? '1' : '0'),
+        (data & 0x40 ? '1' : '0'),
+        (data & 0x20 ? '1' : '0'),
+        (data & 0x10 ? '1' : '0'),
+        (data & 0x08 ? '1' : '0'),
+        (data & 0x04 ? '1' : '0'),
+        (data & 0x02 ? '1' : '0'),
+        (data & 0x01 ? '1' : '0'));
+
+}
+#endif // DEBUG_LEVEL3
+
 
 SPI::SPI ()
 {
-    this->p_data = new uint8_t[32];
+    this->p_data = new uint8_t[SPI_MAX];
     this->m_transfer = 0;
     this->m_channel = 0;
     this->m_counter = 0;
     int i = 0;
 
-    for (i = 0; i < 32; ++i) {
+    for (i = 0; i < SPI_MAX; ++i) {
         this->p_data[i] = 0;
     }
 }
@@ -71,6 +90,9 @@ void SPI::_off(uint8_t channel)
 
 void SPI::transfer(uint8_t channel, uint8_t data)
 {
+    if (this->m_counter >= SPI_MAX)
+        return;
+
     this->_on(channel);
 
     this->m_channel = channel;
@@ -82,6 +104,10 @@ void SPI::transfer(uint8_t channel, uint8_t data)
 
 void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
 {
+    if (size >= SPI_MAX)
+        return;
+
+
     this->_on(channel);
 
     this->m_channel = channel;
@@ -118,7 +144,7 @@ uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsi
 
 #ifdef DEBUG_LEVEL3
         if (debug_out == true) {
-            debug_binary("SPI", data);
+            debug_spi("SPI", data);
         }
 #endif // DEBUG_LEVEL3
 
@@ -130,6 +156,7 @@ uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsi
     }
 
     this->_off(this->m_channel);
+
     if (wait_off > 0) {
         delay(wait_off);
     }

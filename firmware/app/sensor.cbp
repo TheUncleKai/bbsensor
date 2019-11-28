@@ -53,40 +53,39 @@
 					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266mDNS/src" />
 					<Add directory="$$(ESP8266_ROOT)/libraries/SoftwareSerial/src" />
 					<Add directory="$$(ARDUINO_LIBS)/CRC32/src" />
-					<Add directory="include" />
+					<Add directory="." />
 				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="data/loop.cpp" />
-		<Unit filename="data/tables.cpp" />
-		<Unit filename="devices/button.cpp" />
-		<Unit filename="devices/channel.cpp" />
-		<Unit filename="devices/click.cpp" />
-		<Unit filename="devices/device.cpp" />
-		<Unit filename="devices/display.cpp" />
-		<Unit filename="devices/hardware.cpp" />
-		<Unit filename="devices/led.cpp" />
-		<Unit filename="devices/temperature.cpp" />
-		<Unit filename="include/button.h" />
-		<Unit filename="include/channel.h" />
-		<Unit filename="include/click.h" />
-		<Unit filename="include/conf.h" />
-		<Unit filename="include/debug.h" />
-		<Unit filename="include/device.h" />
-		<Unit filename="include/display.h" />
-		<Unit filename="include/hardware.h" />
-		<Unit filename="include/led.h" />
-		<Unit filename="include/loop.h" />
-		<Unit filename="include/settings.h" />
-		<Unit filename="include/tables.h" />
-		<Unit filename="include/temperature.h" />
-		<Unit filename="include/utils.h" />
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
+		<Unit filename="channel.cpp" />
+		<Unit filename="channel.h" />
+		<Unit filename="click.cpp" />
+		<Unit filename="click.h" />
+		<Unit filename="conf.cpp" />
+		<Unit filename="conf.h" />
+		<Unit filename="data.cpp" />
+		<Unit filename="data.h" />
+		<Unit filename="debug.h" />
+		<Unit filename="device.cpp" />
+		<Unit filename="device.h" />
+		<Unit filename="display.cpp" />
+		<Unit filename="display.h" />
+		<Unit filename="eagle.app.v6.common.ld.h" />
+		<Unit filename="hardware.cpp" />
+		<Unit filename="hardware.h" />
+		<Unit filename="led.cpp" />
+		<Unit filename="led.h" />
+		<Unit filename="loop.cpp" />
+		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="utils/conf.cpp" />
-		<Unit filename="utils/utils.cpp" />
+		<Unit filename="settings.h" />
+		<Unit filename="temperature.cpp" />
+		<Unit filename="temperature.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
