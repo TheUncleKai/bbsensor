@@ -13,16 +13,4 @@
 # limitations under the License.
 
 SOURCES = \
-	data/loop.cpp \
-    data/tables.cpp \
-	devices/button.cpp \
-    devices/channel.cpp \
-	devices/click.cpp \
-    devices/device.cpp \
-    devices/display.cpp \
-	devices/hardware.cpp \
-	devices/led.cpp \
-    devices/temperature.cpp \
-    utils/conf.cpp \
-    utils/utils.cpp \
 	main.cpp

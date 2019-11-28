@@ -12,15 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := 
-OBJDIR := $(ROOT)/$(OUTPUT)/sensor
-FOLDER := $(ROOT)/$(OUTPUT)/sensor $(ROOT)/$(OUTPUT)/sensor/data $(ROOT)/$(OUTPUT)/sensor/devices $(ROOT)/$(OUTPUT)/sensor/utils
-ADD_DEP := local.eagle.app.v6.common.ld
-ADD_INCLUDE := -I../ext/core $(EXT_INCLUDE_CRC32) -I../lib -I../lib/include
-ADD_LIBS = -lcore -lspi -leeprom -lESP8266WiFi -lcrc32 -lBB
+OBJS := ${SOURCES:.cpp=.cpp.o}
+OBJS := ${subst $(SRCDIR),$(OBJDIR),$(OBJS)}
 
-TARGET := $(ROOT)/$(OUTPUT)/$(APP).elf
-BIN := $(ROOT)/$(OUTPUT)/$(APP).bin
-MAP := $(ROOT)/$(OUTPUT)/$(APP).map
-SIZES := $(ROOT)/$(OUTPUT)/$(APP).txt
-
+ARS := $(OBJS:.o=.ar)

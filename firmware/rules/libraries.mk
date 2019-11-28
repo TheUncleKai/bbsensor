@@ -21,6 +21,8 @@ LIBESP8266MDNS      = libESP8266mDNS
 LIBSOFTWARESERIAL   = libSoftwareSerial
 LIBCRC32            = libcrc32
 
+LIBBB               = libBB
+
 ESP8266_CORE      = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/cores/esp8266
 ESP8266_VARIANTS  = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/variants/nodemcu
 ESP8266_SPI       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/libraries/SPI

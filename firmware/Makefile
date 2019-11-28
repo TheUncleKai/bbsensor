@@ -39,6 +39,8 @@ include ext/softwareserial/lib.mk
 include ext/spi/lib.mk
 include ext/CRC32/lib.mk
 
+include lib/lib.mk
+
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Projects
 
