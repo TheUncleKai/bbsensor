@@ -68,6 +68,8 @@
 		<Unit filename="click.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
+		<Unit filename="control.cpp" />
+		<Unit filename="control.h" />
 		<Unit filename="data.cpp" />
 		<Unit filename="data.h" />
 		<Unit filename="debug.h" />
@@ -80,8 +82,6 @@
 		<Unit filename="hardware.h" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
-		<Unit filename="loop.cpp" />
-		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="settings.h" />
 		<Unit filename="temperature.cpp" />

@@ -108,3 +108,8 @@ void Hardware::execute()
     this->p_display->execute();
     this->p_temperature->execute();
 }
+
+
+Hardware* hardware = new Hardware();
+Display::Manager* display = hardware->display();
+Temperature::Manager* temperature = hardware->temperature();

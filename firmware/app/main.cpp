@@ -22,9 +22,7 @@
 #include <debug.h>
 
 #include <hardware.h>
-#include <temperature.h>
-#include <channel.h>
-#include <loop.h>
+#include <control.h>
 #include <conf.h>
 
 
@@ -35,6 +33,10 @@ void handleISR1();
 void handleISR2();
 void print_channel();
 
+void toggle_led();
+void toggle_channel();
+void start_measure();
+
 void setup();
 void loop();
 
@@ -42,24 +44,11 @@ void loop();
 // Variables
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-typedef struct {
-    bool measure = false;
-    bool check_config = false;
-    Click::Type button1 = Click::Type::NONE;
-    Click::Type button2 = Click::Type::NONE;
-} MainState;
 
 
-
-MainState* state = new MainState;
-Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
-
-Display::Manager* display = hardware->display();
-Temperature::Manager* temperature = hardware->temperature();
-
-Loop* looper = new Loop();
-
+Control::Manager* looper = new Control::Manager();
+Control::State* state = looper->state();
 
 // Implemnatation
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -100,6 +89,25 @@ void print_channel()
 }
 
 
+void toggle_led()
+{
+    hardware->led1()->toggle();
+}
+
+
+void toggle_channel()
+{
+    temperature->next();
+    print_channel();
+}
+
+
+void start_measure()
+{
+    temperature->set_measure(true);
+}
+
+
 // setup ESP
 void setup()
 {
@@ -137,9 +145,9 @@ void setup()
     // 0: for LED
     // 1: Measurement delay
     // 2: delay between display writes and toggles
-    looper->set_counter(0, 10);
-    looper->set_counter(1, config->data()->measure_delay);
-    looper->set_counter(2, 100);
+    looper->set_counter(0, 10, toggle_led);
+    looper->set_counter(1, config->data()->measure_delay, start_measure);
+    looper->set_counter(2, 100, toggle_channel);
     looper->setup();
 
     display->write(1, "Start...");
@@ -197,25 +205,11 @@ void loop()
         state->measure = true;
     }
 
-    // toggle LED every 10 cycles
-    if (looper->number(0) == 10) {
-        hardware->led1()->toggle();
-    }
 
-    // toggle display and channel every 100 cycles
-    if (looper->number(2) == 100) {
-        temperature->next();
-        print_channel();
-    }
-
-    // measure after configured delay
-    if (looper->number(1) == config->data()->measure_delay) {
-        temperature->set_measure(true);
-    }
+    // finish loop
+    looper->finish();
 
     // execute all tasks
     hardware->execute();
 
-    // finish loop
-    looper->finish();
 }

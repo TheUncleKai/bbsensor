@@ -14,28 +14,40 @@
    limitations under the License.
 */
 
-#ifndef LOOP_H_INCLUDED
-#define LOOP_H_INCLUDED
+#ifndef CONTROL_H_INCLUDED
+#define CONTROL_H_INCLUDED
 
 #include <Arduino.h>
+#include <click.h>
 
-#define CHANNEL_LOOPS 8
+namespace Control
+{
 
 
-class Loop
+typedef struct {
+    bool measure = false;
+    bool check_config = false;
+    Click::Type button1 = Click::Type::NONE;
+    Click::Type button2 = Click::Type::NONE;
+} State;
+
+
+class Manager
 {
     public:
-        Loop();
-        virtual ~Loop();
+        Manager();
+        virtual ~Manager();
 
         uint32_t counter();
         uint32_t number(size_t channel);
+
+        State* state();
 
         void setup();
         void start();
         void finish();
         void activate();
-        void set_counter(size_t channel, uint32_t n);
+        void set_counter(size_t channel, uint32_t n, void (*func)(void));
         void reset_counter(size_t channel);
 
     protected:
@@ -43,8 +55,14 @@ class Loop
     private:
         uint32_t* p_channel;
         uint32_t* p_number;
+        State* p_state;
         bool m_activate;
         uint32_t m_bootup, m_delay, m_counter, m_timestamp;
+
+        void (*p_func[])(void);
 };
 
-#endif // LOOP_H_INCLUDED
+
+};
+
+#endif // CONTROL_H_INCLUDED
