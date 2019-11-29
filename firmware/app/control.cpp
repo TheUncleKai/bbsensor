@@ -25,7 +25,6 @@ Control::Manager::Manager()
 {
     this->p_channel = new uint32_t[CONTROL_SLOTS];
     this->p_number = new uint32_t[CONTROL_SLOTS];
-    this->p_state = new Control::State;
 
     this->m_bootup = 0;
     this->m_delay = LOOP_WAIT;
@@ -46,19 +45,12 @@ Control::Manager::~Manager()
 {
     delete this->p_channel;
     delete this->p_number;
-    delete this->p_state;
 }
 
 
 uint32_t Control::Manager::counter()
 {
     return this->m_counter;
-}
-
-
-Control::State* Control::Manager::state()
-{
-    return this->p_state;
 }
 
 
@@ -102,7 +94,6 @@ void Control::Manager::finish()
 
     for (size_t i = 0; i < CONTROL_SLOTS; ++i) {
         if (this->p_number[i] == this->p_channel[i]) {
-            (*this->p_func[i]);
             this->p_number[i] = 0;
         }
     }
@@ -114,13 +105,13 @@ void Control::Manager::activate()
     this->m_activate = true;
 }
 
-void Control::Manager::set_counter(size_t channel, uint32_t n, void (*func)(void))
+
+void Control::Manager::set_counter(size_t channel, uint32_t n)
 {
     if (channel >= CONTROL_SLOTS)
         return;
 
     this->p_channel[channel] = n;
-    this->p_func[channel] = func;
 }
 
 
@@ -130,4 +121,10 @@ void Control::Manager::reset_counter(size_t channel)
         return;
 
     this->p_number[channel] = 0;
+}
+
+
+bool Control::Manager::is_active()
+{
+    return this->m_activate;
 }

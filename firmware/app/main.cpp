@@ -22,6 +22,8 @@
 #include <debug.h>
 
 #include <hardware.h>
+#include <temperature.h>
+#include <channel.h>
 #include <control.h>
 #include <conf.h>
 
@@ -33,10 +35,6 @@ void handleISR1();
 void handleISR2();
 void print_channel();
 
-void toggle_led();
-void toggle_channel();
-void start_measure();
-
 void setup();
 void loop();
 
@@ -45,10 +43,13 @@ void loop();
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
+Click::Type button1 = Click::Type::NONE;
+Click::Type button2 = Click::Type::NONE;
 
+Hardware* hw = new Hardware();
 Config::Manager* config = new Config::Manager();
-Control::Manager* looper = new Control::Manager();
-Control::State* state = looper->state();
+Control::Manager* control = new Control::Manager();
+
 
 // Implemnatation
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -56,20 +57,20 @@ Control::State* state = looper->state();
 
 void handleISR1()
 {
-    hardware->button1()->handleISR();
+    hw->button1()->handleISR();
 }
 
 
 void handleISR2()
 {
-    hardware->button2()->handleISR();
+    hw->button2()->handleISR();
 }
 
 
 // print current value of channel on display
 void print_channel()
 {
-    Temperature::Channel* channel = temperature->current();
+    Temperature::Channel* channel = hw->temperature()->current();
 
     if (channel == NULL)
         return;
@@ -77,34 +78,15 @@ void print_channel()
     if (channel->type() == Temperature::Type::NONE)
         return;
 
-    display->clear(2);
+    hw->display()->clear(2);
 
     if (channel->type() == Temperature::Type::DATA) {
-        display->write(2, "%u: %u", channel->channel(), channel->value()->data);
+        hw->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
     }
 
     if (channel->type() != Temperature::Type::DATA) {
-        display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+        hw->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
-}
-
-
-void toggle_led()
-{
-    hardware->led1()->toggle();
-}
-
-
-void toggle_channel()
-{
-    temperature->next();
-    print_channel();
-}
-
-
-void start_measure()
-{
-    temperature->set_measure(true);
 }
 
 
@@ -114,18 +96,15 @@ void setup()
     Serial.begin(115200);
     delay(3000);
 
-    hardware->button1()->setISR(handleISR1);
-    hardware->button2()->setISR(handleISR2);
+    hw->button1()->setISR(handleISR1);
+    hw->button2()->setISR(handleISR2);
 
     // setup and read config
     config->setup();
     config->read();
 
     // check config, set default config if invalid
-    state->check_config = config->verify();
-
-
-    if (state->check_config == false) {
+    if (config->verify() == false) {
         config->reset();
         config->set_channel(0, Temperature::Type::RTD);
         config->set_channel(2, Temperature::Type::DATA);
@@ -138,78 +117,88 @@ void setup()
 
     // set channel by config values
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        temperature->set_channel(i, config->get_channel(i));
+        hw->temperature()->set_channel(i, config->get_channel(i));
     }
 
     // setup loop counter
     // 0: for LED
     // 1: Measurement delay
     // 2: delay between display writes and toggles
-    looper->set_counter(0, 10, toggle_led);
-    looper->set_counter(1, config->data()->measure_delay, start_measure);
-    looper->set_counter(2, 100, toggle_channel);
-    looper->setup();
+    control->set_counter(0, 10);
+    control->set_counter(1, config->data()->measure_delay);
+    control->set_counter(2, 100);
+    control->setup();
 
-    display->write(1, "Start...");
-    display->execute();
-
-    hardware->setup();
+    hw->display()->write(1, "Start...");
+    hw->display()->execute();
+    hw->setup();
 }
-
-
 
 
 void loop()
 {
     // start loop
-    looper->start();
+    control->start();
 
     // don't measure until loop measurement delay is reached
-    temperature->set_measure(false);
+    hw->temperature()->set_measure(false);
 
     // get last click from butons
-    state->button1 = hardware->button1()->get_click();
-    state->button2 = hardware->button2()->get_click();
+    button1 = hw->button1()->get_click();
+    button2 = hw->button2()->get_click();
 
     // parse click only after measurement has started
-    if (state->measure == true) {
+    if (control->is_active() == true) {
 
         // toggle channel and print value when single click on button 1 is registered
         // also reset delay between display writes and toggles
-        if (state->button1 == Click::Type::SINGLE) {
-            temperature->next();
+        if (button1 == Click::Type::SINGLE) {
+            hw->temperature()->next();
             print_channel();
-            looper->reset_counter(2);
+            control->reset_counter(2);
         }
 
-        if (state->button2 == Click::Type::SINGLE) {
-            temperature->last();
+        if (button2 == Click::Type::SINGLE) {
+            hw->temperature()->last();
             print_channel();
-            looper->reset_counter(2);
+            control->reset_counter(2);
         }
     }
 
     // first loop, siwtch on led and get first measurement to setup reading
-    if (looper->counter() == 0) {
-        hardware->led1()->on();
-        temperature->set_measure(true);
+    if (control->counter() == 0) {
+        hw->led1()->on();
+        hw->temperature()->set_measure(true);
     }
 
     // now we start measurement truly
-    if (looper->counter() == 10) {
-        hardware->display()->clear();
-        hardware->display()->write(1, "Measure");
+    if (control->counter() == 10) {
+        hw->display()->clear();
+        hw->display()->write(1, "Measure");
 
-        looper->activate();
-        temperature->set_measure(true);
-        state->measure = true;
+        control->activate();
+        hw->temperature()->set_measure(true);
     }
 
+    // toggle LED every 10 cycles
+    if (control->number(0) == 10) {
+        hw->led1()->toggle();
+    }
 
-    // finish loop
-    looper->finish();
+    // toggle display and channel every 100 cycles
+    if (control->number(2) == 100) {
+        hw->temperature()->next();
+        print_channel();
+    }
+
+    // measure after configured delay
+    if (control->number(1) == config->data()->measure_delay) {
+        hw->temperature()->set_measure(true);
+    }
 
     // execute all tasks
-    hardware->execute();
+    hw->execute();
 
+    // finish loop
+    control->finish();
 }

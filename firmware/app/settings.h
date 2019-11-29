@@ -46,7 +46,7 @@
 #define DEFAULT_DELAY   120
 
 #define SPI_MAX         32
-#define CONTROL_SLOTS   8
+#define CONTROL_SLOTS   3
 
 
 #endif // CONFIG_H_INCLUDED

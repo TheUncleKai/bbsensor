@@ -55,9 +55,5 @@ class Hardware : public Device
         Temperature::Manager* p_temperature;
 };
 
-extern Hardware* hardware;
-extern Display::Manager* display;
-extern Temperature::Manager* temperature;
-
 
 #endif // HARDWARE_H_INCLUDED
