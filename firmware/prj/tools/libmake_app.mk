@@ -16,9 +16,14 @@ ROOT = ../../..
 
 INCLUDES = 
 
-include vars.mk
-include sources.mk
-include objects.mk
+-include vars.mk
+-include vars.$(BOARD).mk
+
+-include sources.mk
+-include sources.$(BOARD).mk
+
+-include objects.mk
+-include objects.$(BOARD).mk
 
 OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
 FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
@@ -48,10 +53,12 @@ default: compile link
 
 help:
 	@$(ECHO) "\n\e[1;34mTargets for makefile\e[0;0m\n"
-	@$(ECHO) "\t\e[1;34default\e[0;0m:\tcompile and link library"
-	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompile library"
-	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink library"
+	@$(ECHO) "\t\e[1;34mcompile\e[0;0m:\tcompiles libs and firmware"
+	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink firmware"
+	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
+
+deps: $(DEPS)
 
 compile: $(OBJS)
 
@@ -66,11 +73,13 @@ upload: $(BIN)
 	@$(LOGTIME) $(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(TARGET_BIN) $(LOGONLY)
 	@$(PYTHON) $(UPLOAD) $(UPLOADFLAGS) $(TARGET_BIN) $(LOGOUT)
 
-
 # Include global rules
 include $(ROOT)/prj/tools/rules.mk
 
 # Include local rules
 -include rules.mk
+-include rules.$(BOARD).mk
 
-.PHONY: default help compile link clean
+-include $(DEPS)
+
+.PHONY: default help deps compile link clean upload

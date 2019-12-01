@@ -16,9 +16,14 @@ ROOT = ../../..
 
 INCLUDES = 
 
-include vars.mk
-include sources.mk
-include objects.mk
+-include vars.mk
+-include vars.$(BOARD).mk
+
+-include sources.mk
+-include sources.$(BOARD).mk
+
+-include objects.mk
+-include objects.$(BOARD).mk
 
 OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
 FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
@@ -63,5 +68,6 @@ include $(ROOT)/prj/tools/rules.mk
 
 # Include local rules
 -include rules.mk
+-include rules.$(BOARD).mk
 
 .PHONY: default help compile link clean
