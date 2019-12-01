@@ -23,7 +23,7 @@
 #include <channel.h>
 #include <settings.h>
 
-#define CONFIG_VERSION 3
+#define CONFIG_VERSION 4
 
 
 namespace Config

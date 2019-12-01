@@ -15,8 +15,8 @@
 */
 
 #include <Arduino.h>
-#include <debug.h>
 
+#include <settings.h>
 #include <utils.h>
 
 
