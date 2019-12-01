@@ -12,17 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+OBJS_CORE_C := ${SOURCES_CORE_C:.c=.c.o}
+OBJS_CORE_C := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_CORE_C)}
+
+OBJS_CORE_LIBB64_C := ${SOURCES_CORE_LIBB64_C:.c=.c.o}
+OBJS_CORE_LIBB64_C := ${subst $(SRCDIR)/libb64,$(OBJDIR),$(OBJS_CORE_LIBB64_C)}
+
+OBJS_CORE_CPP := ${SOURCES_CORE_CPP:.cpp=.cpp.o}
+OBJS_CORE_CPP := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_CORE_CPP)}
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+OBJS := $(OBJS_CORE_C) $(OBJS_CORE_LIBB64_C) $(OBJS_CORE_CPP) 
+ARS := $(OBJS:.o=.ar)

@@ -12,17 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+INCLUDE_EEPROM = \
+    -I$(PATH_EEPROM)
+
+INCLUDE += $(INCLUDE_EEPROM)

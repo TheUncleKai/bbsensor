@@ -12,17 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+include prj/external/core/setup.mk
+include prj/external/eeprom/setup.mk
+include prj/external/wifi/setup.mk
+include prj/external/softwareserial/setup.mk
+include prj/external/spi/setup.mk
+include prj/external/CRC32/setup.mk

@@ -12,17 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+include $(ROOT)/prj/external/spi/lib.mk
+include $(ROOT)/prj/external/eeprom/lib.mk
+include $(ROOT)/prj/external/softwareserial/lib.mk
+include $(ROOT)/prj/external/wifi/lib.mk
+include $(ROOT)/prj/external/CRC32/lib.mk
+
+NAME   := bbsensor
+SRCDIR := 
+
+ADD_INCLUDE := -I.

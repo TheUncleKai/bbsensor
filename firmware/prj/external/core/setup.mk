@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+compile_core:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile CORE"
+	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE_LIB) compile
+
+link_core: compile_core
+	@$(INFORM) "Link CORE"
+	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE_LIB) link
+
+clean_core: link_core
+	@$(INFORM) "Clean CORE"
+	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE_LIB) clean
+
+LINK_LIST += link_core
+CLEAN_LIST += clean_core
+PHONY_LIST += compile_core link_core clean_core

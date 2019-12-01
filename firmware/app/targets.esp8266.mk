@@ -12,17 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+TARGET_ELF  := $(ROOT)/$(OUTPUT)/$(NAME).elf
+TARGET_BIN  := $(ROOT)/$(OUTPUT)/$(NAME).bin
+TARGET_MAP  := $(ROOT)/$(OUTPUT)/$(NAME).map
+TARGET_SIZE := $(ROOT)/$(OUTPUT)/$(NAME).txt

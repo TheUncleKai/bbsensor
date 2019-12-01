@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+compile_serial:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile SERIAL"
+	@$(MAKE) -s -C prj/external/softwareserial -f $(MAKEFILE_LIB) compile
+
+link_serial: compile_serial
+	@$(INFORM) "Link SERIAL"
+	@$(MAKE) -s -C prj/external/softwareserial -f $(MAKEFILE_LIB) link
+
+clean_serial: link_serial
+	@$(INFORM) "Clean SERIAL"
+	@$(MAKE) -s -C prj/external/softwareserial -f $(MAKEFILE_LIB) clean
+
+LINK_LIST += link_serial
+CLEAN_LIST += clean_serial
+PHONY_LIST += compile_serial link_serial clean_serial

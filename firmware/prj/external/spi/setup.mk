@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+compile_spi:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile SPI"
+	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE_LIB) compile
+
+link_spi: compile_spi
+	@$(INFORM) "Link SPI"
+	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE_LIB) link
+
+clean_spi: link_spi
+	@$(INFORM) "Clean SPI"
+	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE_LIB) clean
+
+LINK_LIST += link_spi
+CLEAN_LIST += clean_spi
+PHONY_LIST += compile_spi link_spi clean_spi

@@ -13,16 +13,13 @@
 # limitations under the License.
 
 SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+    $(SRCDIR)/ETH.cpp \
+    $(SRCDIR)/WiFi.cpp \
+    $(SRCDIR)/WiFiAP.cpp \
+    $(SRCDIR)/WiFiClient.cpp \
+    $(SRCDIR)/WiFiGeneric.cpp \
+    $(SRCDIR)/WiFiMulti.cpp \
+    $(SRCDIR)/WiFiScan.cpp \
+    $(SRCDIR)/WiFiServer.cpp \
+    $(SRCDIR)/WiFiSTA.cpp \
+    $(SRCDIR)/WiFiUdp.cpp

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="sensor" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_for_esp8266" />
+		<MakeCommands>
+			<Build command="$make -f $makefile all" />
+			<CompileFile command="$make -f $makefile compile" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile clean" />
+			<AskRebuildNeeded command="$make -f $makefile all" />
+			<SilentBuild command="$make -f $makefile all &gt; $(CMD_NULL)" />
+		</MakeCommands>
+		<Build>
+			<Target title="release">
+				<Option output=".sys.exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="D:/home/kai/projekte/bbsensor/firmware/src/.objs" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_for_esp8266" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-DNONOSDK221=1" />
+					<Add option="-DF_CPU=80000000L" />
+					<Add option="-DLWIP_OPEN_SRC" />
+					<Add option="-DTCP_MSS=536" />
+					<Add option="-DLWIP_FEATURES=1" />
+					<Add option="-DLWIP_IPV6=0" />
+					<Add option="-DDEBUG_ESP_PORT=Serial" />
+					<Add option="-DARDUINO=10809" />
+					<Add option="-DARDUINO_ESP8266_NODEMCU" />
+					<Add option="-DARDUINO_ARCH_ESP8266" />
+					<Add option='-DARDUINO_BOARD=\&quot;ESP8266_NODEMCU\&quot;' />
+					<Add option="-DFLASHMODE_DIO" />
+					<Add option="-DESP8266" />
+					<Add option="-DNO_GLOBAL_EEPROM" />
+					<Add option="-DCLICK_DEBUG" />
+					<Add option="-DTEMPERATURE_DEBUG" />
+					<Add option="-DSPI_DEBUG" />
+					<Add option="-DDISPLAY_DEBUG" />
+					<Add option="-DDEBUG_SIGNAL" />
+					<Add option="-DDEBUG_CONFIG" />
+					<Add directory="$$(ESP8266_ROOT)/tools/sdk/include" />
+					<Add directory="$$(ESP8266_ROOT)/tools/sdk/lwip2/include" />
+					<Add directory="$$(ESP8266_ROOT)/tools/sdk/libc/xtensa-lx106-elf/include" />
+					<Add directory="$$(ESP8266_ROOT)/cores/esp8266" />
+					<Add directory="$$(ESP8266_ROOT)/variants/nodemcu" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/SPI" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/EEPROM" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WiFi/src" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266WebServer/src" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/ESP8266mDNS/src" />
+					<Add directory="$$(ESP8266_ROOT)/libraries/SoftwareSerial/src" />
+					<Add directory="$$(ARDUINO_LIBS)/CRC32/src" />
+					<Add directory="." />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
+		<Unit filename="channel.cpp" />
+		<Unit filename="channel.h" />
+		<Unit filename="click.cpp" />
+		<Unit filename="click.h" />
+		<Unit filename="conf.cpp" />
+		<Unit filename="conf.h" />
+		<Unit filename="control.cpp" />
+		<Unit filename="control.h" />
+		<Unit filename="data.cpp" />
+		<Unit filename="data.h" />
+		<Unit filename="device.cpp" />
+		<Unit filename="device.h" />
+		<Unit filename="display.cpp" />
+		<Unit filename="display.h" />
+		<Unit filename="eagle.app.v6.common.ld.h" />
+		<Unit filename="hardware.cpp" />
+		<Unit filename="hardware.h" />
+		<Unit filename="led.cpp" />
+		<Unit filename="led.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="settings.h" />
+		<Unit filename="temperature.cpp" />
+		<Unit filename="temperature.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

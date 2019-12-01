@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+compile_eeprom:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile EEPROM"
+	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE_LIB) compile
+
+link_eeprom: compile_eeprom
+	@$(INFORM) "Link EEPROM"
+	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE_LIB) link
+
+clean_eeprom: link_eeprom
+	@$(INFORM) "Clean EEPROM"
+	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE_LIB) clean
+
+LINK_LIST += link_eeprom
+CLEAN_LIST += clean_eeprom
+PHONY_LIST += compile_eeprom link_eeprom clean_eeprom

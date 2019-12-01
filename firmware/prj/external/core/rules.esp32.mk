@@ -12,17 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+# Include additional rules
+$(OBJDIR)/%.c.o: $(SRCDIR)/libb64/%.c
+	@$(LOG) "(GCC) $@"
+	@$(MKDIR) $(FOLDER)
+	@$(LOGTIME) $(GCC) $(CFLAGS) $< -o $@ $(LOGONLY)
+	@$(GCC) $(CFLAGS) $< -o $@ $(LOGOUT)

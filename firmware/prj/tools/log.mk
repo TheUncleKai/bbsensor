@@ -12,17 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    main.cpp \
-    button.cpp \
-    channel.cpp \
-    click.cpp \
-    conf.cpp \
-    device.cpp \
-    display.cpp \
-    hardware.cpp \
-    led.cpp \
-    loop.cpp \
-    tables.cpp \
-    temperature.cpp \
-    utils.cpp
+LOGTIME = echo `date +%Y-%m-%d/%H:%M:%S`":"
+INFORM  = $(ECHO) "\e[1;31m Info:\e[0;0m ==>\t"
+LOG     = $(ECHO) "\e[1;34m       ==>\e[0;0m\t"
+
+LOGFILE    = $(ROOT)/$(OUTPUT)/$(LOGGING)
+LOGOUT     = 2>&1 | tee -a $(LOGFILE)
+LOGONLY    = >> $(LOGFILE)
