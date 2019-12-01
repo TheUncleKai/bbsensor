@@ -43,10 +43,6 @@ void loop();
 // Variables
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-bool do_measure = false;
-uint8_t channel_number = 0;
-bool check = false;
-
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 
@@ -73,9 +69,18 @@ void handleISR2()
 }
 
 
-void print_channel()
+void print_channel(bool first)
 {
-    channel = temperature->get_channel(channel_number);
+    Temperature::Channel* channel = NULL;
+
+
+    if (first == true) {
+        channel = temperature->current();
+    } else {
+        temperature->next();
+        channel = temperature->current();
+    }
+
 
     if (channel->type() == Temperature::Type::NONE) {
         return;
@@ -104,7 +109,7 @@ void setup()
     config->setup();
     config->read();
 
-    check = config->verify();
+    bool check = config->verify();
 
     if (check == false) {
         config->reset();
@@ -153,18 +158,16 @@ void loop()
         temperature->set_measure(true);
     }
 
+    if (looper->counter() == 30) {
+        print_channel(true);
+    }
+
     if (looper->number(0) == 10) {
         hardware->led1()->toggle();
     }
 
     if (looper->number(2) == 100) {
-        if (channel_number == 0) {
-            channel_number = 2;
-        } else {
-            channel_number = 0;
-        }
-
-        print_channel();
+        print_channel(false);
     }
 
     if (looper->number(1) == config->data()->measure_delay) {

@@ -27,6 +27,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 {
     this->m_cs = cs;
     this->p_spi = new SPIWrapper();
+    this->p_current = NULL;
 
     this->p_spi->set_spi(spi);
 
@@ -165,7 +166,7 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
 void Temperature::Manager::set_measure(bool all)
 {
-    Channel* channel;
+    Temperature::Channel* channel;
     int i = 0;
 
 
@@ -186,8 +187,87 @@ Temperature::Channel* Temperature::Manager::get_channel(uint8_t channel_number)
     if (channel_number >= TEMP_CHANNELS) {
         return NULL;
     }
+    Temperature::Channel* channel;
 
-    return channellist[channel_number];
+
+    channel = channellist[channel_number];
+
+    if (channel != NULL)
+        this->p_current = channel;
+
+    return channel;
+}
+
+
+Temperature::Channel* Temperature::Manager::current()
+{
+    if (this->p_current == NULL) {
+
+        for (int i = 0; i < TEMP_CHANNELS; ++i) {
+
+            if (channellist[i] != NULL) {
+                this->p_current = channellist[i];
+                break;
+            }
+        }
+    }
+
+    return this->p_current;
+}
+
+
+void Temperature::Manager::next()
+{
+    Temperature::Channel* channel = NULL;
+    int counter = 0;
+    int i = 0;
+
+    if (this->p_current != NULL)
+        counter = this->p_current->channel();
+
+
+    while(i < TEMP_CHANNELS) {
+        ++counter;
+
+        if (counter >= TEMP_CHANNELS)
+            counter = 0;
+
+        channel = channellist[counter];
+        if (channel != NULL) {
+            this->p_current = channel;
+            break;
+        }
+
+        ++i;
+    }
+}
+
+
+void Temperature::Manager::prev()
+{
+    Temperature::Channel* channel = NULL;
+    int counter = 0;
+    int i = 0;
+
+    if (this->p_current != NULL)
+        counter = this->p_current->channel();
+
+
+    while(i < TEMP_CHANNELS) {
+        if (counter == 0) {
+            counter = TEMP_CHANNELS - 1;
+        } else {
+            --counter;
+        }
+
+        channel = channellist[counter];
+        if (channel != NULL) {
+            this->p_current = channel;
+            break;
+        }
+
+        ++i;
+    }
 }
 
 

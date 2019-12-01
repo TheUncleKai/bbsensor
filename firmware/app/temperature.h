@@ -42,11 +42,16 @@ class Manager : public Device
         void set_measure(bool all);
         Channel* get_channel(uint8_t channel_number);
 
+        Channel* current();
+        void next();
+        void prev();
+
         uint8_t cs();
 
     private:
         uint8_t m_cs;
         SPIWrapper* p_spi;
+        Channel* p_current;
 
         void _process_channel(Channel* channel);
 };
