@@ -123,9 +123,9 @@ void Temperature::Channel::add_value(uint16_t data)
         value->value = table_voltages[data];
     }
 
-#ifdef DEBUG_LEVEL2
+#ifdef DEBUG_LEVEL1
     DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);
-#endif // DEBUG_LEVEL2
+#endif // DEBUG_LEVEL1
 
     this->p_lastvalue = value;
     this->m_counter++;

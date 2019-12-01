@@ -17,8 +17,6 @@
 #ifndef CONF_H_INCLUDED
 #define CONF_H_INCLUDED
 
-#include <list>
-
 #include <EEPROM.h>
 #include <channel.h>
 #include <settings.h>

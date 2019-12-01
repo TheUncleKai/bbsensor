@@ -75,8 +75,6 @@ void handleISR2()
 
 void print_channel()
 {
-    std::string text_out;
-
     channel = temperature->get_channel(channel_number);
 
     if (channel->type() == Temperature::Type::NONE) {
