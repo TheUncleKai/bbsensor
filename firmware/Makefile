@@ -14,12 +14,12 @@
 
 ROOT = .
 
-include $(ROOT)/rules/config.mk
-include $(ROOT)/rules/setup.mk
+include $(ROOT)/prj/config.mk
 
-COMPILE_LIST = 
-PHONY_LIST = 
+LINK_LIST = 
 CLEAN_LIST = 
+UPLOAD_LIST = 
+PHONY_LIST = 
 
 default: link
 
@@ -30,42 +30,16 @@ help:
 	@$(ECHO) "\t\e[1;34mupload\e[0;0m:\t\tupload firmware"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-include ext/core/lib.mk
-include ext/eeprom/lib.mk
-include ext/esp8266mdns/lib.mk
-# include ext/esp8266webserver/lib.mk
-include ext/esp8266wifi/lib.mk
-include ext/softwareserial/lib.mk
-include ext/spi/lib.mk
-include ext/CRC32/lib.mk
+include $(ROOT)/prj/rules.$(BOARD)/list.mk
+include $(ROOT)/app/setup.mk
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Projects
 
-compile:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Create deps"
-	@$(MAKE) -s -C app -f Makefile deps
-	@$(INFORM) "Compile $(APP)"
-	@$(MAKE) -s -C app -f Makefile compile
-
-
 link: $(LINK_LIST)
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Link $(APP)"
-	@$(MAKE) -s -C app -f Makefile link
-
-
-upload: link
-	@$(INFORM) "Upload firmware"
-	@$(MAKE) -s -C app -f Makefile upload
-
 
 clean: $(CLEAN_LIST)
-	@@$(RM) $(LOGFILE)
-	@$(INFORM) "Clean $(APP)"
-	@$(MAKE) -s -C app -f Makefile clean
-	@-$(RMDIR) $(OUTPUT)
 
+upload: $(UPLOAD_LIST)
 
-.PHONY: default help compile link upload clean $(PHONY_LIST)
+.PHONY: default help link clean upload $(PHONY_LIST)

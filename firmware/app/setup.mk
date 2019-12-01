@@ -12,19 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_core:
+compile_bbsensor:
 	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile CORE"
-	@$(MAKE) -s -C prj/external/core -f Makefile compile
+	@$(INFORM) "Compile BBSensor"
+	@$(MAKE) -s -C app -f Makefile compile
 
-link_core: compile_core
-	@$(INFORM) "Link CORE"
-	@$(MAKE) -s -C prj/external/core -f Makefile link
+link_bbsensor: compile_bbsensor
+	@$(INFORM) "Link BBSensor"
+	@$(MAKE) -s -C app -f Makefile link
 
-clean_core: link_core
-	@$(INFORM) "Clean CORE"
-	@$(MAKE) -s -C prj/external/core -f Makefile clean
+clean_bbsensor: link_bbsensor
+	@$(INFORM) "Clean BBSensor"
+	@$(MAKE) -s -C app -f Makefile clean
 
-LINK_LIST += link_core
-CLEAN_LIST += clean_core
-PHONY_LIST += compile_core link_core clean_core
+upload_bbsensor: link_bbsensor
+	@$(INFORM) "Upload firmware"
+	@$(MAKE) -s -C app -f Makefile upload
+
+
+LINK_LIST += link_bbsensor
+CLEAN_LIST += clean_bbsensor
+UPLOAD_LIST += upload_bbsensor
+PHONY_LIST += compile_bbsensor link_bbsensor clean_bbsensor upload_bbsensor

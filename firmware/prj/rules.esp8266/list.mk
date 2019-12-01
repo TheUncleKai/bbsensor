@@ -12,19 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_core:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile CORE"
-	@$(MAKE) -s -C prj/external/core -f Makefile compile
-
-link_core: compile_core
-	@$(INFORM) "Link CORE"
-	@$(MAKE) -s -C prj/external/core -f Makefile link
-
-clean_core: link_core
-	@$(INFORM) "Clean CORE"
-	@$(MAKE) -s -C prj/external/core -f Makefile clean
-
-LINK_LIST += link_core
-CLEAN_LIST += clean_core
-PHONY_LIST += compile_core link_core clean_core
+include prj/external/core/setup.mk
+include prj/external/eeprom/setup.mk
+include prj/external/wifi/setup.mk
+include prj/external/softwareserial/setup.mk
+include prj/external/spi/setup.mk
+include prj/external/CRC32/setup.mk
