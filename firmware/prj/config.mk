@@ -12,24 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Example for windows
+ESPTOOL    = c:/Python37/Scripts/esptool.exe
+ARDUINO    = D:/home/kai/Arduino/libraries
 
-ESP8266_PATH       = /home/kai/.arduino15/packages/esp8266
-ESP8266_GCC_PREFIX = xtensa-lx106-elf
-
-XTENSA      = 2.5.0-4-b40a506
-ESP_VERSION = 2.6.1
-MKDIR       = mkdir -p
-RM          = rm -f
-RMDIR       = rmdir
-PYTHON      = $(ESP8266_PATH)/tools/python3/3.7.2-post1/python
-TOOLS       = $(ESP8266_PATH)/hardware/esp8266/$(ESP_VERSION)/tools/
-COPY        = cp
-EXEEXT      = .exe
-ECHO        = echo -e
-PORT        = /dev/ttyUSB0
-BAUD        = 115200
-LIBRARIES   = /home/kai/Arduino/libraries
+MKDIR      = mkdir -p
+RM         = rm -f
+RMDIR      = rmdir
+COPY       = cp
+EXEEXT     = .exe
+ECHO       = echo -e
+PORT       = /dev/ttyUSB0
+BAUD       = 115200
+OUTPUT     = build
+LOGGING    = log.txt
+LIB_SUFFIX = .a
 
 # Set Debug Level
 # NONE = Serial is disabled, no defines
@@ -37,5 +33,6 @@ LIBRARIES   = /home/kai/Arduino/libraries
 # LEVEL1: PRINT + DEBUG_LEVEL1
 # LEVEL2: PRINT + DEBUG_LEVEL1+2
 # LEVEL3: PRINT + DEBUG_LEVEL1,2+3
+DEBUG        = LEVEL1
 
-DEBUG       = LEVEL1
+USE_BOARD    = esp32

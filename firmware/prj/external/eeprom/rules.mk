@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_spi:
+compile_eeprom:
 	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile compile
+	@$(INFORM) "Compile EEPROM"
+	@$(MAKE) -s -C prj/external/eeprom -f Makefile compile
 
-link_spi: compile_spi
-	@$(INFORM) "Link $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile link
+link_eeprom: compile_eeprom
+	@$(INFORM) "Link EEPROM"
+	@$(MAKE) -s -C prj/external/eeprom -f Makefile link
 
-clean_spi: link_spi
-	@$(INFORM) "Clean $(LIBSPI)"
-	@$(MAKE) -s -C ext/spi -f Makefile clean
+clean_eeprom: link_eeprom
+	@$(INFORM) "Clean EEPROM"
+	@$(MAKE) -s -C prj/external/eeprom -f Makefile clean
 
-LINK_LIST += link_spi
-CLEAN_LIST += clean_spi
-PHONY_LIST += compile_spi link_spi clean_spi
+LINK_LIST += link_eeprom
+CLEAN_LIST += clean_eeprom
+PHONY_LIST += compile_eeprom link_eeprom clean_eeprom

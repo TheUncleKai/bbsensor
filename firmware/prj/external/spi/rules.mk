@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_crc32:
+compile_spi:
 	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBCRC32)"
-	@$(MAKE) -s -C ext/CRC32 -f Makefile compile
+	@$(INFORM) "Compile SPI"
+	@$(MAKE) -s -C prj/external/spi -f Makefile compile
 
-link_crc32: compile_crc32
-	@$(INFORM) "Link $(LIBCRC32)"
-	@$(MAKE) -s -C ext/CRC32 -f Makefile link
+link_spi: compile_spi
+	@$(INFORM) "Link SPI"
+	@$(MAKE) -s -C prj/external/spi -f Makefile link
 
-clean_crc32: link_crc32
-	@$(INFORM) "Clean $(LIBCRC32)"
-	@$(MAKE) -s -C ext/CRC32 -f Makefile clean
+clean_spi: link_spi
+	@$(INFORM) "Clean SPI"
+	@$(MAKE) -s -C prj/external/spi -f Makefile clean
 
-LINK_LIST += link_crc32
-CLEAN_LIST += clean_crc32
-PHONY_LIST += compile_crc32 link_crc32 clean_crc32
+LINK_LIST += link_spi
+CLEAN_LIST += clean_spi
+PHONY_LIST += compile_spi link_spi clean_spi

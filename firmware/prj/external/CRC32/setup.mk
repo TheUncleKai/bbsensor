@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_eeprom:
+compile_crc32:
 	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile compile
+	@$(INFORM) "Compile CRC32"
+	@$(MAKE) -s -C prj/external/CRC32 -f Makefile compile
 
-link_eeprom: compile_eeprom
-	@$(INFORM) "Link $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile link
+link_crc32: compile_crc32
+	@$(INFORM) "Link CRC32"
+	@$(MAKE) -s -C prj/external/CRC32 -f Makefile link
 
-clean_eeprom: link_eeprom
-	@$(INFORM) "Clean $(LIBEEPROM)"
-	@$(MAKE) -s -C ext/eeprom -f Makefile clean
+clean_crc32: link_crc32
+	@$(INFORM) "Clean CRC32"
+	@$(MAKE) -s -C prj/external/CRC32 -f Makefile clean
 
-LINK_LIST += link_eeprom
-CLEAN_LIST += clean_eeprom
-PHONY_LIST += compile_eeprom link_eeprom clean_eeprom
+LINK_LIST += link_crc32
+CLEAN_LIST += clean_crc32
+PHONY_LIST += compile_crc32 link_crc32 clean_crc32

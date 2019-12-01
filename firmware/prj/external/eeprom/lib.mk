@@ -12,19 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_wifi:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBESP8266WIFI)"
-	@$(MAKE) -s -C ext/esp8266wifi -f Makefile compile
+INCLUDES_EEPROM = \
+    -I$(PATH_EEPROM)
 
-link_wifi: compile_wifi
-	@$(INFORM) "Link $(LIBESP8266WIFI)"
-	@$(MAKE) -s -C ext/esp8266wifi -f Makefile link
-
-clean_wifi: link_wifi
-	@$(INFORM) "Clean $(LIBESP8266WIFI)"
-	@$(MAKE) -s -C ext/esp8266wifi -f Makefile clean
-
-LINK_LIST += link_wifi
-CLEAN_LIST += clean_wifi
-PHONY_LIST += compile_wifi link_wifi clean_wifi
+INCLUDES += $(INCLUDES_EEPROM)

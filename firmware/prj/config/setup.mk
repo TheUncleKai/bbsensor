@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(EXT_CRC32)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCRC32)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBCRC32)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBCRC32)$(LIB_SUFFIX)
-ADD_DEP := 
-ADD_INCLUDE := 
+
+GCC     = $(GCC_BIN)/$(GCC_PREFIX)-gcc$(EXEEXT)
+CXX     = $(GCC_BIN)/$(GCC_PREFIX)-g++$(EXEEXT)
+AR      = $(GCC_BIN)/$(GCC_PREFIX)-ar$(EXEEXT)
+RANLIB  = $(GCC_BIN)/$(GCC_PREFIX)-ranlib$(EXEEXT)
+OBJCOPY = $(GCC_BIN)/$(GCC_PREFIX)-objcopy$(EXEEXT)
+SIZE    = $(GCC_BIN)/$(GCC_PREFIX)-size$(EXEEXT)
+
+SIGNING = $(TOOLS)/signing.py
+ELF2BIN = $(TOOLS)/elf2bin.py
