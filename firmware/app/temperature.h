@@ -40,6 +40,8 @@ class Manager : public Device
         void execute();
 
         void set_measure(bool all);
+        bool get_measure();
+
         Channel* get_channel(uint8_t channel_number);
 
         Channel* current();
@@ -50,6 +52,7 @@ class Manager : public Device
 
     private:
         uint8_t m_cs;
+        bool m_active;
         SPIWrapper* p_spi;
         Channel* p_current;
 

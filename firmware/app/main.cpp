@@ -64,24 +64,13 @@ void handleISR2()
 }
 
 
-void print_channel(bool first)
+void print_channel()
 {
-    Temperature::Channel* channel = NULL;
-
-
-    if (first == true) {
-        channel = hardware->temperature()->current();
-    } else {
-        hardware->temperature()->next();
-        channel = hardware->temperature()->current();
-    }
-
+    Temperature::Channel* channel = hardware->temperature()->current();
 
     if (channel->type() == Temperature::Type::NONE) {
         return;
     }
-
-    hardware->display()->write(2, "                ");
 
     if (channel->type() == Temperature::Type::DATA) {
         hardware->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
@@ -154,7 +143,7 @@ void loop()
     }
 
     if (looper->counter() == 30) {
-        print_channel(true);
+        print_channel();
     }
 
     if (looper->number(0) == 10) {
@@ -162,7 +151,8 @@ void loop()
     }
 
     if (looper->number(2) == 100) {
-        print_channel(false);
+        hardware->temperature()->next();
+        print_channel();
     }
 
     if (looper->number(1) == config->data()->measure_delay) {

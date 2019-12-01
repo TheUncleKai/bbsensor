@@ -29,6 +29,8 @@
 #define PIN_MOSI        13 // D7, SPI MOSI
 #define PIN_NONE        0  // D3, SPI CS, not used
 
+#define DISPLAY_DIGITS  16
+
 #define CLICK_THRESHOLD 20
 #define CLICK_SINGLE    800
 #define CLICK_DOUBLE    500

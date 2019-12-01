@@ -28,6 +28,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
     this->m_cs = cs;
     this->p_spi = new SPIWrapper();
     this->p_current = NULL;
+    this->m_active = false;
 
     this->p_spi->set_spi(spi);
 
@@ -178,7 +179,14 @@ void Temperature::Manager::set_measure(bool all)
         }
 
         channel->do_measure(all);
+        this->m_active = true;
     }
+}
+
+
+bool Temperature::Manager::get_measure()
+{
+    return this->m_active;
 }
 
 
