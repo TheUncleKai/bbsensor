@@ -26,7 +26,7 @@ Temperature::Channel* channellist[TEMP_CHANNELS];
 Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 {
     this->m_cs = cs;
-    this->p_spi = new SPI();
+    this->p_spi = new SPIWrapper();
 
     this->p_spi->set_spi(spi);
 

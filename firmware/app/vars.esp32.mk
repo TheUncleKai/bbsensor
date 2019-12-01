@@ -23,10 +23,10 @@ SRCDIR :=
 ADD_INCLUDE := -I.
 
 DEP_LIBS = \
-    $(ROOT)/$(OUTPUT)/libWifi.a \
-    $(ROOT)/$(OUTPUT)/libspi.a \
-    $(ROOT)/$(OUTPUT)/libeeprom.a \
-    $(ROOT)/$(OUTPUT)/libcrc32.a \
+    $(ROOT)/$(OUTPUT)/libWiFi.a \
+    $(ROOT)/$(OUTPUT)/libSPI.a \
+    $(ROOT)/$(OUTPUT)/libEEPROM.a \
+    $(ROOT)/$(OUTPUT)/libCRC32.a \
     $(ROOT)/$(OUTPUT)/libcore.a
 
 UPLOAD_APP = \

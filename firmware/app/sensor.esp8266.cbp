@@ -68,23 +68,24 @@
 		<Unit filename="click.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
-		<Unit filename="control.cpp" />
-		<Unit filename="control.h" />
-		<Unit filename="data.cpp" />
-		<Unit filename="data.h" />
 		<Unit filename="device.cpp" />
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />
 		<Unit filename="display.h" />
-		<Unit filename="eagle.app.v6.common.ld.h" />
 		<Unit filename="hardware.cpp" />
 		<Unit filename="hardware.h" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
+		<Unit filename="loop.cpp" />
+		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="settings.h" />
+		<Unit filename="tables.cpp" />
+		<Unit filename="tables.h" />
 		<Unit filename="temperature.cpp" />
 		<Unit filename="temperature.h" />
+		<Unit filename="utils.cpp" />
+		<Unit filename="utils.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

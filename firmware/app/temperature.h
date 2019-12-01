@@ -46,7 +46,7 @@ class Manager : public Device
 
     private:
         uint8_t m_cs;
-        SPI* p_spi;
+        SPIWrapper* p_spi;
 
         void _process_channel(Channel* channel);
 };
