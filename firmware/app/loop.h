@@ -17,9 +17,7 @@
 #ifndef LOOP_H_INCLUDED
 #define LOOP_H_INCLUDED
 
-//#define DEBUG_LOOP
-
-#define CHANNEL_LOOPS 8
+#include <settings.h>
 
 
 class Loop

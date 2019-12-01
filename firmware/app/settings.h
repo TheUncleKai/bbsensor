@@ -44,6 +44,12 @@
 #define WLAN_PASS       64
 
 #define DEFAULT_DELAY   120
+#define CHANNEL_LOOPS   8
 
+#ifdef DEBUG_ESP_PORT
+#define DEBUG_MSG(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
+#else
+#define DEBUG_MSG(...)
+#endif
 
 #endif // CONFIG_H_INCLUDED

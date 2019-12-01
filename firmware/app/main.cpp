@@ -15,12 +15,9 @@
 */
 
 #include <Arduino.h>
-//#include <ESP8266WiFi.h>
 #include <SPI.h>
 
 #include <settings.h>
-#include <debug.h>
-
 #include <hardware.h>
 #include <loop.h>
 #include <utils.h>

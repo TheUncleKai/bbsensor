@@ -17,8 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
-
 #include <button.h>
 
 
@@ -50,16 +48,16 @@ void Button::handleISR()
 
     if (digitalRead(this->m_pin) == HIGH) {
         this->p_click->set_high(timestamp);
-#ifdef DEBUG_BUTTON
+#ifdef DEBUG_LEVEL2
         DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 1);
-#endif // DEBUG_BUTTON
+#endif // DEBUG_LEVEL2
     }
 
     if (digitalRead(this->m_pin) == LOW) {
         this->p_click->set_low(timestamp);
-#ifdef DEBUG_BUTTON
+#ifdef DEBUG_LEVEL2
         DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 0);
-#endif // DEBUG_BUTTON
+#endif // DEBUG_LEVEL2
     }
 
 }

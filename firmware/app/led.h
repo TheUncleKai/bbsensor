@@ -19,7 +19,6 @@
 
 #include <device.h>
 
-//#define DEBUG_LED
 
 class LED : public Device
 {

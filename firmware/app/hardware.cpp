@@ -15,8 +15,6 @@
 */
 
 #include <settings.h>
-#include <debug.h>
-
 #include <hardware.h>
 
 
@@ -78,9 +76,6 @@ Temperature::Manager* Hardware::temperature()
 
 void Hardware::setup()
 {
-//    this->p_eeprom->begin(512);
-//    this->p_spi->begin();
-
     this->p_led1->setup();
     this->p_button1->setup();
     this->p_button2->setup();

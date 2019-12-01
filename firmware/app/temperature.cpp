@@ -17,8 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
-
 #include <temperature.h>
 
 
@@ -83,9 +81,9 @@ void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
         Temperature::Channel* channel = new Channel(number, type);
 
         if (channel != NULL) {
-#ifdef DEBUG_TEMPERATURE
+#ifdef DEBUG_LEVEL3
             DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
-#endif // DEBUG_TEMPERATURE
+#endif // DEBUG_LEVEL3
             channellist[number] = channel;
         }
     } else {
@@ -97,11 +95,11 @@ void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 {
 
-#ifdef DEBUG_TEMPERATURE
+#ifdef DEBUG_LEVEL3
     if (channel->measure() == true) {
         DEBUG_MSG("TEMPERATURE: channel %u, measure!\n", channel->channel());
     }
-#endif // DEBUG_TEMPERATURE
+#endif // DEBUG_LEVEL3
 
     uint8_t n;
     uint16_t value = 0;
@@ -157,9 +155,9 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
     delete data;
 
-#ifdef DEBUG_TEMPERATURE
+#ifdef DEBUG_LEVEL3
     DEBUG_MSG("TEMPERATURE: channel %u, measure %u\n", channel->channel(), value);
-#endif // DEBUG_TEMPERATURE
+#endif // DEBUG_LEVEL3
 
     channel->add_value(value);
 }
@@ -189,11 +187,11 @@ void Temperature::Manager::set_measure(bool all, uint8_t channel_number, bool me
             }
         }
 
-#ifdef DEBUG_TEMPERATURE
+#ifdef DEBUG_LEVEL3
         if (channel->measure() == true) {
             DEBUG_MSG("TEMPERATURE: channel %u, plan for measure!\n", channel->channel());
         }
-#endif // DEBUG_TEMPERATURE
+#endif // DEBUG_LEVEL3
     }
 }
 

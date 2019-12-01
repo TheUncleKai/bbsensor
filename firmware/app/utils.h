@@ -19,7 +19,6 @@
 
 #include <cstdarg>
 #include <cstdio>
-#include <string>
 
 void debug_binary(const char* keyword, uint8_t data);
 

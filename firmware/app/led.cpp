@@ -17,8 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
-
 #include <led.h>
 
 
@@ -37,9 +35,9 @@ LED::~LED()
 
 void LED::_on()
 {
-#ifdef DEBUG_LED
+#ifdef DEBUG_LEVEL3
     DEBUG_MSG("LED%d: turn on\n", this->m_num);
-#endif // DEBUG_LED
+#endif // DEBUG_LEVEL3
     digitalWrite(this->m_pin, LOW);
     this->m_status = 1;
 }
@@ -47,9 +45,9 @@ void LED::_on()
 
 void LED::_off()
 {
-#ifdef DEBUG_LED
+#ifdef DEBUG_LEVEL3
     DEBUG_MSG("LED%d: turn off\n", this->m_num);
-#endif // DEBUG_LED
+#endif // DEBUG_LEVEL3
     digitalWrite(this->m_pin, HIGH);
     this->m_status = 0;
 }

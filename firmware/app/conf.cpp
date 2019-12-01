@@ -15,7 +15,6 @@
 */
 
 #include <conf.h>
-#include <debug.h>
 #include <utils.h>
 
 #include <string>
@@ -52,16 +51,16 @@ bool Config::Manager::verify()
     bool reset = false;
 
     if (this->m_crc != this->m_calc) {
-#ifdef DEBUG_CONFIG
+#ifdef DEBUG_LEVEL1
         DEBUG_MSG("CONFIG: crc verify failed\n");
-#endif // DEBUG_CONFIG
+#endif // DEBUG_LEVEL1
         return false;
     }
 
     if (this->p_data->init != CONFIG_VERSION) {
-#ifdef DEBUG_CONFIG
+#ifdef DEBUG_LEVEL1
         DEBUG_MSG("CONFIG: config version verify failed\n");
-#endif // DEBUG_CONFIG
+#endif // DEBUG_LEVEL1
         return false;
     }
 
@@ -117,9 +116,9 @@ void Config::Manager::read()
     this->m_calc = crc.finalize();
     this->m_crc = crc_value;
 
-#ifdef DEBUG_CONFIG
+#ifdef DEBUG_LEVEL1
     DEBUG_MSG("CONFIG: read data, crc %x, read %x\n", this->m_calc, this->m_crc);
-#endif // DEBUG_CONFIG
+#endif // DEBUG_LEVEL1
 }
 
 
@@ -150,9 +149,9 @@ void Config::Manager::write()
         this->p_eeprom->write(pos + i, byteStorage[i]);
     }
 
-#ifdef DEBUG_CONFIG
+#ifdef DEBUG_LEVEL1
     DEBUG_MSG("CONFIG: commit data, crc %x\n", crc_value);
-#endif // DEBUG_CONFIG
+#endif // DEBUG_LEVEL1
     this->p_eeprom->commit();
 }
 
@@ -234,7 +233,7 @@ Config::EEPROM_storage* Config::Manager::data()
 
 void Config::Manager::print()
 {
-#ifdef DEBUG_CONFIG
+#ifdef DEBUG_LEVEL1
     int i = 0;
     DEBUG_MSG("CONFIG: init %u, delay %u\n", this->p_data->init, this->p_data->measure_delay);
     DEBUG_MSG("CONFIG: wps %u, ssid %s, pass %s\n",
@@ -245,5 +244,5 @@ void Config::Manager::print()
     for (i = 0; i < TEMP_CHANNELS; i++) {
         DEBUG_MSG("CONFIG: channel %u, type %u\n", i, this->p_data->channel_types[i]);
     }
-#endif // DEBUG_CONFIG
+#endif // DEBUG_LEVEL1
 }

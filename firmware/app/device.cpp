@@ -17,8 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
-
 #include <device.h>
 #include <utils.h>
 
@@ -116,11 +114,11 @@ uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsi
         // reset command after use
         this->p_data[i] = 0;
 
-#ifdef DEBUG_SPI
+#ifdef DEBUG_LEVEL3
         if (debug_out == true) {
             debug_binary("SPI", data);
         }
-#endif // DEBUG_SPI
+#endif // DEBUG_LEVEL3
 
         if (result == NULL) {
             continue;

@@ -25,7 +25,6 @@
 
 #define CONFIG_VERSION 3
 
-#define DEBUG_CONFIG
 
 namespace Config
 {

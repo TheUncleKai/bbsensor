@@ -23,7 +23,6 @@
 
 #define SIGNAL_LIST 256
 
-//#define DISPLAY_DEBUG
 
 enum class Type {
     SIG_HIGH = 0,

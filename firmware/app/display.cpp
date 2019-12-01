@@ -17,8 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
-
 #include <display.h>
 #include <utils.h>
 
@@ -136,9 +134,9 @@ void Display::_send(Signal* input)
         pin = pin ^ PIN_RS;
     }
 
-#ifdef DISPLAY_DEBUG
+#ifdef DEBUG_LEVEL3
     debug_display("DISPLAY", input->data, signal, pin);
-#endif // DISPLAY_DEBUG
+#endif // DEBUG_LEVEL3
 
     pin_on = pin ^ PIN_E;
     pin_off = pin;

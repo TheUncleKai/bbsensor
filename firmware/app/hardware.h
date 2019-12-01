@@ -25,8 +25,6 @@
 #include <display.h>
 #include <temperature.h>
 
-//#define DEBUG_HARDWARE
-
 
 class Hardware : public Device
 {
