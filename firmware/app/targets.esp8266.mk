@@ -12,4 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include sources.$(BOARD).mk
+TARGET_ELF  := $(ROOT)/$(OUTPUT)/$(NAME).elf
+TARGET_BIN  := $(ROOT)/$(OUTPUT)/$(NAME).bin
+TARGET_MAP  := $(ROOT)/$(OUTPUT)/$(NAME).map
+TARGET_SIZE := $(ROOT)/$(OUTPUT)/$(NAME).txt

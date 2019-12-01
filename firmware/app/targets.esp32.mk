@@ -12,27 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ESPTOOL    = c:/Python37/Scripts/esptool.exe
-ARDUINO    = D:/home/kai/Arduino/libraries
-
-MKDIR      = mkdir -p
-RM         = rm -f
-RMDIR      = rmdir
-COPY       = cp
-EXEEXT     = .exe
-ECHO       = echo -e
-PORT       = /dev/ttyUSB0
-BAUD       = 115200
-OUTPUT     = build
-LOGGING    = log.txt
-LIB_SUFFIX = .a
-
-# Set Debug Level
-# NONE = Serial is disabled, no defines
-# PRINT: DEBUG_ESP_PORT=Serial
-# LEVEL1: PRINT + DEBUG_LEVEL1
-# LEVEL2: PRINT + DEBUG_LEVEL1+2
-# LEVEL3: PRINT + DEBUG_LEVEL1,2+3
-DEBUG        = LEVEL1
-
-BOARD        = esp32
+TARGET_ELF  := $(ROOT)/$(OUTPUT)/$(NAME).elf
+TARGET_BIN  := $(ROOT)/$(OUTPUT)/$(NAME).bin
+TARGET_MAP  := $(ROOT)/$(OUTPUT)/$(NAME).map
+TARGET_SIZE := $(ROOT)/$(OUTPUT)/$(NAME).txt
+TARGET_PART := $(ROOT)/$(OUTPUT)/$(NAME).partitions.bin

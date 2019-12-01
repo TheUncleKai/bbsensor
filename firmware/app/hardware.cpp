@@ -91,8 +91,12 @@ void Hardware::setup()
                 PIN_MOSI);
 #endif // DEBUG_LEVEL2
 
+#ifdef ESP32
+    this->p_spi->begin(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
+#else
     this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
     this->p_spi->begin();
+#endif // ESP32
 
     this->p_display->setup();
     this->p_temperature->setup();

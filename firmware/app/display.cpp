@@ -87,7 +87,7 @@ void Display::debug_display(const char* keyword, uint8_t data, uint8_t signal, u
 
 Display::Manager::Manager (SPIClass* spi, uint8_t cs)
 {
-    this->p_spi = new SPI();
+    this->p_spi = new SPIWrapper();
     this->m_cs = cs;
 
     this->p_spi->set_spi(spi);

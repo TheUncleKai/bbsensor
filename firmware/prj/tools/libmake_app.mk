@@ -35,10 +35,8 @@ include $(ROOT)/prj/tools/setup.mk
 OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
 FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
 
-TARGET_ELF  := $(ROOT)/$(OUTPUT)/$(NAME).elf
-TARGET_BIN  := $(ROOT)/$(OUTPUT)/$(NAME).bin
-TARGET_MAP  := $(ROOT)/$(OUTPUT)/$(NAME).map
-TARGET_SIZE := $(ROOT)/$(OUTPUT)/$(NAME).txt
+-include targets.mk
+-include targets.$(BOARD).mk
 
 -include sources.mk
 -include sources.$(BOARD).mk
@@ -60,7 +58,7 @@ deps: $(DEPS)
 
 compile: $(OBJS)
 
-link: $(TARGET_ELF) $(TARGET_BIN) $(TARGET_SIZE)
+link: $(TARGET_ELF) $(TARGET_BIN) $(TARGET_SIZE) $(TARGET_PART)
 
 clean:
 	@$(RM) -rf $(OBJDIR)/*

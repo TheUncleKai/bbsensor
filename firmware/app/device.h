@@ -38,11 +38,11 @@ class Device
 };
 
 
-class SPI
+class SPIWrapper
 {
     public:
-        SPI ();
-        virtual ~SPI();
+        SPIWrapper ();
+        virtual ~SPIWrapper();
 
         SPIClass* spi();
 

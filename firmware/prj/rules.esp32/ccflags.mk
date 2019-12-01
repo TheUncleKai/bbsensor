@@ -18,7 +18,7 @@ CCFLAGS = \
     -DHAVE_CONFIG_H \
     -DGCC_NOT_5_2_0=0 \
     -DWITH_POSIX \
-    $(INCLUDES) \
+    $(INCLUDE) \
     -std=gnu++11 -Os -g3 \
     -Wpointer-arith \
     -fexceptions \

@@ -55,7 +55,7 @@ class Manager : public Device
     private:
         bool m_active;
         uint8_t m_cs;
-        SPI* p_spi;
+        SPIWrapper* p_spi;
         Channel** p_channellist;
         Channel* p_current;
 

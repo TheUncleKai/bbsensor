@@ -18,7 +18,7 @@ CFLAGS = \
     -DHAVE_CONFIG_H \
     -DGCC_NOT_5_2_0=0 \
     -DWITH_POSIX \
-    $(INCLUDES) \
+    $(INCLUDE) \
     -std=gnu99 -Os -g3 \
     -fstack-protector \
     -ffunction-sections \
