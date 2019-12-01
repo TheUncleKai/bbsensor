@@ -15,15 +15,15 @@
 compile_serial:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile SERIAL"
-	@$(MAKE) -s -C prj/external/softwareserial -f Makefile compile
+	@$(MAKE) -s -C prj/external/softwareserial -f $(MAKEFILE) compile
 
 link_serial: compile_serial
 	@$(INFORM) "Link SERIAL"
-	@$(MAKE) -s -C prj/external/softwareserial -f Makefile link
+	@$(MAKE) -s -C prj/external/softwareserial -f $(MAKEFILE) link
 
 clean_serial: link_serial
 	@$(INFORM) "Clean SERIAL"
-	@$(MAKE) -s -C prj/external/softwareserial -f Makefile clean
+	@$(MAKE) -s -C prj/external/softwareserial -f $(MAKEFILE) clean
 
 LINK_LIST += link_serial
 CLEAN_LIST += clean_serial
