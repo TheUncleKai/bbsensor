@@ -24,6 +24,7 @@ EXEEXT     = .exe
 ECHO       = echo -e
 PORT       = /dev/ttyUSB0
 BAUD       = 115200
+CHIP       = esp8266
 OUTPUT     = build
 LOGGING    = log.txt
 LIB_SUFFIX = .a
