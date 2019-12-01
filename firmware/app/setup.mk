@@ -15,19 +15,19 @@
 compile_bbsensor:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile BBSensor"
-	@$(MAKE) -s -C app -f Makefile compile
+	@$(MAKE) -s -C app -f $(MAKEFILE_APP) compile
 
 link_bbsensor: compile_bbsensor
 	@$(INFORM) "Link BBSensor"
-	@$(MAKE) -s -C app -f Makefile link
+	@$(MAKE) -s -C app -f $(MAKEFILE_APP) link
 
 clean_bbsensor: link_bbsensor
 	@$(INFORM) "Clean BBSensor"
-	@$(MAKE) -s -C app -f Makefile clean
+	@$(MAKE) -s -C app -f $(MAKEFILE_APP) clean
 
 upload_bbsensor: link_bbsensor
 	@$(INFORM) "Upload firmware"
-	@$(MAKE) -s -C app -f Makefile upload
+	@$(MAKE) -s -C app -f $(MAKEFILE_APP) upload
 
 
 LINK_LIST += link_bbsensor

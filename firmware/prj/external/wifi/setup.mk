@@ -15,15 +15,15 @@
 compile_wifi:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile WIFI"
-	@$(MAKE) -s -C prj/external/wifi -f $(MAKEFILE) compile
+	@$(MAKE) -s -C prj/external/wifi -f $(MAKEFILE_LIB) compile
 
 link_wifi: compile_wifi
 	@$(INFORM) "Link WIFI"
-	@$(MAKE) -s -C prj/external/wifi -f $(MAKEFILE) link
+	@$(MAKE) -s -C prj/external/wifi -f $(MAKEFILE_LIB) link
 
 clean_wifi: link_wifi
 	@$(INFORM) "Clean WIFI"
-	@$(MAKE) -s -C prj/external/wifi -f $(MAKEFILE) clean
+	@$(MAKE) -s -C prj/external/wifi -f $(MAKEFILE_LIB) clean
 
 LINK_LIST += link_wifi
 CLEAN_LIST += clean_wifi

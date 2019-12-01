@@ -15,15 +15,15 @@
 compile_spi:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile SPI"
-	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE) compile
+	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE_LIB) compile
 
 link_spi: compile_spi
 	@$(INFORM) "Link SPI"
-	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE) link
+	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE_LIB) link
 
 clean_spi: link_spi
 	@$(INFORM) "Clean SPI"
-	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE) clean
+	@$(MAKE) -s -C prj/external/spi -f $(MAKEFILE_LIB) clean
 
 LINK_LIST += link_spi
 CLEAN_LIST += clean_spi

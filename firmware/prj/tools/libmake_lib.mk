@@ -22,7 +22,8 @@ include objects.mk
 
 OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
 FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
-TARGET := $(ROOT)/$(OUTPUT)/$(NAME)$(LIB_SUFFIX)
+
+TARGET_LIB := $(ROOT)/$(OUTPUT)/$(NAME)$(LIB_SUFFIX)
 
 include $(ROOT)/prj/config.mk
 include $(ROOT)/prj/board.mk
@@ -55,7 +56,7 @@ link: $(ARS)
 
 clean:
 	@$(RM) -rf $(OBJDIR)/*
-	@$(RM) $(TARGET)
+	@$(RM) $(TARGET_LIB)
 
 # Include global rules
 include $(ROOT)/prj/tools/rules.mk

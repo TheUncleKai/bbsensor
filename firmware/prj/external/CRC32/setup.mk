@@ -15,15 +15,15 @@
 compile_crc32:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile CRC32"
-	@$(MAKE) -s -C prj/external/CRC32 -f $(MAKEFILE) compile
+	@$(MAKE) -s -C prj/external/CRC32 -f $(MAKEFILE_LIB) compile
 
 link_crc32: compile_crc32
 	@$(INFORM) "Link CRC32"
-	@$(MAKE) -s -C prj/external/CRC32 -f $(MAKEFILE) link
+	@$(MAKE) -s -C prj/external/CRC32 -f $(MAKEFILE_LIB) link
 
 clean_crc32: link_crc32
 	@$(INFORM) "Clean CRC32"
-	@$(MAKE) -s -C prj/external/CRC32 -f $(MAKEFILE) clean
+	@$(MAKE) -s -C prj/external/CRC32 -f $(MAKEFILE_LIB) clean
 
 LINK_LIST += link_crc32
 CLEAN_LIST += clean_crc32

@@ -15,15 +15,15 @@
 compile_eeprom:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile EEPROM"
-	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE) compile
+	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE_LIB) compile
 
 link_eeprom: compile_eeprom
 	@$(INFORM) "Link EEPROM"
-	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE) link
+	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE_LIB) link
 
 clean_eeprom: link_eeprom
 	@$(INFORM) "Clean EEPROM"
-	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE) clean
+	@$(MAKE) -s -C prj/external/eeprom -f $(MAKEFILE_LIB) clean
 
 LINK_LIST += link_eeprom
 CLEAN_LIST += clean_eeprom

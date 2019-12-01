@@ -19,4 +19,5 @@ RANLIB   = $(GCC_BIN)/$(GCC_PREFIX)-ranlib$(EXEEXT)
 OBJCOPY  = $(GCC_BIN)/$(GCC_PREFIX)-objcopy$(EXEEXT)
 SIZE     = $(GCC_BIN)/$(GCC_PREFIX)-size$(EXEEXT)
 
-MAKEFILE = $(ROOT)/prj/tools/libmake.mk
+MAKEFILE_LIB = $(ROOT)/prj/tools/libmake_lib.mk
+MAKEFILE_APP = $(ROOT)/prj/tools/libmake_app.mk

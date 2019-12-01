@@ -15,15 +15,15 @@
 compile_core:
 	@$(MKDIR) $(OUTPUT)
 	@$(INFORM) "Compile CORE"
-	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE) compile
+	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE_LIB) compile
 
 link_core: compile_core
 	@$(INFORM) "Link CORE"
-	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE) link
+	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE_LIB) link
 
 clean_core: link_core
 	@$(INFORM) "Clean CORE"
-	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE) clean
+	@$(MAKE) -s -C prj/external/core -f $(MAKEFILE_LIB) clean
 
 LINK_LIST += link_core
 CLEAN_LIST += clean_core

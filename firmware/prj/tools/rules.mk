@@ -67,7 +67,7 @@ $(OBJDIR)/%.d: %.cpp
 # LIB
 
 $(OBJDIR)/%.ar: $(OBJDIR)/%.o $(OBJS)
-	@$(LOG) "(AR) $< -> $(TARGET)"
-	@$(LOGTIME) $(AR) cru $(TARGET) $< $(LOGONLY)
-	@$(AR) cru $(TARGET) $< $(LOGOUT)
+	@$(LOG) "(AR) $< -> $(TARGET_LIB)"
+	@$(LOGTIME) $(AR) cru $(TARGET_LIB) $< $(LOGONLY)
+	@$(AR) cru $(TARGET_LIB) $< $(LOGOUT)
 	@echo 1 > $@

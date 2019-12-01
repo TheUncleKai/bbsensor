@@ -12,15 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+NAME   := bbsensor
 SRCDIR := 
-OBJDIR := $(ROOT)/$(OUTPUT)/sensor
-FOLDER := $(ROOT)/$(OUTPUT)/sensor
-ADD_DEP := local.eagle.app.v6.common.ld
-ADD_INCLUDE := -I../ext/core $(EXT_INCLUDE_CRC32) -I.
-ADD_LIBS = -lcore -lspi -leeprom -lESP8266WiFi -lcrc32
 
-TARGET := $(ROOT)/$(OUTPUT)/$(APP).elf
-BIN := $(ROOT)/$(OUTPUT)/$(APP).bin
-MAP := $(ROOT)/$(OUTPUT)/$(APP).map
-SIZES := $(ROOT)/$(OUTPUT)/$(APP).txt
-
+ADD_INCLUDE := -I.
