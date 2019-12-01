@@ -18,11 +18,11 @@ SOURCES = \
     channel.cpp \
     click.cpp \
     conf.cpp \
-    loop.cpp \
-    tables.cpp \
     device.cpp \
     display.cpp \
     hardware.cpp \
     led.cpp \
-    utils.cpp \
-    temperature.cpp
+    loop.cpp \
+    tables.cpp \
+    temperature.cpp \
+    utils.cpp

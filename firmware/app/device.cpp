@@ -20,7 +20,7 @@
 #include <device.h>
 #include <utils.h>
 
-SPI::SPI ()
+SPIWrapper::SPIWrapper ()
 {
     this->p_data = new uint8_t[32];
     this->m_transfer = 0;
@@ -34,40 +34,40 @@ SPI::SPI ()
 }
 
 
-SPI::~SPI()
+SPIWrapper::~SPIWrapper()
 {
 //    this->p_data->clear();
     delete this->p_data;
 }
 
 
-SPIClass* SPI::spi()
+SPIClass* SPIWrapper::spi()
 {
     return this->p_spi;
 }
 
 
-void SPI::set_spi(SPIClass* spi)
+void SPIWrapper::set_spi(SPIClass* spi)
 {
     this->p_spi = spi;
 }
 
 
-void SPI::_on(uint8_t channel)
+void SPIWrapper::_on(uint8_t channel)
 {
     digitalWrite(channel, LOW);
     this->m_transfer = 1;
 }
 
 
-void SPI::_off(uint8_t channel)
+void SPIWrapper::_off(uint8_t channel)
 {
     digitalWrite(channel, HIGH);
     this->m_transfer = 0;
 }
 
 
-void SPI::transfer(uint8_t channel, uint8_t data)
+void SPIWrapper::transfer(uint8_t channel, uint8_t data)
 {
     this->_on(channel);
 
@@ -78,7 +78,7 @@ void SPI::transfer(uint8_t channel, uint8_t data)
 }
 
 
-void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
+void SPIWrapper::transfer(uint8_t channel, uint8_t data[], uint16_t size)
 {
     this->_on(channel);
 
@@ -91,7 +91,7 @@ void SPI::transfer(uint8_t channel, uint8_t data[], uint16_t size)
 }
 
 
-uint8_t SPI::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsigned long wait_off)
+uint8_t SPIWrapper::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsigned long wait_off)
 {
     if (this->m_transfer == 0) {
         return 0;

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="sensor" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_for_esp8266" />
+		<MakeCommands>
+			<Build command="$make -f $makefile all" />
+			<CompileFile command="$make -f $makefile compile" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile clean" />
+			<AskRebuildNeeded command="$make -f $makefile all" />
+			<SilentBuild command="$make -f $makefile all &gt; $(CMD_NULL)" />
+		</MakeCommands>
+		<Build>
+			<Target title="release">
+				<Option output=".sys.exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="D:/home/kai/projekte/bbsensor/firmware/src/.objs" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_for_esp32" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-DESP_PLATFORM" />
+					<Add option="-DMBEDTLS_CONFIG_FILE=mbedtls/esp_config.h" />
+					<Add option="-DHAVE_CONFIG_H" />
+					<Add option="-DGCC_NOT_5_2_0=0" />
+					<Add option="-DWITH_POSIX" />
+					<Add option="-std=gnu99" />
+					<Add option="-Os" />
+					<Add option="-g3" />
+					<Add option="-fstack-protector" />
+					<Add option="-ffunction-sections" />
+					<Add option="-fdata-sections" />
+					<Add option="-fstrict-volatile-bitfields" />
+					<Add option="-mlongcalls" />
+					<Add option="-nostdlib" />
+					<Add option="-Wpointer-arith" />
+					<Add option="-w" />
+					<Add option="-Wno-maybe-uninitialized" />
+					<Add option="-Wno-unused-function" />
+					<Add option="-Wno-unused-but-set-variable" />
+					<Add option="-Wno-unused-variable" />
+					<Add option="-Wno-deprecated-declarations" />
+					<Add option="-Wno-unused-parameter" />
+					<Add option="-Wno-sign-compare" />
+					<Add option="-Wno-old-style-declaration" />
+					<Add option="-MMD" />
+					<Add option="-c" />
+					<Add option="-DF_CPU=240000000L" />
+					<Add option="-DARDUINO=10809" />
+					<Add option="-DARDUINO_ESP32_DEV" />
+					<Add option="-DARDUINO_ARCH_ESP32" />
+					<Add option="-DARDUINO_BOARD=ESP32_DEV" />
+					<Add option="-DARDUINO_VARIANT=esp32" />
+					<Add option="-DESP32" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/config" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/app_trace" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/app_update" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/asio" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/bootloader_support" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/bt" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/coap" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/console" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/driver" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp-tls" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp32" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp_adc_cal" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp_event" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp_http_client" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp_http_server" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp_https_ota" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp_ringbuf" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/ethernet" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/expat" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/fatfs" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/freemodbus" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/freertos" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/heap" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/idf_test" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/jsmn" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/json" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/libsodium" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/log" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/lwip" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/mbedtls" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/mdns" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/micro-ecc" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/mqtt" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/newlib" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/nghttp" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/nvs_flash" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/openssl" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/protobuf-c" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/protocomm" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/pthread" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/sdmmc" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/smartconfig_ack" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/soc" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/spi_flash" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/spiffs" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/tcp_transport" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/tcpip_adapter" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/ulp" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/vfs" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/wear_levelling" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/wifi_provisioning" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/wpa_supplicant" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/xtensa-debug-module" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp-face" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/esp32-camera" />
+					<Add directory="$$(ESP32_ROOT)/sdk/include/fb_gfx" />
+					<Add directory="$$(ESP32_ROOT)/cores/esp32" />
+					<Add directory="$$(ESP32_ROOT)/libraries/SPI/src" />
+					<Add directory="$$(ESP32_ROOT)/libraries/EEPROM/src" />
+					<Add directory="$$(ESP32_ROOT)/libraries/FS/src" />
+					<Add directory="$$(ESP32_ROOT)/libraries/WiFi/src" />
+					<Add directory="$$(ESP32_ROOT)/libraries/WebServer/src" />
+					<Add directory="$$(ARDUINO_LIBS)/CRC32/src" />
+					<Add directory="." />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
+		<Unit filename="channel.cpp" />
+		<Unit filename="channel.h" />
+		<Unit filename="click.cpp" />
+		<Unit filename="click.h" />
+		<Unit filename="conf.cpp" />
+		<Unit filename="conf.h" />
+		<Unit filename="device.cpp" />
+		<Unit filename="device.h" />
+		<Unit filename="display.cpp" />
+		<Unit filename="display.h" />
+		<Unit filename="hardware.cpp" />
+		<Unit filename="hardware.h" />
+		<Unit filename="led.cpp" />
+		<Unit filename="led.h" />
+		<Unit filename="loop.cpp" />
+		<Unit filename="loop.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="settings.h" />
+		<Unit filename="tables.cpp" />
+		<Unit filename="tables.h" />
+		<Unit filename="temperature.cpp" />
+		<Unit filename="temperature.h" />
+		<Unit filename="utils.cpp" />
+		<Unit filename="utils.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

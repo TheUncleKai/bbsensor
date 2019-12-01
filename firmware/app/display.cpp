@@ -71,7 +71,7 @@
 
 Display::Display (SPIClass* spi, uint8_t cs)
 {
-    this->p_spi = new SPI();
+    this->p_spi = new SPIWrapper();
     this->m_cs = cs;
 
     this->p_spi->set_spi(spi);
