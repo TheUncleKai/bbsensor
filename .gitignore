@@ -37,7 +37,8 @@ firmware/ext/core/*.h
 firmware/ext/core/*.S
 firmware/ext/core/*/*.cpp
 firmware/ext/core/*/*.h
-firmware/rules/config.mk
+firmware/prj/config.mk
+firmware/prj/board.mk
 firmware/src/*.ld
 
 .gitmessages
