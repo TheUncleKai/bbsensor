@@ -16,33 +16,31 @@ ROOT = ../../..
 
 INCLUDES = 
 
--include vars.mk
--include vars.$(BOARD).mk
-
--include sources.mk
--include sources.$(BOARD).mk
-
--include objects.mk
--include objects.$(BOARD).mk
-
-OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
-FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
-
-TARGET_LIB := $(ROOT)/$(OUTPUT)/$(NAME)$(LIB_SUFFIX)
-
 include $(ROOT)/prj/config.mk
 include $(ROOT)/prj/board.mk
-
 include $(ROOT)/prj/tools/debug.mk
 include $(ROOT)/prj/tools/log.mk
 
-include $(ROOT)/prj/rules.$(BOARD)/vars.mk
+-include $(ROOT)/prj/rules.$(BOARD)/vars.mk
 -include $(ROOT)/prj/rules.$(BOARD)/asmflags.mk
 -include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
 -include $(ROOT)/prj/rules.$(BOARD)/ccflags.mk
 -include $(ROOT)/prj/rules.$(BOARD)/ldflags.mk
 
 include $(ROOT)/prj/tools/setup.mk
+
+-include vars.mk
+-include vars.$(BOARD).mk
+
+OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
+FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
+TARGET_LIB := $(ROOT)/$(OUTPUT)/$(NAME)$(LIB_SUFFIX)
+
+-include sources.mk
+-include sources.$(BOARD).mk
+
+-include objects.mk
+-include objects.$(BOARD).mk
 
 -include lib.mk
 

@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-GCC     = $(GCC_BIN)/$(GCC_PREFIX)-gcc$(EXEEXT)
-CXX     = $(GCC_BIN)/$(GCC_PREFIX)-g++$(EXEEXT)
-AR      = $(GCC_BIN)/$(GCC_PREFIX)-ar$(EXEEXT)
-RANLIB  = $(GCC_BIN)/$(GCC_PREFIX)-ranlib$(EXEEXT)
-OBJCOPY = $(GCC_BIN)/$(GCC_PREFIX)-objcopy$(EXEEXT)
-SIZE    = $(GCC_BIN)/$(GCC_PREFIX)-size$(EXEEXT)
+include $(ROOT)/prj/external/spi/lib.mk
+include $(ROOT)/prj/external/eeprom/lib.mk
+include $(ROOT)/prj/external/softwareserial/lib.mk
+include $(ROOT)/prj/external/wifi/lib.mk
+include $(ROOT)/prj/external/CRC32/lib.mk
+
+NAME   := bbsensor
+SRCDIR := 
+
+ADD_INCLUDE := -I.

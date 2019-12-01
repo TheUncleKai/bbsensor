@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDES_WIFI = \
+INCLUDE_WIFI = \
     -I$(PATH_WIFI)
 
-INCLUDES += $(INCLUDES_WIFI)
+INCLUDE += $(INCLUDE_WIFI)

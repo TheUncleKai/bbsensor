@@ -19,7 +19,6 @@
 #include <SPI.h>
 
 #include <settings.h>
-#include <debug.h>
 
 #include <hardware.h>
 #include <temperature.h>

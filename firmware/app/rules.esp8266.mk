@@ -14,13 +14,13 @@
 
 local.eagle.app.v6.common.ld: eagle.app.v6.common.ld.h
 	@$(LOG) "$@"
-	@$(LOGTIME) $(GCC) -I$(ESP8266_SDK)/ld -CC -E -P -DVTABLES_IN_FLASH $< -o $@ $(LOGONLY)
-	@$(GCC) -I$(ESP8266_SDK)/ld -CC -E -P -DVTABLES_IN_FLASH $< -o $@ $(LOGOUT)
+	@$(LOGTIME) $(GCC) -I$(PATH_SDK)/ld -CC -E -P -DVTABLES_IN_FLASH $< -o $@ $(LOGONLY)
+	@$(GCC) -I$(PATH_SDK)/ld -CC -E -P -DVTABLES_IN_FLASH $< -o $@ $(LOGOUT)
 
 $(TARGET_ELF): $(OBJS) local.eagle.app.v6.common.ld
 	@$(LOG) "$@"
 	@$(LOGTIME) $(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) $(LDLOCAL) $(LDLIBS) -Wl,--end-group $(LOGONLY)
-	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) -lcore -lspi -leeprom -lESP8266WiFi -lcrc32 $(LDLIBS) -Wl,--end-group $(LOGOUT)
+	@$(GCC) $(LDFLAGS) -o $@ -Wl,--start-group $(OBJS) -lcore -lSPI -lEEPROM -lWiFi -lCRC32 $(LDLIBS) -Wl,--end-group $(LOGOUT)
 
 $(TARGET_BIN): $(TARGET_ELF)
 	@$(LOG) "$@"
@@ -29,7 +29,7 @@ $(TARGET_BIN): $(TARGET_ELF)
 	@$(LOGTIME) $(PYTHON) $(SIGNING) --mode sign --privatekey private.key --bin $@ --out $@.signed $(LOGONLY)
 	@$(PYTHON) $(SIGNING) --mode sign --privatekey private.key --bin $@ --out $@.signed $(LOGOUT)
 
-$(TARGET_SIZE): $(BIN)
+$(TARGET_SIZE): $(TARGET_BIN)
 	@$(LOG) "Log size"
 	@$(LOGTIME) $(SIZE) -A $(TARGET_ELF) $(LOGONLY)
 	@$(SIZE) -A $(TARGET_ELF) > $@

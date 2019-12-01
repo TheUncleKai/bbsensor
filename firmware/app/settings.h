@@ -48,5 +48,10 @@
 #define SPI_MAX         32
 #define CONTROL_SLOTS   3
 
+#ifdef DEBUG_SERIAL
+#define DEBUG_MSG(...) DEBUG_SERIAL.printf( __VA_ARGS__ )
+#else
+#define DEBUG_MSG(...)
+#endif // DEBUG_SERIAL
 
 #endif // CONFIG_H_INCLUDED

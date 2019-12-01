@@ -17,7 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
 #include <display.h>
 
 

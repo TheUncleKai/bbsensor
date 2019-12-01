@@ -17,9 +17,7 @@ ESP32_GCC       = xtensa-esp32-elf
 ESP32_VERSION   = 1.0.4
 ESP32_XTENSA    = 1.22.0-80-g6c4433a-5.2.0
 
-ESP8266_ROOT    = /home/kai/.arduino15/packages/esp8266
+ESP8266_ROOT    = c:/Users/kai/AppData/Local/Arduino15/packages/esp8266
 ESP8266_GCC     = xtensa-lx106-elf
 ESP8266_XTENSA  = 2.5.0-4-b40a506
 ESP8266_VERSION = 2.6.1
-
-

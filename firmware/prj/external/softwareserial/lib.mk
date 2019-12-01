@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDES_SERIAL = \
+INCLUDE_SERIAL = \
     -I$(PATH_SERIAL)
 
-INCLUDES += $(INCLUDES_SERIAL)
+INCLUDE += $(INCLUDE_SERIAL)

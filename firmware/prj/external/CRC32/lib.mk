@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDES_CRC32 = \
+INCLUDE_CRC32 = \
     -I$(PATH_CRC32)
 
-LIB_CRC32 = libCRC32$(LIB_SUFFIX)
-
-INCLUDES += $(INCLUDES_CRC32)
+INCLUDE += $(INCLUDE_CRC32)

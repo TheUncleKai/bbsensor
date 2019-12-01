@@ -15,6 +15,9 @@
 ROOT = .
 
 include $(ROOT)/prj/config.mk
+include $(ROOT)/prj/board.mk
+include $(ROOT)/prj/tools/log.mk
+include $(ROOT)/prj/tools/run.mk
 
 LINK_LIST = 
 CLEAN_LIST = 

@@ -14,7 +14,7 @@
 
 LDFLAGS = \
 	-fno-exceptions \
-    -Wl,-Map "-Wl,$(MAP)" \
+    -Wl,-Map "-Wl,$(TARGET_MAP)" \
     -g -Os -nostdlib \
     -Wl,--no-check-sections \
     -u app_entry \

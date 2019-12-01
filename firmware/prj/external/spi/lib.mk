@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDES_SPI = \
+INCLUDE_SPI = \
     -I$(PATH_SPI)
 
-INCLUDES += $(INCLUDES_SPI)
+INCLUDE += $(INCLUDE_SPI)

@@ -12,7 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NAME   := bbsensor
-SRCDIR := 
-
-ADD_INCLUDE := -I.
+MAKEFILE_LIB = ../../../prj/tools/libmake_lib.mk
+MAKEFILE_APP = ../prj/tools/libmake_app.mk

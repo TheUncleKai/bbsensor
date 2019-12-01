@@ -17,7 +17,6 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <debug.h>
 
 #include <channel.h>
 #include <data.h>

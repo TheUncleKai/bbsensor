@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDES_EEPROM = \
+INCLUDE_EEPROM = \
     -I$(PATH_EEPROM)
 
-INCLUDES += $(INCLUDES_EEPROM)
+INCLUDE += $(INCLUDE_EEPROM)

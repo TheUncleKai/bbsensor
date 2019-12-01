@@ -72,7 +72,6 @@
 		<Unit filename="control.h" />
 		<Unit filename="data.cpp" />
 		<Unit filename="data.h" />
-		<Unit filename="debug.h" />
 		<Unit filename="device.cpp" />
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />

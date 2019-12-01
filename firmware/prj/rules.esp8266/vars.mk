@@ -38,8 +38,9 @@ INCLUDE_CORES = \
 INCLUDE_VARIANTS = \
     -I$(PATH_VARIANTS)
 
-SIGNING  = $(ESP8266_ROOT)/hardware/esp8266/$(ESP8266_VERSION)/tools/signing.py
-ELF2BIN  = $(ESP8266_ROOT)/hardware/esp8266/$(ESP8266_VERSION)/tools/elf2bin.py
+PYTHON  = $(ESP8266_ROOT)/tools/python3/3.7.2-post1/python
+SIGNING = $(ESP8266_ROOT)/hardware/esp8266/$(ESP8266_VERSION)/tools/signing.py
+ELF2BIN = $(ESP8266_ROOT)/hardware/esp8266/$(ESP8266_VERSION)/tools/elf2bin.py
 
 # Normalized Paths
 GCC_BIN    = $(PATH_BIN)

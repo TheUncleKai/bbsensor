@@ -12,18 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ROOT = ../../..
+ROOT = ..
 
 INCLUDES = 
 
+include $(ROOT)/prj/config.mk
+include $(ROOT)/prj/board.mk
+include $(ROOT)/prj/tools/debug.mk
+include $(ROOT)/prj/tools/log.mk
+
+-include $(ROOT)/prj/rules.$(BOARD)/vars.mk
+-include $(ROOT)/prj/rules.$(BOARD)/asmflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/ccflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/ldflags.mk
+
+include $(ROOT)/prj/tools/setup.mk
+
 -include vars.mk
 -include vars.$(BOARD).mk
-
--include sources.mk
--include sources.$(BOARD).mk
-
--include objects.mk
--include objects.$(BOARD).mk
 
 OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
 FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
@@ -33,21 +40,12 @@ TARGET_BIN  := $(ROOT)/$(OUTPUT)/$(NAME).bin
 TARGET_MAP  := $(ROOT)/$(OUTPUT)/$(NAME).map
 TARGET_SIZE := $(ROOT)/$(OUTPUT)/$(NAME).txt
 
-include $(ROOT)/prj/config.mk
-include $(ROOT)/prj/board.mk
+-include sources.mk
+-include sources.$(BOARD).mk
 
-include $(ROOT)/prj/tools/debug.mk
-include $(ROOT)/prj/tools/log.mk
+-include objects.mk
+-include objects.$(BOARD).mk
 
-include $(ROOT)/prj/rules.$(BOARD)/vars.mk
--include $(ROOT)/prj/rules.$(BOARD)/asmflags.mk
--include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
--include $(ROOT)/prj/rules.$(BOARD)/ccflags.mk
--include $(ROOT)/prj/rules.$(BOARD)/ldflags.mk
-
-include $(ROOT)/prj/tools/setup.mk
-
--include lib.mk
 
 default: compile link
 

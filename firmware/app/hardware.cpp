@@ -15,7 +15,6 @@
 */
 
 #include <settings.h>
-#include <debug.h>
 
 #include <hardware.h>
 

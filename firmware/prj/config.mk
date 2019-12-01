@@ -35,4 +35,4 @@ LIB_SUFFIX = .a
 # LEVEL3: PRINT + DEBUG_LEVEL1,2+3
 DEBUG        = LEVEL1
 
-BOARD        = esp32
+BOARD        = esp8266
