@@ -18,9 +18,9 @@ INCLUDES =
 
 include $(ROOT)/prj/config.mk
 include $(ROOT)/prj/board.mk
-include $(ROOT)/prj/tools/debug.mk
 include $(ROOT)/prj/tools/log.mk
 
+-include $(ROOT)/prj/rules.$(BOARD)/debug.mk
 -include $(ROOT)/prj/rules.$(BOARD)/vars.mk
 -include $(ROOT)/prj/rules.$(BOARD)/asmflags.mk
 -include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
