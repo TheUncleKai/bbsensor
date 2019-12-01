@@ -45,11 +45,6 @@ void loop();
 
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
-
-Display* display = hardware->display();
-Temperature::Manager* temperature = hardware->temperature();
-Temperature::Channel* channel = NULL;
-
 Loop* looper = new Loop();
 
 
@@ -75,10 +70,10 @@ void print_channel(bool first)
 
 
     if (first == true) {
-        channel = temperature->current();
+        channel = hardware->temperature()->current();
     } else {
-        temperature->next();
-        channel = temperature->current();
+        hardware->temperature()->next();
+        channel = hardware->temperature()->current();
     }
 
 
@@ -86,14 +81,14 @@ void print_channel(bool first)
         return;
     }
 
-    display->write(2, "                ");
+    hardware->display()->write(2, "                ");
 
     if (channel->type() == Temperature::Type::DATA) {
-        display->write(2, "%u: %u", channel->channel(), channel->value()->data);
+        hardware->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
     }
 
     if (channel->type() == Temperature::Type::VOLTAGE) {
-        display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+        hardware->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
 }
 
@@ -123,7 +118,7 @@ void setup()
     config->print();
 
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        temperature->add_channel(i, config->get_channel(i));
+        hardware->temperature()->add_channel(i, config->get_channel(i));
     }
 
     looper->set_counter(0, 10);
@@ -139,7 +134,7 @@ void setup()
 void loop()
 {
     looper->start();
-    temperature->set_measure(false);
+    hardware->temperature()->set_measure(false);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -148,14 +143,14 @@ void loop()
     if (looper->counter() == 10) {
         hardware->display()->clear();
         hardware->display()->write(1, "Start");
-        temperature->set_measure(true);
+        hardware->temperature()->set_measure(true);
     }
 
     if (looper->counter() == 20) {
         hardware->display()->write(1, "Measure");
 
         looper->activate();
-        temperature->set_measure(true);
+        hardware->temperature()->set_measure(true);
     }
 
     if (looper->counter() == 30) {
@@ -171,7 +166,7 @@ void loop()
     }
 
     if (looper->number(1) == config->data()->measure_delay) {
-        temperature->set_measure(true);
+        hardware->temperature()->set_measure(true);
     }
 
     hardware->execute();
