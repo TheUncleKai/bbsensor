@@ -94,7 +94,7 @@ INCLUDE_VARIANTS = \
 ESP32_LIB = $(PATH_HW)/tools/sdk/lib
 ESP32_LD  = $(PATH_HW)/tools/sdk/ld
 
-ESP32PART = $(PATH_HW)/tools/gen_esp32part$(EXEEXT)
+ESP32PART = $(PATH_HW)/tools/gen_esp32part$(PYEXT)
 
 # Normalized Paths
 GCC_BIN    = $(PATH_BIN)

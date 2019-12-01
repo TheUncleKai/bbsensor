@@ -21,6 +21,7 @@ RM         = rm -f
 RMDIR      = rmdir
 COPY       = cp
 EXEEXT     = .exe
+PYEXT      = .exe
 ECHO       = echo -e
 PORT       = /dev/ttyUSB0
 BAUD       = 115200
