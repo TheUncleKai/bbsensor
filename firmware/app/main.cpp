@@ -134,8 +134,7 @@ void setup()
 void loop()
 {
     looper->start();
-    temperature->set_measure(false, 0, false);
-    temperature->set_measure(false, 2, false);
+    temperature->set_measure(false);
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -144,15 +143,14 @@ void loop()
     if (looper->counter() == 10) {
         hardware->display()->clear();
         hardware->display()->write(1, "Start");
+        temperature->set_measure(true);
     }
 
     if (looper->counter() == 20) {
         hardware->display()->write(1, "Measure");
-        do_measure = true;
 
         looper->activate();
-        temperature->set_measure(false, 0, do_measure);
-        temperature->set_measure(false, 2, do_measure);
+        temperature->set_measure(true);
     }
 
     if (looper->number(0) == 10) {
@@ -170,8 +168,7 @@ void loop()
     }
 
     if (looper->number(1) == config->data()->measure_delay) {
-        temperature->set_measure(false, 0, do_measure);
-        temperature->set_measure(false, 2, do_measure);
+        temperature->set_measure(true);
     }
 
     hardware->execute();
