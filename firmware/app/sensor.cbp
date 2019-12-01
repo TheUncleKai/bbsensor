@@ -68,11 +68,6 @@
 		<Unit filename="click.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
-		<Unit filename="loop.cpp" />
-		<Unit filename="loop.h" />
-		<Unit filename="tables.cpp" />
-		<Unit filename="tables.h" />
-		<Unit filename="debug.h" />
 		<Unit filename="device.cpp" />
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />
@@ -82,12 +77,16 @@
 		<Unit filename="hardware.h" />
 		<Unit filename="led.cpp" />
 		<Unit filename="led.h" />
+		<Unit filename="loop.cpp" />
+		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="utils.h" />
-		<Unit filename="utils.cpp" />
 		<Unit filename="settings.h" />
+		<Unit filename="tables.cpp" />
+		<Unit filename="tables.h" />
 		<Unit filename="temperature.cpp" />
 		<Unit filename="temperature.h" />
+		<Unit filename="utils.cpp" />
+		<Unit filename="utils.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
