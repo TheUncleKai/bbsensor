@@ -17,10 +17,10 @@
 #ifndef BUTTON_H_INCLUDED
 #define BUTTON_H_INCLUDED
 
-#include <Arduino.h>
-
 #include <device.h>
 #include <click.h>
+
+//#define DEBUG_BUTTON
 
 
 class Button : public Device
@@ -40,10 +40,9 @@ class Button : public Device
     private:
         uint8_t m_num, m_pin;
 
-        Click::Manager* p_click;
+        Click* p_click;
 
         void (*p_isr)(void);
 };
-
 
 #endif // BUTTON_H_INCLUDED

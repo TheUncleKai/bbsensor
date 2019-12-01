@@ -14,31 +14,15 @@
    limitations under the License.
 */
 
-#ifndef LED_H_INCLUDED
-#define LED_H_INCLUDED
+#ifndef UTILS_H_INCLUDED
+#define UTILS_H_INCLUDED
 
-#include <device.h>
+#include <cstdarg>
+#include <cstdio>
+#include <string>
 
-//#define DEBUG_LED
+void debug_binary(const char* keyword, uint8_t data);
 
-class LED : public Device
-{
-    public:
-        LED (uint8_t num, uint8_t pin);
-        virtual ~LED();
+void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin);
 
-        void toggle();
-        void on();
-        void off();
-
-        void setup();
-        void execute();
-
-    private:
-        uint8_t m_num, m_status, m_pin;
-
-        void _on();
-        void _off();
-};
-
-#endif // LED_H_INCLUDED
+#endif // UTILS_H_INCLUDED

@@ -17,14 +17,15 @@
 #ifndef CONF_H_INCLUDED
 #define CONF_H_INCLUDED
 
-#include <Arduino.h>
-#include <EEPROM.h>
+#include <list>
 
+#include <EEPROM.h>
 #include <channel.h>
 #include <settings.h>
 
 #define CONFIG_VERSION 3
 
+#define DEBUG_CONFIG
 
 namespace Config
 {

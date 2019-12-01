@@ -150,7 +150,6 @@ SECTIONS
     *libgcc.a:unwind-dw2-fde.o(.literal .text .rodata .literal.* .text.* .rodata.*)
 
     *libc.a:(.literal .text .literal.* .text.*)
-    *libBB.a:(.literal .text .literal.* .text.*)
     *libcore.a:(.literal .text .literal.* .text.*)
     *libcrc32.a:(.literal .text .literal.* .text.*)
     *libeeprom.a:(.literal .text .literal.* .text.*)

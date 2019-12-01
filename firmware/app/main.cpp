@@ -22,10 +22,14 @@
 #include <debug.h>
 
 #include <hardware.h>
-#include <temperature.h>
-#include <channel.h>
-#include <control.h>
+#include <loop.h>
+#include <utils.h>
 #include <conf.h>
+
+
+// Name and password of the access point
+//#define SSID "Pussycat"
+//#define PASSWORD "supersecret"
 
 
 // Declarations
@@ -42,13 +46,18 @@ void loop();
 // Variables
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+bool do_measure = false;
+uint8_t channel_number = 0;
+bool check = false;
 
-Click::Type button1 = Click::Type::NONE;
-Click::Type button2 = Click::Type::NONE;
-
-Hardware* hw = new Hardware();
+Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
-Control::Manager* control = new Control::Manager();
+
+Display* display = hardware->display();
+Temperature::Manager* temperature = hardware->temperature();
+Temperature::Channel* channel = NULL;
+
+Loop* looper = new Loop();
 
 
 // Implemnatation
@@ -57,56 +66,54 @@ Control::Manager* control = new Control::Manager();
 
 void handleISR1()
 {
-    hw->button1()->handleISR();
+    hardware->button1()->handleISR();
 }
 
 
 void handleISR2()
 {
-    hw->button2()->handleISR();
+    hardware->button2()->handleISR();
 }
 
 
-// print current value of channel on display
 void print_channel()
 {
-    Temperature::Channel* channel = hw->temperature()->current();
+    std::string text_out;
 
-    if (channel == NULL)
+    channel = temperature->get_channel(channel_number);
+
+    if (channel->type() == Temperature::Type::NONE) {
         return;
-
-    if (channel->type() == Temperature::Type::NONE)
-        return;
-
-    hw->display()->clear(2);
-
-    if (channel->type() == Temperature::Type::DATA) {
-        hw->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
     }
 
-    if (channel->type() != Temperature::Type::DATA) {
-        hw->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+    display->write(2, "                ");
+
+    if (channel->type() == Temperature::Type::DATA) {
+        display->write(2, "%u: %u", channel->channel(), channel->value()->data);
+    }
+
+    if (channel->type() == Temperature::Type::VOLTAGE) {
+        display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
 }
 
 
-// setup ESP
 void setup()
 {
     Serial.begin(115200);
     delay(3000);
 
-    hw->button1()->setISR(handleISR1);
-    hw->button2()->setISR(handleISR2);
+    hardware->button1()->setISR(handleISR1);
+    hardware->button2()->setISR(handleISR2);
 
-    // setup and read config
     config->setup();
     config->read();
 
-    // check config, set default config if invalid
-    if (config->verify() == false) {
+    check = config->verify();
+
+    if (check == false) {
         config->reset();
-        config->set_channel(0, Temperature::Type::RTD);
+        config->set_channel(0, Temperature::Type::VOLTAGE);
         config->set_channel(2, Temperature::Type::DATA);
         config->set_delay(300);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
@@ -115,90 +122,63 @@ void setup()
 
     config->print();
 
-    // set channel by config values
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        hw->temperature()->set_channel(i, config->get_channel(i));
+        temperature->add_channel(i, config->get_channel(i));
     }
 
-    // setup loop counter
-    // 0: for LED
-    // 1: Measurement delay
-    // 2: delay between display writes and toggles
-    control->set_counter(0, 10);
-    control->set_counter(1, config->data()->measure_delay);
-    control->set_counter(2, 100);
-    control->setup();
+    looper->set_counter(0, 10);
+    looper->set_counter(1, config->data()->measure_delay);
+    looper->set_counter(2, 100);
+    looper->setup();
 
-    hw->display()->write(1, "Start...");
-    hw->display()->execute();
-    hw->setup();
+
+    hardware->setup();
 }
 
 
 void loop()
 {
-    // start loop
-    control->start();
+    looper->start();
+    temperature->set_measure(false, 0, false);
+    temperature->set_measure(false, 2, false);
 
-    // don't measure until loop measurement delay is reached
-    hw->temperature()->set_measure(false);
+    if (looper->counter() == 0) {
+        hardware->led1()->on();
+    }
 
-    // get last click from butons
-    button1 = hw->button1()->get_click();
-    button2 = hw->button2()->get_click();
+    if (looper->counter() == 10) {
+        hardware->display()->clear();
+        hardware->display()->write(1, "Start");
+    }
 
-    // parse click only after measurement has started
-    if (control->is_active() == true) {
+    if (looper->counter() == 20) {
+        hardware->display()->write(1, "Measure");
+        do_measure = true;
 
-        // toggle channel and print value when single click on button 1 is registered
-        // also reset delay between display writes and toggles
-        if (button1 == Click::Type::SINGLE) {
-            hw->temperature()->next();
-            print_channel();
-            control->reset_counter(2);
+        looper->activate();
+        temperature->set_measure(false, 0, do_measure);
+        temperature->set_measure(false, 2, do_measure);
+    }
+
+    if (looper->number(0) == 10) {
+        hardware->led1()->toggle();
+    }
+
+    if (looper->number(2) == 100) {
+        if (channel_number == 0) {
+            channel_number = 2;
+        } else {
+            channel_number = 0;
         }
 
-        if (button2 == Click::Type::SINGLE) {
-            hw->temperature()->last();
-            print_channel();
-            control->reset_counter(2);
-        }
-    }
-
-    // first loop, siwtch on led and get first measurement to setup reading
-    if (control->counter() == 0) {
-        hw->led1()->on();
-        hw->temperature()->set_measure(true);
-    }
-
-    // now we start measurement truly
-    if (control->counter() == 10) {
-        hw->display()->clear();
-        hw->display()->write(1, "Measure");
-
-        control->activate();
-        hw->temperature()->set_measure(true);
-    }
-
-    // toggle LED every 10 cycles
-    if (control->number(0) == 10) {
-        hw->led1()->toggle();
-    }
-
-    // toggle display and channel every 100 cycles
-    if (control->number(2) == 100) {
-        hw->temperature()->next();
         print_channel();
     }
 
-    // measure after configured delay
-    if (control->number(1) == config->data()->measure_delay) {
-        hw->temperature()->set_measure(true);
+    if (looper->number(1) == config->data()->measure_delay) {
+        temperature->set_measure(false, 0, do_measure);
+        temperature->set_measure(false, 2, do_measure);
     }
 
-    // execute all tasks
-    hw->execute();
-
-    // finish loop
-    control->finish();
+    hardware->execute();
+    looper->finish();
 }

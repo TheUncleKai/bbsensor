@@ -17,10 +17,10 @@
 #ifndef CHANNEL_H_INCLUDED
 #define CHANNEL_H_INCLUDED
 
-#include <Arduino.h>
 #include <SPI.h>
-
 #include <device.h>
+
+#define DEBUG_CHANNEL
 
 
 namespace Temperature
@@ -38,27 +38,22 @@ enum class Type
 {
     NONE = 0,
     DATA = 1,
-    RTD = 2,
-    PTC10 = 3,
-    PTC100 = 4
+    VOLTAGE = 2,
+    RTD = 3,
+    PTC10 = 4,
+    PTC100 = 5
 };
 
 
 class Channel : public Device
 {
     public:
-        Channel (uint8_t num);
+        Channel (uint8_t num, Type type);
         virtual ~Channel();
-
-        void set(Channel* last, Channel* next);
-        void set_type(Type type);
 
         void setup();
         void execute();
         void clear();
-
-        Channel* last();
-        Channel* next();
 
         Type type();
         Value* value();
@@ -69,12 +64,8 @@ class Channel : public Device
         bool measure();
 
     private:
-        Channel* p_last;
-        Channel* p_next;
-
         Value* p_lastvalue;
-        Value** p_data;
-
+        Value** p_values;
         size_t m_counter;
         bool m_measure;
         uint8_t m_num;

@@ -14,21 +14,19 @@
    limitations under the License.
 */
 
-#ifndef CONTROL_H_INCLUDED
-#define CONTROL_H_INCLUDED
+#ifndef LOOP_H_INCLUDED
+#define LOOP_H_INCLUDED
 
-#include <Arduino.h>
-#include <click.h>
+//#define DEBUG_LOOP
 
-namespace Control
-{
+#define CHANNEL_LOOPS 8
 
 
-class Manager
+class Loop
 {
     public:
-        Manager();
-        virtual ~Manager();
+        Loop();
+        virtual ~Loop();
 
         uint32_t counter();
         uint32_t number(size_t channel);
@@ -38,9 +36,6 @@ class Manager
         void finish();
         void activate();
         void set_counter(size_t channel, uint32_t n);
-        void reset_counter(size_t channel);
-
-        bool is_active();
 
     protected:
 
@@ -51,7 +46,4 @@ class Manager
         uint32_t m_bootup, m_delay, m_counter, m_timestamp;
 };
 
-
-};
-
-#endif // CONTROL_H_INCLUDED
+#endif // LOOP_H_INCLUDED

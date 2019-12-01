@@ -16,6 +16,9 @@
 
 #include <conf.h>
 #include <debug.h>
+#include <utils.h>
+
+#include <string>
 
 #include <CRC32.h>
 
@@ -49,16 +52,16 @@ bool Config::Manager::verify()
     bool reset = false;
 
     if (this->m_crc != this->m_calc) {
-#ifdef DEBUG_LEVEL2
+#ifdef DEBUG_CONFIG
         DEBUG_MSG("CONFIG: crc verify failed\n");
-#endif // DEBUG_LEVEL2
+#endif // DEBUG_CONFIG
         return false;
     }
 
     if (this->p_data->init != CONFIG_VERSION) {
-#ifdef DEBUG_LEVEL2
+#ifdef DEBUG_CONFIG
         DEBUG_MSG("CONFIG: config version verify failed\n");
-#endif // DEBUG_LEVEL2
+#endif // DEBUG_CONFIG
         return false;
     }
 
@@ -114,9 +117,9 @@ void Config::Manager::read()
     this->m_calc = crc.finalize();
     this->m_crc = crc_value;
 
-#ifdef DEBUG_LEVEL2
+#ifdef DEBUG_CONFIG
     DEBUG_MSG("CONFIG: read data, crc %x, read %x\n", this->m_calc, this->m_crc);
-#endif // DEBUG_LEVEL2
+#endif // DEBUG_CONFIG
 }
 
 
@@ -147,9 +150,9 @@ void Config::Manager::write()
         this->p_eeprom->write(pos + i, byteStorage[i]);
     }
 
-#ifdef DEBUG_LEVEL2
+#ifdef DEBUG_CONFIG
     DEBUG_MSG("CONFIG: commit data, crc %x\n", crc_value);
-#endif // DEBUG_LEVEL2
+#endif // DEBUG_CONFIG
     this->p_eeprom->commit();
 }
 
@@ -178,8 +181,8 @@ void Config::Manager::set_delay(uint32_t measure_delay)
 
 void Config::Manager::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass)
 {
-    size_t size_ssid = strlen(wlan_ssid);
-    size_t size_pass = strlen(wlan_pass);
+    std::string str_ssid(wlan_ssid);
+    std::string str_pass(wlan_pass);
 
     int i = 0;
 
@@ -189,21 +192,21 @@ void Config::Manager::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const c
 
     this->p_data->wlan_wps = wps_onoff;
 
-    if ((size_ssid >= WLAN_SSID) or (size_pass >= WLAN_PASS)) {
+    if ((str_ssid.size() >= WLAN_SSID) or (str_pass.size() >= WLAN_PASS)) {
         return;
     }
 
     for (i = 0; i < WLAN_SSID; ++i) {
-        if (i < size_ssid) {
-            this->p_data->wlan_ssid[i] = wlan_ssid[i];
+        if (i < str_ssid.size()) {
+            this->p_data->wlan_ssid[i] = str_ssid[i];
         } else {
             this->p_data->wlan_ssid[i] = 0;
         }
     }
 
     for (i = 0; i < WLAN_PASS; ++i) {
-        if (i < size_pass) {
-            this->p_data->wlan_pass[i] = wlan_pass[i];
+        if (i < str_pass.size()) {
+            this->p_data->wlan_pass[i] = str_pass[i];
         } else {
             this->p_data->wlan_pass[i] = 0;
         }
@@ -231,7 +234,7 @@ Config::EEPROM_storage* Config::Manager::data()
 
 void Config::Manager::print()
 {
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_CONFIG
     int i = 0;
     DEBUG_MSG("CONFIG: init %u, delay %u\n", this->p_data->init, this->p_data->measure_delay);
     DEBUG_MSG("CONFIG: wps %u, ssid %s, pass %s\n",
@@ -242,5 +245,5 @@ void Config::Manager::print()
     for (i = 0; i < TEMP_CHANNELS; i++) {
         DEBUG_MSG("CONFIG: channel %u, type %u\n", i, this->p_data->channel_types[i]);
     }
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_CONFIG
 }

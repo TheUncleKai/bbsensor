@@ -17,13 +17,13 @@
 #ifndef TEMPERATURE_H_INCLUDED
 #define TEMPERATURE_H_INCLUDED
 
-#include <Arduino.h>
 #include <EEPROM.h>
 #include <SPI.h>
 
 #include <device.h>
 #include <channel.h>
 
+//#define DEBUG_TEMPERATURE
 
 namespace Temperature
 {
@@ -36,30 +36,19 @@ class Manager : public Device
         virtual ~Manager();
 
         void setup();
-        void set_channel(uint8_t number, Temperature::Type type);
+        void add_channel(uint8_t number, Temperature::Type type);
 
         void execute();
 
-        void set_measure(bool measure);
-
+        void set_measure(bool all, uint8_t channel_number, bool measure);
         Channel* get_channel(uint8_t channel_number);
-
-        void last();
-        void next();
-
-        Channel* current();
-
 
         uint8_t cs();
 
     private:
-        bool m_active;
         uint8_t m_cs;
         SPI* p_spi;
-        Channel** p_channellist;
-        Channel* p_current;
 
-        void _toggle(bool last);
         void _process_channel(Channel* channel);
 };
 

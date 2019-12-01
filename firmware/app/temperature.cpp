@@ -22,44 +22,21 @@
 #include <temperature.h>
 
 
+Temperature::Channel* channellist[TEMP_CHANNELS];
+
+
 Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 {
-    Channel* channel = NULL;
-    Channel* last = NULL;
-    Channel* next = NULL;
-
     this->m_cs = cs;
-    this->m_active = false;
     this->p_spi = new SPI();
-    this->p_channellist = new Temperature::Channel *[TEMP_CHANNELS];
 
     this->p_spi->set_spi(spi);
 
     int i = 0;
 
     for (i = 0; i < TEMP_CHANNELS; ++i) {
-        this->p_channellist[i] = new Channel(i);
+        channellist[i] = NULL;
     }
-
-    for (i = 0; i < TEMP_CHANNELS; ++i) {
-        channel = this->p_channellist[i];
-
-        if (i == 0) {
-            this->p_current = channel;
-            last = this->p_channellist[TEMP_CHANNELS-1];
-        } else {
-            last = this->p_channellist[i-1];
-        }
-
-        if (i == TEMP_CHANNELS-1) {
-            next = this->p_channellist[0];
-        } else {
-            next = this->p_channellist[i+1];
-        }
-
-        channel->set(last, next);
-    }
-
 
 }
 
@@ -67,18 +44,20 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 Temperature::Manager::~Manager()
 {
 
-    Channel* channel = NULL;
-    for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        channel = this->p_channellist[i];
+    Channel* channel;
+
+    int i = 0;
+
+    for (i = 0; i < TEMP_CHANNELS; ++i) {
+        channel = channellist[i];
 
         if (channel != NULL) {
             delete channel;
-            this->p_channellist[i] = NULL;
+            channellist[i] = NULL;
         }
     }
 
     delete this->p_spi;
-    delete this->p_channellist;
 }
 
 
@@ -90,36 +69,27 @@ uint8_t Temperature::Manager::cs()
 
 void Temperature::Manager::setup()
 {
-#ifdef DEBUG_LEVEL2
     DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
-#endif // DEBUG_LEVEL2
     pinMode(this->m_cs, OUTPUT);
 }
 
 
-void Temperature::Manager::set_channel(uint8_t number, Temperature::Type type)
+void Temperature::Manager::add_channel(uint8_t number, Temperature::Type type)
 {
     if (type == Temperature::Type::NONE)
         return;
 
     if (number < TEMP_CHANNELS) {
-        Temperature::Channel* channel = this->p_channellist[number];
+        Temperature::Channel* channel = new Channel(number, type);
 
-        channel->set_type(type);
-
-        if (this->m_active == false) {
-            this->p_current = channel;
-            this->m_active = true;
+        if (channel != NULL) {
+#ifdef DEBUG_TEMPERATURE
+            DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
+#endif // DEBUG_TEMPERATURE
+            channellist[number] = channel;
         }
-
-#ifdef DEBUG_LEVEL2
-        DEBUG_MSG("TEMPERATURE: add channel %u, type %u\n", channel->channel(), channel->type());
-#endif // DEBUG_LEVEL2
-
     } else {
-#ifdef DEBUG_LEVEL2
         DEBUG_MSG("TEMPERATURE: max number of channels reached!");
-#endif // DEBUG_LEVEL2
         return;
     }
 }
@@ -127,11 +97,11 @@ void Temperature::Manager::set_channel(uint8_t number, Temperature::Type type)
 void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 {
 
-#ifdef DEBUG_LEVEL2
+#ifdef DEBUG_TEMPERATURE
     if (channel->measure() == true) {
         DEBUG_MSG("TEMPERATURE: channel %u, measure!\n", channel->channel());
     }
-#endif // DEBUG_LEVEL2
+#endif // DEBUG_TEMPERATURE
 
     uint8_t n;
     uint16_t value = 0;
@@ -187,35 +157,43 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
     delete data;
 
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_TEMPERATURE
     DEBUG_MSG("TEMPERATURE: channel %u, measure %u\n", channel->channel(), value);
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_TEMPERATURE
 
     channel->add_value(value);
 }
 
 
-void Temperature::Manager::set_measure(bool measure)
+void Temperature::Manager::set_measure(bool all, uint8_t channel_number, bool measure)
 {
     Channel* channel;
     int i = 0;
 
+    if (channel_number >= TEMP_CHANNELS) {
+        return;
+    }
+
     for (i = 0; i < TEMP_CHANNELS; ++i) {
-        channel = this->p_channellist[i];
+        channel = channellist[i];
 
-        if (channel == NULL)
+        if (channel == NULL) {
             continue;
+        }
 
-        if (channel->type() == Temperature::Type::NONE)
-            continue;
+        if (all == true) {
+            channel->do_measure(true);
+        } else {
+            if (channel->channel() == channel_number) {
+                channel->do_measure(measure);
+            }
+        }
 
-        channel->do_measure(measure);
-
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_TEMPERATURE
         if (channel->measure() == true) {
             DEBUG_MSG("TEMPERATURE: channel %u, plan for measure!\n", channel->channel());
         }
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_TEMPERATURE
     }
 }
 
@@ -226,51 +204,7 @@ Temperature::Channel* Temperature::Manager::get_channel(uint8_t channel_number)
         return NULL;
     }
 
-    return this->p_channellist[channel_number];
-}
-
-
-void Temperature::Manager::last()
-{
-    this->_toggle(true);
-}
-
-
-void Temperature::Manager::next()
-{
-    this->_toggle(false);
-}
-
-
-void Temperature::Manager::_toggle(bool last)
-{
-    if (this->m_active == false)
-        return;
-
-    Temperature::Channel* channel = NULL;
-    int i = 0;
-
-    while(i < TEMP_CHANNELS) {
-
-        if (last == true) {
-            channel = this->p_current->last();
-        } else {
-            channel = this->p_current->next();
-        }
-
-        if (channel->type() != Temperature::Type::NONE) {
-            this->p_current = channel;
-            break;
-        }
-
-        ++i;
-    }
-}
-
-
-Temperature::Channel* Temperature::Manager::current()
-{
-    return this->p_current;
+    return channellist[channel_number];
 }
 
 
@@ -280,7 +214,7 @@ void Temperature::Manager::execute()
     int i = 0;
 
     for (i = 0; i < TEMP_CHANNELS; ++i) {
-        channel = this->p_channellist[i];
+        channel = channellist[i];
 
         if (channel == NULL) {
             continue;

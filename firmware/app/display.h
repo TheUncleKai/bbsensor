@@ -17,20 +17,13 @@
 #ifndef DISPLAY_H_INCLUDED
 #define DISPLAY_H_INCLUDED
 
-#include <Arduino.h>
 #include <SPI.h>
 
 #include <device.h>
 
 #define SIGNAL_LIST 256
 
-namespace Display
-{
-
-#ifdef DEBUG_LEVEL3
-void debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin);
-#endif // DEBUG_LEVEL3
-
+//#define DISPLAY_DEBUG
 
 enum class Type {
     SIG_HIGH = 0,
@@ -38,25 +31,24 @@ enum class Type {
 };
 
 
-typedef struct
+struct Signal
 {
     uint8_t data;
     Type type;
     bool istext;
-} Signal;
+};
 
 
-class Manager : public Device
+class Display : public Device
 {
     public:
-        Manager (SPIClass* spi, uint8_t cs);
-        virtual ~Manager();
+        Display (SPIClass* spi, uint8_t cs);
+        virtual ~Display();
 
         void setup();
         void execute();
 
         void clear();
-        void clear(uint8_t line);
         void write(uint8_t line, const char* fmt, ...);
 
     private:
@@ -75,7 +67,5 @@ class Manager : public Device
         void _send_high(uint8_t data, bool istext);
 };
 
-
-};
 
 #endif // DISPLAY_H_INCLUDED

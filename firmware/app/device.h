@@ -17,16 +17,12 @@
 #ifndef DEVICE_H_INCLUDED
 #define DEVICE_H_INCLUDED
 
-#include <Arduino.h>
 #include <SPI.h>
+
+#define DEBUG_SPI
 
 #define SPI_WAIT_ON  1
 #define SPI_WAIT_OFF 2
-
-
-#ifdef DEBUG_LEVEL3
-void debug_spi(const char* keyword, uint8_t data);
-#endif // DEBUG_LEVEL3
 
 
 class Device

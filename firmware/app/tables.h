@@ -14,18 +14,14 @@
    limitations under the License.
 */
 
-#ifndef DATA_H_INCLUDED
-#define DATA_H_INCLUDED
+#ifndef TABLES_H_INCLUDED
+#define TABLES_H_INCLUDED
 
-#include <channel.h>
-#include <settings.h>
-
-
-extern const float table_rtd[4096];
-
-extern const float table_ptc10[4096];
-
-extern const float table_ptc100[4096];
+#include <Arduino.h>
 
 
-#endif // DATA_H_INCLUDED
+extern float table_voltages[4096];
+
+extern float table_rtd[4096];
+
+#endif // TABLES_H_INCLUDED

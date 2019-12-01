@@ -22,22 +22,20 @@
 #include <click.h>
 
 
-
-
-Click::Span::Span()
+ClickSpan::ClickSpan()
 {
     this->start = 0;
     this->end = 0;
 }
 
 
-Click::Span::~Span()
+ClickSpan::~ClickSpan()
 {
     //dtor
 }
 
 
-unsigned long Click::Span::diff(Click::Span* timespan = NULL)
+unsigned long ClickSpan::diff(ClickSpan* timespan = NULL)
 {
     unsigned long result = 0;
 
@@ -58,14 +56,14 @@ unsigned long Click::Span::diff(Click::Span* timespan = NULL)
 }
 
 
-void Click::Span::reset()
+void ClickSpan::reset()
 {
     this->start = 0;
     this->end = 0;
 }
 
 
-void Click::Span::copy(Click::Span* timespan)
+void ClickSpan::copy(ClickSpan* timespan)
 {
     this->start = timespan->start;
     this->end = timespan->end;
@@ -73,39 +71,39 @@ void Click::Span::copy(Click::Span* timespan)
 
 
 
-Click::Manager::Manager (uint8_t num)
+Click::Click (uint8_t num)
 {
     this->m_num = num;
     this->m_counter = 0;
-    this->m_type = Click::Type::NONE;
-    this->p_current = new Click::Span();
-    this->p_last = new Click::Span();
+    this->m_type = Click::NONE;
+    this->p_current = new ClickSpan();
+    this->p_last = new ClickSpan();
 }
 
 
-Click::Manager::~Manager()
+Click::~Click()
 {
     delete this->p_current;
     delete this->p_last;
 }
 
 
-void Click::Manager::reset()
+void Click::reset()
 {
     this->m_counter = 0;
-    this->m_type = Click::Type::NONE;
+    this->m_type = Click::NONE;
     this->p_current->reset();
     this->p_last->reset();
 }
 
 
-Click::Type Click::Manager::type()
+Click::Type Click::type()
 {
     return this->m_type;
 }
 
 
-void Click::Manager::set_high(unsigned long timestamp)
+void Click::set_high(unsigned long timestamp)
 {
     if (this->m_counter == 0) {
         this->p_current->start = timestamp;
@@ -118,21 +116,21 @@ void Click::Manager::set_high(unsigned long timestamp)
 }
 
 
-void Click::Manager::set_low(unsigned long timestamp)
+void Click::set_low(unsigned long timestamp)
 {
     this->p_current->end = timestamp;
     this->_process();
 }
 
 
-void Click::Manager::_process()
+void Click::_process()
 {
     unsigned long diff, ddiff;
 
     diff = this->p_current->diff();
     ddiff = this->p_current->diff(this->p_last);
 
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_CLICK
     DEBUG_MSG("BUTTON%d: diff %d, ddiff %d, count %d, current %d/%d, last %d/%d\n",
                 this->m_num,
                 diff,
@@ -142,50 +140,50 @@ void Click::Manager::_process()
                 this->p_current->end,
                 this->p_last->start,
                 this->p_last->end);
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_CLICK
 
     if (this->m_counter == 0) {
         if (diff <= CLICK_SINGLE) {
-            this->m_type = Click::Type::SINGLE;
+            this->m_type = Click::SINGLE_CLICK;
             this->m_counter++;
 
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_CLICK
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_CLICK
             return;
         }
         if (diff >= CLICK_HOLD) {
-            this->m_type = Click::Type::HOLD;
+            this->m_type = Click::HOLD_CLICK;
             this->m_counter = 0;
             this->p_current->reset();
             this->p_last->reset();
 
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_CLICK
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_CLICK
             return;
         }
     }
 
     if (this->m_counter > 0) {
         if (ddiff <= CLICK_DOUBLE) {
-            this->m_type = Click::Type::DOUBLE;
+            this->m_type = Click::DOUBLE_CLICK;
             this->m_counter = 0;
             this->p_current->reset();
             this->p_last->reset();
 
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_CLICK
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_CLICK
             return;
         }
         if (diff <= CLICK_SINGLE) {
-            this->m_type = Click::Type::SINGLE;
+            this->m_type = Click::SINGLE_CLICK;
             this->m_counter = 1;
 
-#ifdef DEBUG_LEVEL3
+#ifdef DEBUG_CLICK
             DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
-#endif // DEBUG_LEVEL3
+#endif // DEBUG_CLICK
             return;
         }
     }

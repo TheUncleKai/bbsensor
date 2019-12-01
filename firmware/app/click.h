@@ -17,40 +17,35 @@
 #ifndef CLICK_H_INCLUDED
 #define CLICK_H_INCLUDED
 
-#include <Arduino.h>
-
-namespace Click
-{
+//#define DEBUG_CLICK
 
 
-class Span
+class ClickSpan
 {
     public:
-        Span ();
-        virtual ~Span();
+        ClickSpan ();
+        virtual ~ClickSpan();
 
         unsigned long start, end;
 
-        unsigned long diff(Span* timespan);
+        unsigned long diff(ClickSpan* timespan);
         void reset();
-        void copy(Span* timespan);
+        void copy(ClickSpan* timespan);
 };
 
 
-enum class Type
-{
-    NONE = 0,
-    SINGLE = 1,
-    DOUBLE = 2,
-    HOLD = 3
-};
-
-
-class Manager
+class Click
 {
     public:
-        Manager (uint8_t num);
-        virtual ~Manager();
+        Click (uint8_t num);
+        virtual ~Click();
+
+        enum Type {
+            NONE = 0,
+            SINGLE_CLICK = 1,
+            DOUBLE_CLICK = 2,
+            HOLD_CLICK = 3
+        };
 
         void set_high(unsigned long timestamp);
         void set_low(unsigned long timestamp);
@@ -63,13 +58,11 @@ class Manager
         unsigned long m_counter;
         Type m_type;
 
-        Span* p_current;
-        Span* p_last;
+        ClickSpan* p_current;
+        ClickSpan* p_last;
 
         void _process();
 };
 
-
-};
 
 #endif // CLICK_H_INCLUDED

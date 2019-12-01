@@ -18,8 +18,31 @@
 
 #include <settings.h>
 #include <debug.h>
-#include <display.h>
 
+#include <display.h>
+#include <utils.h>
+
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+
+#define BYTE_TO_BINARY(byte)  \
+  (byte & 0x80 ? '1' : '0'), \
+  (byte & 0x40 ? '1' : '0'), \
+  (byte & 0x20 ? '1' : '0'), \
+  (byte & 0x10 ? '1' : '0'), \
+  (byte & 0x08 ? '1' : '0'), \
+  (byte & 0x04 ? '1' : '0'), \
+  (byte & 0x02 ? '1' : '0'), \
+  (byte & 0x01 ? '1' : '0')
+
+
+//#define PIN_A0 0x01 // 1,   Qa
+//#define PIN_A1 0x02 // 2,   Qb
+//#define PIN_A2 0x04 // 4,   Qc
+//#define PIN_A3 0x08 // 8,   Qd
+//#define PIN_A4 0x10 // 16,  Qe
+//#define PIN_A5 0x20 // 32,  Qf
+//#define PIN_A6 0x40 // 64,  Qg
+//#define PIN_A7 0x80 // 128, Qh
 
 #define PIN_RS 0x01 // 1,  Qa
 #define PIN_E  0x02 // 2,  Qb
@@ -39,8 +62,6 @@
 #define POS_DB5 0x20 //  32, 0010 0000
 #define POS_DB4 0x10 //  16, 0001 0000
 
-#define DIGITS 16
-
 #define LINE1 0x80
 #define LINE2 0xc0
 
@@ -50,43 +71,7 @@
 #define DELAY_OFF 2
 
 
-#ifdef DEBUG_LEVEL3
-void Display::debug_display(const char* keyword, uint8_t data, uint8_t signal, uint8_t pin)
-{
-    DEBUG_MSG("%s:  %.3u  0x%.2X  %c%c%c%c %c%c%c%c  %c%c%c%c %c%c%c%c  %c%c%c%c %c%c%c%c\n",
-        keyword,
-        data,
-        data,
-        (data & 0x80 ? '1' : '0'),
-        (data & 0x40 ? '1' : '0'),
-        (data & 0x20 ? '1' : '0'),
-        (data & 0x10 ? '1' : '0'),
-        (data & 0x08 ? '1' : '0'),
-        (data & 0x04 ? '1' : '0'),
-        (data & 0x02 ? '1' : '0'),
-        (data & 0x01 ? '1' : '0'),
-        (signal & 0x80 ? '1' : '0'),
-        (signal & 0x40 ? '1' : '0'),
-        (signal & 0x20 ? '1' : '0'),
-        (signal & 0x10 ? '1' : '0'),
-        (signal & 0x08 ? '1' : '0'),
-        (signal & 0x04 ? '1' : '0'),
-        (signal & 0x02 ? '1' : '0'),
-        (signal & 0x01 ? '1' : '0'),
-        (pin & 0x80 ? '1' : '0'),
-        (pin & 0x40 ? '1' : '0'),
-        (pin & 0x20 ? '1' : '0'),
-        (pin & 0x10 ? '1' : '0'),
-        (pin & 0x08 ? '1' : '0'),
-        (pin & 0x04 ? '1' : '0'),
-        (pin & 0x02 ? '1' : '0'),
-        (pin & 0x01 ? '1' : '0')
-    );
-}
-#endif // DEBUG_LEVEL3
-
-
-Display::Manager::Manager (SPIClass* spi, uint8_t cs)
+Display::Display (SPIClass* spi, uint8_t cs)
 {
     this->p_spi = new SPI();
     this->m_cs = cs;
@@ -101,14 +86,14 @@ Display::Manager::Manager (SPIClass* spi, uint8_t cs)
 }
 
 
-Display::Manager::~Manager()
+Display::~Display()
 {
     delete this->p_spi;
     delete this->p_list;
 }
 
 
-uint8_t Display::Manager::_process_pins(uint8_t data)
+uint8_t Display::_process_pins(uint8_t data)
 {
     uint8_t pin = 0x00;
 
@@ -129,18 +114,18 @@ uint8_t Display::Manager::_process_pins(uint8_t data)
 }
 
 
-void Display::Manager::_send(Display::Signal* input)
+void Display::_send(Signal* input)
 {
     uint8_t pin_on, pin_off;
     uint8_t signal = 0x00;
     uint8_t pin = 0x00;
 
 
-    if (input->type == Display::Type::SIG_HIGH) {
+    if (input->type == Type::SIG_HIGH) {
         signal = input->data & 0xF0;
     }
 
-    if (input->type == Display::Type::SIG_LOW) {
+    if (input->type == Type::SIG_LOW) {
         signal = (input->data & 0x0F) << 4;
     }
 
@@ -151,9 +136,9 @@ void Display::Manager::_send(Display::Signal* input)
         pin = pin ^ PIN_RS;
     }
 
-#ifdef DEBUG_LEVEL3
+#ifdef DISPLAY_DEBUG
     debug_display("DISPLAY", input->data, signal, pin);
-#endif // DEBUG_LEVEL3
+#endif // DISPLAY_DEBUG
 
     pin_on = pin ^ PIN_E;
     pin_off = pin;
@@ -168,9 +153,9 @@ void Display::Manager::_send(Display::Signal* input)
 }
 
 
-void Display::Manager::_send_low(uint8_t data, bool istext)
+void Display::_send_low(uint8_t data, bool istext)
 {
-    Display::Signal* signal = new Signal();
+    Signal* signal = new Signal();
 
     signal->data = data;
     signal->istext = istext;
@@ -181,20 +166,20 @@ void Display::Manager::_send_low(uint8_t data, bool istext)
 }
 
 
-void Display::Manager::_send_high(uint8_t data, bool istext)
+void Display::_send_high(uint8_t data, bool istext)
 {
-    Display::Signal* signal = new Signal();
+    Signal* signal = new Signal();
 
     signal->data = data;
     signal->istext = istext;
-    signal->type = Display::Type::SIG_HIGH;
+    signal->type = Type::SIG_HIGH;
 
     this->p_list[this->m_size] = signal;
     this->m_size++;
 }
 
 
-void Display::Manager::_set_line(uint8_t line)
+void Display::_set_line(uint8_t line)
 {
     uint8_t data = 0;
 
@@ -214,7 +199,7 @@ void Display::Manager::_set_line(uint8_t line)
 }
 
 
-void Display::Manager::clear()
+void Display::clear()
 {
     uint8_t data = CLEAR;
 
@@ -223,18 +208,7 @@ void Display::Manager::clear()
 }
 
 
-void Display::Manager::clear(uint8_t line)
-{
-    this->_set_line(line);
-
-    for (uint8_t i = 0; i < DIGITS; ++i) {
-        this->_send_high(32, true);
-        this->_send_low(32, true);
-    }
-}
-
-
-void Display::Manager::write(uint8_t line, const char* fmt, ...)
+void Display::write(uint8_t line, const char* fmt, ...)
 {
     va_list vl;
 
@@ -260,11 +234,9 @@ void Display::Manager::write(uint8_t line, const char* fmt, ...)
 }
 
 
-void Display::Manager::setup()
+void Display::setup()
 {
-#ifdef DEBUG_LEVEL2
     DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
-#endif // DEBUG_LEVEL2
     pinMode(this->m_cs, OUTPUT);
     digitalWrite(this->m_cs, HIGH);
 
@@ -299,13 +271,14 @@ void Display::Manager::setup()
     this->_send_low(0x00, false); // SET
     this->_send_low(0x06, false);
 
+    this->write(1, "BOOT...");
     this->execute();
 }
 
 
-void Display::Manager::execute()
+void Display::execute()
 {
-    Display::Signal* signal = NULL;
+    Signal* signal = NULL;
 
     for (size_t i = 0; i < this->m_size; ++i) {
         signal = this->p_list[i];

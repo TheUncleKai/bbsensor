@@ -17,13 +17,15 @@
 #ifndef HARDWARE_H_INCLUDED
 #define HARDWARE_H_INCLUDED
 
-#include <Arduino.h>
+#include <EEPROM.h>
 
 #include <device.h>
 #include <led.h>
 #include <button.h>
 #include <display.h>
 #include <temperature.h>
+
+//#define DEBUG_HARDWARE
 
 
 class Hardware : public Device
@@ -37,7 +39,7 @@ class Hardware : public Device
 
         Button* button1();
         Button* button2();
-        Display::Manager* display();
+        Display* display();
         Temperature::Manager* temperature();
 
         void setup();
@@ -51,9 +53,8 @@ class Hardware : public Device
 
         Button* p_button1;
         Button* p_button2;
-        Display::Manager* p_display;
+        Display* p_display;
         Temperature::Manager* p_temperature;
 };
-
 
 #endif // HARDWARE_H_INCLUDED
