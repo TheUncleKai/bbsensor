@@ -12,31 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CCFLAGS = \
+CFLAGS = \
     -DESP_PLATFORM \
     "-DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\"" \
     -DHAVE_CONFIG_H \
     -DGCC_NOT_5_2_0=0 \
     -DWITH_POSIX \
     $(INCLUDES) \
-    -std=gnu++11 -Os -g3 \
-    -Wpointer-arith \
-    -fexceptions \
+    -std=gnu99 -Os -g3 \
     -fstack-protector \
     -ffunction-sections \
     -fdata-sections \
     -fstrict-volatile-bitfields \
-    -mlongcalls -nostdlib \
-    -Wno-error=maybe-uninitialized \
-    -Wno-error=unused-function \
-    -Wno-error=unused-but-set-variable \
-    -Wno-error=unused-variable \
-    -Wno-error=deprecated-declarations \
+    -mlongcalls \
+    -nostdlib \
+    -Wpointer-arith \
+    -Wno-maybe-uninitialized \
+    -Wno-unused-function \
+    -Wno-unused-but-set-variable \
+    -Wno-unused-variable \
+    -Wno-deprecated-declarations \
     -Wno-unused-parameter \
-    -Wno-unused-but-set-parameter \
-    -Wno-missing-field-initializers \
     -Wno-sign-compare \
-    -fno-rtti \
+    -Wno-old-style-declaration \
     -MMD -c \
     -DF_CPU=240000000L \
     -DARDUINO=10810 \
@@ -45,4 +43,6 @@ CCFLAGS = \
     "-DARDUINO_BOARD=\"ESP32_DEV\"" \
     "-DARDUINO_VARIANT=\"esp32\"" \
     -DESP32 \
-    $(CFLAGS_DEBUG)
+    -DCORE_DEBUG_LEVEL=0 \
+    $(INCLUDES_CORES) \
+    $(INCLUDES_VARIANTS)

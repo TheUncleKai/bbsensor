@@ -12,25 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-OBJS_CORE_ASM := ${SOURCES_CORE_ASM:.S=.S.o}
-OBJS_CORE_ASM := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_CORE_ASM)}
-
-OBJS_CORE_CPP := ${SOURCES_CORE_CPP:.cpp=.cpp.o}
-OBJS_CORE_CPP := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_CORE_CPP)}
-
-OBJS_LIBB64 := ${SOURCES_LIBB64:.cpp=.cpp.o}
-OBJS_LIBB64 := ${subst $(SRCDIR)/libb64,$(OBJDIR),$(OBJS_LIBB64)}
-
-OBJS_MALLOC_C := ${SOURCES_MALLOC_C:.c=.c.o}
-OBJS_MALLOC_C := ${subst $(SRCDIR)/umm_malloc,$(OBJDIR),$(OBJS_MALLOC)}
-
-OBJS_MALLOC := ${SOURCES_MALLOC:.cpp=.cpp.o}
-OBJS_MALLOC := ${subst $(SRCDIR)/umm_malloc,$(OBJDIR),$(OBJS_MALLOC)}
-
-OBJS_SPIFFS := ${SOURCES_SPIFFS:.cpp=.cpp.o}
-OBJS_SPIFFS := ${subst $(SRCDIR)/spiffs,$(OBJDIR),$(OBJS_SPIFFS)}
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-OBJS := $(OBJS_CORE_ASM) $(OBJS_CORE_CPP) $(OBJS_SPIFFS) $(OBJS_LIBB64) $(OBJS_MALLOC) $(OBJS_MALLOC_C)
-ARS := $(OBJS:.o=.ar)
+include objects.$(BOARD).mk

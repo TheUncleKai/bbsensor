@@ -1,0 +1,15 @@
+lib.mk      =   lib infos
+
+                INCLUDES
+                ADD_LIBS
+
+objects.mk  =   target sources
+
+                OBJS
+                ARS
+
+setup.mk    =   rules for building
+
+sources.mk  =   sources for objects.mk
+
+                SOURCES

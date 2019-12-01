@@ -12,9 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(ESP8266_CORE)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCORE)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBCORE)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBCORE)$(LIB_SUFFIX)
-ADD_DEP := Updater_Signing.h
-ADD_INCLUDE := -I.
+include sources.$(BOARD).mk

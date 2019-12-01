@@ -12,7 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-OBJS := ${SOURCES:.cpp=.cpp.o}
-OBJS := ${subst $(SRCDIR),$(OBJDIR),$(OBJS)}
+compile_wifi:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile WIFI"
+	@$(MAKE) -s -C prj/external/wifi -f Makefile compile
 
-ARS := $(OBJS:.o=.ar)
+link_wifi: compile_wifi
+	@$(INFORM) "Link WIFI"
+	@$(MAKE) -s -C prj/external/wifi -f Makefile link
+
+clean_wifi: link_wifi
+	@$(INFORM) "Clean WIFI"
+	@$(MAKE) -s -C prj/external/wifi -f Makefile clean
+
+LINK_LIST += link_wifi
+CLEAN_LIST += clean_wifi
+PHONY_LIST += compile_wifi link_wifi clean_wifi

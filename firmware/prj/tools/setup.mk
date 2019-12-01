@@ -12,20 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CFLAGS_DEBUG = 
-
-ifeq ($(DEBUG),PRINT)
-CFLAGS_DEBUG = -DDEBUG_BB
-endif
-
-ifeq ($(DEBUG),LEVEL1)
-CFLAGS_DEBUG = -DDEBUG_BB -DDEBUG_LEVEL1
-endif
-
-ifeq ($(DEBUG),LEVEL2)
-CFLAGS_DEBUG = -DDEBUG_BB -DDEBUG_LEVEL1 -DDEBUG_LEVEL2
-endif
-
-ifeq ($(DEBUG),LEVEL3)
-CFLAGS_DEBUG = -DDEBUG_BB -DDEBUG_LEVEL1 -DDEBUG_LEVEL2 -DDEBUG_LEVEL3
-endif
+GCC     = $(GCC_BIN)/$(GCC_PREFIX)-gcc$(EXEEXT)
+CXX     = $(GCC_BIN)/$(GCC_PREFIX)-g++$(EXEEXT)
+AR      = $(GCC_BIN)/$(GCC_PREFIX)-ar$(EXEEXT)
+RANLIB  = $(GCC_BIN)/$(GCC_PREFIX)-ranlib$(EXEEXT)
+OBJCOPY = $(GCC_BIN)/$(GCC_PREFIX)-objcopy$(EXEEXT)
+SIZE    = $(GCC_BIN)/$(GCC_PREFIX)-size$(EXEEXT)

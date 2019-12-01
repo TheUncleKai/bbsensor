@@ -12,16 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ROOT = ../..
+ROOT = ../../..
 
-include $(ROOT)/rules/config.mk
-include $(ROOT)/rules/setup.mk
-include $(ROOT)/rules/libraries.mk
-include $(ROOT)/rules/flags.mk
+INCLUDES = 
 
-include config.mk
+include vars.mk
 include sources.mk
 include objects.mk
+
+OBJDIR := $(ROOT)/$(OUTPUT)/$(NAME)
+FOLDER := $(ROOT)/$(OUTPUT)/$(NAME)
+TARGET := $(ROOT)/$(OUTPUT)/$(NAME)$(LIB_SUFFIX)
+
+include $(ROOT)/prj/config.mk
+include $(ROOT)/prj/board.mk
+
+include $(ROOT)/prj/tools/debug.mk
+include $(ROOT)/prj/tools/log.mk
+
+include $(ROOT)/prj/rules.$(BOARD)/vars.mk
+include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
+include $(ROOT)/prj/rules.$(BOARD)/ccflags.mk
+include $(ROOT)/prj/rules.$(BOARD)/ldflags.mk
+
+include $(ROOT)/prj/tools/setup.mk
+
+-include lib.mk
 
 default: compile link
 
@@ -32,7 +48,7 @@ help:
 	@$(ECHO) "\t\e[1;34mlink\e[0;0m:\t\tlink library"
 	@$(ECHO) "\t\e[1;34mclean\e[0;0m:\t\tcleanup output"
 
-compile: $(OBJS) $(ROOT)/rules/config.mk
+compile: $(OBJS)
 
 link: $(ARS)
 
@@ -40,10 +56,10 @@ clean:
 	@$(RM) -rf $(OBJDIR)/*
 	@$(RM) $(TARGET)
 
-# Include general rules
-include $(ROOT)/rules/rules.mk
+# Include global rules
+include $(ROOT)/prj/tools/rules.mk
 
-# Include additional rules
-include rules.mk
+# Include local rules
+-include rules.mk
 
 .PHONY: default help compile link clean

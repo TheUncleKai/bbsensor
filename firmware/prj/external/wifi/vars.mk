@@ -12,12 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-OBJS_MAIN := ${SOURCES_MAIN:.cpp=.cpp.o}
-OBJS_MAIN := ${subst $(SRCDIR),$(OBJDIR),$(OBJS_MAIN)}
-
-OBJS_DETAIL := ${SOURCES_DETAIL:.cpp=.cpp.o}
-OBJS_DETAIL := ${subst $(SRCDIR)/detail,$(OBJDIR),$(OBJS_DETAIL)}
-
-OBJS := $(OBJS_MAIN) $(OBJS_DETAIL)
-
-ARS := $(OBJS:.o=.ar)
+NAME   := libWiFi
+SRCDIR := $(PATH_WIFI)

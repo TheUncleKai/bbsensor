@@ -12,9 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(ESP8266_EEPROM)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBEEPROM)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBEEPROM)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBEEPROM)$(LIB_SUFFIX)
-ADD_DEP := 
-ADD_INCLUDE := 
+CFLAGS_DEBUG = 
+
+ifeq ($(DEBUG),PRINT)
+CFLAGS_DEBUG += -DDEBUG_BB_SERIAL=Serial
+endif
+
+ifeq ($(DEBUG),LEVEL1)
+CFLAGS_DEBUG += -DDEBUG_BB_SERIAL=Serial -DDEBUG_LEVEL1
+endif
+
+ifeq ($(DEBUG),LEVEL2)
+CFLAGS_DEBUG = -DDEBUG_BB_SERIAL=Serial -DDEBUG_LEVEL1 -DDEBUG_LEVEL2
+endif
+
+ifeq ($(DEBUG),LEVEL3)
+CFLAGS_DEBUG = -DDEBUG_BB_SERIAL=Serial -DDEBUG_LEVEL1 -DDEBUG_LEVEL2 -DDEBUG_LEVEL3
+endif

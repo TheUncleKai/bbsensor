@@ -12,7 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(EXT_CRC32)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBCRC32)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBCRC32)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBCRC32)$(LIB_SUFFIX)
+NAME   := libCRC32
+SRCDIR := $(PATH_CRC32)

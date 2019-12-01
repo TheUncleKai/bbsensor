@@ -12,11 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = \
-    $(SRCDIR)/ESP8266mDNS.cpp \
-    $(SRCDIR)/ESP8266mDNS_Legacy.cpp \
-    $(SRCDIR)/LEAmDNS.cpp \
-    $(SRCDIR)/LEAmDNS_Control.cpp \
-    $(SRCDIR)/LEAmDNS_Helpers.cpp \
-    $(SRCDIR)/LEAmDNS_Structs.cpp \
-    $(SRCDIR)/LEAmDNS_Transfer.cpp
+NAME   := libEEPROM
+SRCDIR := $(PATH_EEPROM)

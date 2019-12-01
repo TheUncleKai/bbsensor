@@ -12,11 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES_MAIN = \
-    $(SRCDIR)/ESP8266WebServer.cpp \
-    $(SRCDIR)/ESP8266WebServerSecureAxTLS.cpp \
-    $(SRCDIR)/ESP8266WebServerSecureBearSSL.cpp \
-    $(SRCDIR)/Parsing.cpp
+NAME   := libcore
+SRCDIR := $(ESP8266_CORE)
 
-SOURCES_DETAIL = \
-    $(SRCDIR)/detail/mimetable.cpp
+-include vars.$(BOARD).mk

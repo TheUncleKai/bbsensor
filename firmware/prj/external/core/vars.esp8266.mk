@@ -12,19 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_core:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile compile
-
-link_core: compile_core
-	@$(INFORM) "Link $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile link
-
-clean_core: link_core
-	@$(INFORM) "Clean $(LIBCORE)"
-	@$(MAKE) -s -C ext/core -f Makefile clean
-
-LINK_LIST += link_core
-CLEAN_LIST += clean_core
-PHONY_LIST += compile_core link_core clean_core
+ADD_DEP := Updater_Signing.h
+ADD_INCLUDE := -I.

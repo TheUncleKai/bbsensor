@@ -12,9 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(ESP8266_WEBSERVER)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBESP8266WEBSERVER)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBESP8266WEBSERVER)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBESP8266WEBSERVER)$(LIB_SUFFIX)
-ADD_DEP := 
-ADD_INCLUDE := 
+compile_core:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile CORE"
+	@$(MAKE) -s -C ext/core -f Makefile compile
+
+link_core: compile_core
+	@$(INFORM) "Link CORE"
+	@$(MAKE) -s -C ext/core -f Makefile link
+
+clean_core: link_core
+	@$(INFORM) "Clean CORE"
+	@$(MAKE) -s -C ext/core -f Makefile clean
+
+LINK_LIST += link_core
+CLEAN_LIST += clean_core
+PHONY_LIST += compile_core link_core clean_core

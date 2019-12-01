@@ -18,7 +18,6 @@ CCFLAGS = \
     -DHAVE_CONFIG_H \
     -DGCC_NOT_5_2_0=0 \
     -DWITH_POSIX \
-    $(INCLUDES) \
     -std=gnu++11 -Os -g3 \
     -Wpointer-arith \
     -fexceptions \
@@ -45,4 +44,5 @@ CCFLAGS = \
     "-DARDUINO_BOARD=\"ESP32_DEV\"" \
     "-DARDUINO_VARIANT=\"esp32\"" \
     -DESP32 \
-    $(CFLAGS_DEBUG)
+    -DCORE_DEBUG_LEVEL=0 \
+    $(INCLUDES)

@@ -12,15 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-compile_webserver:
-	@$(MKDIR) $(OUTPUT)
-	@$(INFORM) "Compile $(LIBESP8266WEBSERVER)"
-	@$(MAKE) -s -C ext/esp8266webserver -f Makefile compile
-
-link_webserver: compile_webserver
-	@$(INFORM) "Link $(LIBESP8266WEBSERVER)"
-	@$(MAKE) -s -C ext/esp8266webserver -f Makefile link
-
-clean_webserver: link_webserver
-	@$(INFORM) "Clean $(LIBESP8266WEBSERVER)"
-	@$(MAKE) -s -C ext/esp8266webserver -f Makefile clean
+# Board specific tools
+SIGNING = $(TOOLS)/signing.py
+ELF2BIN = $(TOOLS)/elf2bin.py
