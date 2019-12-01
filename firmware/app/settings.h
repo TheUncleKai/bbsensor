@@ -31,10 +31,8 @@
 
 #define DISPLAY_DIGITS  16
 
-#define CLICK_THRESHOLD 20
-#define CLICK_SINGLE    800
-#define CLICK_DOUBLE    500
-#define CLICK_HOLD      2000
+#define CLICK_SINGLE    50
+#define CLICK_HOLD      3000
 
 #define TEMP_CHANNELS   8
 #define TEMP_ARRAY      32

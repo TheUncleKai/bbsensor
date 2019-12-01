@@ -125,6 +125,27 @@ void loop()
     looper->start();
     hardware->temperature()->set_measure(false);
 
+
+    if (hardware->temperature()->get_measure() == true) {
+        Button::Click button1 = hardware->button1()->click();
+        Button::Click button2 = hardware->button2()->click();
+
+        if (button1 == Button::SINGLE_CLICK) {
+            hardware->temperature()->next();
+            print_channel();
+            looper->reset_counter(2);
+            hardware->button1()->reset();
+        }
+
+        if (button2 == Button::SINGLE_CLICK) {
+            hardware->temperature()->prev();
+            print_channel();
+            looper->reset_counter(2);
+            hardware->button2()->reset();
+        }
+    }
+
+
     if (looper->counter() == 0) {
         hardware->led1()->on();
     }
