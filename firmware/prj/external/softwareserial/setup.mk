@@ -12,7 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDES_SERIAL = \
-    -I$(PATH_SERIAL)
+compile_serial:
+	@$(MKDIR) $(OUTPUT)
+	@$(INFORM) "Compile SERIAL"
+	@$(MAKE) -s -C prj/external/softwareserial -f Makefile compile
 
-INCLUDES += $(INCLUDES_SERIAL)
+link_serial: compile_serial
+	@$(INFORM) "Link SERIAL"
+	@$(MAKE) -s -C prj/external/softwareserial -f Makefile link
+
+clean_serial: link_serial
+	@$(INFORM) "Clean SERIAL"
+	@$(MAKE) -s -C prj/external/softwareserial -f Makefile clean
+
+LINK_LIST += link_serial
+CLEAN_LIST += clean_serial
+PHONY_LIST += compile_serial link_serial clean_serial

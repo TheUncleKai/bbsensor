@@ -12,9 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SRCDIR := $(ESP8266_SERIAL)
-OBJDIR := $(ROOT)/$(OUTPUT)/$(LIBSOFTWARESERIAL)
-FOLDER := $(ROOT)/$(OUTPUT)/$(LIBSOFTWARESERIAL)
-TARGET := $(ROOT)/$(OUTPUT)/$(LIBSOFTWARESERIAL)$(LIB_SUFFIX)
-ADD_DEP := 
-ADD_INCLUDE := 
+NAME   := libserial
+SRCDIR := $(PATH_SERIAL)
