@@ -12,6 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Board specific tools
-SIGNING = $(TOOLS)/signing.py
-ELF2BIN = $(TOOLS)/elf2bin.py
+ASMFLAGS = \
+	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
+	$(INCLUDE) \
+	-c -g -x assembler-with-cpp -MMD -mlongcalls \
+	-DNONOSDK221=1 \
+	-DF_CPU=80000000L \
+	-DLWIP_OPEN_SRC \
+	-DTCP_MSS=536 \
+	-DLWIP_FEATURES=1 \
+	-DLWIP_IPV6=0 \
+	-DARDUINO=10809 \
+	-DARDUINO_ESP8266_NODEMCU \
+	-DARDUINO_ARCH_ESP8266 \
+	-DARDUINO_BOARD=\"ESP8266_NODEMCU\" \
+	-DFLASHMODE_DIO \
+    -DESP8266 \
+	$(CFLAGS_DEBUG)

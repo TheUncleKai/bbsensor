@@ -13,36 +13,22 @@
 # limitations under the License.
 
 CFLAGS = \
-    -DESP_PLATFORM \
-    "-DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\"" \
-    -DHAVE_CONFIG_H \
-    -DGCC_NOT_5_2_0=0 \
-    -DWITH_POSIX \
-    $(INCLUDES) \
-    -std=gnu99 -Os -g3 \
-    -fstack-protector \
-    -ffunction-sections \
-    -fdata-sections \
-    -fstrict-volatile-bitfields \
-    -mlongcalls \
-    -nostdlib \
-    -Wpointer-arith \
-    -Wno-maybe-uninitialized \
-    -Wno-unused-function \
-    -Wno-unused-but-set-variable \
-    -Wno-unused-variable \
-    -Wno-deprecated-declarations \
-    -Wno-unused-parameter \
-    -Wno-sign-compare \
-    -Wno-old-style-declaration \
-    -MMD -c \
-    -DF_CPU=240000000L \
-    -DARDUINO=10810 \
-    -DARDUINO_ESP32_DEV \
-    -DARDUINO_ARCH_ESP32 \
-    "-DARDUINO_BOARD=\"ESP32_DEV\"" \
-    "-DARDUINO_VARIANT=\"esp32\"" \
-    -DESP32 \
-    -DCORE_DEBUG_LEVEL=0 \
-    $(INCLUDES_CORES) \
-    $(INCLUDES_VARIANTS)
+	-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ \
+	$(INCLUDE) \
+	-c -Os -g -mlongcalls -mtext-section-literals \
+	-fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections -fno-exceptions \
+	-DNONOSDK221=1 \
+	-DF_CPU=80000000L \
+	-DLWIP_OPEN_SRC \
+	-DTCP_MSS=536 \
+	-DLWIP_FEATURES=1 \
+	-DLWIP_IPV6=0 \
+	-DARDUINO=10809 \
+	-DARDUINO_ESP8266_NODEMCU \
+	-DARDUINO_ARCH_ESP8266 \
+	-DARDUINO_BOARD=\"ESP8266_NODEMCU\"\
+	-DFLASHMODE_DIO \
+	-DESP8266 \
+	-DNO_GLOBAL_SPI \
+	-DNO_GLOBAL_EEPROM \
+	$(CFLAGS_DEBUG)

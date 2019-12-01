@@ -27,6 +27,13 @@ $(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp
 	@$(LOGTIME) $(CXX) $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
 
+# ASM
+$(OBJDIR)/%.S.o: $(SRCDIR)/%.S
+	@$(LOG) "(GCC) $@"
+	@$(MKDIR) $(FOLDER)
+	@$(LOGTIME) $(GCC) $(ASMFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
+	@$(GCC) $(ASMFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
+
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # C
 $(OBJDIR)/%.o: %.c

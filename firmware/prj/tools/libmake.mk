@@ -31,9 +31,10 @@ include $(ROOT)/prj/tools/debug.mk
 include $(ROOT)/prj/tools/log.mk
 
 include $(ROOT)/prj/rules.$(BOARD)/vars.mk
-include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
-include $(ROOT)/prj/rules.$(BOARD)/ccflags.mk
-include $(ROOT)/prj/rules.$(BOARD)/ldflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/asmflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/cflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/ccflags.mk
+-include $(ROOT)/prj/rules.$(BOARD)/ldflags.mk
 
 include $(ROOT)/prj/tools/setup.mk
 
