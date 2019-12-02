@@ -19,7 +19,7 @@
 #include <settings.h>
 #include <channel.h>
 #include <tables.h>
-
+#include <data.h>
 
 Temperature::Channel::Channel(uint8_t num, Type type)
 {
@@ -28,27 +28,11 @@ Temperature::Channel::Channel(uint8_t num, Type type)
     this->m_num = num;
     this->m_counter = 0;
     this->m_type = type;
-    this->p_values = new Temperature::Value *[TEMP_ARRAY];
-
-    int i = 0;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        this->p_values[i] = new Temperature::Value;
-    }
 }
 
 
 Temperature::Channel::~Channel()
 {
-    int i = 0;
-    Temperature::Value* value;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = this->p_values[i];
-        delete value;
-    }
-
-    delete this->p_values;
 }
 
 
@@ -60,13 +44,8 @@ Temperature::Value* Temperature::Channel::value()
 
 void Temperature::Channel::clear()
 {
-    int i = 0;
-    Temperature::Value* value;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = this->p_values[i];
-        value->data = 0;
-        value->value = 0.0;
+    for (int i = 0; i < TEMP_ARRAY; ++i) {
+        DATAList[this->m_num][i] = 0;
     }
 
     this->m_counter = 0;
@@ -115,8 +94,9 @@ void Temperature::Channel::add_value(uint16_t data)
         this->clear();
     }
 
-    Temperature::Value* value = this->p_values[this->m_counter];
+    Temperature::Value* value = new Temperature::Value;
 
+    DATAList[this->m_num][this->m_counter] = data;
     value->data = data;
 
     if (this->m_type == Temperature::Type::VOLTAGE) {

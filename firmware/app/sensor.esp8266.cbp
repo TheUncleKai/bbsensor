@@ -68,6 +68,8 @@
 		<Unit filename="click.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
+		<Unit filename="data.cpp" />
+		<Unit filename="data.h" />
 		<Unit filename="device.cpp" />
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />

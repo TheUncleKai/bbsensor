@@ -35,7 +35,7 @@
 #define CLICK_HOLD      3000
 
 #define TEMP_CHANNELS   8
-#define TEMP_ARRAY      32
+#define TEMP_ARRAY      240
 #define TEMP_LIMIT      4095 // max value of adc, everything above is suspect
 
 #define LOOP_WAIT       100

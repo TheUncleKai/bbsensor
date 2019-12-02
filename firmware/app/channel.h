@@ -65,7 +65,6 @@ class Channel : public Device
 
     private:
         Value* p_lastvalue;
-        Value** p_values;
         size_t m_counter;
         bool m_measure;
         uint8_t m_num;
