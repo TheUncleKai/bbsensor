@@ -14,7 +14,7 @@
 
 # Include additional rules
 $(OBJDIR)/%.c.o: $(SRCDIR)/libb64/%.c
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(GCC) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(GCC) $(CFLAGS) $< -o $@ $(LOGOUT)

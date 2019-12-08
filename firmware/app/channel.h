@@ -20,8 +20,6 @@
 #include <SPI.h>
 #include <device.h>
 
-#define DEBUG_CHANNEL
-
 
 namespace Temperature
 {
@@ -53,20 +51,27 @@ class Channel : public Device
 
         void setup();
         void execute();
-        void clear();
+
+        bool empty() const;
+        bool full() const;
+        size_t size() const;
 
         Type type();
         Value* value();
         uint8_t channel();
 
-        void add_value(uint16_t data);
+        void put(uint16_t data);
+        uint16_t get();
+
         void do_measure(bool measure);
         bool measure();
 
     private:
         Value* p_lastvalue;
-        Value** p_values;
-        size_t m_counter;
+        size_t m_head;
+        size_t m_tail;
+        bool m_full;
+
         bool m_measure;
         uint8_t m_num;
         Type m_type;

@@ -17,8 +17,21 @@
 #ifndef CONFIG_H_INCLUDED
 #define CONFIG_H_INCLUDED
 
-#define PIN_LED1        16 // D0, internal LED1
+#ifdef ESP32
+#define PIN_LED1        2  // internal LED1
+#define PIN_BUTTON1     23 // push button 1
+#define PIN_BUTTON2     22 // push button 2
+#define PIN_CS1         21 // SPI chip select 1, Display
+#define PIN_CS2         4  // SPI chip select 2, Temperature
 
+#define PIN_SCLK        19 // SPI clock
+#define PIN_MISO        18 // SPI MISO
+#define PIN_MOSI        5  // SPI MOSI
+#define PIN_NONE        15 // SPI CS, not used
+#endif // ESP32
+
+#ifdef ESP8266
+#define PIN_LED1        16 // D0, internal LED1
 #define PIN_BUTTON1     4  // D2, push button 1
 #define PIN_BUTTON2     5  // D1, push button 2
 #define PIN_CS1         2  // D4, SPI chip select 1, Display
@@ -28,14 +41,15 @@
 #define PIN_MISO        12 // D6, SPI MISO
 #define PIN_MOSI        13 // D7, SPI MOSI
 #define PIN_NONE        0  // D3, SPI CS, not used
+#endif // ESP8266
 
-#define CLICK_THRESHOLD 20
-#define CLICK_SINGLE    800
-#define CLICK_DOUBLE    500
-#define CLICK_HOLD      2000
+#define DISPLAY_DIGITS  16
+
+#define CLICK_SINGLE    50
+#define CLICK_HOLD      3000
 
 #define TEMP_CHANNELS   8
-#define TEMP_ARRAY      32
+#define TEMP_ARRAY      240
 #define TEMP_LIMIT      4095 // max value of adc, everything above is suspect
 
 #define LOOP_WAIT       100

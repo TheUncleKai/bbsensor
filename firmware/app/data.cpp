@@ -14,14 +14,8 @@
    limitations under the License.
 */
 
-#ifndef TABLES_H_INCLUDED
-#define TABLES_H_INCLUDED
-
 #include <Arduino.h>
 
+#include <data.h>
 
-const extern float table_voltages[4096];
-
-const extern float table_rtd[4096];
-
-#endif // TABLES_H_INCLUDED
+uint16_t DATAList[TEMP_CHANNELS][TEMP_ARRAY];

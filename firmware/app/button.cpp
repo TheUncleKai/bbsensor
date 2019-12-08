@@ -24,15 +24,16 @@ Button::Button (uint8_t num, uint8_t pin)
 {
     this->m_num = num;
     this->m_pin = pin;
+    this->m_type = Button::NONE;
+    this->m_high = 0;
+    this->m_low = 0;
 
     this->p_isr = NULL;
-    this->p_click = new Click(this->m_num);
 }
 
 
 Button::~Button()
 {
-    delete this->p_click;
 }
 
 
@@ -47,37 +48,72 @@ void Button::handleISR()
     unsigned long timestamp = millis();
 
     if (digitalRead(this->m_pin) == HIGH) {
-        this->p_click->set_high(timestamp);
+        this->m_high = timestamp;
+
 #ifdef DEBUG_LEVEL2
-        DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 1);
+        DEBUG_MSG("BUTTON%d: HIGH: %d, %u\n", this->m_num, 1, this->m_high);
 #endif // DEBUG_LEVEL2
     }
 
     if (digitalRead(this->m_pin) == LOW) {
-        this->p_click->set_low(timestamp);
+        this->m_low = timestamp;
+
 #ifdef DEBUG_LEVEL2
-        DEBUG_MSG("BUTTON%d: state %d\n", this->m_num, 0);
+        DEBUG_MSG("BUTTON%d: LOW: %d, %u\n", this->m_num, 0, this->m_low);
 #endif // DEBUG_LEVEL2
+
+        this->_process();
     }
 
 }
 
 
-Click::Type Button::get_click()
+void Button::_process()
 {
-    Click::Type click = this->p_click->type();
+    unsigned long diff, ddiff;
 
-    this->p_click->reset();
-    return click;
+    diff = this->m_low - this->m_high;
+
+#ifdef DEBUG_LEVEL2
+    DEBUG_MSG("BUTTON%d: diff %d, high %d, low %d\n",
+                this->m_num,
+                diff,
+                this->m_high,
+                this->m_low);
+#endif // DEBUG_LEVEL2
+
+    if (diff > CLICK_SINGLE && diff < CLICK_HOLD) {
+        this->m_type = Button::SINGLE_CLICK;
+    }
+
+    if (diff >= CLICK_HOLD) {
+        this->m_type = Button::HOLD_CLICK;
+    }
+
+#ifdef DEBUG_LEVEL1
+        DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
+#endif // DEBUG_LEVEL1
+
+    this->m_high = 0;
+    this->m_low = 0;
 }
 
+
+Button::Click Button::click()
+{
+    return this->m_type;
+}
+
+
+void Button::reset()
+{
+    this->m_type = Button::NONE;
+}
 
 
 void Button::setup()
 {
     DEBUG_MSG("BUTTON%d: setup pin %d\n", this->m_num, this->m_pin);
-
-    this->p_click->reset();
 
     if (this->p_isr != NULL)
     {

@@ -111,6 +111,7 @@
 					<Add directory="$$(ESP32_ROOT)/sdk/include/esp32-camera" />
 					<Add directory="$$(ESP32_ROOT)/sdk/include/fb_gfx" />
 					<Add directory="$$(ESP32_ROOT)/cores/esp32" />
+					<Add directory="$$(ESP32_ROOT)/variants/esp32" />
 					<Add directory="$$(ESP32_ROOT)/libraries/SPI/src" />
 					<Add directory="$$(ESP32_ROOT)/libraries/EEPROM/src" />
 					<Add directory="$$(ESP32_ROOT)/libraries/FS/src" />
@@ -128,10 +129,10 @@
 		<Unit filename="button.h" />
 		<Unit filename="channel.cpp" />
 		<Unit filename="channel.h" />
-		<Unit filename="click.cpp" />
-		<Unit filename="click.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
+		<Unit filename="data.cpp" />
+		<Unit filename="data.h" />
 		<Unit filename="device.cpp" />
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />

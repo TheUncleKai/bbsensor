@@ -224,8 +224,12 @@ void Display::write(uint8_t line, const char* fmt, ...)
 
     this->_set_line(line);
 
-    for (size_t i = 0; i < size; ++i) {
-        data = buffer[i];
+    for (size_t i = 0; i < DISPLAY_DIGITS; ++i) {
+        if (i < size) {
+            data = buffer[i];
+        } else {
+            data = 32;
+        }
         this->_send_high(data, true);
         this->_send_low(data, true);
     }
