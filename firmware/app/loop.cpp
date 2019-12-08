@@ -109,3 +109,11 @@ void Loop::set_counter(size_t channel, uint32_t n)
 
     this->p_channel[channel] = n;
 }
+
+
+void Loop::reset_counter(size_t channel)
+{
+    if (channel >= CHANNEL_LOOPS)
+        return;
+    this->p_number[channel] = 0;
+}

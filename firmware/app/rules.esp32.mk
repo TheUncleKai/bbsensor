@@ -13,21 +13,21 @@
 # limitations under the License.
 
 $(TARGET_ELF): $(OBJS)
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(GCC) ${subst $(ROOT)/$(OUTPUT)/,,$@}"
 	@$(LOGTIME) $(GCC) $(LDFLAGS) -Wl,--start-group $(OBJS) $(DEP_LIBS) $(LDLIBS) -Wl,--end-group -Wl,-EL -o $@ $(LOGONLY)
 	@$(GCC) $(LDFLAGS) -Wl,--start-group $(OBJS) $(DEP_LIBS) $(LDLIBS) -Wl,--end-group -Wl,-EL -o $@ $(LOGOUT)
 
 $(TARGET_PART): $(PATH_HW)/tools/partitions/default.csv
-	@$(LOG) "(ESP32PART) $@"
+	@$(LOG) "(ESP32PART) ${subst $(ROOT)/$(OUTPUT)/,,$@}"
 	@$(LOGTIME) $(ESP32PART) -q $< $@ $@ $(LOGONLY)
 	@$(ESP32PART) -q $< $@ $(LOGOUT)
 
 $(TARGET_BIN): $(TARGET_ELF)
-	@$(LOG) "(ESPTOOL) $@"
+	@$(LOG) "(ESPTOOL) ${subst $(ROOT)/$(OUTPUT)/,,$@}"
 	@$(LOGTIME) $(ESPTOOL) --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o $@ $< $(LOGONLY)
 	@$(ESPTOOL) --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o $@ $< $(LOGOUT)
 
 $(TARGET_SIZE): $(TARGET_ELF)
-	@$(LOG) "(SIZE) $@"
+	@$(LOG) "(SIZE) ${subst $(ROOT)/$(OUTPUT)/,,$@}"
 	@$(LOGTIME) $(SIZE) -A $< $(LOGONLY)
 	@$(SIZE) -A $< > $@

@@ -18,7 +18,6 @@
 #define BUTTON_H_INCLUDED
 
 #include <device.h>
-#include <click.h>
 
 
 class Button : public Device
@@ -27,18 +26,28 @@ class Button : public Device
         Button (uint8_t num, uint8_t pin);
         virtual ~Button();
 
+        enum Click {
+            NONE = 0,
+            SINGLE_CLICK = 1,
+            HOLD_CLICK = 2
+        };
+
         void setISR(void (*isr)(void));
         void handleISR();
 
         void setup();
         void execute();
 
-        Click::Type get_click();
+        Click click();
+        void reset();
 
     private:
         uint8_t m_num, m_pin;
+        unsigned long m_high, m_low;
 
-        Click* p_click;
+        Click m_type;
+
+        void _process();
 
         void (*p_isr)(void);
 };

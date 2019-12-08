@@ -17,25 +17,25 @@ Updater_Signing.h: $(ROOT)/rules/config.mk
 	@echo "#define ARDUINO_SIGNING 0" > Updater_Signing.h
 
 $(OBJDIR)/%.cpp.o: $(SRCDIR)/libb64/%.cpp
-	@$(LOG) "(CXX) $@"
+	@$(LOG) "(CXX) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(OBJDIR)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.cpp.o: $(SRCDIR)/umm_malloc/%.cpp
-	@$(LOG) "(CXX) $@"
+	@$(LOG) "(CXX) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(OBJDIR)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.c.o: $(SRCDIR)/umm_malloc/%.c
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(GCC) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(OBJDIR)
 	@$(LOGTIME) $(GCC) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(GCC) $(CFLAGS) $< -o $@ $(LOGOUT)
 
 $(OBJDIR)/%.cpp.o: $(SRCDIR)/spiffs/%.cpp
-	@$(LOG) "(CXX) $@"
+	@$(LOG) "(CXX) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(OBJDIR)
 	@$(LOGTIME) $(CXX) $(CFLAGS) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CFLAGS) $< -o $@ $(LOGOUT)

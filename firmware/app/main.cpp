@@ -43,17 +43,8 @@ void loop();
 // Variables
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-bool do_measure = false;
-uint8_t channel_number = 0;
-bool check = false;
-
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
-
-Display* display = hardware->display();
-Temperature::Manager* temperature = hardware->temperature();
-Temperature::Channel* channel = NULL;
-
 Loop* looper = new Loop();
 
 
@@ -75,20 +66,18 @@ void handleISR2()
 
 void print_channel()
 {
-    channel = temperature->get_channel(channel_number);
+    Temperature::Channel* channel = hardware->temperature()->current();
 
     if (channel->type() == Temperature::Type::NONE) {
         return;
     }
 
-    display->write(2, "                ");
-
     if (channel->type() == Temperature::Type::DATA) {
-        display->write(2, "%u: %u", channel->channel(), channel->value()->data);
+        hardware->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
     }
 
     if (channel->type() == Temperature::Type::VOLTAGE) {
-        display->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+        hardware->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
     }
 }
 
@@ -104,7 +93,7 @@ void setup()
     config->setup();
     config->read();
 
-    check = config->verify();
+    bool check = config->verify();
 
     if (check == false) {
         config->reset();
@@ -118,7 +107,7 @@ void setup()
     config->print();
 
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        temperature->add_channel(i, config->get_channel(i));
+        hardware->temperature()->add_channel(i, config->get_channel(i));
     }
 
     looper->set_counter(0, 10);
@@ -134,8 +123,28 @@ void setup()
 void loop()
 {
     looper->start();
-    temperature->set_measure(false, 0, false);
-    temperature->set_measure(false, 2, false);
+    hardware->temperature()->set_measure(false);
+
+
+    if (hardware->temperature()->get_measure() == true) {
+        Button::Click button1 = hardware->button1()->click();
+        Button::Click button2 = hardware->button2()->click();
+
+        if (button1 == Button::SINGLE_CLICK) {
+            hardware->temperature()->next();
+            print_channel();
+            looper->reset_counter(2);
+            hardware->button1()->reset();
+        }
+
+        if (button2 == Button::SINGLE_CLICK) {
+            hardware->temperature()->prev();
+            print_channel();
+            looper->reset_counter(2);
+            hardware->button2()->reset();
+        }
+    }
+
 
     if (looper->counter() == 0) {
         hardware->led1()->on();
@@ -144,15 +153,18 @@ void loop()
     if (looper->counter() == 10) {
         hardware->display()->clear();
         hardware->display()->write(1, "Start");
+        hardware->temperature()->set_measure(true);
     }
 
     if (looper->counter() == 20) {
         hardware->display()->write(1, "Measure");
-        do_measure = true;
 
         looper->activate();
-        temperature->set_measure(false, 0, do_measure);
-        temperature->set_measure(false, 2, do_measure);
+        hardware->temperature()->set_measure(true);
+    }
+
+    if (looper->counter() == 30) {
+        print_channel();
     }
 
     if (looper->number(0) == 10) {
@@ -160,18 +172,12 @@ void loop()
     }
 
     if (looper->number(2) == 100) {
-        if (channel_number == 0) {
-            channel_number = 2;
-        } else {
-            channel_number = 0;
-        }
-
+        hardware->temperature()->next();
         print_channel();
     }
 
     if (looper->number(1) == config->data()->measure_delay) {
-        temperature->set_measure(false, 0, do_measure);
-        temperature->set_measure(false, 2, do_measure);
+        hardware->temperature()->set_measure(true);
     }
 
     hardware->execute();

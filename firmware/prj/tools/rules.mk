@@ -15,21 +15,21 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # C
 $(OBJDIR)/%.c.o: $(SRCDIR)/%.c
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(GCC) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) $(CFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(GCC) $(CFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
 
 # C++
 $(OBJDIR)/%.cpp.o: $(SRCDIR)/%.cpp
-	@$(LOG) "(CXX) $@"
+	@$(LOG) "(CXX) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
 
 # ASM
 $(OBJDIR)/%.S.o: $(SRCDIR)/%.S
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(GCC) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) $(ASMFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(GCC) $(ASMFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
@@ -37,28 +37,28 @@ $(OBJDIR)/%.S.o: $(SRCDIR)/%.S
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # C
 $(OBJDIR)/%.o: %.c
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(GCC) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) $(CFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(GCC) $(CFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
 
 # C++
 $(OBJDIR)/%.o: %.cpp
-	@$(LOG) "(CXX) $@"
+	@$(LOG) "(CXX) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(CXX) $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
 
 # DEP/C
 $(OBJDIR)/%.d: %.c
-	@$(LOG) "(GCC) $@"
+	@$(LOG) "(DEP) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(GCC) -MM $(CFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(GCC) -MM $(CFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
 
 # DEP/C++
 $(OBJDIR)/%.d: %.cpp
-	@$(LOG) "(CXX) $@"
+	@$(LOG) "(DEP) ${subst $(SRCDIR)/,,$<}"
 	@$(MKDIR) $(FOLDER)
 	@$(LOGTIME) $(CXX) -MM $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGONLY)
 	@$(CXX) -MM $(CCFLAGS) $(ADD_INCLUDE) $< -o $@ $(LOGOUT)
@@ -67,7 +67,7 @@ $(OBJDIR)/%.d: %.cpp
 # LIB
 
 $(OBJDIR)/%.ar: $(OBJDIR)/%.o $(OBJS)
-	@$(LOG) "(AR) $< -> $(TARGET_LIB)"
+	@$(LOG) "(AR) ${subst $(ROOT)/$(OUTPUT)/,,$(TARGET_LIB)} <-- ${subst $(OBJDIR)/,,$<}"
 	@$(LOGTIME) $(AR) cru $(TARGET_LIB) $< $(LOGONLY)
 	@$(AR) cru $(TARGET_LIB) $< $(LOGOUT)
 	@echo 1 > $@
