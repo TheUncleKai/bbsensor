@@ -62,7 +62,13 @@
 
 #ifdef DEBUG_ESP_PORT
 #define DEBUG_MSG(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
-#else
+#endif // DEBUG_ESP_PORT
+
+#ifdef DEBUG_ESP32_PORT
+#define DEBUG_MSG(...) DEBUG_ESP32_PORT.printf( __VA_ARGS__ )
+#endif // DEBUG_ESP32_PORT
+
+#if !defined(DEBUG_ESP_PORT) && !defined(DEBUG_ESP32_PORT)
 #define DEBUG_MSG(...)
 #endif
 

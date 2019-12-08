@@ -13,4 +13,5 @@
 # limitations under the License.
 
 UPLOADFLAGS = \
-	--chip $(CHIP) --port $(PORT) --baud $(BAUD) --trace write_flash 0x0
+    --chip $(CHIP) --port $(PORT) --baud $(BAUD) \
+    --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect
