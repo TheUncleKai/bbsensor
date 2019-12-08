@@ -67,8 +67,8 @@ clean:
 
 upload: $(BIN)
 	@$(INFORM) "Upload $(BIN)"
-	@$(LOGTIME) $(ESPTOOL) $(UPLOADFLAGS) $(TARGET_BIN) $(LOGONLY)
-	@$(ESPTOOL) $(UPLOADFLAGS) $(TARGET_BIN) $(LOGOUT)
+	@$(LOGTIME) $(ESPTOOL) $(UPLOADFLAGS) $(UPLOAD_APP) $(LOGONLY)
+	@$(ESPTOOL) $(UPLOADFLAGS) $(UPLOAD_APP) $(LOGOUT)
 
 # Include global rules
 include $(ROOT)/prj/tools/rules.mk

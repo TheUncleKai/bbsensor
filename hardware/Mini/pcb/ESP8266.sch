@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:BBMini-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -391,4 +390,10 @@ Wire Wire Line
 NoConn ~ 6800 3450
 Wire Bus Line
 	8300 2750 8300 4875
+Text Label 7100 2250 0    60   ~ 0
+LED
+Text Label 7100 2450 0    60   ~ 0
+BUTTON1
+Text Label 7100 2350 0    60   ~ 0
+BUTTON2
 $EndSCHEMATC

@@ -19,36 +19,26 @@
 #include <settings.h>
 #include <channel.h>
 #include <tables.h>
-
+#include <data.h>
 
 Temperature::Channel::Channel(uint8_t num, Type type)
 {
     this->p_lastvalue = NULL;
     this->m_measure = false;
     this->m_num = num;
-    this->m_counter = 0;
     this->m_type = type;
-    this->p_values = new Temperature::Value *[TEMP_ARRAY];
+    this->m_head = 0;
+    this->m_tail = 0;
+    this->p_lastvalue = new Temperature::Value;
 
-    int i = 0;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        this->p_values[i] = new Temperature::Value;
-    }
+    this->p_lastvalue->data = 0;
+    this->p_lastvalue->value = 0.0;
 }
 
 
 Temperature::Channel::~Channel()
 {
-    int i = 0;
-    Temperature::Value* value;
-
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = this->p_values[i];
-        delete value;
-    }
-
-    delete this->p_values;
+    delete this->p_lastvalue;
 }
 
 
@@ -58,18 +48,31 @@ Temperature::Value* Temperature::Channel::value()
 }
 
 
-void Temperature::Channel::clear()
+bool Temperature::Channel::empty() const
 {
-    int i = 0;
-    Temperature::Value* value;
+    return (!this->m_full &&(this->m_head == this->m_tail));
+}
 
-    for (i = 0; i < TEMP_ARRAY; ++i) {
-        value = this->p_values[i];
-        value->data = 0;
-        value->value = 0.0;
+
+bool Temperature::Channel::full() const
+{
+    return this->m_full;
+}
+
+
+size_t Temperature::Channel::size() const
+{
+    size_t size = TEMP_ARRAY;
+
+    if (this->m_full != true) {
+        if (this->m_head > this->m_tail) {
+            size = this->m_head - this->m_tail;
+        } else {
+            size = TEMP_ARRAY + this->m_head - this->m_tail;
+        }
     }
 
-    this->m_counter = 0;
+    return size;
 }
 
 
@@ -101,34 +104,51 @@ void Temperature::Channel::do_measure(bool measure)
 }
 
 
-void Temperature::Channel::add_value(uint16_t data)
+void Temperature::Channel::put(uint16_t data)
 {
     if (data > TEMP_LIMIT) {
         return;
     }
 
-    if (this->m_counter == TEMP_ARRAY) {
-#ifdef DEBUG_LEVEL2
-    DEBUG_MSG("CHANNEL%u: clear data\n", this->channel());
-#endif // DEBUG_LEVEL2
+    DATAList[this->m_num][this->m_head] = data;
 
-        this->clear();
+    if (this->m_full == true) {
+        this->m_tail = (this->m_tail + 1) % TEMP_ARRAY;
     }
 
-    Temperature::Value* value = this->p_values[this->m_counter];
+    this->m_head = (this->m_head + 1) % TEMP_ARRAY;
 
-    value->data = data;
+    this->m_full = this->m_head == this->m_tail;
+
+
+    this->p_lastvalue->data = data;
 
     if (this->m_type == Temperature::Type::VOLTAGE) {
-        value->value = table_voltages[data];
+        this->p_lastvalue->value = table_voltages[data];
     }
 
 #ifdef DEBUG_LEVEL1
-    DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", this->m_num, this->m_counter, value->data, value->value);
+    DEBUG_MSG("%u\t%u\t%u\t%5.3f\n",
+              this->m_num,
+              this->m_head,
+              this->p_lastvalue->data,
+              this->p_lastvalue->value);
 #endif // DEBUG_LEVEL1
+}
 
-    this->p_lastvalue = value;
-    this->m_counter++;
+
+uint16_t Temperature::Channel::get()
+{
+    if (this->empty() == true) {
+        return 0;
+    }
+
+    uint16_t data = DATAList[this->m_num][this->m_tail];
+
+    this->m_full = false;
+    this->m_tail = (this->m_tail + 1) % TEMP_ARRAY;
+
+    return data;
 }
 
 
