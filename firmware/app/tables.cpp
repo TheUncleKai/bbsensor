@@ -16,7 +16,7 @@
 
 #include <tables.h>
 
-float table_voltages[4096] = {
+const float table_voltages[4096] = {
     0,
     0.001,
     0.002,
@@ -4116,7 +4116,7 @@ float table_voltages[4096] = {
 };
 
 
-float table_rtd[4096] = {
+const float table_rtd[4096] = {
     0,
     0.001,
     0.002,

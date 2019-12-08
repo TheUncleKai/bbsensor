@@ -14,8 +14,14 @@
    limitations under the License.
 */
 
-#ifndef CLICK_H_INCLUDED
-#define CLICK_H_INCLUDED
+#ifndef DATA_H_INCLUDED
+#define DATA_H_INCLUDED
 
+#include <Arduino.h>
 
-#endif // CLICK_H_INCLUDED
+#include <settings.h>
+#include <channel.h>
+
+extern uint16_t DATAList[TEMP_CHANNELS][TEMP_ARRAY];
+
+#endif // DATA_H_INCLUDED

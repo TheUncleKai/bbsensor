@@ -20,8 +20,8 @@
 #include <Arduino.h>
 
 
-extern float table_voltages[4096];
+const extern float table_voltages[4096];
 
-extern float table_rtd[4096];
+const extern float table_rtd[4096];
 
 #endif // TABLES_H_INCLUDED

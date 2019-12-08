@@ -16,8 +16,8 @@ SOURCES = \
     main.cpp \
     button.cpp \
     channel.cpp \
-    click.cpp \
     conf.cpp \
+    data.cpp \
     device.cpp \
     display.cpp \
     hardware.cpp \

@@ -161,7 +161,7 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
     DEBUG_MSG("TEMPERATURE: channel %u, measure %u\n", channel->channel(), value);
 #endif // DEBUG_LEVEL3
 
-    channel->add_value(value);
+    channel->put(value);
 }
 
 
