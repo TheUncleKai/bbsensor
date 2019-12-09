@@ -29,9 +29,11 @@ DEP_LIBS = \
     $(ROOT)/$(OUTPUT)/libCRC32.a \
     $(ROOT)/$(OUTPUT)/libcore.a
 
+# python /home/kai/.arduino15/packages/esp32/tools/esptool_py/2.6.1/esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 /home/kai/.arduino15/packages/esp32/hardware/esp32/1.0.4/tools/partitions/boot_app0.bin 0x1000 /home/kai/.arduino15/packages/esp32/hardware/esp32/1.0.4/tools/sdk/bin/bootloader_qio_80m.bin 0x10000 /tmp/arduino_build_386427/blink.ino.bin 0x8000 /tmp/arduino_build_386427/blink.ino.partitions.bin
+
+
 UPLOAD_APP = \
-    0xe000 $(ESP32_TOOLS)/partitions/boot_app0.bin \
-    0x1000 $(ESP32_TOOLS)/sdk/bin/bootloader_dio_80m.bin \
+    0xe000 $(PATH_HW)/tools/partitions/boot_app0.bin \
+    0x1000 $(PATH_HW)/tools/sdk/bin/bootloader_dio_80m.bin \
     0x10000 $(TARGET_BIN) \
     0x8000 $(TARGET_PART)
-
