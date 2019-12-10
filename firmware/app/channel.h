@@ -21,9 +21,6 @@
 #include <device.h>
 
 
-namespace Temperature
-{
-
 
 typedef struct
 {
@@ -77,7 +74,5 @@ class Channel : public Device
         Type m_type;
 };
 
-
-};
 
 #endif // CHANNEL_H_INCLUDED

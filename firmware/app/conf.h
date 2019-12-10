@@ -18,7 +18,7 @@
 #define CONF_H_INCLUDED
 
 #include <EEPROM.h>
-#include <channel.h>
+#include <temperature.h>
 #include <settings.h>
 
 #define CONFIG_VERSION 4

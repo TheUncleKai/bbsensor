@@ -15,7 +15,6 @@
 SOURCES = \
     main.cpp \
     button.cpp \
-    channel.cpp \
     conf.cpp \
     data.cpp \
     device.cpp \

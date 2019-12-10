@@ -21,7 +21,7 @@
 #include <tables.h>
 #include <data.h>
 
-Temperature::Channel::Channel(uint8_t num, Type type)
+Channel::Channel(uint8_t num, Type type)
 {
     this->p_lastvalue = NULL;
     this->m_measure = false;
@@ -29,38 +29,38 @@ Temperature::Channel::Channel(uint8_t num, Type type)
     this->m_type = type;
     this->m_head = 0;
     this->m_tail = 0;
-    this->p_lastvalue = new Temperature::Value;
+    this->p_lastvalue = new Value;
 
     this->p_lastvalue->data = 0;
     this->p_lastvalue->value = 0.0;
 }
 
 
-Temperature::Channel::~Channel()
+Channel::~Channel()
 {
     delete this->p_lastvalue;
 }
 
 
-Temperature::Value* Temperature::Channel::value()
+Value* Channel::value()
 {
     return this->p_lastvalue;
 }
 
 
-bool Temperature::Channel::empty() const
+bool Channel::empty() const
 {
     return (!this->m_full &&(this->m_head == this->m_tail));
 }
 
 
-bool Temperature::Channel::full() const
+bool Channel::full() const
 {
     return this->m_full;
 }
 
 
-size_t Temperature::Channel::size() const
+size_t Channel::size() const
 {
     size_t size = TEMP_ARRAY;
 
@@ -76,35 +76,35 @@ size_t Temperature::Channel::size() const
 }
 
 
-Temperature::Type Temperature::Channel::type()
+Type Channel::type()
 {
     return this->m_type;
 }
 
 
-void Temperature::Channel::setup()
+void Channel::setup()
 {
 }
 
 
-void Temperature::Channel::execute()
+void Channel::execute()
 {
 }
 
 
-uint8_t Temperature::Channel::channel()
+uint8_t Channel::channel()
 {
     return this->m_num;
 }
 
 
-void Temperature::Channel::do_measure(bool measure)
+void Channel::do_measure(bool measure)
 {
     this->m_measure = measure;
 }
 
 
-void Temperature::Channel::put(uint16_t data)
+void Channel::put(uint16_t data)
 {
     if (data > TEMP_LIMIT) {
         return;
@@ -123,7 +123,7 @@ void Temperature::Channel::put(uint16_t data)
 
     this->p_lastvalue->data = data;
 
-    if (this->m_type == Temperature::Type::VOLTAGE) {
+    if (this->m_type == Type::VOLTAGE) {
         this->p_lastvalue->value = table_voltages[data];
     }
 
@@ -137,7 +137,7 @@ void Temperature::Channel::put(uint16_t data)
 }
 
 
-uint16_t Temperature::Channel::get()
+uint16_t Channel::get()
 {
     if (this->empty() == true) {
         return 0;
@@ -152,7 +152,7 @@ uint16_t Temperature::Channel::get()
 }
 
 
-bool Temperature::Channel::measure()
+bool Channel::measure()
 {
     return this->m_measure;
 }

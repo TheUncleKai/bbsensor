@@ -68,16 +68,16 @@ void print_channel()
 {
     Temperature::Channel* channel = hardware->temperature()->current();
 
-    if (channel->type() == Temperature::Type::NONE) {
+    if (channel->type == Temperature::Type::NONE) {
         return;
     }
 
-    if (channel->type() == Temperature::Type::DATA) {
-        hardware->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
+    if (channel->type == Temperature::Type::DATA) {
+        hardware->display()->write(2, "%u: %u", channel->num, channel->data);
     }
 
-    if (channel->type() == Temperature::Type::VOLTAGE) {
-        hardware->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+    if (channel->type == Temperature::Type::VOLTAGE) {
+        hardware->display()->write(2, "%u: %5.3f", channel->num, channel->value);
     }
 }
 
