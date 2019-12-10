@@ -127,8 +127,6 @@
 		</Compiler>
 		<Unit filename="button.cpp" />
 		<Unit filename="button.h" />
-		<Unit filename="channel.cpp" />
-		<Unit filename="channel.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
 		<Unit filename="data.cpp" />
