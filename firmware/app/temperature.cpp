@@ -18,8 +18,13 @@
 
 #include <settings.h>
 #include <temperature.h>
-#include <data.h>
 #include <tables.h>
+
+
+uint16_t DATAList[TEMP_CHANNELS][TEMP_ARRAY];
+
+
+Temperature::Channel channellist[TEMP_CHANNELS];
 
 
 const char* Temperature::TEMPERATURE_Type[] = {
@@ -30,11 +35,6 @@ const char* Temperature::TEMPERATURE_Type[] = {
     "PTC10",
     "PTC100"
 };
-
-
-Temperature::Channel channellist[TEMP_CHANNELS];
-
-
 
 
 Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)

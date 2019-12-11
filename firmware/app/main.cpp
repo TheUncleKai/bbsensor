@@ -24,11 +24,6 @@
 #include <conf.h>
 
 
-// Name and password of the access point
-//#define SSID "Pussycat"
-//#define PASSWORD "supersecret"
-
-
 // Declarations
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
