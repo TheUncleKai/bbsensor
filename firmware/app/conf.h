@@ -18,7 +18,6 @@
 #define CONF_H_INCLUDED
 
 #include <EEPROM.h>
-#include <temperature.h>
 #include <settings.h>
 
 #define CONFIG_VERSION 4
@@ -54,11 +53,11 @@ class Manager
         void reset();
         void write();
 
-        void set_channel(uint8_t number, Temperature::Type type);
+        void set_channel(uint8_t number, uint8_t type);
         void set_delay(uint32_t measure_delay);
         void set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const char* wlan_pass);
 
-        Temperature::Type get_channel(uint8_t number);
+        uint8_t get_channel(uint8_t number);
 
         void print();
 

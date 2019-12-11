@@ -22,7 +22,7 @@
 #include <tables.h>
 
 
-const char* TEMPERATURE_Type[] = {
+const char* Temperature::TEMPERATURE_Type[] = {
     "NONE",
     "DATA",
     "VOLTAGE",
