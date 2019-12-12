@@ -42,7 +42,6 @@ class Button : public Device
         void reset();
 
     private:
-        uint8_t m_num, m_pin;
         unsigned long m_high, m_low;
 
         Click m_type;

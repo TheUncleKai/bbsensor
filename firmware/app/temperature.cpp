@@ -37,14 +37,10 @@ const char* Temperature::TEMPERATURE_Type[] = {
 };
 
 
-Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
+Temperature::Manager::Manager(SPIClass* spi, uint8_t cs) : Device(spi, cs)
 {
-    this->m_cs = cs;
-    this->p_spi = new SPIWrapper();
     this->p_current = NULL;
     this->m_active = false;
-
-    this->p_spi->set_spi(spi);
 
     int i = 0;
     Temperature::Channel* channel = NULL;
@@ -66,20 +62,11 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs)
 
 Temperature::Manager::~Manager()
 {
-    delete this->p_spi;
-}
-
-
-uint8_t Temperature::Manager::cs()
-{
-    return this->m_cs;
 }
 
 
 void Temperature::Manager::setup()
 {
-    DEBUG_MSG("TEMPERATURE: setup cs pin %d\n", this->m_cs);
-    pinMode(this->m_cs, OUTPUT);
 }
 
 
@@ -141,11 +128,11 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 
     command = (0x0018 ^ channel->num) << 14;
 
-    this->p_spi->transfer(this->m_cs, (uint8_t)((0x00FF0000 & command) >> 16)); // set start
-    this->p_spi->transfer(this->m_cs, (uint8_t)((0x0000FF00 & command) >> 8)); // set start
-    this->p_spi->transfer(this->m_cs, (uint8_t)(0x000000FF & command)); // set start
+    this->spi()->transfer((uint8_t)((0x00FF0000 & command) >> 16)); // set start
+    this->spi()->transfer((uint8_t)((0x0000FF00 & command) >> 8)); // set start
+    this->spi()->transfer((uint8_t)(0x000000FF & command)); // set start
 
-    answer_size = this->p_spi->commit(false, data);
+    answer_size = this->spi()->commit(false, data);
 
     if (answer_size != 3)
         return;

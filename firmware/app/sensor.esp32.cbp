@@ -141,6 +141,8 @@
 		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="settings.h" />
+		<Unit filename="spi_wrapper.cpp" />
+		<Unit filename="spi_wrapper.h" />
 		<Unit filename="tables.cpp" />
 		<Unit filename="tables.h" />
 		<Unit filename="temperature.cpp" />

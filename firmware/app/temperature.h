@@ -74,12 +74,8 @@ class Manager : public Device
         void next();
         void prev();
 
-        uint8_t cs();
-
     private:
-        uint8_t m_cs;
         bool m_active;
-        SPIWrapper* p_spi;
         Channel* p_current;
 
         void _process_channel(Channel* channel);
