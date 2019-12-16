@@ -1,4 +1,4 @@
-update=04/12/2019 00:02:44
+update=16/12/2019 17:01:54
 version=1
 last_client=kicad
 [cvpcb]
@@ -9,6 +9,16 @@ version=1
 [eeschema]
 version=1
 LibDir=
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=../plot/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -258,7 +268,7 @@ dPairViaGap=0,25
 [pcbnew/Netclasses/3]
 Name=AC
 Clearance=0,4
-TrackWidth=2
+TrackWidth=1
 ViaDiameter=0,8
 ViaDrill=0,4
 uViaDiameter=0,3
@@ -266,13 +276,3 @@ uViaDrill=0,1
 dPairWidth=0,2
 dPairGap=0,25
 dPairViaGap=0,25
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=../plot/
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceAjustPassiveValues=0
-LabSize=60
-ERC_TestSimilarLabels=1
