@@ -92,7 +92,7 @@ AR Path="/5D6608A5/5DFAF125" Ref="R?"  Part="1"
 AR Path="/5DFAF125" Ref="R3"  Part="1" 
 F 0 "R3" V 9175 2125 50  0000 C CNN
 F 1 "1k" V 9225 2300 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 9155 2300 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 9155 2300 50  0001 C CNN
 F 3 "~" H 9225 2300 50  0001 C CNN
 	1    9225 2300
 	0    1    1    0   
@@ -137,7 +137,7 @@ AR Path="/5D6608A5/5DFAF13B" Ref="R?"  Part="1"
 AR Path="/5DFAF13B" Ref="R6"  Part="1" 
 F 0 "R6" H 10050 2650 50  0000 L CNN
 F 1 "2k2" V 10100 2500 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 10030 2500 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 10030 2500 50  0001 C CNN
 F 3 "~" H 10100 2500 50  0001 C CNN
 	1    10100 2500
 	1    0    0    -1  
@@ -193,7 +193,7 @@ AR Path="/5D6608A5/5DFAF156" Ref="R?"  Part="1"
 AR Path="/5DFAF156" Ref="R2"  Part="1" 
 F 0 "R2" V 8600 900 50  0000 L CNN
 F 1 "140" V 8500 1000 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8430 1000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8430 1000 50  0001 C CNN
 F 3 "~" H 8500 1000 50  0001 C CNN
 	1    8500 1000
 	1    0    0    -1  
@@ -242,7 +242,7 @@ AR Path="/5D6608A5/5DFAF16D" Ref="R?"  Part="1"
 AR Path="/5DFAF16D" Ref="R4"  Part="1" 
 F 0 "R4" H 9075 3150 50  0000 L CNN
 F 1 "2k2" V 9000 3150 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8930 3150 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8930 3150 50  0001 C CNN
 F 3 "~" H 9000 3150 50  0001 C CNN
 	1    9000 3150
 	1    0    0    -1  
@@ -272,7 +272,7 @@ AR Path="/5D6608A5/5DFAF195" Ref="R?"  Part="1"
 AR Path="/5DFAF195" Ref="R5"  Part="1" 
 F 0 "R5" H 9900 2650 50  0000 L CNN
 F 1 "2k2" V 9950 2500 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 9880 2500 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 9880 2500 50  0001 C CNN
 F 3 "~" H 9950 2500 50  0001 C CNN
 	1    9950 2500
 	1    0    0    -1  
@@ -366,7 +366,7 @@ AR Path="/5D6ADE4E/5DFC7EE9" Ref="U?"  Part="1"
 AR Path="/5DFC7EE9" Ref="U5"  Part="1" 
 F 0 "U5" H 4200 4450 50  0000 C CNN
 F 1 "MCP3208" H 4300 3400 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 4000 4100 50  0001 C CNN
+F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 4000 4100 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21298c.pdf" H 4000 4100 50  0001 C CNN
 	1    3900 4000
 	1    0    0    -1  
@@ -381,7 +381,7 @@ AR Path="/5D6ADE4E/5DFC7EF0" Ref="C?"  Part="1"
 AR Path="/5DFC7EF0" Ref="C6"  Part="1" 
 F 0 "C6" V 4098 3350 50  0000 C CNN
 F 1 "100n" V 4189 3350 50  0000 C CNN
-F 2 "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm" H 4388 3200 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4388 3200 50  0001 C CNN
 F 3 "~" H 4350 3350 50  0001 C CNN
 	1    4350 3350
 	0    -1   1    0   
@@ -958,7 +958,7 @@ AR Path="/5E27623D/5E280BE3" Ref="R?"  Part="1"
 AR Path="/5E280BE3" Ref="R8"  Part="1" 
 F 0 "R8" V 4600 6300 50  0000 L CNN
 F 1 "2k" V 4550 6150 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 4480 6150 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4480 6150 50  0001 C CNN
 F 3 "~" H 4550 6150 50  0001 C CNN
 	1    4550 6150
 	-1   0    0    -1  
@@ -1002,7 +1002,7 @@ AR Path="/5E27623D/5E280BCB" Ref="R?"  Part="1"
 AR Path="/5E280BCB" Ref="R7"  Part="1" 
 F 0 "R7" V 4800 5450 50  0000 L CNN
 F 1 "220" V 4750 5300 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 4680 5300 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4680 5300 50  0001 C CNN
 F 3 "~" H 4750 5300 50  0001 C CNN
 	1    4750 5300
 	-1   0    0    -1  
@@ -1077,7 +1077,7 @@ AR Path="/5E27623D/5E280B95" Ref="C?"  Part="1"
 AR Path="/5E280B95" Ref="C5"  Part="1" 
 F 0 "C5" V 7548 4650 50  0000 C CNN
 F 1 "100n" V 7639 4650 50  0000 C CNN
-F 2 "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm" H 7838 4500 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7838 4500 50  0001 C CNN
 F 3 "~" H 7800 4650 50  0001 C CNN
 	1    7800 4650
 	0    -1   1    0   
@@ -1090,7 +1090,7 @@ AR Path="/5E27623D/5E280B8F" Ref="U?"  Part="1"
 AR Path="/5E280B8F" Ref="U3"  Part="1" 
 F 0 "U3" H 7500 6050 50  0000 C CNN
 F 1 "74HC595" H 7000 4850 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 7300 5500 50  0001 C CNN
+F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 7300 5500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 7300 5500 50  0001 C CNN
 	1    7300 5500
 	-1   0    0    -1  
@@ -1176,7 +1176,7 @@ AR Path="/5D8E11F6/5DF98DD1" Ref="R?"  Part="1"
 AR Path="/5DF8D843/5DF98DD1" Ref="R?"  Part="1" 
 F 0 "R1" V 5250 1350 50  0000 C CNN
 F 1 "220" V 5350 1350 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 5280 1350 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5280 1350 50  0001 C CNN
 F 3 "~" H 5350 1350 50  0001 C CNN
 	1    5350 1350
 	0    1    1    0   
@@ -1247,7 +1247,7 @@ AR Path="/5DF8D843/5DF98E03" Ref="C?"  Part="1"
 AR Path="/5DF98E03" Ref="C2"  Part="1" 
 F 0 "C2" H 2715 1646 50  0000 L CNN
 F 1 "100n" H 2715 1555 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm" H 2638 1450 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2638 1450 50  0001 C CNN
 F 3 "~" H 2600 1600 50  0001 C CNN
 	1    2600 1600
 	1    0    0    -1  
@@ -1324,18 +1324,18 @@ $EndComp
 $Comp
 L Connector_Generic:Conn_01x02 J?
 U 1 1 5DF98E28
-P 800 850
+P 650 850
 AR Path="/5DF8D843/5DF98E28" Ref="J?"  Part="1" 
 AR Path="/5DF98E28" Ref="J1"  Part="1" 
-F 0 "J1" H 800 950 50  0000 C CNN
-F 1 "POWER" H 800 600 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 800 850 50  0001 C CNN
-F 3 "~" H 800 850 50  0001 C CNN
-	1    800  850 
+F 0 "J1" H 650 950 50  0000 C CNN
+F 1 "POWER" H 650 600 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 650 850 50  0001 C CNN
+F 3 "~" H 650 850 50  0001 C CNN
+	1    650  850 
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	1050 950  1000 950 
+	1050 950  850  950 
 $Comp
 L Regulator_Switching:LM2672M-5.0 U?
 U 1 1 5DF98E30
@@ -1394,7 +1394,7 @@ AR Path="/5DF8D843/5DF98E4C" Ref="C?"  Part="1"
 AR Path="/5DF98E4C" Ref="C3"  Part="1" 
 F 0 "C3" V 3900 1250 50  0000 L CNN
 F 1 "10n" V 4100 1250 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm" H 4038 1000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4038 1000 50  0001 C CNN
 F 3 "~" H 4000 1150 50  0001 C CNN
 	1    4000 1150
 	0    1    -1   0   
@@ -1444,7 +1444,7 @@ Wire Wire Line
 Wire Wire Line
 	1050 950  1050 1100
 Wire Wire Line
-	1000 850  1100 850 
+	850  850  1100 850 
 NoConn ~ 1500 750 
 $Comp
 L power:GND #PWR?
@@ -1537,4 +1537,8 @@ Wire Wire Line
 Connection ~ 10400 1600
 Wire Wire Line
 	10400 1600 10550 1600
+Text Label 2150 950  0    60   ~ 0
+VIN
+Text Label 900  850  0    60   ~ 0
+VPOWER
 $EndSCHEMATC
