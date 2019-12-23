@@ -49,15 +49,15 @@ SPIClass* spi = new SPIClass();
 
 // Devices
 LED* led1 = new LED(1, PIN_LED1);
-Button* button1 = new Button(1, PIN_BUTTON1);
-Button* button2 = new Button(2, PIN_BUTTON2);
+Button::Manager* button1 = new Button::Manager(1, PIN_BUTTON1);
+Button::Manager* button2 = new Button::Manager(2, PIN_BUTTON2);
 Display* display = new Display(spi, PIN_CS1);
 Temperature::Manager* temperature = new Temperature::Manager(spi, PIN_CS2);
 
 
 // Variables
-Button::Click click1 = Button::NONE;
-Button::Click click2 = Button::NONE;
+Button::Click click1 = Button::Click::NONE;
+Button::Click click2 = Button::Click::NONE;
 
 
 // Implemnatation
@@ -156,14 +156,14 @@ void loop()
     click1 = button1->click();
     click2 = button2->click();
 
-    if (click1 == Button::SINGLE_CLICK) {
+    if (click1 == Button::Click::SINGLE) {
         temperature->next();
         print_channel();
         looper->reset_counter(2);
         button1->reset();
     }
 
-    if (click2 == Button::SINGLE_CLICK) {
+    if (click2 == Button::Click::SINGLE) {
         temperature->prev();
         print_channel();
         looper->reset_counter(2);

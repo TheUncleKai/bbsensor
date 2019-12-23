@@ -20,17 +20,26 @@
 #include <device.h>
 
 
-class Button : public Device
+namespace Button
+{
+
+
+enum class Click
+{
+    NONE = 0,
+    SINGLE = 1,
+    HOLD = 2
+};
+
+
+extern const char* CLICK_Type[];
+
+
+class Manager : public Device
 {
     public:
-        Button (uint8_t num, uint8_t pin);
-        virtual ~Button();
-
-        enum Click {
-            NONE = 0,
-            SINGLE_CLICK = 1,
-            HOLD_CLICK = 2
-        };
+        Manager (uint8_t num, uint8_t pin);
+        virtual ~Manager();
 
         void setISR(void (*isr)(void));
         void handleISR();
@@ -49,6 +58,9 @@ class Button : public Device
         void _process();
 
         void (*p_isr)(void);
+};
+
+
 };
 
 #endif // BUTTON_H_INCLUDED

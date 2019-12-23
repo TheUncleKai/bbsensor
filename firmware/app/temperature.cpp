@@ -165,8 +165,20 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
     channel->full = channel->head == channel->tail;
     channel->data = value;
 
-    if (channel->type == Type::VOLTAGE) {
+    if (channel->type == Temperature::Type::VOLTAGE) {
         channel->value = table_voltages[value];
+    }
+
+    if (channel->type == Temperature::Type::RTD) {
+        channel->value = table_rtd[value];
+    }
+
+    if (channel->type == Temperature::Type::PTC10) {
+        channel->value = table_ptc10[value];
+    }
+
+    if (channel->type == Temperature::Type::PTC100) {
+        channel->value = table_ptc100[value];
     }
 
 #ifdef DEBUG_LEVEL1

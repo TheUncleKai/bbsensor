@@ -20,9 +20,17 @@
 #include <button.h>
 
 
-Button::Button (uint8_t num, uint8_t pin) : Device(num, pin)
+const char* Button::CLICK_Type[] = {
+    "NONE",
+    "SINGLE",
+    "HOLD"
+};
+
+
+
+Button::Manager::Manager (uint8_t num, uint8_t pin) : Device(num, pin)
 {
-    this->m_type = Button::NONE;
+    this->m_type = Button::Click::NONE;
     this->m_high = 0;
     this->m_low = 0;
 
@@ -30,18 +38,18 @@ Button::Button (uint8_t num, uint8_t pin) : Device(num, pin)
 }
 
 
-Button::~Button()
+Button::Manager::~Manager()
 {
 }
 
 
-void Button::setISR(void (*isr)(void))
+void Button::Manager::setISR(void (*isr)(void))
 {
     this->p_isr = isr;
 }
 
 
-void Button::handleISR()
+void Button::Manager::handleISR()
 {
     unsigned long timestamp = millis();
 
@@ -66,7 +74,7 @@ void Button::handleISR()
 }
 
 
-void Button::_process()
+void Button::Manager::_process()
 {
     unsigned long diff, ddiff;
 
@@ -81,15 +89,15 @@ void Button::_process()
 #endif // DEBUG_LEVEL2
 
     if (diff > CLICK_SINGLE && diff < CLICK_HOLD) {
-        this->m_type = Button::SINGLE_CLICK;
+        this->m_type = Button::Click::SINGLE;
     }
 
     if (diff >= CLICK_HOLD) {
-        this->m_type = Button::HOLD_CLICK;
+        this->m_type = Button::Click::HOLD;
     }
 
 #ifdef DEBUG_LEVEL1
-        DEBUG_MSG("BUTTON%d: %d\n", this->number(), this->m_type);
+        DEBUG_MSG("BUTTON%d: %s\n", this->number(), Button::CLICK_Type[(size_t)this->m_type]);
 #endif // DEBUG_LEVEL1
 
     this->m_high = 0;
@@ -97,19 +105,19 @@ void Button::_process()
 }
 
 
-Button::Click Button::click()
+Button::Click Button::Manager::click()
 {
     return this->m_type;
 }
 
 
-void Button::reset()
+void Button::Manager::reset()
 {
-    this->m_type = Button::NONE;
+    this->m_type = Button::Click::NONE;
 }
 
 
-void Button::setup()
+void Button::Manager::setup()
 {
     DEBUG_MSG("BUTTON%d: setup pin %d\n", this->number(), this->pin());
 
@@ -124,6 +132,6 @@ void Button::setup()
 }
 
 
-void Button::execute()
+void Button::Manager::execute()
 {
 }
