@@ -65,7 +65,7 @@ class Manager : public Device
 
         void execute();
 
-        void set_measure(bool all);
+        void set_measure(bool active);
         bool get_measure();
 
         Channel* get_channel(uint8_t channel_number);
