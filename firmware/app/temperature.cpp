@@ -175,7 +175,7 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
 }
 
 
-void Temperature::Manager::set_measure(bool all)
+void Temperature::Manager::set_measure(bool active)
 {
     Temperature::Channel* channel;
     int i = 0;
@@ -184,12 +184,16 @@ void Temperature::Manager::set_measure(bool all)
     for (i = 0; i < TEMP_CHANNELS; ++i) {
         channel = &channellist[i];
 
+        if (channel->type == Temperature::Type::NONE) {
+            continue;
+        }
+
         if (channel == NULL) {
             continue;
         }
 
-        channel->measure = true;
-        this->m_active = true;
+        channel->measure = active;
+        this->m_active = active;
     }
 }
 
