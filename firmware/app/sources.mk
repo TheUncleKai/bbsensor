@@ -21,6 +21,7 @@ SOURCES = \
     hardware.cpp \
     led.cpp \
     loop.cpp \
+    spi_wrapper.cpp \
     tables.cpp \
     temperature.cpp \
     utils.cpp

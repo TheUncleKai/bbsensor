@@ -14,127 +14,67 @@
    limitations under the License.
 */
 
-#include <Arduino.h>
-
-#include <settings.h>
 #include <device.h>
-#include <utils.h>
 
-SPIWrapper::SPIWrapper ()
+
+
+Device::Device()
 {
-    this->p_data = new uint8_t[32];
-    this->m_transfer = 0;
-    this->m_channel = 0;
-    this->m_counter = 0;
-    int i = 0;
+    this->p_spi = NULL;
+    this->m_num = 0;
+    this->m_pin = 0;
+}
 
-    for (i = 0; i < 32; ++i) {
-        this->p_data[i] = 0;
+
+Device::Device(SPIClass* spi, uint8_t cs)
+{
+    this->p_spi = new SPIWrapper(cs);
+    this->p_spi->set_spi(spi);
+
+    this->m_num = 0;
+    this->m_pin = 0;
+}
+
+
+Device::Device(uint8_t num, uint8_t pin)
+{
+    this->p_spi = NULL;
+    this->m_num = num;
+    this->m_pin = pin;
+}
+
+
+Device::~Device()
+{
+    if (this->p_spi != NULL) {
+        delete this->p_spi;
     }
 }
 
 
-SPIWrapper::~SPIWrapper()
+void Device::setup()
 {
-//    this->p_data->clear();
-    delete this->p_data;
 }
 
 
-SPIClass* SPIWrapper::spi()
+void Device::execute()
+{
+}
+
+
+SPIWrapper* Device::spi()
 {
     return this->p_spi;
 }
 
 
-void SPIWrapper::set_spi(SPIClass* spi)
+uint8_t Device::pin()
 {
-    this->p_spi = spi;
+    return this->m_pin;
 }
 
 
-void SPIWrapper::_on(uint8_t channel)
+uint8_t Device::number()
 {
-    digitalWrite(channel, LOW);
-    this->m_transfer = 1;
-}
-
-
-void SPIWrapper::_off(uint8_t channel)
-{
-    digitalWrite(channel, HIGH);
-    this->m_transfer = 0;
-}
-
-
-void SPIWrapper::transfer(uint8_t channel, uint8_t data)
-{
-    this->_on(channel);
-
-    this->m_channel = channel;
-
-    this->p_data[this->m_counter] = data;
-    this->m_counter++;
-}
-
-
-void SPIWrapper::transfer(uint8_t channel, uint8_t data[], uint16_t size)
-{
-    this->_on(channel);
-
-    this->m_channel = channel;
-
-    for (uint8_t i = 0; i < size; ++i) {
-        this->p_data[this->m_counter] = data[i];
-        this->m_counter++;
-    }
-}
-
-
-uint8_t SPIWrapper::commit(bool debug_out, uint8_t* result, unsigned long wait_on, unsigned long wait_off)
-{
-    if (this->m_transfer == 0) {
-        return 0;
-    }
-
-    uint8_t i = 0;
-    uint8_t res = 0;
-    uint8_t data = 0;
-
-    for (i = 0; i < this->m_counter; ++i)
-    {
-        // get command from que
-        data = this->p_data[i];
-
-        res = this->p_spi->transfer(data);
-        if (wait_on > 0) {
-            delay(wait_on);
-        }
-
-        // reset command after use
-        this->p_data[i] = 0;
-
-#ifdef DEBUG_LEVEL3
-        if (debug_out == true) {
-            debug_binary("SPI", data);
-        }
-#endif // DEBUG_LEVEL3
-
-        if (result == NULL) {
-            continue;
-        }
-
-        result[i] = res;
-    }
-
-    this->_off(this->m_channel);
-    if (wait_off > 0) {
-        delay(wait_off);
-    }
-
-    this->m_channel = 0;
-    this->m_transfer = 0;
-    this->m_counter = 0;
-
-    return i;
+    return this->m_num;
 }

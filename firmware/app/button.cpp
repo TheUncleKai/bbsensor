@@ -20,10 +20,8 @@
 #include <button.h>
 
 
-Button::Button (uint8_t num, uint8_t pin)
+Button::Button (uint8_t num, uint8_t pin) : Device(num, pin)
 {
-    this->m_num = num;
-    this->m_pin = pin;
     this->m_type = Button::NONE;
     this->m_high = 0;
     this->m_low = 0;
@@ -47,19 +45,19 @@ void Button::handleISR()
 {
     unsigned long timestamp = millis();
 
-    if (digitalRead(this->m_pin) == HIGH) {
+    if (digitalRead(this->pin()) == HIGH) {
         this->m_high = timestamp;
 
 #ifdef DEBUG_LEVEL2
-        DEBUG_MSG("BUTTON%d: HIGH: %d, %u\n", this->m_num, 1, this->m_high);
+        DEBUG_MSG("BUTTON%d: HIGH: %d, %u\n", this->number(), 1, this->m_high);
 #endif // DEBUG_LEVEL2
     }
 
-    if (digitalRead(this->m_pin) == LOW) {
+    if (digitalRead(this->pin()) == LOW) {
         this->m_low = timestamp;
 
 #ifdef DEBUG_LEVEL2
-        DEBUG_MSG("BUTTON%d: LOW: %d, %u\n", this->m_num, 0, this->m_low);
+        DEBUG_MSG("BUTTON%d: LOW: %d, %u\n", this->number(), 0, this->m_low);
 #endif // DEBUG_LEVEL2
 
         this->_process();
@@ -76,7 +74,7 @@ void Button::_process()
 
 #ifdef DEBUG_LEVEL2
     DEBUG_MSG("BUTTON%d: diff %d, high %d, low %d\n",
-                this->m_num,
+                this->number(),
                 diff,
                 this->m_high,
                 this->m_low);
@@ -91,7 +89,7 @@ void Button::_process()
     }
 
 #ifdef DEBUG_LEVEL1
-        DEBUG_MSG("BUTTON%d: %d\n", this->m_num, this->m_type);
+        DEBUG_MSG("BUTTON%d: %d\n", this->number(), this->m_type);
 #endif // DEBUG_LEVEL1
 
     this->m_high = 0;
@@ -113,15 +111,15 @@ void Button::reset()
 
 void Button::setup()
 {
-    DEBUG_MSG("BUTTON%d: setup pin %d\n", this->m_num, this->m_pin);
+    DEBUG_MSG("BUTTON%d: setup pin %d\n", this->number(), this->pin());
 
     if (this->p_isr != NULL)
     {
-        pinMode(this->m_pin, INPUT_PULLUP);
-        attachInterrupt(digitalPinToInterrupt(this->m_pin), this->p_isr, CHANGE);
+        pinMode(this->pin(), INPUT_PULLUP);
+        attachInterrupt(digitalPinToInterrupt(this->pin()), this->p_isr, CHANGE);
 
     } else {
-        DEBUG_MSG("BUTTON%d: ISR is missing!\n", this->m_num);
+        DEBUG_MSG("BUTTON%d: ISR is missing!\n", this->number());
     }
 }
 
