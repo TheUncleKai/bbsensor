@@ -69,12 +69,8 @@
 #define DELAY_OFF 2
 
 
-Display::Display (SPIClass* spi, uint8_t cs)
+Display::Display (SPIClass* spi, uint8_t cs) : Device(spi, cs)
 {
-    this->p_spi = new SPIWrapper();
-    this->m_cs = cs;
-
-    this->p_spi->set_spi(spi);
     this->p_list = new Signal *[SIGNAL_LIST];
     this->m_size = 0;
 
@@ -86,7 +82,6 @@ Display::Display (SPIClass* spi, uint8_t cs)
 
 Display::~Display()
 {
-    delete this->p_spi;
     delete this->p_list;
 }
 
@@ -141,12 +136,12 @@ void Display::_send(Signal* input)
     pin_on = pin ^ PIN_E;
     pin_off = pin;
 
-    this->p_spi->transfer(this->m_cs, pin_on);
-    this->p_spi->commit(false, NULL);
+    this->spi()->transfer(pin_on);
+    this->spi()->commit(false, NULL);
     delay(DELAY_ON);
 
-    this->p_spi->transfer(this->m_cs, pin_off);
-    this->p_spi->commit(false, NULL);
+    this->spi()->transfer(pin_off);
+    this->spi()->commit(false, NULL);
     delay(DELAY_OFF);
 }
 
@@ -238,9 +233,8 @@ void Display::write(uint8_t line, const char* fmt, ...)
 
 void Display::setup()
 {
-    DEBUG_MSG("DISPLAY: setup cs pin %d\n", this->m_cs);
-    pinMode(this->m_cs, OUTPUT);
-    digitalWrite(this->m_cs, HIGH);
+
+    this->spi()->on();
 
     /*
     Function set

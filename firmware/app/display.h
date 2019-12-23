@@ -51,8 +51,6 @@ class Display : public Device
         void write(uint8_t line, const char* fmt, ...);
 
     private:
-        SPIWrapper* p_spi;
-        uint8_t m_cs;
         Signal** p_list;
         size_t m_size;
 

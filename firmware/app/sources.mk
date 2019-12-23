@@ -15,14 +15,13 @@
 SOURCES = \
     main.cpp \
     button.cpp \
-    channel.cpp \
     conf.cpp \
-    data.cpp \
     device.cpp \
     display.cpp \
     hardware.cpp \
     led.cpp \
     loop.cpp \
+    spi_wrapper.cpp \
     tables.cpp \
     temperature.cpp \
     utils.cpp

@@ -17,15 +17,41 @@
 #ifndef TEMPERATURE_H_INCLUDED
 #define TEMPERATURE_H_INCLUDED
 
-#include <EEPROM.h>
+#include <Arduino.h>
 #include <SPI.h>
 
 #include <device.h>
-#include <channel.h>
 
 
 namespace Temperature
 {
+
+
+enum class Type
+{
+    NONE = 0,
+    DATA = 1,
+    VOLTAGE = 2,
+    RTD = 3,
+    PTC10 = 4,
+    PTC100 = 5
+};
+
+
+typedef struct
+{
+    bool full;
+    bool measure;
+    size_t head;
+    size_t tail;
+    uint8_t num;
+    Type type;
+    uint16_t data;
+    float value;
+} Channel;
+
+
+extern const char* TEMPERATURE_Type[];
 
 
 class Manager : public Device
@@ -39,7 +65,7 @@ class Manager : public Device
 
         void execute();
 
-        void set_measure(bool all);
+        void set_measure(bool active);
         bool get_measure();
 
         Channel* get_channel(uint8_t channel_number);
@@ -48,12 +74,8 @@ class Manager : public Device
         void next();
         void prev();
 
-        uint8_t cs();
-
     private:
-        uint8_t m_cs;
         bool m_active;
-        SPIWrapper* p_spi;
         Channel* p_current;
 
         void _process_channel(Channel* channel);

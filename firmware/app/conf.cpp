@@ -15,6 +15,7 @@
 */
 
 #include <conf.h>
+#include <temperature.h>
 #include <utils.h>
 #include <CRC32.h>
 
@@ -157,7 +158,7 @@ void Config::Manager::write()
 }
 
 
-void Config::Manager::set_channel(uint8_t number, Temperature::Type type)
+void Config::Manager::set_channel(uint8_t number, uint8_t type)
 {
     if (this->p_data == NULL)
         return;
@@ -214,15 +215,15 @@ void Config::Manager::set_wlan(uint8_t wps_onoff, const char* wlan_ssid, const c
 }
 
 
-Temperature::Type Config::Manager::get_channel(uint8_t number)
+uint8_t Config::Manager::get_channel(uint8_t number)
 {
     if (this->p_data == NULL)
-        return Temperature::Type::NONE;
+        return 0;
 
     if (number >= TEMP_CHANNELS)
-        return Temperature::Type::NONE;
+        return 0;
 
-    return (Temperature::Type)this->p_data->channel_types[number];
+    return this->p_data->channel_types[number];
 }
 
 
@@ -236,6 +237,7 @@ void Config::Manager::print()
 {
 #ifdef DEBUG_LEVEL1
     int i = 0;
+    uint8_t channel_type = 0;
     DEBUG_MSG("CONFIG: init %u, delay %u\n", this->p_data->init, this->p_data->measure_delay);
     DEBUG_MSG("CONFIG: wps %u, ssid %s, pass %s\n",
         this->p_data->wlan_wps,
@@ -243,7 +245,8 @@ void Config::Manager::print()
         this->p_data->wlan_pass);
 
     for (i = 0; i < TEMP_CHANNELS; i++) {
-        DEBUG_MSG("CONFIG: channel %u, type %u\n", i, this->p_data->channel_types[i]);
+        channel_type = this->p_data->channel_types[i];
+        DEBUG_MSG("CONFIG: channel %u, type %u\n", i, Temperature::TEMPERATURE_Type[channel_type]);
     }
 #endif // DEBUG_LEVEL1
 }

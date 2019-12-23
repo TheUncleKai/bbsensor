@@ -19,14 +19,14 @@
 
 #include <settings.h>
 #include <hardware.h>
+#include <led.h>
+#include <button.h>
+#include <display.h>
+#include <temperature.h>
+
 #include <loop.h>
 #include <utils.h>
 #include <conf.h>
-
-
-// Name and password of the access point
-//#define SSID "Pussycat"
-//#define PASSWORD "supersecret"
 
 
 // Declarations
@@ -40,44 +40,54 @@ void setup();
 void loop();
 
 
-// Variables
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
+// Manager
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 Loop* looper = new Loop();
+SPIClass* spi = new SPIClass();
+
+
+// Devices
+LED* led1 = new LED(1, PIN_LED1);
+Button* button1 = new Button(1, PIN_BUTTON1);
+Button* button2 = new Button(2, PIN_BUTTON2);
+Display* display = new Display(spi, PIN_CS1);
+Temperature::Manager* temperature = new Temperature::Manager(spi, PIN_CS2);
+
+
+// Variables
+Button::Click click1 = Button::NONE;
+Button::Click click2 = Button::NONE;
 
 
 // Implemnatation
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 
 void handleISR1()
 {
-    hardware->button1()->handleISR();
+    button1->handleISR();
 }
 
 
 void handleISR2()
 {
-    hardware->button2()->handleISR();
+    button2->handleISR();
 }
 
 
 void print_channel()
 {
-    Temperature::Channel* channel = hardware->temperature()->current();
+    Temperature::Channel* channel = temperature->current();
 
-    if (channel->type() == Temperature::Type::NONE) {
+    if (channel->type == Temperature::Type::NONE) {
         return;
     }
 
-    if (channel->type() == Temperature::Type::DATA) {
-        hardware->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
+    if (channel->type == Temperature::Type::DATA) {
+        display->write(2, "%u: %u", channel->num, channel->data);
     }
 
-    if (channel->type() == Temperature::Type::VOLTAGE) {
-        hardware->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+    if (channel->type == Temperature::Type::VOLTAGE) {
+        display->write(2, "%u: %5.3f", channel->num, channel->value);
     }
 }
 
@@ -87,8 +97,14 @@ void setup()
     Serial.begin(115200);
     delay(3000);
 
-    hardware->button1()->setISR(handleISR1);
-    hardware->button2()->setISR(handleISR2);
+    hardware->add_device(led1);
+    hardware->add_device(button1);
+    hardware->add_device(button2);
+    hardware->add_device(display);
+    hardware->add_device(temperature);
+
+    button1->setISR(handleISR1);
+    button2->setISR(handleISR2);
 
     config->setup();
     config->read();
@@ -97,8 +113,8 @@ void setup()
 
     if (check == false) {
         config->reset();
-        config->set_channel(0, Temperature::Type::VOLTAGE);
-        config->set_channel(2, Temperature::Type::DATA);
+        config->set_channel(0, (uint8_t)Temperature::Type::VOLTAGE);
+        config->set_channel(2, (uint8_t)Temperature::Type::DATA);
         config->set_delay(300);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
@@ -107,13 +123,25 @@ void setup()
     config->print();
 
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        hardware->temperature()->add_channel(i, config->get_channel(i));
+        temperature->add_channel(i, (Temperature::Type)config->get_channel(i));
     }
 
     looper->set_counter(0, 10);
     looper->set_counter(1, config->data()->measure_delay);
     looper->set_counter(2, 100);
     looper->setup();
+
+    DEBUG_MSG("SPI: SCLK %d, MISO %d, MOSI %d\n",
+                PIN_SCLK,
+                PIN_MISO,
+                PIN_MOSI);
+
+#ifdef ESP32
+    spi->begin(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
+#else
+    spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
+    spi->begin();
+#endif // ESP32
 
 
     hardware->setup();
@@ -123,44 +151,41 @@ void setup()
 void loop()
 {
     looper->start();
-    hardware->temperature()->set_measure(false);
+    temperature->set_measure(false);
 
+    click1 = button1->click();
+    click2 = button2->click();
 
-    if (hardware->temperature()->get_measure() == true) {
-        Button::Click button1 = hardware->button1()->click();
-        Button::Click button2 = hardware->button2()->click();
+    if (click1 == Button::SINGLE_CLICK) {
+        temperature->next();
+        print_channel();
+        looper->reset_counter(2);
+        button1->reset();
+    }
 
-        if (button1 == Button::SINGLE_CLICK) {
-            hardware->temperature()->next();
-            print_channel();
-            looper->reset_counter(2);
-            hardware->button1()->reset();
-        }
-
-        if (button2 == Button::SINGLE_CLICK) {
-            hardware->temperature()->prev();
-            print_channel();
-            looper->reset_counter(2);
-            hardware->button2()->reset();
-        }
+    if (click2 == Button::SINGLE_CLICK) {
+        temperature->prev();
+        print_channel();
+        looper->reset_counter(2);
+        button2->reset();
     }
 
 
     if (looper->counter() == 0) {
-        hardware->led1()->on();
+        led1->on();
     }
 
     if (looper->counter() == 10) {
-        hardware->display()->clear();
-        hardware->display()->write(1, "Start");
-        hardware->temperature()->set_measure(true);
+        display->clear();
+        display->write(1, "Start");
+        temperature->set_measure(true);
     }
 
     if (looper->counter() == 20) {
-        hardware->display()->write(1, "Measure");
+        display->write(1, "Measure");
 
         looper->activate();
-        hardware->temperature()->set_measure(true);
+        temperature->set_measure(true);
     }
 
     if (looper->counter() == 30) {
@@ -168,16 +193,16 @@ void loop()
     }
 
     if (looper->number(0) == 10) {
-        hardware->led1()->toggle();
+        led1->toggle();
     }
 
     if (looper->number(2) == 100) {
-        hardware->temperature()->next();
+        temperature->next();
         print_channel();
     }
 
     if (looper->number(1) == config->data()->measure_delay) {
-        hardware->temperature()->set_measure(true);
+        temperature->set_measure(true);
     }
 
     hardware->execute();

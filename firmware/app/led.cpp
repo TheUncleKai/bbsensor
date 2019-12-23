@@ -20,10 +20,8 @@
 #include <led.h>
 
 
-LED::LED (uint8_t num, uint8_t pin)
+LED::LED (uint8_t num, uint8_t pin) : Device(num, pin)
 {
-    this->m_num = num;
-    this->m_pin = pin;
     this->m_status = 0;
 }
 
@@ -36,9 +34,9 @@ LED::~LED()
 void LED::_on()
 {
 #ifdef DEBUG_LEVEL3
-    DEBUG_MSG("LED%d: turn on\n", this->m_num);
+    DEBUG_MSG("LED%d: turn on\n", this->number());
 #endif // DEBUG_LEVEL3
-    digitalWrite(this->m_pin, LOW);
+    digitalWrite(this->pin(), LOW);
     this->m_status = 1;
 }
 
@@ -46,9 +44,9 @@ void LED::_on()
 void LED::_off()
 {
 #ifdef DEBUG_LEVEL3
-    DEBUG_MSG("LED%d: turn off\n", this->m_num);
+    DEBUG_MSG("LED%d: turn off\n", this->number());
 #endif // DEBUG_LEVEL3
-    digitalWrite(this->m_pin, HIGH);
+    digitalWrite(this->pin(), HIGH);
     this->m_status = 0;
 }
 
@@ -81,9 +79,11 @@ void LED::off()
 
 void LED::setup()
 {
-    DEBUG_MSG("LED%d: setup pin %d, status %d\n", this->m_num, this->m_pin, this->m_status);
+#ifdef DEBUG_LEVEL1
+    DEBUG_MSG("LED%d: setup pin %d\n", this->number(), this->pin());
+#endif // DEBUG_LEVEL1
 
-    pinMode(this->m_pin, OUTPUT);
+    pinMode(this->pin(), OUTPUT);
 }
 
 

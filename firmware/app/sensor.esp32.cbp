@@ -21,13 +21,9 @@
 				<Option compiler="gnu_gcc_compiler_for_esp32" />
 				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-DESP_PLATFORM" />
-					<Add option="-DMBEDTLS_CONFIG_FILE=mbedtls/esp_config.h" />
-					<Add option="-DHAVE_CONFIG_H" />
-					<Add option="-DGCC_NOT_5_2_0=0" />
-					<Add option="-DWITH_POSIX" />
-					<Add option="-std=gnu99" />
 					<Add option="-Os" />
+					<Add option="-w" />
+					<Add option="-std=gnu99" />
 					<Add option="-g3" />
 					<Add option="-fstack-protector" />
 					<Add option="-ffunction-sections" />
@@ -36,7 +32,6 @@
 					<Add option="-mlongcalls" />
 					<Add option="-nostdlib" />
 					<Add option="-Wpointer-arith" />
-					<Add option="-w" />
 					<Add option="-Wno-maybe-uninitialized" />
 					<Add option="-Wno-unused-function" />
 					<Add option="-Wno-unused-but-set-variable" />
@@ -47,6 +42,11 @@
 					<Add option="-Wno-old-style-declaration" />
 					<Add option="-MMD" />
 					<Add option="-c" />
+					<Add option="-DESP_PLATFORM" />
+					<Add option="-DMBEDTLS_CONFIG_FILE=mbedtls/esp_config.h" />
+					<Add option="-DHAVE_CONFIG_H" />
+					<Add option="-DGCC_NOT_5_2_0=0" />
+					<Add option="-DWITH_POSIX" />
 					<Add option="-DF_CPU=240000000L" />
 					<Add option="-DARDUINO=10809" />
 					<Add option="-DARDUINO_ESP32_DEV" />
@@ -54,6 +54,7 @@
 					<Add option="-DARDUINO_BOARD=ESP32_DEV" />
 					<Add option="-DARDUINO_VARIANT=esp32" />
 					<Add option="-DESP32" />
+					<Add option="-DDEBUG_LEVEL1" />
 					<Add directory="$$(ESP32_ROOT)/sdk/include/config" />
 					<Add directory="$$(ESP32_ROOT)/sdk/include/app_trace" />
 					<Add directory="$$(ESP32_ROOT)/sdk/include/app_update" />
@@ -127,12 +128,8 @@
 		</Compiler>
 		<Unit filename="button.cpp" />
 		<Unit filename="button.h" />
-		<Unit filename="channel.cpp" />
-		<Unit filename="channel.h" />
 		<Unit filename="conf.cpp" />
 		<Unit filename="conf.h" />
-		<Unit filename="data.cpp" />
-		<Unit filename="data.h" />
 		<Unit filename="device.cpp" />
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />
@@ -145,6 +142,8 @@
 		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="settings.h" />
+		<Unit filename="spi_wrapper.cpp" />
+		<Unit filename="spi_wrapper.h" />
 		<Unit filename="tables.cpp" />
 		<Unit filename="tables.h" />
 		<Unit filename="temperature.cpp" />

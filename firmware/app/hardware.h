@@ -20,39 +20,23 @@
 #include <EEPROM.h>
 
 #include <device.h>
-#include <led.h>
-#include <button.h>
-#include <display.h>
-#include <temperature.h>
+
+#define MAX_DEVICES 32
 
 
-class Hardware : public Device
+class Hardware
 {
     public:
         Hardware();
         virtual ~Hardware();
 
-        SPIClass* spi();
-        LED* led1();
-
-        Button* button1();
-        Button* button2();
-        Display* display();
-        Temperature::Manager* temperature();
+        void add_device(Device* device);
 
         void setup();
         void execute();
 
-    protected:
-
     private:
-        SPIClass* p_spi;
-        LED* p_led1;
-
-        Button* p_button1;
-        Button* p_button2;
-        Display* p_display;
-        Temperature::Manager* p_temperature;
+        size_t m_counter;
 };
 
 #endif // HARDWARE_H_INCLUDED

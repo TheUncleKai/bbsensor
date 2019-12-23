@@ -17,44 +17,33 @@
 #ifndef DEVICE_H_INCLUDED
 #define DEVICE_H_INCLUDED
 
-#include <SPI.h>
+#include <Arduino.h>
 
-#define DEBUG_SPI
-
-#define SPI_WAIT_ON  1
-#define SPI_WAIT_OFF 2
+#include <spi_wrapper.h>
 
 
 class Device
 {
     public:
+        Device ();
+        Device (SPIClass* spi, uint8_t cs);
+        Device (uint8_t num, uint8_t pin);
+        ~Device();
+
         virtual void setup();
         virtual void execute();
 
-};
+        SPIWrapper* spi();
+        uint8_t number();
+        uint8_t pin();
 
-
-class SPIWrapper
-{
-    public:
-        SPIWrapper ();
-        virtual ~SPIWrapper();
-
-        SPIClass* spi();
-
-        void set_spi(SPIClass* spi);
-        void transfer(uint8_t channel, uint8_t data);
-        void transfer(uint8_t channel, uint8_t data[], uint16_t size);
-        uint8_t commit(bool debug_out, uint8_t* result, unsigned long wait_on = 0, unsigned long wait_off = 0);
 
     private:
-        SPIClass* p_spi;
-        uint8_t* p_data;
-        uint8_t m_counter;
-        uint8_t m_transfer, m_channel;
+        SPIWrapper* p_spi;
+        uint8_t m_num;
+        uint8_t m_pin;
 
-        void _on(uint8_t channel);
-        void _off(uint8_t channel);
 };
+
 
 #endif // DEVICE_H_INCLUDED

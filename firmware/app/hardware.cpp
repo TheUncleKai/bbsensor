@@ -17,91 +17,65 @@
 #include <settings.h>
 #include <hardware.h>
 
+Device* DEVICEList[MAX_DEVICES];
+
 
 Hardware::Hardware()
 {
-    this->p_led1 = new LED(1, PIN_LED1);
-    this->p_button1 = new Button(1, PIN_BUTTON1);
-    this->p_button2 = new Button(2, PIN_BUTTON2);
-    this->p_spi = new SPIClass();
-    this->p_display = new Display(this->p_spi, PIN_CS1);
-    this->p_temperature = new Temperature::Manager(this->p_spi, PIN_CS2);
+    this->m_counter = 0;
+
+    size_t i = 0;
+
+    for (i = 0; i < MAX_DEVICES; ++i) {
+        DEVICEList[i] = NULL;
+    }
 }
 
 
 Hardware::~Hardware()
 {
-    delete this->p_led1;
-    delete this->p_button1;
-    delete this->p_button2;
-    delete this->p_spi;
-    delete this->p_display;
-    delete this->p_temperature;
 }
 
 
-SPIClass* Hardware::spi() {
-    return this->p_spi;
-}
-
-
-LED* Hardware::led1() {
-    return this->p_led1;
-}
-
-
-Button* Hardware::button1()
+void Hardware::add_device(Device* device)
 {
-    return this->p_button1;
-}
+    if (this->m_counter == MAX_DEVICES)
+        return;
 
-
-Button* Hardware::button2()
-{
-    return this->p_button2;
-}
-
-
-Display* Hardware::display()
-{
-    return this->p_display;
-}
-
-
-Temperature::Manager* Hardware::temperature()
-{
-    return this->p_temperature;
+    DEVICEList[this->m_counter] = device;
+    ++this->m_counter;
 }
 
 
 void Hardware::setup()
 {
-    this->p_led1->setup();
-    this->p_button1->setup();
-    this->p_button2->setup();
+    size_t i = 0;
 
-    DEBUG_MSG("SPI: SCLK %d, MISO %d, MOSI %d\n",
-                PIN_SCLK,
-                PIN_MISO,
-                PIN_MOSI);
+    Device* device = NULL;
 
-#ifdef ESP32
-    this->p_spi->begin(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
-#else
-    this->p_spi->pins(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
-    this->p_spi->begin();
-#endif // ESP32
+    for (i = 0; i < MAX_DEVICES; ++i) {
+        device = DEVICEList[i];
 
-    this->p_display->setup();
-    this->p_temperature->setup();
+        if (device == NULL)
+            continue;
+
+        device->setup();
+    }
 }
 
 
 void Hardware::execute()
 {
-    this->p_led1->execute();
-    this->p_button1->execute();
-    this->p_button2->execute();
-    this->p_display->execute();
-    this->p_temperature->execute();
+    size_t i = 0;
+
+    Device* device = NULL;
+
+    for (i = 0; i < MAX_DEVICES; ++i) {
+        device = DEVICEList[i];
+
+        if (device == NULL)
+            continue;
+
+        device->execute();
+    }
 }

@@ -34,7 +34,7 @@ class LED : public Device
         void execute();
 
     private:
-        uint8_t m_num, m_status, m_pin;
+        uint8_t m_status;
 
         void _on();
         void _off();
