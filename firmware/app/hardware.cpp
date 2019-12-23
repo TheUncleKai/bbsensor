@@ -17,6 +17,8 @@
 #include <settings.h>
 #include <hardware.h>
 
+Device* DEVICEList[32];
+
 
 Hardware::Hardware()
 {
