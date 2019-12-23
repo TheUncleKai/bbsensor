@@ -24,11 +24,6 @@
 #include <conf.h>
 
 
-// Name and password of the access point
-//#define SSID "Pussycat"
-//#define PASSWORD "supersecret"
-
-
 // Declarations
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -68,16 +63,16 @@ void print_channel()
 {
     Temperature::Channel* channel = hardware->temperature()->current();
 
-    if (channel->type() == Temperature::Type::NONE) {
+    if (channel->type == Temperature::Type::NONE) {
         return;
     }
 
-    if (channel->type() == Temperature::Type::DATA) {
-        hardware->display()->write(2, "%u: %u", channel->channel(), channel->value()->data);
+    if (channel->type == Temperature::Type::DATA) {
+        hardware->display()->write(2, "%u: %u", channel->num, channel->data);
     }
 
-    if (channel->type() == Temperature::Type::VOLTAGE) {
-        hardware->display()->write(2, "%u: %5.3f", channel->channel(), channel->value()->value);
+    if (channel->type == Temperature::Type::VOLTAGE) {
+        hardware->display()->write(2, "%u: %5.3f", channel->num, channel->value);
     }
 }
 
@@ -97,8 +92,8 @@ void setup()
 
     if (check == false) {
         config->reset();
-        config->set_channel(0, Temperature::Type::VOLTAGE);
-        config->set_channel(2, Temperature::Type::DATA);
+        config->set_channel(0, (uint8_t)Temperature::Type::VOLTAGE);
+        config->set_channel(2, (uint8_t)Temperature::Type::DATA);
         config->set_delay(300);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
@@ -107,7 +102,7 @@ void setup()
     config->print();
 
     for (int i = 0; i < TEMP_CHANNELS; ++i) {
-        hardware->temperature()->add_channel(i, config->get_channel(i));
+        hardware->temperature()->add_channel(i, (Temperature::Type)config->get_channel(i));
     }
 
     looper->set_counter(0, 10);
