@@ -41,7 +41,8 @@ void loop();
 Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 Loop* looper = new Loop();
-
+Button::Click button1 = Button::NONE;
+Button::Click button2 = Button::NONE;
 
 // Implemnatation
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -120,24 +121,21 @@ void loop()
     looper->start();
     hardware->temperature()->set_measure(false);
 
+    button1 = hardware->button1()->click();
+    button2 = hardware->button2()->click();
 
-    if (hardware->temperature()->get_measure() == true) {
-        Button::Click button1 = hardware->button1()->click();
-        Button::Click button2 = hardware->button2()->click();
+    if (button1 == Button::SINGLE_CLICK) {
+        hardware->temperature()->next();
+        print_channel();
+        looper->reset_counter(2);
+        hardware->button1()->reset();
+    }
 
-        if (button1 == Button::SINGLE_CLICK) {
-            hardware->temperature()->next();
-            print_channel();
-            looper->reset_counter(2);
-            hardware->button1()->reset();
-        }
-
-        if (button2 == Button::SINGLE_CLICK) {
-            hardware->temperature()->prev();
-            print_channel();
-            looper->reset_counter(2);
-            hardware->button2()->reset();
-        }
+    if (button2 == Button::SINGLE_CLICK) {
+        hardware->temperature()->prev();
+        print_channel();
+        looper->reset_counter(2);
+        hardware->button2()->reset();
     }
 
 

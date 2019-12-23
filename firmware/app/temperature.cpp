@@ -250,7 +250,6 @@ void Temperature::Manager::next()
     if (this->p_current != NULL)
         counter = this->p_current->num;
 
-
     while(i < TEMP_CHANNELS) {
         ++counter;
 
