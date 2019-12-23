@@ -17,7 +17,10 @@
 #ifndef LOOP_H_INCLUDED
 #define LOOP_H_INCLUDED
 
-#include <settings.h>
+#include <Arduino.h>
+#include <device.h>
+
+#define MAX_DEVICES 32
 
 
 class Loop
@@ -30,17 +33,22 @@ class Loop
         uint32_t number(size_t channel);
 
         void setup();
-        void start();
-        void finish();
         void activate();
         void set_counter(size_t channel, uint32_t n);
         void reset_counter(size_t channel);
+
+        void add_device(Device* device);
+
+        void start_loop();
+        void end_loop();
 
     protected:
 
     private:
         uint32_t* p_channel;
         uint32_t* p_number;
+        size_t m_device;
+
         bool m_activate;
         uint32_t m_bootup, m_delay, m_counter, m_timestamp;
 };

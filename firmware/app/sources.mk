@@ -18,7 +18,6 @@ SOURCES = \
     conf.cpp \
     device.cpp \
     display.cpp \
-    hardware.cpp \
     led.cpp \
     loop.cpp \
     spi_wrapper.cpp \

@@ -19,6 +19,10 @@
 #include <settings.h>
 #include <loop.h>
 
+
+Device* DEVICEList[MAX_DEVICES];
+
+
 Loop::Loop()
 {
     this->p_channel = new uint32_t[CHANNEL_LOOPS];
@@ -30,12 +34,19 @@ Loop::Loop()
     this->m_counter = 0;
     this->m_timestamp = 0;
     this->m_activate = false;
+    this->m_device = 0;
 
     for (size_t i = 0; i < CHANNEL_LOOPS; ++i) {
         this->p_channel[i] = 0;
         this->p_number[i] = 0;
     }
 
+
+    size_t i = 0;
+
+    for (i = 0; i < MAX_DEVICES; ++i) {
+        DEVICEList[i] = NULL;
+    }
 }
 
 
@@ -64,10 +75,24 @@ void Loop::setup()
 {
     DEBUG_MSG("Bootup...\n");
     this->m_bootup = millis();
+
+
+    size_t i = 0;
+
+    Device* device = NULL;
+
+    for (i = 0; i < MAX_DEVICES; ++i) {
+        device = DEVICEList[i];
+
+        if (device == NULL)
+            continue;
+
+        device->setup();
+    }
 }
 
 
-void Loop::start()
+void Loop::start_loop()
 {
     this->m_timestamp = millis();
     this->m_counter++;
@@ -82,8 +107,20 @@ void Loop::start()
 }
 
 
-void Loop::finish()
+void Loop::end_loop()
 {
+    size_t i = 0;
+    Device* device = NULL;
+
+    for (i = 0; i < MAX_DEVICES; ++i) {
+        device = DEVICEList[i];
+
+        if (device == NULL)
+            continue;
+
+        device->execute();
+    }
+
     delay(this->m_delay);
 
     if (this->m_activate == false)
@@ -117,3 +154,15 @@ void Loop::reset_counter(size_t channel)
         return;
     this->p_number[channel] = 0;
 }
+
+
+void Loop::add_device(Device* device)
+{
+    if (this->m_device == MAX_DEVICES)
+        return;
+
+    DEVICEList[this->m_device] = device;
+    ++this->m_device;
+}
+
+

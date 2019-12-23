@@ -18,7 +18,6 @@
 #include <SPI.h>
 
 #include <settings.h>
-#include <hardware.h>
 #include <led.h>
 #include <button.h>
 #include <display.h>
@@ -41,7 +40,6 @@ void loop();
 
 
 // Manager
-Hardware* hardware = new Hardware();
 Config::Manager* config = new Config::Manager();
 Loop* looper = new Loop();
 SPIClass* spi = new SPIClass();
@@ -97,11 +95,11 @@ void setup()
     Serial.begin(115200);
     delay(3000);
 
-    hardware->add_device(led1);
-    hardware->add_device(button1);
-    hardware->add_device(button2);
-    hardware->add_device(display);
-    hardware->add_device(temperature);
+    looper->add_device(led1);
+    looper->add_device(button1);
+    looper->add_device(button2);
+    looper->add_device(display);
+    looper->add_device(temperature);
 
     button1->setISR(handleISR1);
     button2->setISR(handleISR2);
@@ -126,15 +124,8 @@ void setup()
         temperature->add_channel(i, (Temperature::Type)config->get_channel(i));
     }
 
-    looper->set_counter(0, 10);
-    looper->set_counter(1, config->data()->measure_delay);
-    looper->set_counter(2, 100);
-    looper->setup();
+    DEBUG_MSG("SPI: SCLK %d, MISO %d, MOSI %d\n", PIN_SCLK, PIN_MISO, PIN_MOSI);
 
-    DEBUG_MSG("SPI: SCLK %d, MISO %d, MOSI %d\n",
-                PIN_SCLK,
-                PIN_MISO,
-                PIN_MOSI);
 
 #ifdef ESP32
     spi->begin(PIN_SCLK, PIN_MISO, PIN_MOSI, PIN_NONE);
@@ -143,14 +134,16 @@ void setup()
     spi->begin();
 #endif // ESP32
 
-
-    hardware->setup();
+    looper->set_counter(0, 10);
+    looper->set_counter(1, config->data()->measure_delay);
+    looper->set_counter(2, 100);
+    looper->setup();
 }
 
 
 void loop()
 {
-    looper->start();
+    looper->start_loop();
     temperature->set_measure(false);
 
     click1 = button1->click();
@@ -205,6 +198,5 @@ void loop()
         temperature->set_measure(true);
     }
 
-    hardware->execute();
-    looper->finish();
+    looper->end_loop();
 }
