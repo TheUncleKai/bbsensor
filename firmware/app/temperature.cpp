@@ -258,7 +258,7 @@ void Temperature::Manager::next()
             counter = 0;
 
         channel = &channellist[counter];
-        if (channel != NULL) {
+        if (channel->type != Temperature::Type::NONE) {
             this->p_current = channel;
             break;
         }
@@ -286,7 +286,7 @@ void Temperature::Manager::prev()
         }
 
         channel = &channellist[counter];
-        if (channel != NULL) {
+        if (channel->type != Temperature::Type::NONE) {
             this->p_current = channel;
             break;
         }
@@ -303,10 +303,6 @@ void Temperature::Manager::execute()
 
     for (i = 0; i < TEMP_CHANNELS; ++i) {
         channel = &channellist[i];
-
-        if (channel == NULL) {
-            continue;
-        }
 
         if (channel->measure == true) {
             this->_process_channel(channel);
