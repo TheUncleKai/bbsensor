@@ -48,6 +48,7 @@ typedef struct
     Type type;
     uint16_t data;
     float value;
+    float voltage;
 } Channel;
 
 
@@ -76,6 +77,7 @@ class Manager : public Device
 
     private:
         bool m_active;
+        size_t m_counter;
         Channel* p_current;
 
         void _process_channel(Channel* channel);

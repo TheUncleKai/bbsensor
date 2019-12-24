@@ -20,7 +20,7 @@
 #include <EEPROM.h>
 #include <settings.h>
 
-#define CONFIG_VERSION 4
+#define CONFIG_VERSION 7
 
 
 namespace Config

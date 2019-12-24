@@ -85,7 +85,19 @@ void print_channel()
     }
 
     if (channel->type == Temperature::Type::VOLTAGE) {
-        display->write(2, "%u: %5.3f", channel->num, channel->value);
+        display->write(2, "%u: %5.3f V", channel->num, channel->value);
+    }
+
+    if (channel->type == Temperature::Type::RTD) {
+        display->write(2, "%u: %5.3f C", channel->num, channel->value);
+    }
+
+    if (channel->type == Temperature::Type::PTC10) {
+        display->write(2, "%u: %5.3f C", channel->num, channel->value);
+    }
+
+    if (channel->type == Temperature::Type::PTC100) {
+        display->write(2, "%u: %5.3f C", channel->num, channel->value);
     }
 }
 
@@ -111,9 +123,10 @@ void setup()
 
     if (check == false) {
         config->reset();
-        config->set_channel(0, (uint8_t)Temperature::Type::VOLTAGE);
-        config->set_channel(2, (uint8_t)Temperature::Type::DATA);
-        config->set_delay(300);
+        config->set_channel(0, (uint8_t)Temperature::Type::RTD);
+        config->set_channel(1, (uint8_t)Temperature::Type::PTC10);
+        config->set_channel(2, (uint8_t)Temperature::Type::PTC100);
+        config->set_delay(20);
         config->set_wlan(0, "TEST-SSID", "TEST-PASS");
         config->write();
     }
