@@ -41,6 +41,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs) : Device(spi, cs)
 {
     this->p_current = NULL;
     this->m_active = false;
+    this->m_counter = 0;
 
     int i = 0;
     Temperature::Channel* channel = NULL;
@@ -55,6 +56,7 @@ Temperature::Manager::Manager(SPIClass* spi, uint8_t cs) : Device(spi, cs)
         channel->type = Temperature::Type::NONE;
         channel->data = 0;
         channel->value = 0.0;
+        channel->voltage = 0.0;
     }
 
 }
@@ -165,12 +167,32 @@ void Temperature::Manager::_process_channel(Temperature::Channel* channel)
     channel->full = channel->head == channel->tail;
     channel->data = value;
 
-    if (channel->type == Type::VOLTAGE) {
-        channel->value = table_voltages[value];
+    channel->voltage = table_voltages[value];
+
+    if (channel->type == Temperature::Type::VOLTAGE) {
+        channel->value = channel->voltage;
+    }
+
+    if (channel->type == Temperature::Type::RTD) {
+        channel->value = table_rtd[value];
+    }
+
+    if (channel->type == Temperature::Type::PTC10) {
+        channel->value = table_ptc10[value];
+    }
+
+    if (channel->type == Temperature::Type::PTC100) {
+        channel->value = table_ptc100[value];
     }
 
 #ifdef DEBUG_LEVEL1
-    DEBUG_MSG("%u\t%u\t%u\t%5.3f\n", channel->num, channel->head, channel->data, channel->value);
+    // Channel | Number | Data | Voltage | Value
+    DEBUG_MSG("%u\t%u\t%u\t%5.3f\t%5.3f\n",
+        channel->num,
+        this->m_counter,
+        channel->data,
+        channel->voltage,
+        channel->value);
 #endif // DEBUG_LEVEL1
 }
 
@@ -264,6 +286,11 @@ void Temperature::Manager::next()
 
         ++i;
     }
+#ifdef DEBUG_LEVEL2
+    // Channel | Number | Data | Voltage | Value
+    DEBUG_MSG("CURRENT: %d", this->p_current->num);
+#endif // DEBUG_LEVEL2
+
 }
 
 
@@ -298,6 +325,7 @@ void Temperature::Manager::prev()
 void Temperature::Manager::execute()
 {
     Temperature::Channel* channel;
+    bool measure = false;
     int i = 0;
 
     for (i = 0; i < TEMP_CHANNELS; ++i) {
@@ -305,6 +333,11 @@ void Temperature::Manager::execute()
 
         if (channel->measure == true) {
             this->_process_channel(channel);
+            measure = true;
         }
+    }
+
+    if (measure == true) {
+        ++this->m_counter;
     }
 }

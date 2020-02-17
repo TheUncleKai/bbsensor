@@ -246,7 +246,7 @@ void Config::Manager::print()
 
     for (i = 0; i < TEMP_CHANNELS; i++) {
         channel_type = this->p_data->channel_types[i];
-        DEBUG_MSG("CONFIG: channel %u, type %u\n", i, Temperature::TEMPERATURE_Type[channel_type]);
+        DEBUG_MSG("CONFIG: channel %u, type %s\n", i, Temperature::TEMPERATURE_Type[channel_type]);
     }
 #endif // DEBUG_LEVEL1
 }
