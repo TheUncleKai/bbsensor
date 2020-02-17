@@ -20,11 +20,11 @@
 #include <device.h>
 
 
-class LED : public Device
+class DOut : public Device
 {
     public:
-        LED (uint8_t num, uint8_t pin);
-        virtual ~LED();
+        DOut (uint8_t num, uint8_t pin);
+        virtual ~DOut();
 
         void toggle();
         void on();

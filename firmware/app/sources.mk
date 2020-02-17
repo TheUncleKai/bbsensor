@@ -18,7 +18,7 @@ SOURCES = \
     conf.cpp \
     device.cpp \
     display.cpp \
-    led.cpp \
+    dout.cpp \
     loop.cpp \
     spi_wrapper.cpp \
     tables.cpp \

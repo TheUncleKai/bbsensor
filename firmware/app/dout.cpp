@@ -17,41 +17,41 @@
 #include <Arduino.h>
 
 #include <settings.h>
-#include <led.h>
+#include <dout.h>
 
 
-LED::LED (uint8_t num, uint8_t pin) : Device(num, pin)
+DOut::DOut (uint8_t num, uint8_t pin) : Device(num, pin)
 {
     this->m_status = 0;
 }
 
 
-LED::~LED()
+DOut::~DOut()
 {
 }
 
 
-void LED::_on()
+void DOut::_on()
 {
 #ifdef DEBUG_LEVEL3
-    DEBUG_MSG("LED%d: turn on\n", this->number());
+    DEBUG_MSG("OUT%d: turn on\n", this->number());
 #endif // DEBUG_LEVEL3
     digitalWrite(this->pin(), LOW);
     this->m_status = 1;
 }
 
 
-void LED::_off()
+void DOut::_off()
 {
 #ifdef DEBUG_LEVEL3
-    DEBUG_MSG("LED%d: turn off\n", this->number());
+    DEBUG_MSG("OUT%d: turn off\n", this->number());
 #endif // DEBUG_LEVEL3
     digitalWrite(this->pin(), HIGH);
     this->m_status = 0;
 }
 
 
-void LED::toggle()
+void DOut::toggle()
 {
     if (this->m_status == 1) {
         this->m_status = 0;
@@ -65,29 +65,29 @@ void LED::toggle()
 }
 
 
-void LED::on()
+void DOut::on()
 {
     this->m_status = 1;
 }
 
 
-void LED::off()
+void DOut::off()
 {
     this->m_status = 0;
 }
 
 
-void LED::setup()
+void DOut::setup()
 {
 #ifdef DEBUG_LEVEL1
-    DEBUG_MSG("LED%d: setup pin %d\n", this->number(), this->pin());
+    DEBUG_MSG("OUT%d: setup pin %d\n", this->number(), this->pin());
 #endif // DEBUG_LEVEL1
 
     pinMode(this->pin(), OUTPUT);
 }
 
 
-void LED::execute()
+void DOut::execute()
 {
     if (this->m_status == 1) {
         this->_on();
