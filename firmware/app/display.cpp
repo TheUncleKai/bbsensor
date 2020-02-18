@@ -239,18 +239,19 @@ void Display::setup()
 
     pinMode(this->pin(), OUTPUT);
 
-    // reset display
+    // reset display, we set high to bring the PNP down
 #ifdef DEBUG_LEVEL1
     DEBUG_MSG("DISPLAY: disable display");
 #endif // DEBUG_LEVEL1
-    digitalWrite(this->pin(), LOW);
+    digitalWrite(this->pin(), HIGH);
 
     delay(200);
 
+    // reset display, we set low to bring the PNP up
 #ifdef DEBUG_LEVEL1
     DEBUG_MSG("DISPLAY: enable display");
 #endif // DEBUG_LEVEL1
-    digitalWrite(this->pin(), HIGH);
+    digitalWrite(this->pin(), LOW);
 
     this->spi()->on();
 
