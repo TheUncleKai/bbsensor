@@ -18,7 +18,7 @@
 #include <SPI.h>
 
 #include <settings.h>
-#include <led.h>
+#include <dout.h>
 #include <button.h>
 #include <display.h>
 #include <temperature.h>
@@ -46,10 +46,10 @@ SPIClass* spi = new SPIClass();
 
 
 // Devices
-LED* led1 = new LED(1, PIN_LED1);
+DOut* led1 = new DOut(1, PIN_LED1);
 Button::Manager* button1 = new Button::Manager(1, PIN_BUTTON1);
 Button::Manager* button2 = new Button::Manager(2, PIN_BUTTON2);
-Display* display = new Display(spi, PIN_CS1);
+Display* display = new Display(spi, PIN_CS1, PIN_DISPLAY);
 Temperature::Manager* temperature = new Temperature::Manager(spi, PIN_CS2);
 
 

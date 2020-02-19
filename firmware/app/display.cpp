@@ -69,7 +69,7 @@
 #define DELAY_OFF 2
 
 
-Display::Display (SPIClass* spi, uint8_t cs) : Device(spi, cs)
+Display::Display (SPIClass* spi, uint8_t cs, uint8_t onoff) : Device(spi, cs, onoff)
 {
     this->p_list = new Signal *[SIGNAL_LIST];
     this->m_size = 0;
@@ -233,6 +233,25 @@ void Display::write(uint8_t line, const char* fmt, ...)
 
 void Display::setup()
 {
+#ifdef DEBUG_LEVEL1
+    DEBUG_MSG("DISPLAY: setup pin %d\n", this->pin());
+#endif // DEBUG_LEVEL1
+
+    pinMode(this->pin(), OUTPUT);
+
+    // reset display, we set high to bring the PNP down
+#ifdef DEBUG_LEVEL1
+    DEBUG_MSG("DISPLAY: disable display");
+#endif // DEBUG_LEVEL1
+    digitalWrite(this->pin(), HIGH);
+
+    delay(200);
+
+    // reset display, we set low to bring the PNP up
+#ifdef DEBUG_LEVEL1
+    DEBUG_MSG("DISPLAY: enable display");
+#endif // DEBUG_LEVEL1
+    digitalWrite(this->pin(), LOW);
 
     this->spi()->on();
 

@@ -19,6 +19,7 @@
 
 #ifdef ESP32
 #define PIN_LED1        2  // internal LED1
+#define PIN_DISPLAY     15 // display switch
 #define PIN_BUTTON1     23 // push button 1
 #define PIN_BUTTON2     22 // push button 2
 #define PIN_CS1         21 // SPI chip select 1, Display
@@ -27,7 +28,7 @@
 #define PIN_SCLK        19 // SPI clock
 #define PIN_MISO        18 // SPI MISO
 #define PIN_MOSI        5  // SPI MOSI
-#define PIN_NONE        15 // SPI CS, not used
+#define PIN_NONE        14 // SPI CS, not used
 #endif // ESP32
 
 #ifdef ESP8266
