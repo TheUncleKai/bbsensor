@@ -27,6 +27,7 @@ class Device
     public:
         Device ();
         Device (SPIClass* spi, uint8_t cs);
+        Device (SPIClass* spi, uint8_t cs, uint8_t pin);
         Device (uint8_t num, uint8_t pin);
         ~Device();
 

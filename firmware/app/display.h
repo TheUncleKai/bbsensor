@@ -41,7 +41,7 @@ struct Signal
 class Display : public Device
 {
     public:
-        Display (SPIClass* spi, uint8_t cs);
+        Display (SPIClass* spi, uint8_t cs, uint8_t onoff);
         virtual ~Display();
 
         void setup();

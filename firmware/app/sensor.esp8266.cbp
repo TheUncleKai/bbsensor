@@ -68,8 +68,8 @@
 		<Unit filename="device.h" />
 		<Unit filename="display.cpp" />
 		<Unit filename="display.h" />
-		<Unit filename="led.cpp" />
-		<Unit filename="led.h" />
+		<Unit filename="dout.cpp" />
+		<Unit filename="dout.h" />
 		<Unit filename="loop.cpp" />
 		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />

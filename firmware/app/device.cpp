@@ -36,6 +36,16 @@ Device::Device(SPIClass* spi, uint8_t cs)
 }
 
 
+Device::Device(SPIClass* spi, uint8_t cs, uint8_t pin)
+{
+    this->p_spi = new SPIWrapper(cs);
+    this->p_spi->set_spi(spi);
+
+    this->m_num = 0;
+    this->m_pin = pin;
+}
+
+
 Device::Device(uint8_t num, uint8_t pin)
 {
     this->p_spi = NULL;
