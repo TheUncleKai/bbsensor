@@ -1,5 +1,0 @@
-(sym_lib_table
-  (lib (name BBPower)(type Legacy)(uri ${BBROOT}/symbols/BBPower.lib)(options "")(descr ""))
-  (lib (name BBLib)(type Legacy)(uri ${BBROOT}/symbols/BBLib.lib)(options "")(descr ""))
-  (lib (name BBConn)(type Legacy)(uri ${BBROOT}/symbols/BBConn.lib)(options "")(descr ""))
-)
