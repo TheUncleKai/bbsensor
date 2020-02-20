@@ -1280,4 +1280,6 @@ Wire Wire Line
 	2750 1200 3000 1200
 Wire Wire Line
 	3000 1200 3000 1000
+Text Label 10150 4300 0    60   ~ 0
+VDISP
 $EndSCHEMATC
