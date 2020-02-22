@@ -57,21 +57,6 @@ F 3 "" H 6100 1650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Fuse F?
-U 1 1 5DF98DC4
-P 2950 1800
-AR Path="/5D671357/5DF98DC4" Ref="F?"  Part="1" 
-AR Path="/5DF98DC4" Ref="F1"  Part="1" 
-AR Path="/5D8E11F6/5DF98DC4" Ref="F?"  Part="1" 
-AR Path="/5DF8D843/5DF98DC4" Ref="F?"  Part="1" 
-F 0 "F1" V 2753 1800 50  0000 C CNN
-F 1 "Fuse" V 2844 1800 50  0000 C CNN
-F 2 "Schurter:Fuse_holder_20x5_22.5" V 2880 1800 50  0001 C CNN
-F 3 "~" H 2950 1800 50  0001 C CNN
-	1    2950 1800
-	0    1    1    0   
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 5DF98DCA
 P 2300 1950
@@ -209,8 +194,6 @@ F 3 "~" H 6100 2450 50  0001 C CNN
 	1    6100 2450
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2750 1800 2800 1800
 $Comp
 L power:PWR_FLAG #FLG?
 U 1 1 5DF98E22
@@ -256,8 +239,6 @@ NoConn ~ 4050 2000
 NoConn ~ 4050 2100
 NoConn ~ 4050 2200
 Wire Wire Line
-	3100 1800 3400 1800
-Wire Wire Line
 	3850 2300 3850 1800
 Connection ~ 3850 1800
 Wire Wire Line
@@ -273,7 +254,6 @@ Wire Wire Line
 	4550 3150 4550 3400
 Wire Wire Line
 	3400 2300 3400 1800
-Connection ~ 3400 1800
 Wire Wire Line
 	3400 1800 3850 1800
 Wire Wire Line
@@ -400,4 +380,7 @@ Wire Wire Line
 Wire Wire Line
 	6850 1900 7000 1900
 Connection ~ 6600 3150
+Wire Wire Line
+	2750 1800 3400 1800
+Connection ~ 3400 1800
 $EndSCHEMATC
