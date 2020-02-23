@@ -241,17 +241,23 @@ void Display::setup()
 
     // reset display, we set high to bring the PNP down
 #ifdef DEBUG_LEVEL1
-    DEBUG_MSG("DISPLAY: disable display");
+    DEBUG_MSG("DISPLAY: disable display\n");
 #endif // DEBUG_LEVEL1
-    digitalWrite(this->pin(), HIGH);
+    digitalWrite(this->pin(), LOW);
 
-    delay(200);
+    delay(2000);
 
     // reset display, we set low to bring the PNP up
 #ifdef DEBUG_LEVEL1
-    DEBUG_MSG("DISPLAY: enable display");
+    DEBUG_MSG("DISPLAY: enable display\n");
 #endif // DEBUG_LEVEL1
-    digitalWrite(this->pin(), LOW);
+    digitalWrite(this->pin(), HIGH);
+
+#ifdef DEBUG_LEVEL1
+    DEBUG_MSG("DISPLAY: wait start\n");
+#endif // DEBUG_LEVEL1
+
+    delay(2000);
 
     this->spi()->on();
 

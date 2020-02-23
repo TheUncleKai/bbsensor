@@ -971,7 +971,6 @@ Wire Wire Line
 	4850 5450 4850 5550
 Wire Wire Line
 	5550 4650 5550 4700
-Connection ~ 5550 4650
 Wire Wire Line
 	4850 4650 4850 5150
 Wire Wire Line
@@ -1003,7 +1002,6 @@ Wire Wire Line
 	7700 5700 7950 5700
 Wire Wire Line
 	7850 5400 7700 5400
-Connection ~ 7300 4650
 Wire Wire Line
 	7650 4650 7300 4650
 $Comp
@@ -1096,27 +1094,14 @@ Wire Wire Line
 $Comp
 L Device:R R?
 U 1 1 5E4C1A9B
-P 10150 3400
+P 5300 2550
 AR Path="/5D6608A5/5E4C1A9B" Ref="R?"  Part="1" 
 AR Path="/5E4C1A9B" Ref="R6"  Part="1" 
-F 0 "R6" H 10150 3550 50  0000 L CNN
-F 1 "2k2" V 10150 3400 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 10080 3400 50  0001 C CNN
-F 3 "~" H 10150 3400 50  0001 C CNN
-	1    10150 3400
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 5E4DD378
-P 10600 3100
-AR Path="/5D6ADE4E/5E4DD378" Ref="#PWR?"  Part="1" 
-AR Path="/5E4DD378" Ref="#PWR0122"  Part="1" 
-F 0 "#PWR0122" H 10600 2950 50  0001 C CNN
-F 1 "+5V" H 10615 3273 50  0000 C CNN
-F 2 "" H 10600 3100 50  0001 C CNN
-F 3 "" H 10600 3100 50  0001 C CNN
-	1    10600 3100
+F 0 "R6" H 5100 2550 50  0000 L CNN
+F 1 "270" V 5300 2550 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 5230 2550 50  0001 C CNN
+F 3 "~" H 5300 2550 50  0001 C CNN
+	1    5300 2550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1142,51 +1127,16 @@ Wire Wire Line
 $Comp
 L Transistor_BJT:S8550 Q1
 U 1 1 5E4D97D0
-P 10500 3700
-F 0 "Q1" H 10690 3654 50  0000 L CNN
-F 1 "S8550" H 10690 3745 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline" H 10700 3625 50  0001 L CIN
-F 3 "http://www.unisonic.com.tw/datasheet/S8550.pdf" H 10500 3700 50  0001 L CNN
-	1    10500 3700
-	1    0    0    1   
-$EndComp
-Wire Wire Line
-	10150 3000 10150 3250
-Wire Wire Line
-	8300 3000 10150 3000
-Wire Wire Line
-	10600 3100 10600 3500
-Wire Wire Line
-	10150 3550 10150 3700
-Wire Wire Line
-	10150 3700 10300 3700
-Wire Wire Line
-	7300 4300 10600 4300
-Wire Wire Line
-	10600 4300 10600 3900
-Wire Wire Line
-	7300 4300 7300 4650
-Wire Wire Line
-	7300 4300 5550 4300
-Wire Wire Line
-	5550 4300 5550 4650
-Connection ~ 7300 4300
-$Comp
-L power:PWR_FLAG #FLG?
-U 1 1 5E5D0EC3
-P 10600 4400
-AR Path="/5D671357/5E5D0EC3" Ref="#FLG?"  Part="1" 
-AR Path="/5E5D0EC3" Ref="#FLG0105"  Part="1" 
-F 0 "#FLG0105" H 10600 4475 50  0001 C CNN
-F 1 "PWR_FLAG" H 10600 4573 50  0000 C CNN
-F 2 "" H 10600 4400 50  0001 C CNN
-F 3 "~" H 10600 4400 50  0001 C CNN
-	1    10600 4400
+P 4900 1600
+F 0 "Q1" H 5090 1554 50  0000 L CNN
+F 1 "S8550" H 5090 1645 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5100 1525 50  0001 L CIN
+F 3 "http://www.unisonic.com.tw/datasheet/S8550.pdf" H 4900 1600 50  0001 L CNN
+	1    4900 1600
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	10600 4300 10600 4400
-Connection ~ 10600 4300
+	8300 3000 8400 3000
 $Comp
 L Connector_Generic:Conn_01x02 J1
 U 1 1 5E52F3BE
@@ -1232,7 +1182,7 @@ Wire Wire Line
 	2750 1200 3000 1200
 Wire Wire Line
 	3000 1200 3000 1000
-Text Label 10150 4300 0    60   ~ 0
+Text Label 5050 3450 0    60   ~ 0
 VDISP
 $Comp
 L Switch:SW_Push SW1
@@ -1260,4 +1210,87 @@ F 3 "~" H 10750 2350 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	11050 1600 11050 2150
+$Comp
+L Transistor_BJT:S8050 Q2
+U 1 1 5E54244E
+P 5400 2100
+F 0 "Q2" H 5591 2146 50  0000 L CNN
+F 1 "S8050" H 5591 2055 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5600 2025 50  0001 L CIN
+F 3 "http://www.unisonic.com.tw/datasheet/S8050.pdf" H 5400 2100 50  0001 L CNN
+	1    5400 2100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E548C04
+P 5300 2850
+AR Path="/5D6ADE4E/5E548C04" Ref="#PWR?"  Part="1" 
+AR Path="/5E548C04" Ref="#PWR0103"  Part="1" 
+F 0 "#PWR0103" H 5300 2600 50  0001 C CNN
+F 1 "GND" H 5305 2677 50  0000 C CNN
+F 2 "" H 5300 2850 50  0001 C CNN
+F 3 "" H 5300 2850 50  0001 C CNN
+	1    5300 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 2700 5300 2850
+Wire Wire Line
+	5300 2300 5300 2400
+Wire Wire Line
+	5600 2100 6000 2100
+Wire Wire Line
+	6000 2100 6000 4300
+Wire Wire Line
+	6000 4300 8400 4300
+Wire Wire Line
+	8400 4300 8400 3000
+Wire Wire Line
+	5100 1600 5300 1600
+Wire Wire Line
+	5300 1600 5300 1900
+$Comp
+L power:+5V #PWR?
+U 1 1 5E651AEA
+P 4800 1250
+AR Path="/5D6ADE4E/5E651AEA" Ref="#PWR?"  Part="1" 
+AR Path="/5E651AEA" Ref="#PWR0113"  Part="1" 
+F 0 "#PWR0113" H 4800 1100 50  0001 C CNN
+F 1 "+5V" H 4815 1423 50  0000 C CNN
+F 2 "" H 4800 1250 50  0001 C CNN
+F 3 "" H 4800 1250 50  0001 C CNN
+	1    4800 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4800 1250 4800 1400
+Wire Wire Line
+	4800 3450 5550 3450
+Wire Wire Line
+	5550 3450 5550 4650
+Wire Wire Line
+	4800 1800 4800 3450
+Connection ~ 5550 4650
+Wire Wire Line
+	5550 4650 7300 4650
+Connection ~ 7300 4650
+$Comp
+L power:PWR_FLAG #FLG?
+U 1 1 5E68830F
+P 4400 5050
+AR Path="/5D671357/5E68830F" Ref="#FLG?"  Part="1" 
+AR Path="/5E68830F" Ref="#FLG0103"  Part="1" 
+F 0 "#FLG0103" H 4400 5125 50  0001 C CNN
+F 1 "PWR_FLAG" H 4400 5223 50  0000 C CNN
+F 2 "" H 4400 5050 50  0001 C CNN
+F 3 "~" H 4400 5050 50  0001 C CNN
+	1    4400 5050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4850 4650 4400 4650
+Wire Wire Line
+	4400 4650 4400 5050
+Connection ~ 4850 4650
 $EndSCHEMATC
