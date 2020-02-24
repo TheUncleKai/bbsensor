@@ -215,7 +215,7 @@ AR Path="/5DF8D843/5DF98E28" Ref="J?"  Part="1"
 AR Path="/5DF98E28" Ref="J1"  Part="1" 
 F 0 "J1" H 1900 1800 50  0000 C CNN
 F 1 "POWER" H 1900 1450 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1900 1700 50  0001 C CNN
+F 2 "Connector_Wire:SolderWirePad_1x02_P5.08mm_Drill1.5mm" H 1900 1700 50  0001 C CNN
 F 3 "~" H 1900 1700 50  0001 C CNN
 	1    1900 1700
 	-1   0    0    -1  
@@ -366,7 +366,7 @@ AR Path="/5DF8D843/5E534F1E" Ref="J?"  Part="1"
 AR Path="/5E534F1E" Ref="J2"  Part="1" 
 F 0 "J2" H 7200 1900 50  0000 C CNN
 F 1 "OUTPUT" H 7200 1550 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 7200 1800 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 7200 1800 50  0001 C CNN
 F 3 "~" H 7200 1800 50  0001 C CNN
 	1    7200 1800
 	1    0    0    -1  
