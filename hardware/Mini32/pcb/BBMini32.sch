@@ -1094,14 +1094,14 @@ Wire Wire Line
 $Comp
 L Device:R R?
 U 1 1 5E4C1A9B
-P 5300 2550
+P 5700 2550
 AR Path="/5D6608A5/5E4C1A9B" Ref="R?"  Part="1" 
 AR Path="/5E4C1A9B" Ref="R6"  Part="1" 
-F 0 "R6" H 5100 2550 50  0000 L CNN
-F 1 "270" V 5300 2550 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 5230 2550 50  0001 C CNN
-F 3 "~" H 5300 2550 50  0001 C CNN
-	1    5300 2550
+F 0 "R6" H 5500 2550 50  0000 L CNN
+F 1 "270" V 5700 2550 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 5630 2550 50  0001 C CNN
+F 3 "~" H 5700 2550 50  0001 C CNN
+	1    5700 2550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1127,62 +1127,17 @@ Wire Wire Line
 $Comp
 L Transistor_BJT:S8550 Q1
 U 1 1 5E4D97D0
-P 4900 1600
-F 0 "Q1" H 5090 1554 50  0000 L CNN
-F 1 "S8550" H 5090 1645 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5100 1525 50  0001 L CIN
-F 3 "http://www.unisonic.com.tw/datasheet/S8550.pdf" H 4900 1600 50  0001 L CNN
-	1    4900 1600
+P 5450 1600
+F 0 "Q1" H 5640 1554 50  0000 L CNN
+F 1 "S8550" H 5640 1645 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5650 1525 50  0001 L CIN
+F 3 "http://www.unisonic.com.tw/datasheet/S8550.pdf" H 5450 1600 50  0001 L CNN
+	1    5450 1600
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
 	8300 3000 8400 3000
-$Comp
-L Connector_Generic:Conn_01x02 J1
-U 1 1 5E52F3BE
-P 2550 1200
-F 0 "J1" H 2468 1417 50  0000 C CNN
-F 1 "POWER" H 2468 1326 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2550 1200 50  0001 C CNN
-F 3 "~" H 2550 1200 50  0001 C CNN
-	1    2550 1200
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 5E5305AE
-P 3000 1000
-AR Path="/5D671357/5E5305AE" Ref="#PWR?"  Part="1" 
-AR Path="/5E5305AE" Ref="#PWR0101"  Part="1" 
-F 0 "#PWR0101" H 3000 850 50  0001 C CNN
-F 1 "+5V" H 3015 1173 50  0000 C CNN
-F 2 "" H 3000 1000 50  0001 C CNN
-F 3 "" H 3000 1000 50  0001 C CNN
-	1    3000 1000
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5E530C40
-P 3000 1500
-AR Path="/5D6ADE4E/5E530C40" Ref="#PWR?"  Part="1" 
-AR Path="/5E530C40" Ref="#PWR0102"  Part="1" 
-F 0 "#PWR0102" H 3000 1250 50  0001 C CNN
-F 1 "GND" H 3005 1327 50  0000 C CNN
-F 2 "" H 3000 1500 50  0001 C CNN
-F 3 "" H 3000 1500 50  0001 C CNN
-	1    3000 1500
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2750 1300 3000 1300
-Wire Wire Line
-	3000 1300 3000 1500
-Wire Wire Line
-	2750 1200 3000 1200
-Wire Wire Line
-	3000 1200 3000 1000
-Text Label 5050 3450 0    60   ~ 0
+Text Label 5400 3450 0    60   ~ 0
 VDISP
 $Comp
 L Switch:SW_Push SW1
@@ -1213,64 +1168,64 @@ Wire Wire Line
 $Comp
 L Transistor_BJT:S8050 Q2
 U 1 1 5E54244E
-P 5400 2100
-F 0 "Q2" H 5591 2146 50  0000 L CNN
-F 1 "S8050" H 5591 2055 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5600 2025 50  0001 L CIN
-F 3 "http://www.unisonic.com.tw/datasheet/S8050.pdf" H 5400 2100 50  0001 L CNN
-	1    5400 2100
+P 5800 2100
+F 0 "Q2" H 5991 2146 50  0000 L CNN
+F 1 "S8050" H 5991 2055 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 6000 2025 50  0001 L CIN
+F 3 "http://www.unisonic.com.tw/datasheet/S8050.pdf" H 5800 2100 50  0001 L CNN
+	1    5800 2100
 	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5E548C04
-P 5300 2850
+P 5700 2800
 AR Path="/5D6ADE4E/5E548C04" Ref="#PWR?"  Part="1" 
 AR Path="/5E548C04" Ref="#PWR0103"  Part="1" 
-F 0 "#PWR0103" H 5300 2600 50  0001 C CNN
-F 1 "GND" H 5305 2677 50  0000 C CNN
-F 2 "" H 5300 2850 50  0001 C CNN
-F 3 "" H 5300 2850 50  0001 C CNN
-	1    5300 2850
+F 0 "#PWR0103" H 5700 2550 50  0001 C CNN
+F 1 "GND" H 5705 2627 50  0000 C CNN
+F 2 "" H 5700 2800 50  0001 C CNN
+F 3 "" H 5700 2800 50  0001 C CNN
+	1    5700 2800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5300 2700 5300 2850
+	5700 2700 5700 2800
 Wire Wire Line
-	5300 2300 5300 2400
+	5700 2300 5700 2400
 Wire Wire Line
-	5600 2100 6000 2100
+	6000 2100 6050 2100
 Wire Wire Line
-	6000 2100 6000 4300
+	6050 2100 6050 4300
 Wire Wire Line
-	6000 4300 8400 4300
+	6050 4300 8400 4300
 Wire Wire Line
 	8400 4300 8400 3000
 Wire Wire Line
-	5100 1600 5300 1600
+	5650 1600 5700 1600
 Wire Wire Line
-	5300 1600 5300 1900
+	5700 1600 5700 1900
 $Comp
 L power:+5V #PWR?
 U 1 1 5E651AEA
-P 4800 1250
+P 5350 1300
 AR Path="/5D6ADE4E/5E651AEA" Ref="#PWR?"  Part="1" 
 AR Path="/5E651AEA" Ref="#PWR0113"  Part="1" 
-F 0 "#PWR0113" H 4800 1100 50  0001 C CNN
-F 1 "+5V" H 4815 1423 50  0000 C CNN
-F 2 "" H 4800 1250 50  0001 C CNN
-F 3 "" H 4800 1250 50  0001 C CNN
-	1    4800 1250
+F 0 "#PWR0113" H 5350 1150 50  0001 C CNN
+F 1 "+5V" H 5365 1473 50  0000 C CNN
+F 2 "" H 5350 1300 50  0001 C CNN
+F 3 "" H 5350 1300 50  0001 C CNN
+	1    5350 1300
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4800 1250 4800 1400
+	5350 1300 5350 1400
 Wire Wire Line
-	4800 3450 5550 3450
+	5350 3450 5550 3450
 Wire Wire Line
 	5550 3450 5550 4650
 Wire Wire Line
-	4800 1800 4800 3450
+	5350 1800 5350 3450
 Connection ~ 5550 4650
 Wire Wire Line
 	5550 4650 7300 4650
@@ -1293,4 +1248,311 @@ Wire Wire Line
 Wire Wire Line
 	4400 4650 4400 5050
 Connection ~ 4850 4650
+$Comp
+L power:+5V #PWR?
+U 1 1 5E5EDC3F
+P 4100 750
+AR Path="/5D671357/5E5EDC3F" Ref="#PWR?"  Part="1" 
+AR Path="/5E5EDC3F" Ref="#PWR0101"  Part="1" 
+AR Path="/5D8E11F6/5E5EDC3F" Ref="#PWR?"  Part="1" 
+AR Path="/5DF8D843/5E5EDC3F" Ref="#PWR?"  Part="1" 
+AR Path="/5E5E282C/5E5EDC3F" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0101" H 4100 600 50  0001 C CNN
+F 1 "+5V" H 4115 923 50  0000 C CNN
+F 2 "" H 4100 750 50  0001 C CNN
+F 3 "" H 4100 750 50  0001 C CNN
+	1    4100 750 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E5EDC45
+P 900 1000
+AR Path="/5D671357/5E5EDC45" Ref="#PWR?"  Part="1" 
+AR Path="/5E5EDC45" Ref="#PWR0102"  Part="1" 
+AR Path="/5D8E11F6/5E5EDC45" Ref="#PWR?"  Part="1" 
+AR Path="/5DF8D843/5E5EDC45" Ref="#PWR?"  Part="1" 
+AR Path="/5E5E282C/5E5EDC45" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0102" H 900 750 50  0001 C CNN
+F 1 "GND" H 905 827 50  0000 C CNN
+F 2 "" H 900 1000 50  0001 C CNN
+F 3 "" H 900 1000 50  0001 C CNN
+	1    900  1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E5EDC4B
+P 4400 1300
+AR Path="/5D671357/5E5EDC4B" Ref="R?"  Part="1" 
+AR Path="/5E5EDC4B" Ref="R9"  Part="1" 
+AR Path="/5D8E11F6/5E5EDC4B" Ref="R?"  Part="1" 
+AR Path="/5DF8D843/5E5EDC4B" Ref="R?"  Part="1" 
+AR Path="/5E5E282C/5E5EDC4B" Ref="R?"  Part="1" 
+F 0 "R9" V 4300 1300 50  0000 C CNN
+F 1 "220" V 4400 1300 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 4330 1300 50  0001 C CNN
+F 3 "~" H 4400 1300 50  0001 C CNN
+	1    4400 1300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D?
+U 1 1 5E5EDC51
+P 4650 1550
+AR Path="/5D671357/5E5EDC51" Ref="D?"  Part="1" 
+AR Path="/5E5EDC51" Ref="D2"  Part="1" 
+AR Path="/5D8E11F6/5E5EDC51" Ref="D?"  Part="1" 
+AR Path="/5DF8D843/5E5EDC51" Ref="D?"  Part="1" 
+AR Path="/5E5E282C/5E5EDC51" Ref="D?"  Part="1" 
+F 0 "D2" V 4650 1400 50  0000 C CNN
+F 1 "POWER" H 4650 1700 50  0000 C CNN
+F 2 "VCC:5600F" H 4650 1550 50  0001 C CNN
+F 3 "~" H 4650 1550 50  0001 C CNN
+	1    4650 1550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Switch:SW_SPDT SW?
+U 1 1 5E5EDC57
+P 1150 800
+AR Path="/5DF8D843/5E5EDC57" Ref="SW?"  Part="1" 
+AR Path="/5E5EDC57" Ref="SW3"  Part="1" 
+AR Path="/5E5E282C/5E5EDC57" Ref="SW?"  Part="1" 
+F 0 "SW3" H 1150 650 50  0000 C CNN
+F 1 "SW_SPDT" H 1150 1000 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_E-Switch_EG1224_SPDT_Angled" H 1150 800 50  0001 C CNN
+F 3 "~" H 1150 800 50  0001 C CNN
+	1    1150 800 
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E5EDC5D
+P 2650 1900
+AR Path="/5D671357/5E5EDC5D" Ref="#PWR?"  Part="1" 
+AR Path="/5E5EDC5D" Ref="#PWR0121"  Part="1" 
+AR Path="/5D8E11F6/5E5EDC5D" Ref="#PWR?"  Part="1" 
+AR Path="/5DF8D843/5E5EDC5D" Ref="#PWR?"  Part="1" 
+AR Path="/5E5E282C/5E5EDC5D" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0121" H 2650 1650 50  0001 C CNN
+F 1 "GND" H 2655 1727 50  0000 C CNN
+F 2 "" H 2650 1900 50  0001 C CNN
+F 3 "" H 2650 1900 50  0001 C CNN
+	1    2650 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP1 C?
+U 1 1 5E5EDC63
+P 1500 1450
+AR Path="/5DF8D843/5E5EDC63" Ref="C?"  Part="1" 
+AR Path="/5E5EDC63" Ref="C3"  Part="1" 
+AR Path="/5E5E282C/5E5EDC63" Ref="C?"  Part="1" 
+F 0 "C3" H 1615 1496 50  0000 L CNN
+F 1 "100u" H 1615 1405 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 1500 1450 50  0001 C CNN
+F 3 "~" H 1500 1450 50  0001 C CNN
+	1    1500 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5E5EDC69
+P 1950 1450
+AR Path="/5DF8D843/5E5EDC69" Ref="C?"  Part="1" 
+AR Path="/5E5EDC69" Ref="C4"  Part="1" 
+AR Path="/5E5E282C/5E5EDC69" Ref="C?"  Part="1" 
+F 0 "C4" H 2065 1496 50  0000 L CNN
+F 1 "100n" H 2065 1405 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 1988 1300 50  0001 C CNN
+F 3 "~" H 1950 1450 50  0001 C CNN
+	1    1950 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L_Small L?
+U 1 1 5E5EDC6F
+P 3800 1300
+AR Path="/5DF8D843/5E5EDC6F" Ref="L?"  Part="1" 
+AR Path="/5E5EDC6F" Ref="L1"  Part="1" 
+AR Path="/5E5E282C/5E5EDC6F" Ref="L?"  Part="1" 
+F 0 "L1" V 3900 1300 50  0000 C CNN
+F 1 "47u" V 3750 1300 50  0000 C CNN
+F 2 "Inductor_THT:L_Radial_D8.7mm_P5.00mm_Fastron_07HCP" H 3800 1300 50  0001 C CNN
+F 3 "~" H 3800 1300 50  0001 C CNN
+	1    3800 1300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N5822 D?
+U 1 1 5E5EDC75
+P 3600 1550
+AR Path="/5DF8D843/5E5EDC75" Ref="D?"  Part="1" 
+AR Path="/5E5EDC75" Ref="D3"  Part="1" 
+AR Path="/5E5E282C/5E5EDC75" Ref="D?"  Part="1" 
+F 0 "D3" V 3554 1629 50  0000 L CNN
+F 1 "1N5822" V 3645 1629 50  0000 L CNN
+F 2 "Diode_THT:D_DO-201AD_P15.24mm_Horizontal" H 3600 1375 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88526/1n5820.pdf" H 3600 1550 50  0001 C CNN
+	1    3600 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1 C?
+U 1 1 5E5EDC7B
+P 4100 1550
+AR Path="/5DF8D843/5E5EDC7B" Ref="C?"  Part="1" 
+AR Path="/5E5EDC7B" Ref="C6"  Part="1" 
+AR Path="/5E5E282C/5E5EDC7B" Ref="C?"  Part="1" 
+F 0 "C6" H 4215 1596 50  0000 L CNN
+F 1 "68u" H 4215 1505 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 4100 1550 50  0001 C CNN
+F 3 "~" H 4100 1550 50  0001 C CNN
+	1    4100 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG?
+U 1 1 5E5EDC81
+P 1950 800
+AR Path="/5DF8D843/5E5EDC81" Ref="#FLG?"  Part="1" 
+AR Path="/5E5EDC81" Ref="#FLG0105"  Part="1" 
+AR Path="/5E5E282C/5E5EDC81" Ref="#FLG?"  Part="1" 
+F 0 "#FLG0105" H 1950 875 50  0001 C CNN
+F 1 "PWR_FLAG" H 1950 973 50  0000 C CNN
+F 2 "" H 1950 800 50  0001 C CNN
+F 3 "~" H 1950 800 50  0001 C CNN
+	1    1950 800 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J?
+U 1 1 5E5EDC87
+P 650 800
+AR Path="/5DF8D843/5E5EDC87" Ref="J?"  Part="1" 
+AR Path="/5E5EDC87" Ref="J1"  Part="1" 
+AR Path="/5E5E282C/5E5EDC87" Ref="J?"  Part="1" 
+F 0 "J1" H 650 900 50  0000 C CNN
+F 1 "POWER" H 650 550 50  0000 C CNN
+F 2 "Connector_Wire:SolderWirePad_1x02_P5.08mm_Drill1.5mm" H 650 800 50  0001 C CNN
+F 3 "~" H 650 800 50  0001 C CNN
+	1    650  800 
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	900  900  850  900 
+$Comp
+L Regulator_Switching:LM2672M-5.0 U?
+U 1 1 5E5EDC8E
+P 2650 1100
+AR Path="/5DF8D843/5E5EDC8E" Ref="U?"  Part="1" 
+AR Path="/5E5EDC8E" Ref="U5"  Part="1" 
+AR Path="/5E5E282C/5E5EDC8E" Ref="U?"  Part="1" 
+F 0 "U5" H 2650 1567 50  0000 C CNN
+F 1 "LM2672M-5.0" H 2650 1476 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 2700 750 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2672.pdf" H 2650 1100 50  0001 C CNN
+	1    2650 1100
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2150 1100
+NoConn ~ 2150 1200
+NoConn ~ 2150 1300
+Wire Wire Line
+	1950 1300 1950 900 
+Connection ~ 1950 900 
+Wire Wire Line
+	1950 900  2150 900 
+Wire Wire Line
+	2650 1500 2650 1800
+Wire Wire Line
+	1950 1600 1950 1800
+Wire Wire Line
+	1950 1800 2650 1800
+Connection ~ 2650 1800
+Wire Wire Line
+	2650 1800 2650 1900
+Wire Wire Line
+	1500 1300 1500 900 
+Wire Wire Line
+	1500 900  1950 900 
+Wire Wire Line
+	1500 1600 1500 1800
+Wire Wire Line
+	1500 1800 1950 1800
+Connection ~ 1950 1800
+Wire Wire Line
+	2650 1800 3600 1800
+Wire Wire Line
+	3600 1800 3600 1700
+Wire Wire Line
+	3150 1300 3600 1300
+Wire Wire Line
+	3600 1300 3600 1400
+$Comp
+L Device:C C?
+U 1 1 5E5EDCA8
+P 3350 1100
+AR Path="/5DF8D843/5E5EDCA8" Ref="C?"  Part="1" 
+AR Path="/5E5EDCA8" Ref="C5"  Part="1" 
+AR Path="/5E5E282C/5E5EDCA8" Ref="C?"  Part="1" 
+F 0 "C5" V 3250 1200 50  0000 L CNN
+F 1 "10n" V 3450 1200 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 3388 950 50  0001 C CNN
+F 3 "~" H 3350 1100 50  0001 C CNN
+	1    3350 1100
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	3500 1100 3600 1100
+Wire Wire Line
+	3600 1100 3600 1300
+Connection ~ 3600 1300
+Wire Wire Line
+	3200 1100 3150 1100
+Wire Wire Line
+	3600 1800 4100 1800
+Wire Wire Line
+	4100 1800 4100 1700
+Connection ~ 3600 1800
+Wire Wire Line
+	4100 1400 4100 1300
+Wire Wire Line
+	4100 1300 3900 1300
+Wire Wire Line
+	3600 1300 3700 1300
+Wire Wire Line
+	3150 900  4100 900 
+Wire Wire Line
+	4100 900  4100 1300
+Connection ~ 4100 1300
+Wire Wire Line
+	4100 900  4100 750 
+Connection ~ 4100 900 
+Wire Wire Line
+	1950 800  1950 900 
+Wire Wire Line
+	900  900  900  1000
+Wire Wire Line
+	850  800  950  800 
+NoConn ~ 1350 700 
+Text Label 1500 900  0    60   ~ 0
+VIN
+Text Label 900  800  0    60   ~ 0
+VPOWER
+Wire Wire Line
+	4650 1700 4650 1800
+Wire Wire Line
+	4650 1800 4100 1800
+Connection ~ 4100 1800
+Wire Wire Line
+	1350 900  1500 900 
+Connection ~ 1500 900 
+Wire Wire Line
+	4100 1300 4250 1300
+Wire Wire Line
+	4550 1300 4650 1300
+Wire Wire Line
+	4650 1300 4650 1400
 $EndSCHEMATC
