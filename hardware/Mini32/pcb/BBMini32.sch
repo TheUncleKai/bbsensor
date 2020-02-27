@@ -1442,20 +1442,6 @@ F 3 "~" H 650 800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	900  900  850  900 
-$Comp
-L Regulator_Switching:LM2672M-5.0 U?
-U 1 1 5E5EDC8E
-P 2650 1100
-AR Path="/5DF8D843/5E5EDC8E" Ref="U?"  Part="1" 
-AR Path="/5E5EDC8E" Ref="U5"  Part="1" 
-AR Path="/5E5E282C/5E5EDC8E" Ref="U?"  Part="1" 
-F 0 "U5" H 2650 1567 50  0000 C CNN
-F 1 "LM2672M-5.0" H 2650 1476 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 2700 750 50  0001 L CIN
-F 3 "http://www.ti.com/lit/ds/symlink/lm2672.pdf" H 2650 1100 50  0001 C CNN
-	1    2650 1100
-	1    0    0    -1  
-$EndComp
 NoConn ~ 2150 1100
 NoConn ~ 2150 1200
 NoConn ~ 2150 1300
@@ -1555,4 +1541,15 @@ Wire Wire Line
 	4550 1300 4650 1300
 Wire Wire Line
 	4650 1300 4650 1400
+$Comp
+L Regulator_Switching:LM2672M-5.0 U5
+U 1 1 5E58EC76
+P 2650 1100
+F 0 "U5" H 2650 1567 50  0000 C CNN
+F 1 "LM2672M-5.0" H 2650 1476 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2700 750 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2672.pdf" H 2650 1100 50  0001 C CNN
+	1    2650 1100
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
